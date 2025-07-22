@@ -1,0 +1,55 @@
+﻿@model appVelas.Models.Pigmento
+<h4>Pigmento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_CreatePigView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Firma" class="control-label">Empresa proveedora:</label>
+                <input asp-for="Firma" class="form-control" />
+                <span asp-validation-for="Firma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorNombre" class="control-label">¿De qué tipo?, composición...</label>
+                <input asp-for="ColorNombre" class="form-control" />
+                <span asp-validation-for="ColorNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CompradoEn" class="control-label">Comprado en:</label>
+                <input asp-for="CompradoEn" class="form-control" />
+                <span asp-validation-for="CompradoEn" class="text-danger"></span>
+            </div>
+
+            @*Nuevo coste*@
+            <div class="form-group">
+                <label asp-for="Coste" class="control-label"></label>
+                <input asp-for="Coste" class="form-control" />
+                <span asp-validation-for="Coste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+                <div class="form-group">
+                    <input type="submit" value="Crear" class="btn btn-outline-success" @*style="margin-top: 43%; margin-left: 31%;"*@ />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<appVelas.Models.Molde>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMolde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoldeNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Firma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompradoEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GramCera)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medidas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMMecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MilAgua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coste)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMolde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoldeNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompradoEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GramCera)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medidas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CMMecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MilAgua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coste)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "_ActMoldeView", new { IDMolde = item.IDMolde }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

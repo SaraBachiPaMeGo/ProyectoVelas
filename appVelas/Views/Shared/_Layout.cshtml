@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - appVelas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">appVelas</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="flex-grow-1" style="overflow: visible;">
+                        <li @*class="nav-item"*@>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropbtn">Crear</a>
+                            <div class="dropdown-content">
+                                <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Crear')">Vela</a>
+                                <a href="#" onclick="cargarVistaParcial('pedido','miContenedor','Crear')">Pedido</a>
+                                <a href="#" onclick="cargarVistaParcial('molde','miContenedor','Crear')">Molde</a>
+                                <a href="#" onclick="cargarVistaParcial('frag','miContenedor','Crear')">Fragancia</a>
+                                <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Crear')">Pigmento</a>
+                                <a href="#" onclick="cargarVistaParcial('mecha','miContenedor','Crear')">Mecha</a>
+                                <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Crear')">Cera</a>
+                            </div>
+                        </li>
+                        @*Desde detalles podrás seleccionar y editar un registro*@
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropbtn">Detalles</a>
+                            <div class="dropdown-content">
+                                <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Detalles')">Vela</a>
+                                <a href="#" onclick="cargarVistaParcial('pedido','miContenedor','Detalles')">Pedido</a>
+                                <a href="#" onclick="cargarVistaParcial('molde','miContenedor','Detalles')">Molde</a>
+                                <a href="#" onclick="cargarVistaParcial('frag','miContenedor','Detalles')">Fragancia</a>
+                                <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Detalles')">Pigmento</a>
+                                <a href="#" onclick="cargarVistaParcial('mecha','miContenedor','Detalles')">Mecha</a>
+                                <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Detalles')">Cera</a>
+                            </div>
+                        </li>
+                        <li><a href="#contact">Evolución</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - appVelas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,195 @@
+﻿@model appVelas.Models.Vela
+
+@{
+
+    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha>;
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde>;
+    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia>;
+    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento>;
+    List<Cera> cera = ViewData["Cera"] as List<Cera>;
+
+}
+
+<style>
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 48%;
+    }
+
+    /*body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }
+
+        input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        select {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }*/
+</style>
+<div style="margin-left: 3%;">
+    <h4>Vela</h4>
+    <hr />
+
+    <div class="row">
+        <div>
+            <form asp-action="_CrearVelaView" method="post" style="/*display: flex;*/padding: 0rem;margin: 0rem;-webkit-column-count: 4;">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @*<div >*@
+                <div class="form-group">
+                    <label asp-for="VelaNombre" class="control-label">Nombre vela:</label>
+                    <input asp-for="VelaNombre" class="form-control" />
+                    <span asp-validation-for="VelaNombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Endurecedor" /> @Html.DisplayNameFor(model => model.Endurecedor)
+                    </label>
+                </div>
+
+                @*Por defecto la de siempre*@
+            <div class="form-group">
+                <label asp-for="IDMecha" class="control-label">Mecha:</label>
+                <select name="IDMecha" id="IDMecha" class="form-control">
+
+                    @foreach (var item in mechas)
+                    {
+                        <option value="@item.IDMecha">@item.Firma</option>
+                    }
+                </select>
+            </div>
+                @*<form action="/buscar" method="get">
+                        <label for="search-input">Buscar:</label>
+                        <input type="search" id="search-input" name="q" placeholder="Ingrese su búsqueda">
+                        <button type="submit">Buscar</button>
+                    </form>*@
+
+                @*Por defecto la de siempre*@
+                <div class="form-group">
+                    <label asp-for="IDCera" class="control-label">Cera:</label>
+                    <select  name="IDCera" id="IDCera" class="form-control" >
+
+                        @foreach (var item in cera)
+                        {
+                            <option value="@item.IDCera">@item.Tipo</option>
+                        }
+                    </select>
+                    @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
+                </div>
+                @*<form action="#">
+                        <label for="lang">Lenguaje</label>
+                        <select name="lenguajes" id="lang" multiple>
+                            <option value="javascript">JavaScript</option>
+                            <option value="php">PHP</option>
+                            <option value="java">Java</option>
+                            <option value="golang">Golang</option>
+                            <option value="python">Python</option>
+                            <option value="c#">C#</option>
+                            <option value="C++">C++</option>
+                            <option value="erlang">Erlang</option>
+                        </select>
+                        <input type="submit" value="Enviar" />
+                    </form>*@
+
+                @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
+            <div class="form-group">
+                <label asp-for="IDMolde" class="control-label">Molde:</label>
+                <select name="IDMolde" id="IDMolde" class="form-control" >
+                     
+                        @foreach (var item in moldes)
+                        {
+                            <option value="@item.IDMolde">@item.MoldeNombre</option>
+                        }
+                    </select>
+            </div>
+
+                @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+                <div class="form-group">
+                    <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
+                    <select name="IDFrag" id="IDFrag" multiple class="form-control">
+
+                        @foreach (var item in frag)
+                        {
+                            <option value="@item.IDFrag">@item.FragNombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IDPig" class="control-label">Color/es</label>
+                    <select name="IDPig" id="IDPig" multiple class="form-control">
+
+                        @foreach (var item in pig)
+                        {
+                            <option value="@item.IDPig">@item.ColorNombre</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="GradFrag" class="control-label">Cera ºC + fragancia:</label>
+                    <input asp-for="GradFrag" class="form-control" />
+                    <span asp-validation-for="GradFrag" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GradPig" class="control-label">Cera ºC + pigmento:</label>
+                    <input asp-for="GradPig" class="form-control" />
+                    <span asp-validation-for="GradPig" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Observ" class="control-label"></label>
+                    <textarea asp-for="Observ" class="form-control" ></textarea>
+                    <span asp-validation-for="Observ" class="text-danger"></span>
+                </div>
+                @*</div>*@
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-success" style="margin-top: 43%; margin-left: 31%;">Crear</button>
+                </div>
+            </form>
+            <div class="form-group">
+                @*PASAR A LA VISTA PARCIAL EL IDVELA@*@
+                <div class="checkbox-container">
+                    <label for="miCheckbox" class="checkbox-label">¿Es un pedido?</label>
+                    <input type="checkbox" id="idCheckPedi" onclick="manejarCheckbox('contPedi','idCheckPedi','pedido')" class="checkbox-input">
+                    <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                </div>
+            </div>
+            @*<div id="contPedi">
+                </div>*@
+        </div>
+    </div>
+
+    @*<div>
+            <a asp-action="Index">Back to List</a>
+        </div>*@
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>
+

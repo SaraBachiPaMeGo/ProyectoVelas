@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<div class="step-wizard">
+    <ul class="step-wizard-list">
+        <li class="step-wizard-item">
+            <span class="progress-point">1</span>
+            <span class="progress-label">Paso 1</span>
+        </li>
+        <li class="step-wizard-item">
+            <span class="progress-point">2</span>
+            <span class="progress-label">Paso 2</span>
+        </li>
+        <li class="step-wizard-item">
+            <span class="progress-point">3</span>
+            <span class="progress-label">Paso 3</span>
+        </li>
+    </ul>
+    <div class="step-content">
+        <div class="step-pane active" data-step="1">
+            <h2>Paso 1</h2>
+            <p>Contenido del paso 1.</p>
+            <button onclick="nextStep()">Siguiente</button>
+        </div>
+        <div class="step-pane" data-step="2">
+            <h2>Paso 2</h2>
+            <p>Contenido del paso 2.</p>
+            <button onclick="prevStep()">Anterior</button>
+            <button onclick="nextStep()">Siguiente</button>
+        </div>
+        <div class="step-pane" data-step="3">
+            <h2>Paso 3</h2>
+            <p>Contenido del paso 3.</p>
+            <button onclick="prevStep()">Anterior</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .step-wizard-list {
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+    .step-wizard-item {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+
+    .progress-point {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: inline-block;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-weight: bold;
+        position: relative;
+        z-index: 2;
+    }
+
+        .progress-point.active {
+            background-color: #007bff;
+        }
+
+    .progress-label {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .step-content {
+        margin-top: 20px;
+    }
+
+    .step-pane {
+        display: none;
+    }
+
+        .step-pane.active {
+            display: block;
+        }
+</style>

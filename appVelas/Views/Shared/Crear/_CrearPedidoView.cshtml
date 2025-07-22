@@ -1,0 +1,71 @@
+﻿@model appVelas.Models.Pedido
+
+@{
+
+    List<Cliente> clientes = ViewData["Cliente"] as List<Cliente>;
+} 
+
+        <h4>Pedido</h4>
+        <hr />
+        <div class="row" style="display: block; margin-left: 3%;">
+            <div style="display: block;">
+                <form asp-action="_CrearPedidoView" method="post" style="-webkit-column-count: 3;">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="form-group">
+                        <label asp-for="FechaPedi" class="control-label" style="margin-top: 0%;">Fecha de pedido:</label>
+                        <input asp-for="FechaPedi" class="form-control" />
+                        <span asp-validation-for="FechaPedi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaEntrega" class="control-label">Fecha de entrega:</label>
+                        <input asp-for="FechaEntrega" class="form-control" />
+                        <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+                    </div>
+
+                    @*Es un nuevo cliente? en la caso de sí, CREAR NUEVO CLIENTE
+                        sino buscarlo escribiendo, mediante lista *@
+
+                    <div class="form-group" @*style="display:none"*@>
+                        <label asp-for="IDCliente" class="control-label" style="margin-top: 31px;">¿Cliente nuevo?:</label>
+                        <select name="IDCliente" id="IDCliente" class="form-control">
+
+                            @foreach (var item in clientes)
+                            {
+                                <option value="@item.IDCliente">@item.Nombre</option>
+                            }
+                        </select>
+                    </div>
+
+                    @*PASAR A LA VISTA PARCIAL EL IDVELA@*@
+                    <div class="checkbox-container">
+                        <label for="miCheckbox" class="checkbox-label">¿Es un nuevo cliente?</label>
+                        <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente')" class="checkbox-input">
+                        <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                    </div>
+
+                    @*Se puede pasar un parámetro por la vista, el idVela
+                        lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+                    <div class="form-group" style="display:none">
+                        <label asp-for="IDVela" class="control-label"></label>
+                        <input asp-for="IDVela" class="form-control" />
+                        <span asp-validation-for="IDVela" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success" @*style="margin-left: 63%;"*@>Crear</button>
+                    </div>
+                </form>
+            </div>
+
+            @*<div id="contCli">
+
+                </div>*@
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

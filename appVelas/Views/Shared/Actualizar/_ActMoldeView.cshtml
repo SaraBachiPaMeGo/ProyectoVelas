@@ -1,0 +1,77 @@
+﻿@model appVelas.Models.Molde
+
+<h4>Molde</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_ActMoldeView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IDMolde" class="control-label"></label>
+                <input asp-for="IDMolde" class="form-control" />
+                <span asp-validation-for="IDMolde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Firma" class="control-label"></label>
+                <input asp-for="Firma" class="form-control" />
+                <span asp-validation-for="Firma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompradoEn" class="control-label"></label>
+                <input asp-for="CompradoEn" class="form-control" />
+                <span asp-validation-for="CompradoEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GramCera" class="control-label"></label>
+                <input asp-for="GramCera" class="form-control" />
+                <span asp-validation-for="GramCera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Medidas" class="control-label"></label>
+                <input asp-for="Medidas" class="form-control" />
+                <span asp-validation-for="Medidas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duracion" class="control-label"></label>
+                <input asp-for="Duracion" class="form-control" />
+                <span asp-validation-for="Duracion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CMMecha" class="control-label"></label>
+                <input asp-for="CMMecha" class="form-control" />
+                <span asp-validation-for="CMMecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observ" class="control-label"></label>
+                <input asp-for="Observ" class="form-control" />
+                <span asp-validation-for="Observ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MilAgua" class="control-label"></label>
+                <input asp-for="MilAgua" class="form-control" />
+                <span asp-validation-for="MilAgua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

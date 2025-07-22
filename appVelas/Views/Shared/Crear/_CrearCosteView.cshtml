@@ -1,0 +1,98 @@
+﻿@model appVelas.Models.Costes
+
+<h4>Costes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_CrearCosteView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*Dependiendo de la vista que llame a esta Partial, aparecerán unos campos u otros*@
+            <div class="form-group">
+                <label asp-for="TiempoProp" class="control-label"></label>
+                <input asp-for="TiempoProp" class="form-control" />
+                <span asp-validation-for="TiempoProp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorasLuz" class="control-label"></label>
+                <input asp-for="HorasLuz" class="form-control" />
+                <span asp-validation-for="HorasLuz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteLuz" class="control-label"></label>
+                <input asp-for="CosteLuz" class="form-control" />
+                <span asp-validation-for="CosteLuz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteTarj" class="control-label"></label>
+                <input asp-for="CosteTarj" class="form-control" />
+                <span asp-validation-for="CosteTarj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteFrag" class="control-label"></label>
+                <input asp-for="CosteFrag" class="form-control" />
+                <span asp-validation-for="CosteFrag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteMecha" class="control-label"></label>
+                <input asp-for="CosteMecha" class="form-control" />
+                <span asp-validation-for="CosteMecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostePack" class="control-label"></label>
+                <input asp-for="CostePack" class="form-control" />
+                <span asp-validation-for="CostePack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteCera" class="control-label"></label>
+                <input asp-for="CosteCera" class="form-control" />
+                <span asp-validation-for="CosteCera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteMolde" class="control-label"></label>
+                <input asp-for="CosteMolde" class="form-control" />
+                <span asp-validation-for="CosteMolde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CosteVela" class="control-label"></label>
+                <input asp-for="CosteVela" class="form-control" />
+                <span asp-validation-for="CosteVela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDFrag" class="control-label"></label>
+                <input asp-for="IDFrag" class="form-control" />
+                <span asp-validation-for="IDFrag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDPig" class="control-label"></label>
+                <input asp-for="IDPig" class="form-control" />
+                <span asp-validation-for="IDPig" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDMolde" class="control-label"></label>
+                <input asp-for="IDMolde" class="form-control" />
+                <span asp-validation-for="IDMolde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDMecha" class="control-label"></label>
+                <input asp-for="IDMecha" class="form-control" />
+                <span asp-validation-for="IDMecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
