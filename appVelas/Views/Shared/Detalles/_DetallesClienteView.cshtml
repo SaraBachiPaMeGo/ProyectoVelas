@@ -50,7 +50,7 @@
             </td>
             <td>
                 @Html.ActionLink("Actualizar", "_ActClienteView", new { IDCliente = item.IDCliente }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detalles", "_DetallesClienteView1", new { IDCliente = item.IDCliente }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>

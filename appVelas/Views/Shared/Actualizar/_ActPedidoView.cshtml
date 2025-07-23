@@ -1,16 +1,18 @@
 ﻿@model appVelas.Models.Pedido
 
+@{
+    string IDPedido = ViewData["IDPedido"] as string;
+    List<Cliente> clientes = ViewData["clientes"] as List<Cliente>;
+}
+
+
 <h4>Pedido</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="_ActPedidoView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDPedido" class="control-label"></label>
-                <input asp-for="IDPedido" class="form-control" />
-                <span asp-validation-for="IDPedido" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="FechaPedi" class="control-label"></label>
                 <input asp-for="FechaPedi" class="form-control" />
@@ -21,15 +23,16 @@
                 <input asp-for="FechaEntrega" class="form-control" />
                 <span asp-validation-for="FechaEntrega" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="IDVela" class="control-label"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IDCliente" class="control-label"></label>
-                <input asp-for="IDCliente" class="form-control" />
-                <span asp-validation-for="IDCliente" class="text-danger"></span>
+                <label asp-for="IDCliente" class="control-label">Mecha:</label>
+                <select name="IDCliente" id="IDCliente" class="form-control">
+
+                    @foreach (var item in clientes)
+                    {
+                        <option value="@item.IDCliente">@item.IDCliente</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizar" class="btn btn-primary" />

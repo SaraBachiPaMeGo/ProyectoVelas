@@ -65,7 +65,20 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActVelaView(Guid IDVela)
         {
+            List<Molde> listaMoldes = this.repo.GetMoldes();
+            List<Fragancia> listaFrag = this.repo.GetFragancias();
+            List<Pigmento> listaPig = this.repo.GetPigmentos();
+            List<Cera> listaCera = this.repo.GetCeras();
+            List<Mecha> listaMecha = this.repo.GetMechas();
+
+            ViewData["Moldes"] = listaMoldes;
+            ViewData["Frag"] = listaFrag;
+            ViewData["Pig"] = listaPig;
+            ViewData["Cera"] = listaCera;
+            ViewData["Mecha"] = listaMecha;
+
             Vela vela = this.repo.BuscarVela(IDVela);
+            ViewData["IDVela"] = IDVela;
 
             return PartialView("Actualizar/_ActVelaView", vela);
         }
@@ -83,9 +96,16 @@ namespace appVelas.Controllers
             List<Vela> velas = this.repo.GetVelas();
 
             //ViewData["VELAS"] = velas;
-            return PartialView("_DetallesVelaView");
+            return PartialView("Detalles/_DetallesVelaView", velas);
         }
 
+        public PartialViewResult _DetallesVelaView1(Guid IDVela)
+        {
+            Vela vela = this.repo.BuscarVela(IDVela);
+
+            ViewData["VELA"] = vela;
+            return PartialView("Detalles/_DetallesVelaView1", vela);
+        }
         // ------------------------------------- MOLDE ---------------------------------------------
 
         public PartialViewResult _CrearMoldeView()
@@ -106,9 +126,10 @@ namespace appVelas.Controllers
 
         }
 
-        public PartialViewResult _ActMoldeView()
+        public PartialViewResult _ActMoldeView(Guid IDMolde)
         {
-            return PartialView("Actualizar/_CrearMoldeView");
+            ViewData["IDMolde"] = IDMolde;
+            return PartialView("Actualizar/_CrearMoldeView", this.repo.BuscarMolde(IDMolde));
         }
 
         [HttpPost]
@@ -116,7 +137,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarMolde(molde);
 
-            return PartialView("Actualizar/_ActMoldeView", molde);
+            return PartialView("Sucess", molde);
         }
 
         public PartialViewResult _DetallesMoldeView()
@@ -124,7 +145,15 @@ namespace appVelas.Controllers
             List<Molde> moldes = this.repo.GetMoldes();
 
             //ViewData["VELAS"] = velas;
-            return PartialView("Detalles/_DetallesVelaView", moldes);
+            return PartialView("Detalles/_DetallesMoldeView", moldes);
+        }
+
+        public PartialViewResult _DetallesMoldeView1(Guid IDMolde)
+        {
+            Molde mol = this.repo.BuscarMolde(IDMolde);
+
+            ViewData["MOLDE"] = mol;
+            return PartialView("Detalles/_DetallesMoldeView1", mol);
         }
 
         // ------------------------------------- PEDIDO ---------------------------------------------
@@ -145,9 +174,13 @@ namespace appVelas.Controllers
             return PartialView("Sucess");
         }
 
-        public PartialViewResult _ActPedidoView()
+        public PartialViewResult _ActPedidoView(Guid IDPedido)
         {
-            return PartialView("Actualizar/_ActPedidoView");
+            List<Cliente> listaClientes = this.repo.GetClientes();
+
+            ViewData["clientes"] = listaClientes;
+            ViewData["IDPedido"] = IDPedido; 
+            return PartialView("Actualizar/_ActPedidoView", this.repo.BuscarPedido(IDPedido));
         }
 
         [HttpPost]
@@ -164,6 +197,14 @@ namespace appVelas.Controllers
 
             //ViewData["VELAS"] = velas;
             return PartialView("Detalles/_DetallesPedidoView", pedidos);
+        }
+
+        public PartialViewResult _DetallesPedidoView1(Guid IDPedido)
+        {
+            Pedido pedo = this.repo.BuscarPedido(IDPedido);
+
+            ViewData["PEDIDO"] = pedo;
+            return PartialView("Detalles/_DetallesPedidoView1", pedo);
         }
 
         // ------------------------------------- CLIENTE ---------------------------------------------
@@ -274,9 +315,10 @@ namespace appVelas.Controllers
             return PartialView("Sucess");
         }
 
-        public PartialViewResult _ActMechaView()
+        public PartialViewResult _ActMechaView(Guid IDMecha)
         {
-            return PartialView("Actualizar/_ActMechaView");
+            ViewData["IDMecha"] = IDMecha;
+            return PartialView("Actualizar/_ActMechaView", this.repo.BuscarMecha(IDMecha));
         }
 
         [HttpPost]
@@ -284,7 +326,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarMecha(mecha);
 
-            return PartialView("Actualizar/_ActMechaView", mecha);
+            return PartialView("Sucess", mecha);
         }
 
         public PartialViewResult _DetallesMechaView()
@@ -295,15 +337,23 @@ namespace appVelas.Controllers
             return PartialView("Detalles/_DetallesMechaView", mechas);
         }
 
+        public PartialViewResult _DetallesMechaView1(Guid IDMecha)
+        {
+            Mecha me = this.repo.BuscarMecha(IDMecha);
+
+            ViewData["MECHA"] = me;
+            return PartialView("Detalles/_DetallesMechaView1", me);
+        }
+
         // ------------------------------------- PIGMENTO ---------------------------------------------
 
-        public IActionResult _CreatePigView()
+        public IActionResult _CrearPigView()
         {
             return PartialView("Crear/_CrearPigView");
         }
 
         [HttpPost]
-        public IActionResult _CreatePigView(Pigmento pig)
+        public IActionResult _CrearPigView(Pigmento pig)
         {
             this.repo.InsertarPigmento(pig);
 
@@ -311,9 +361,10 @@ namespace appVelas.Controllers
         }
 
 
-        public PartialViewResult _ActPigView()
+        public PartialViewResult _ActPigView(Guid IDPig)
         {
-            return PartialView("Actualizar/_ActPigView");
+            ViewData["IDFrag"] = IDPig; 
+            return PartialView("Actualizar/_ActPigView", this.repo.BuscarPigmento(IDPig));
         }
 
         [HttpPost]
@@ -321,7 +372,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarPigmento(pig);
 
-            return PartialView("Actualizar/_ActPigView", pig);
+            return PartialView("Sucess", pig);
         }
 
         public PartialViewResult _DetallesPigView()
@@ -330,6 +381,14 @@ namespace appVelas.Controllers
 
             //ViewData["VELAS"] = velas;
             return PartialView("Detalles/_DetallesPigView", pig);
+        }
+
+        public PartialViewResult _DetallesPigView1(Guid IDPig)
+        {
+            Pigmento pig = this.repo.BuscarPigmento(IDPig);
+
+            ViewData["PIG"] = pig;
+            return PartialView("Detalles/_DetallesPigView1", pig);
         }
 
         // ------------------------------------- CERA ---------------------------------------------
@@ -352,9 +411,10 @@ namespace appVelas.Controllers
 
         }
 
-        public PartialViewResult _ActCeraView()
+        public PartialViewResult _ActCeraView(Guid IDCera)
         {
-            return PartialView("Actualizar/_ActCeraView");
+            ViewData["IDCera"] = IDCera;
+            return PartialView("Actualizar/_ActCeraView", this.repo.BuscarCera(IDCera));
         }
 
         [HttpPost]
@@ -362,7 +422,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarCera(cera);
 
-            return PartialView("Actualizar/_ActCeraView", cera);
+            return PartialView("Sucess", cera);
         }
 
         public PartialViewResult _DetallesCeraView()
@@ -373,8 +433,16 @@ namespace appVelas.Controllers
             return PartialView("Detalles/_DetallesCeraView", ceras);
         }
 
+        public PartialViewResult _DetallesCeraView1(Guid IDCera)
+        {
+            Cera cera = this.repo.BuscarCera(IDCera);
+
+            ViewData["CERA"] = cera;
+            return PartialView("Detalles/_DetallesCeraView1", cera);
+        }
+
         // ------------------------------------- ENDURECEDOR ---------------------------------------------
-        
+
         public PartialViewResult _CrearEndurecedorView()
         {
             return PartialView("Crear/_CrearEndurecedoriew");
@@ -393,9 +461,10 @@ namespace appVelas.Controllers
 
         }
 
-        public PartialViewResult _ActEndurecedorView()
+        public PartialViewResult _ActEndurecedorView(Guid IDEnd)
         {
-            return PartialView("Actualizar/_ActEndurecedorView");
+            ViewData["IDEnd"] = IDEnd;
+            return PartialView("Actualizar/_ActEndurecedorView", this.repo.BuscarEndurecedor(IDEnd));
         }
 
         [HttpPost]
@@ -403,7 +472,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarEndurecedor(end);
 
-            return PartialView("Actualizar/_ActEndurecedorView", end);
+            return PartialView("Sucess", end);
         }
 
         public PartialViewResult _DetallesEndurecedorView()
@@ -412,6 +481,14 @@ namespace appVelas.Controllers
 
             //ViewData["VELAS"] = velas;
             return PartialView("Detalles/_DetallesEndurecedorView", end);
+        }
+
+        public PartialViewResult _DetallesEndurecedorView1(Guid IDEnd)
+        {
+            Endurecedor end = this.repo.BuscarEndurecedor(IDEnd);
+
+            ViewData["END"] = end;
+            return PartialView("Detalles/_DetallesEndurecedorView1", end);
         }
 
         // ------------------------------------- PACK ---------------------------------------------
@@ -434,9 +511,10 @@ namespace appVelas.Controllers
 
         }
 
-        public PartialViewResult _ActPackView()
+        public PartialViewResult _ActPackView(Guid IDPack)
         {
-            return PartialView("Actualizar/_ActPackView");
+            ViewData["IDPack"] = IDPack;
+            return PartialView("Actualizar/_ActPackView", this.repo.BuscarPack(IDPack));
         }
 
         [HttpPost]
@@ -444,7 +522,7 @@ namespace appVelas.Controllers
         {
             this.repo.ActualizarPack(pack);
 
-            return PartialView("Actualizar/_ActPackView", pack);
+            return PartialView("Sucess", pack);
         }
 
         public PartialViewResult _DetallesPackView()
@@ -453,6 +531,14 @@ namespace appVelas.Controllers
 
             //ViewData["VELAS"] = velas;
             return PartialView("Detalles/_DetallesPackView", pack);
+        }
+
+        public PartialViewResult _DetallesPackView1(Guid IDPack)
+        {
+            Pack pack = this.repo.BuscarPack(IDPack);
+
+            ViewData["PACK"] = pack;
+            return PartialView("Detalles/_DetallesPackView1", pack);
         }
 
         // ----------------------------------------------------------------------------------

@@ -1,16 +1,16 @@
 ﻿@model appVelas.Models.Endurecedor
 
+@{
+    string IDEndurecedor = ViewData["IDEnd"] as string;
+}
+
 <h4>Endurecedor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="_ActEndurecedorView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDEndurecedor" class="control-label"></label>
-                <input asp-for="IDEndurecedor" class="form-control" />
-                <span asp-validation-for="IDEndurecedor" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
@@ -22,7 +22,7 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompradoEn" class="control-label"></label>
+                <label asp-for="CompradoEn" class="control-label">Comprado en</label>
                 <input asp-for="CompradoEn" class="form-control" />
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
@@ -35,11 +35,6 @@
                 <label asp-for="Coste" class="control-label"></label>
                 <input asp-for="Coste" class="form-control" />
                 <span asp-validation-for="Coste" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IDVela" class="control-label"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

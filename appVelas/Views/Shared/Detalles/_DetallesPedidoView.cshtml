@@ -44,8 +44,8 @@
             </td>
             <td>
                 @Html.ActionLink("Actualizar", "_ActPedidoView", new { IDPedido = item.IDPedido }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Detalles", "_DetallesPedidoView1", new { IDPedido = item.IDPedido }) @*|
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
 }

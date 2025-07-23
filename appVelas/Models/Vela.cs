@@ -32,10 +32,10 @@ namespace appVelas.Models
         public DateTime FechaVenta { get; set; }
 
         [Column("GradFrag")]
-        public float GradFrag { get; set; }
+        public decimal GradFrag { get; set; }
 
         [Column("GradPig")]
-        public float GradPig { get; set; }
+        public decimal GradPig { get; set; }
 
         [Column("IDFrag")]
         public Guid IDFrag { get; set; }

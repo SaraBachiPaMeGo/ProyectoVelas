@@ -204,10 +204,12 @@ namespace appVelas.Repository
 
             this.context.SaveChanges();
         }
+
         public List<Pigmento> GetPigmentos()
         {
             return this.context.Pigmento.ToList();
         }
+
         public Pigmento BuscarPigmento(Guid idPig)
         {
             return this.context.Pigmento.SingleOrDefault

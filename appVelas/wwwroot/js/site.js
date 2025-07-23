@@ -3,10 +3,10 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
     switch (tipoVista) {
         case 'vela':
             $.ajax({
-                url: '/Home/_'+http+'VelaView', // Reemplaza con la URL correcta
+                url: '/Home/_'+http+'VelaView', 
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data); // Reemplaza #miContenedor con el ID del elemento donde insertar la vista
+                    $('#miContenedor').html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -18,7 +18,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 contenedor = 'miContenedor'
             }
             $.ajax({
-                url: '/Home/_CrearPedidoView', 
+                url: '/Home/_' + http +'PedidoView', 
                 type: 'GET',
                 success: function (data) {
                     $('#' + contenedor).html(data); 
@@ -30,7 +30,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'cliente':
             $.ajax({
-                url: '/Home/_CrearClienteView',
+                url: '/Home/_' + http +'ClienteView',
                 type: 'GET',
                 success: function (data) {
                     $('#' + contenedor).html(data);
@@ -42,26 +42,13 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'molde':
             $.ajax({
-                url: '/Home/_CrearMoldeView', 
+                url: '/Home/_' + http +'MoldeView', 
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
-                }
-            });
-            break;
-        case 'detalleVela':
-            $.ajax({
-                url: '/Home/_DetallesVelaView',
-                type: 'GET',
-                success: function (data) {
-                    $('#' + contenedor).html(data);
-                },
-                error: function () {
-                    alert('Error al cargar la vista parcial.');
-                    console.log(error)
                 }
             });
             break;

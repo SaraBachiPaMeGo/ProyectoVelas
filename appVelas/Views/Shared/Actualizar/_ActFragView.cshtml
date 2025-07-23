@@ -12,12 +12,7 @@
     <div class="col-md-4">
         <form asp-action="_ActFragView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" style="display:none;">
-                <label class="control-label">IDFrag;</label>
-                <input asp-for="IDFrag" class="form-control" />
-                <span asp-validation-for="IDFrag" class="text-danger"></span>
-            </div>
-            
+                        
             <div class="form-group">
                 <label class="control-label">Nombre;</label>
                 <input asp-for="FragNombre" class="form-control" />
@@ -37,11 +32,6 @@
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
                 <span asp-validation-for="Firma" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IDVela" class="control-label"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Coste" class="control-label"></label>

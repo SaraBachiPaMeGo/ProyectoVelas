@@ -1,4 +1,4 @@
-﻿@model IEnumerable<appVelas.Models.Pack>
+﻿@model IEnumerable<appVelas.Models.Pigmento>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IDPack)
+                @Html.DisplayNameFor(model => model.IDPig)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Firma)
@@ -16,16 +16,19 @@
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ColorNombre)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.CompradoEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cantidad)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Coste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDVela)
             </th>
             <th></th>
         </tr>
@@ -34,7 +37,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IDPack)
+                @Html.DisplayFor(modelItem => item.IDPig)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Firma)
@@ -43,7 +46,13 @@
                 @Html.DisplayFor(modelItem => item.Tipo)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ColorNombre)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CompradoEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cantidad)
@@ -52,12 +61,8 @@
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IDVela)
-            </td>
-            <td>
-                @Html.ActionLink("Actualizar", "_ActPackView", new { IDPack = item.IDPack }) |
-                @Html.ActionLink("Detalles", "_DetallesPackView1", new { IDPack = item.IDPack }) @*|
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                @Html.ActionLink("Actualizar", "_ActPigView", new { IDPig = item.IDPig }) |
+                @Html.ActionLink("Detalles", "_DetallesPigView1", new { IDPig = item.IDPig }) 
             </td>
         </tr>
 }

@@ -1,16 +1,26 @@
 ﻿@model appVelas.Models.Vela
 
+@{
+
+    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha>;
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde>;
+    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia>;
+    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento>;
+    List<Cera> cera = ViewData["Cera"] as List<Cera>;
+
+}
+
 <h4>Vela</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="_ActVelaView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDVela" class="control-label"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="IDVela" class="control-label"></label>
+            <input asp-for="IDVela" class="form-control" />
+            <span asp-validation-for="IDVela" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="VelaNombre" class="control-label"></label>
                 <input asp-for="VelaNombre" class="form-control" />
@@ -46,21 +56,68 @@
                 <input asp-for="GradPig" class="form-control" />
                 <span asp-validation-for="GradPig" class="text-danger"></span>
             </div>
+            @*Por defecto la de siempre*@
             <div class="form-group">
-                <label asp-for="IDFrag" class="control-label"></label>
-                <input asp-for="IDFrag" class="form-control" />
-                <span asp-validation-for="IDFrag" class="text-danger"></span>
+                <label asp-for="IDMecha" class="control-label">Mecha:</label>
+                <select name="IDMecha" id="IDMecha" class="form-control">
+
+                    @foreach (var item in mechas)
+                    {
+                        <option value="@item.IDMecha">@item.Firma</option>
+                    }
+                </select>
             </div>
+
+
+            @*Por defecto la de siempre*@
             <div class="form-group">
-                <label asp-for="IDMolde" class="control-label"></label>
-                <input asp-for="IDMolde" class="form-control" />
-                <span asp-validation-for="IDMolde" class="text-danger"></span>
+                <label asp-for="IDCera" class="control-label">Cera:</label>
+                <select name="IDCera" id="IDCera" class="form-control">
+
+                    @foreach (var item in cera)
+                    {
+                        <option value="@item.IDCera">@item.Tipo</option>
+                    }
+                </select>
+                @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
             </div>
+
+
+            @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
             <div class="form-group">
-                <label asp-for="IDPig" class="control-label"></label>
-                <input asp-for="IDPig" class="form-control" />
-                <span asp-validation-for="IDPig" class="text-danger"></span>
+                <label asp-for="IDMolde" class="control-label">Molde:</label>
+                <select name="IDMolde" id="IDMolde" class="form-control">
+
+                    @foreach (var item in moldes)
+                    {
+                        <option value="@item.IDMolde">@item.MoldeNombre</option>
+                    }
+                </select>
             </div>
+
+            @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+            <div class="form-group">
+                <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
+                <select name="IDFrag" id="IDFrag" multiple class="form-control">
+
+                    @foreach (var item in frag)
+                    {
+                        <option value="@item.IDFrag">@item.FragNombre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IDPig" class="control-label">Color/es</label>
+                <select name="IDPig" id="IDPig" multiple class="form-control">
+
+                    @foreach (var item in pig)
+                    {
+                        <option value="@item.IDPig">@item.ColorNombre</option>
+                    }
+                </select>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Coste" class="control-label"></label>
                 <input asp-for="Coste" class="form-control" />
@@ -70,16 +127,6 @@
                 <label asp-for="IDPedido" class="control-label"></label>
                 <input asp-for="IDPedido" class="form-control" />
                 <span asp-validation-for="IDPedido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IDMecha" class="control-label"></label>
-                <input asp-for="IDMecha" class="form-control" />
-                <span asp-validation-for="IDMecha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IDCera" class="control-label"></label>
-                <input asp-for="IDCera" class="form-control" />
-                <span asp-validation-for="IDCera" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizar" class="btn btn-primary" />

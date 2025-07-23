@@ -56,8 +56,8 @@
             </td>
             <td>
                 @Html.ActionLink("Actualizar", "_ActEndurecedorView", new { IDEndurecedor = item.IDEndurecedor }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Detalles", "_DetallesEndurecedorView1", new { IDEndurecedor = item.IDEndurecedor }) @*|
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
 }

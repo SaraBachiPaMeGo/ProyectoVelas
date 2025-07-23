@@ -1,119 +1,113 @@
 ﻿@model IEnumerable<appVelas.Models.Vela>
 
-@{
-   // List<Vela> velas = ViewData["VELAS"] as List<Vela>;
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VelaNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endurecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaReal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradFrag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradPig)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDFrag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMolde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPig)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCera)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VelaNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endurecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaVenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradFrag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradPig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDFrag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMolde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCera)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "_ActVelaaView", new { IDVela = item.IDVela}) |
+                @Html.ActionLink("Detalles", "_DetallesVelaView1", new { IDVela=item.IDVela})
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
 }
-
-
-<div class="col-md-4" style="margin-left: 3%;">
-    <table class="table">
-        <thead>
-            <tr>
-                @*<th>
-            @Html.DisplayNameFor(model => model.IDVela)
-        </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.VelaNombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endurecedor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaReal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaVenta)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GradFrag)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GradPig)
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.IDFrag)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDMolde)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDPig)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDCoste)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDPedido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDMecha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDCera)
-                </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.Observ)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.IDVela)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.VelaNombre)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endurecedor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaReal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaVenta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GradFrag)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GradPig)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.IDFrag)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDMolde)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDPig)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDCoste)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDPedido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDMecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDCera)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observ)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+    </tbody>
+</table>
