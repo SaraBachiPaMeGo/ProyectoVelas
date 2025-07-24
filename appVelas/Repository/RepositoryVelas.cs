@@ -46,13 +46,13 @@ namespace appVelas.Repository
             vela.FechaReal = DateTime.Now;
             vela.GradFrag = vel.GradFrag;
             vela.GradPig = vel.GradPig;
-            vela.IDCera = Guid.NewGuid();
-            vela.IDMecha = Guid.NewGuid();
+            vela.IDCera = vel.IDCera;
+            vela.IDMecha = vel.IDMecha;
             vela.Coste = vel.Coste;
-            vela.IDMolde = Guid.NewGuid();
-            vela.IDFrag = Guid.NewGuid();
-            vela.IDPedido = Guid.NewGuid();
-            vela.IDPig = Guid.NewGuid();
+            vela.IDMolde = vel.IDMolde;
+            vela.IDFrag = vel.IDFrag;
+            vela.IDPedido = vel.IDPedido;
+            vela.IDPig = vel.IDPig;
             vela.Observ = vel.Observ;
 
             //LLAMADA A STORE PROCEDURE PARA QUE ME CALCULE EL GASTO DE UNA VELA
@@ -83,18 +83,18 @@ namespace appVelas.Repository
             Vela vela = BuscarVela(vel.IDVela);
 
             //MIRAR SI LOS CAMPOS ANTIGUOS SON LOS MISMOS QUE LOS DATOS QUE VIENEN
-            if (vel.Endurecedor != null)
+            if (vel.Endurecedor != vela.Endurecedor)
             {
                 vela.Endurecedor = vel.Endurecedor;
 
             }
 
-            if (vel.GradFrag != null)
+            if (vel.GradFrag != vela.GradFrag)
             {
                 vela.GradFrag = vel.GradFrag;
             }
 
-            if (vel.GradPig != null)
+            if (vel.GradPig != vela.GradPig)
             {
                 vela.GradPig = vel.GradPig;
             }
@@ -102,27 +102,27 @@ namespace appVelas.Repository
             vela.FechaReal = DateTime.UtcNow;
             vela.FechaVenta = vel.FechaVenta; 
 
-            if (vel.IDCera != null)
+            if (vel.IDCera != vela.IDCera)
             {
                 vela.IDCera = vel.IDCera;
             }
 
-            if (vel.IDMecha != null)
+            if (vel.IDMecha != vela.IDMecha)
             {
                 vela.IDMecha = vel.IDMecha;
             }
 
-            if (vel.Coste != null)
+            if (vel.Coste != vela.Coste)
             {
                 vela.Coste = vel.Coste;
             }
 
-            if (vel.IDFrag != null)
+            if (vel.IDFrag != vela.IDFrag)
             {
                 vela.IDFrag = vel.IDFrag;
             }
             
-            if (vel.IDPedido != null)
+            if (vel.IDPedido != vela.IDPedido)
             {
                 vela.IDPedido = vel.IDPedido;
 

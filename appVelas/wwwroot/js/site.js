@@ -105,11 +105,14 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
     
 }
 
-function manejarCheckbox(contenedor, idCheck, tipoVista) {
+function manejarCheckbox(contenedor, idCheck, tipoVista, http) {
+    
     const checkbox = document.getElementById(idCheck);
 
     if (checkbox.checked) {
         //estadoSpan.textContent = "Sí";
-        cargarVistaParcial(tipoVista, contenedor);
+        cargarVistaParcial(tipoVista, contenedor, http);
+    } else {
+        document.getElementById('#miContenedor').di;
     }
 }

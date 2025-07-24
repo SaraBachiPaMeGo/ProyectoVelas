@@ -392,3 +392,4 @@ C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcor
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.dll
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.pdb
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.genruntimeconfig.cache
+C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.csprojAssemblyReference.cache

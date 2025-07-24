@@ -2,11 +2,11 @@
 
 <h4>Molde</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="_CrearMoldeView">
+<div class="row" style=" display: block; margin-left: 3%;">
+    <div >
+        <form asp-action="_CrearMoldeView" style="display:inline-block">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
+
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
@@ -18,12 +18,12 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompradoEn" class="control-label"></label>
+                <label asp-for="CompradoEn" class="control-label">Comprado en:</label>
                 <input asp-for="CompradoEn" class="form-control" />
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GramCera" class="control-label"></label>
+                <label asp-for="GramCera" class="control-label">g Cera</label>
                 <input asp-for="GramCera" class="form-control" />
                 <span asp-validation-for="GramCera" class="text-danger"></span>
             </div>
@@ -38,9 +38,15 @@
                 <span asp-validation-for="Duracion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CMMecha" class="control-label"></label>
+                <label asp-for="CMMecha" class="control-label">cm Mecha</label>
                 <input asp-for="CMMecha" class="form-control" />
                 <span asp-validation-for="CMMecha" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MilAgua" class="control-label">ml Agua</label>
+                <input asp-for="MilAgua" class="form-control" />
+                <span asp-validation-for="MilAgua" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Observ" class="control-label"></label>
@@ -48,12 +54,7 @@
                 <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MilAgua" class="control-label"></label>
-                <input asp-for="MilAgua" class="form-control" />
-                <span asp-validation-for="MilAgua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-outline-success" />
             </div>
         </form>
     </div>

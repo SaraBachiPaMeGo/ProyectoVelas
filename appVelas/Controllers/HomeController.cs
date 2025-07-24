@@ -95,6 +95,18 @@ namespace appVelas.Controllers
         {
             List<Vela> velas = this.repo.GetVelas();
 
+            List<Molde> listaMoldes = this.repo.GetMoldes();
+            List<Fragancia> listaFrag = this.repo.GetFragancias();
+            List<Pigmento> listaPig = this.repo.GetPigmentos();
+            List<Cera> listaCera = this.repo.GetCeras();
+            List<Mecha> listaMecha = this.repo.GetMechas();
+
+            ViewData["Moldes"] = listaMoldes;
+            ViewData["Frag"] = listaFrag;
+            ViewData["Pig"] = listaPig;
+            ViewData["Cera"] = listaCera;
+            ViewData["Mecha"] = listaMecha;
+
             //ViewData["VELAS"] = velas;
             return PartialView("Detalles/_DetallesVelaView", velas);
         }
@@ -102,8 +114,24 @@ namespace appVelas.Controllers
         public PartialViewResult _DetallesVelaView1(Guid IDVela)
         {
             Vela vela = this.repo.BuscarVela(IDVela);
+            Molde Moldes = this.repo.BuscarMolde(vela.IDMolde);
+            Fragancia Frag = this.repo.BuscarFragancia(vela.IDFrag);
+            Pigmento Pig = this.repo.BuscarPigmento(vela.IDPig);
+            Cera Cera = this.repo.BuscarCera(vela.IDCera);
+            Mecha Mecha = this.repo.BuscarMecha(vela.IDMecha);
+            Pedido pedi = this.repo.BuscarPedido(vela.IDPedido);
+            Guid cli = pedi.IDCliente;
+            string clien = this.repo.BuscarCliente(cli).Nombre;
 
+            ViewData["Moldes"] = Moldes;
+            ViewData["Frag"] = Frag;
+            ViewData["Pig"] = Pig;
+            ViewData["Cera"] = Cera;
+            ViewData["Mecha"] = Mecha;
             ViewData["VELA"] = vela;
+            ViewData["clien"] = clien;
+            ViewData["pedi"] = pedi;
+
             return PartialView("Detalles/_DetallesVelaView1", vela);
         }
         // ------------------------------------- MOLDE ---------------------------------------------

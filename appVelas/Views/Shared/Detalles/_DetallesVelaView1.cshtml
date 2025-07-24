@@ -1,7 +1,18 @@
 ﻿@model IEnumerable<appVelas.Models.Vela>
 
 @{
-   // List<Vela> velas = ViewData["VELAS"] as List<Vela>;
+    // List<Vela> velas = ViewData["VELAS"] as List<Vela>;
+    string IDCera = ViewData["IDCera"] as string;
+
+    Molde molde=  ViewData["Moldes"]  as Molde;
+    Fragancia frag = ViewData["Frag"] as Fragancia ;
+    Pigmento pig  = ViewData["Pig"]  as Pigmento;
+    Cera  cera = ViewData["Cera"]  as  Cera;
+    Mecha mecha  = ViewData["Mecha"]  as Mecha;
+    Vela vela = ViewData["VELA"]  as Vela;
+    string clien = ViewData["clien"] as string;
+    Pedido pedi = ViewData["pedi"]  as Pedido;
+
 }
 
 
@@ -9,11 +20,11 @@
     <table class="table">
         <thead>
             <tr>
-                @*<th>
-            @Html.DisplayNameFor(model => model.IDVela)
-        </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.VelaNombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Coste)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Endurecedor)
@@ -25,32 +36,39 @@
                     @Html.DisplayNameFor(model => model.FechaVenta)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GradFrag)
+                    ºC Fragancia
+                </th>
+
+                <th>
+                    Fragancia
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GradPig)
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.IDFrag)
+                    ºC Pig
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDMolde)
+                    Pigmento
+                </th>
+
+                <th>
+                    Molde
+                </th>
+
+
+                <th>
+                    Fecha pedido
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDPig)
+                    Fecha Entrega
+                </th>
+                <th>Cliente</th>
+
+                <th>
+                    Mecha
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDCoste)
+                    Cera
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDPedido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDMecha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDCera)
-                </th>*@
+
                 <th>
                     @Html.DisplayNameFor(model => model.Observ)
                 </th>
@@ -62,12 +80,14 @@
             {
             <tr>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.IDVela)
-                </td>*@
+            @Html.DisplayFor(modelItem => item.IDVela)
+        </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.VelaNombre)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Coste)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Endurecedor)
                 </td>
@@ -83,30 +103,33 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GradPig)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.IDFrag)
+                <td>
+                    @pig.ColorNombre
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDMolde)
+                    @frag.FragNombre;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDPig)
+                    @molde.MoldeNombre;
+                </td>
+
+                <td>
+                    @pedi.FechaPedi
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDCoste)
+                    @pedi.FechaEntrega
+                </td>
+                <td>@clien</td>
+                <td>
+                    @mecha.Tipo
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDPedido)
+                    @cera.Tipo
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDMecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDCera)
-                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Observ)
                 </td>
+
                 <td>
                     @Html.ActionLink("Actualizar", "_ActVelaView", new { IDVela = item.IDVela })
                 </td>

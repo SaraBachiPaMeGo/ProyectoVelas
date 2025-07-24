@@ -53,7 +53,7 @@
 
     <div class="row">
         <div>
-            <form asp-action="_CrearVelaView" method="post" style="/*display: flex;*/padding: 0rem;margin: 0rem;-webkit-column-count: 4;">
+            <form asp-action="_CrearVelaView" method="post" style="/*display: flex;*/padding: 0rem;margin: 0rem;-webkit-column-count: 4;display: inline;margin-left: 3%; ">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 @*<div >*@
@@ -156,14 +156,12 @@
             </form>
             <div class="form-group">
                 @*PASAR A LA VISTA PARCIAL EL IDVELA@*@
-                <div class="checkbox-container">
+                <div class="form-group checkbox-container">
                     <label for="miCheckbox" class="checkbox-label">¿Es un pedido?</label>
-                    <input type="checkbox" id="idCheckPedi" onclick="manejarCheckbox('contPedi','idCheckPedi','pedido')" class="checkbox-input">
-                    <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                    <input type="checkbox" id="idCheckPedi" onclick="manejarCheckbox('contPedi','idCheckPedi','pedido','Crear')" class="checkbox-input">
+                    <span class="checkbox-text">Sí</span>
                 </div>
             </div>
-            @*<div id="contPedi">
-                </div>*@
         </div>
     </div>
 
