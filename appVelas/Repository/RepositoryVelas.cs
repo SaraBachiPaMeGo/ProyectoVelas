@@ -15,6 +15,8 @@ namespace appVelas.Repository
         {
             this.context = context;
         }
+        //SELECT* FROM CosteAudit ORDER BY Fecha DESC;
+
 
         // ------------------------------------- VELA ---------------------------------------------
 

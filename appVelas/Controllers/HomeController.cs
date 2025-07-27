@@ -31,6 +31,47 @@ namespace appVelas.Controllers
             return View();
         }
 
+        public IActionResult ActualizarView(Guid id, string vista)
+        {
+            switch (vista)
+            {
+                case "Vela":
+                    return _ActVelaView( id);
+
+                case "Pedido":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Cliente":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Molde":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Frag":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Pig":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Mecha":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Cera":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Endurecedor":
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                case "Pack":                 
+                    return PartialView("Actualizar/_Act" + vista + "View", id);
+                    ;
+                default:
+                    return PartialView("Shared/Error", "No se encontró ninguna vela con el IDVela recibido" +
+                    ". Error en el Controller de la vista _ActVelaView");
+
+            }
+        }
+
         // ------------------------------------- VELA ---------------------------------------------
 
         public PartialViewResult _CrearVelaView()
@@ -65,22 +106,36 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActVelaView(Guid IDVela)
         {
-            List<Molde> listaMoldes = this.repo.GetMoldes();
-            List<Fragancia> listaFrag = this.repo.GetFragancias();
-            List<Pigmento> listaPig = this.repo.GetPigmentos();
-            List<Cera> listaCera = this.repo.GetCeras();
-            List<Mecha> listaMecha = this.repo.GetMechas();
-
-            ViewData["Moldes"] = listaMoldes;
-            ViewData["Frag"] = listaFrag;
-            ViewData["Pig"] = listaPig;
-            ViewData["Cera"] = listaCera;
-            ViewData["Mecha"] = listaMecha;
-
             Vela vela = this.repo.BuscarVela(IDVela);
-            ViewData["IDVela"] = IDVela;
 
-            return PartialView("Actualizar/_ActVelaView", vela);
+            if (vela == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel {
+                        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                        Mensaje = "No se encontró ninguna vela con el IDVela recibido. IDVELA = " + IDVela +
+                        "Error en el Controller de la vista _ActVelaView"
+                });
+            }
+            else {
+                List<Molde> listaMoldes = this.repo.GetMoldes();
+                List<Fragancia> listaFrag = this.repo.GetFragancias();
+                List<Pigmento> listaPig = this.repo.GetPigmentos();
+                List<Cera> listaCera = this.repo.GetCeras();
+                List<Mecha> listaMecha = this.repo.GetMechas();
+
+                ViewData["Moldes"] = listaMoldes;
+                ViewData["Frag"] = listaFrag;
+                ViewData["Pig"] = listaPig;
+                ViewData["Cera"] = listaCera;
+                ViewData["Mecha"] = listaMecha;
+
+                ViewData["IDVela"] = IDVela;
+
+                return PartialView("Actualizar/_ActVelaView", vela);
+            }
+            
+            
         }
 
         [HttpPost]
@@ -156,8 +211,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActMoldeView(Guid IDMolde)
         {
-            ViewData["IDMolde"] = IDMolde;
-            return PartialView("Actualizar/_CrearMoldeView", this.repo.BuscarMolde(IDMolde));
+            Molde mol = this.repo.BuscarMolde(IDMolde);
+
+            if (mol == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna vela con el IDMolde recibido. IDMolde = " + IDMolde +
+                        "Error en el Controller de la vista _ActMoldeView"
+                });
+            }
+            else
+            {
+                ViewData["IDMolde"] = IDMolde;
+                return PartialView("Actualizar/_CrearMoldeView", this.repo.BuscarMolde(IDMolde));
+            }
         }
 
         [HttpPost]
@@ -204,11 +274,26 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActPedidoView(Guid IDPedido)
         {
-            List<Cliente> listaClientes = this.repo.GetClientes();
+            Pedido ped = this.repo.BuscarPedido(IDPedido);
 
-            ViewData["clientes"] = listaClientes;
-            ViewData["IDPedido"] = IDPedido; 
-            return PartialView("Actualizar/_ActPedidoView", this.repo.BuscarPedido(IDPedido));
+            if (ped == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna vela con el IDPedido recibido. IDPedido = " + IDPedido +
+                        "Error en el Controller de la vista _ActPedidoView"
+                });
+            }
+            else{
+
+                List<Cliente> listaClientes = this.repo.GetClientes();
+
+                ViewData["clientes"] = listaClientes;
+                ViewData["IDPedido"] = IDPedido;
+                return PartialView("Actualizar/_ActPedidoView",ped);
+            }
         }
 
         [HttpPost]
@@ -251,8 +336,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActClienteView(Guid IDCli)
         {
-            ViewData["IDCli"] = IDCli;
-            return PartialView("Actualizar/_ActClienteView", this.repo.BuscarCliente(IDCli));
+            Cliente cli = this.repo.BuscarCliente(IDCli);
+
+            if (cli == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna vela con el IDCli recibido. IDCli = " + IDCli +
+                        "Error en el Controller de la vista _ActClienteView"
+                });
+            }
+            else
+            {
+                ViewData["IDCli"] = IDCli;
+                return PartialView("Actualizar/_ActClienteView", cli);
+            }
         }
 
         [HttpPost]
@@ -301,8 +401,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActFragView(Guid IDFrag)
         {
-            ViewData["IDFrag"] = IDFrag;
-            return PartialView("Actualizar/_ActFragView", this.repo.BuscarFragancia(IDFrag));
+            Fragancia frag = this.repo.BuscarFragancia(IDFrag);
+
+            if (frag == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna fragancua con el IDFrag recibido. IDFrag = " + IDFrag +
+                        "Error en el Controller de la vista _ActFragView"
+                });
+            }
+            else
+            {
+                ViewData["IDFrag"] = IDFrag;
+                return PartialView("Actualizar/_ActFragView", frag);
+            }
         }
 
         [HttpPost]
@@ -345,8 +460,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActMechaView(Guid IDMecha)
         {
-            ViewData["IDMecha"] = IDMecha;
-            return PartialView("Actualizar/_ActMechaView", this.repo.BuscarMecha(IDMecha));
+            Mecha mecha = this.repo.BuscarMecha(IDMecha);
+
+            if (mecha == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna mecha con el IDMecha recibido. IDMecha = " + IDMecha +
+                        "Error en el Controller de la vista _ActMechaView"
+                });
+            }
+            else
+            {
+                ViewData["IDMecha"] = IDMecha;
+                return PartialView("Actualizar/_ActMechaView", mecha);
+            }
         }
 
         [HttpPost]
@@ -391,8 +521,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActPigView(Guid IDPig)
         {
-            ViewData["IDFrag"] = IDPig; 
-            return PartialView("Actualizar/_ActPigView", this.repo.BuscarPigmento(IDPig));
+            Pigmento pig = this.repo.BuscarPigmento(IDPig);
+
+            if (pig == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna pigmento con el IDPig recibido. IDPig = " + IDPig +
+                        "Error en el Controller de la vista _ActPigView"
+                });
+            }
+            else
+            {
+                ViewData["IDPig"] = IDPig;
+                return PartialView("Actualizar/_ActPigView", pig);
+            }
         }
 
         [HttpPost]
@@ -441,8 +586,20 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActCeraView(Guid IDCera)
         {
-            ViewData["IDCera"] = IDCera;
-            return PartialView("Actualizar/_ActCeraView", this.repo.BuscarCera(IDCera));
+            Cera cera = this.repo.BuscarCera(IDCera);
+            if (cera == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna cera con el IDCera recibido. IDCera = " + IDCera +
+                        "Error en el Controller de la vista _ActCeraView"
+                });
+            }
+            else
+                ViewData["IDCera"] = IDCera;
+            return PartialView("Actualizar/_ActCeraView", cera);
         }
 
         [HttpPost]
@@ -473,7 +630,7 @@ namespace appVelas.Controllers
 
         public PartialViewResult _CrearEndurecedorView()
         {
-            return PartialView("Crear/_CrearEndurecedoriew");
+            return PartialView("Crear/_CrearEndurecedorView");
         }
 
         [HttpPost]
@@ -491,8 +648,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActEndurecedorView(Guid IDEnd)
         {
-            ViewData["IDEnd"] = IDEnd;
-            return PartialView("Actualizar/_ActEndurecedorView", this.repo.BuscarEndurecedor(IDEnd));
+            Endurecedor end = this.repo.BuscarEndurecedor(IDEnd);
+
+            if (end == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna endurecedor con el IDEnd recibido. IDEnd = " + IDEnd +
+                        "Error en el Controller de la vista _ActEndurecedorView"
+                });
+            }
+            else
+            {
+                ViewData["IDEnd"] = IDEnd;
+            }
+            return PartialView("Actualizar/_ActEndurecedorView", end);
         }
 
         [HttpPost]
@@ -541,8 +713,23 @@ namespace appVelas.Controllers
 
         public PartialViewResult _ActPackView(Guid IDPack)
         {
-            ViewData["IDPack"] = IDPack;
-            return PartialView("Actualizar/_ActPackView", this.repo.BuscarPack(IDPack));
+            Pack pack = this.repo.BuscarPack(IDPack);
+
+            if (pack == null)
+            {
+                return PartialView("Error", new
+                    ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Mensaje = "No se encontró ninguna pack con el IDPack recibido. IDPack = " + IDPack +
+                        "Error en el Controller de la vista _ActPackView"
+                });
+            }
+            else
+            {
+                ViewData["IDPack"] = IDPack;
+            }
+            return PartialView("Actualizar/_ActPackView", pack);
         }
 
         [HttpPost]
@@ -577,9 +764,13 @@ namespace appVelas.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(string mensaje)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel 
+            { 
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                Mensaje = mensaje
+            });
         }
     }
 }

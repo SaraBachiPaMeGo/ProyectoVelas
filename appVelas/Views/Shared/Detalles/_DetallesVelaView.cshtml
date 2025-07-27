@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<appVelas.Models.Vela>
-
+@{
+    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha>;
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde>;
+    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia>;
+    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento>;
+    List<Cera> cera = ViewData["Cera"] as List<Cera>;
+}
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -10,37 +16,32 @@
                 @Html.DisplayNameFor(model => model.VelaNombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaReal)
+                Fragancia
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaVenta)
+                Pigmento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IDFrag)
+                Molde
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDMolde)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDPig)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Coste)
             </th>
+            @*<th>
+            Es un pedido
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.IDPedido)
+                Mecha
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IDMecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDCera)
+                Cera
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaReal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaVenta)
+                Fecha venta
             </th>
             <th></th>
         </tr>
@@ -53,26 +54,32 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.IDFrag)
+                @frag.FirstOrDefault(f => f.IDFrag == item.IDFrag)?.FragNombre
+
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IDMolde)
+                @pig.FirstOrDefault(f => f.IDPig == item.IDPig)?.ColorNombre
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IDPig)
+                @moldes.FirstOrDefault(f => f.IDMolde == item.IDMolde)?.MoldeNombre
+
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDMecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDCera)
-            </td>
+            @*<td>
+            @pedis.FirstOrDefault(f => f.IDPedido == item.IDPedido).FragNombre
+
+        </td>*@
+        <td>
+            @mechas.FirstOrDefault(f => f.IDMecha == item.IDMecha)?.Tipo
+
+        </td>
+        <td>
+            @cera.FirstOrDefault(f => f.IDCera == item.IDCera)?.Tipo
+
+        </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaReal)
             </td>
@@ -80,7 +87,7 @@
                 @Html.DisplayFor(modelItem => item.FechaVenta)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActVelaView", new { IDVela = item.IDVela }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDVela, vista = "Vela" }) |
                 @Html.ActionLink("Detalles", "_DetallesVelaView1", new { IDVela = item.IDVela })
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

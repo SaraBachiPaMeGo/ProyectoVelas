@@ -16,11 +16,11 @@
     <div >
         <form asp-action="_ActVelaView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-            <label asp-for="IDVela" class="control-label"></label>
-            <input asp-for="IDVela" class="form-control" />
-            <span asp-validation-for="IDVela" class="text-danger"></span>
-        </div>*@
+            <div class="form-group" style="display:none">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="VelaNombre" class="control-label"></label>
                 <input asp-for="VelaNombre" class="form-control" />
@@ -63,11 +63,18 @@
 
                     @foreach (var item in mechas)
                     {
-                        <option value="@item.IDMecha">@item.Firma</option>
+                        if (@item.IDMecha == Model.IDMecha)
+                        {
+                            <option value="@item.IDMecha" selected>@item.Firma</option>
+
+                        }
+                        else
+                        {
+                            <option value="@item.IDMecha">@item.Firma</option>
+                        }
                     }
                 </select>
             </div>
-
 
             @*Por defecto la de siempre*@
             <div class="form-group">
@@ -82,7 +89,6 @@
                 @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
             </div>
 
-
             @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
             <div class="form-group">
                 <label asp-for="IDMolde" class="control-label">Molde:</label>
@@ -90,7 +96,15 @@
 
                     @foreach (var item in moldes)
                     {
-                        <option value="@item.IDMolde">@item.MoldeNombre</option>
+                        if (@item.IDMolde == Model.IDMecha)
+                        {
+                            <option value="@item.IDMolde" selected>@item.Firma</option>
+
+                        }
+                        else
+                        {
+                            <option value="@item.IDMolde">@item.MoldeNombre</option>
+                        }
                     }
                 </select>
             </div>

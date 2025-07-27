@@ -4,9 +4,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IDFrag)
-            </th>
-            <th>
                Nombre
             </th>
             <th>
@@ -33,9 +30,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDFrag)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.FragNombre)
             </td>

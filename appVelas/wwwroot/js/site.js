@@ -100,6 +100,30 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 }
             });
             break;
+        case 'end':
+            $.ajax({
+                url: '/Home/_' + http + 'EndurecedorView',
+                type: 'GET',
+                success: function (data) {
+                    $('#miContenedor').html(data);
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
+        case 'pack':
+            $.ajax({
+                url: '/Home/_' + http + 'PackView',
+                type: 'GET',
+                success: function (data) {
+                    $('#miContenedor').html(data);
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
         default:
     }
     
@@ -111,8 +135,10 @@ function manejarCheckbox(contenedor, idCheck, tipoVista, http) {
 
     if (checkbox.checked) {
         //estadoSpan.textContent = "Sí";
+        document.getElementById(contenedor).style.display = "block";
         cargarVistaParcial(tipoVista, contenedor, http);
     } else {
-        document.getElementById('#miContenedor').di;
+        console.log(document.getElementById(contenedor))
+        document.getElementById(contenedor).style.display = "none";
     }
 }

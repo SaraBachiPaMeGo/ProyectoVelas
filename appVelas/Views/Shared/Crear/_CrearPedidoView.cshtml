@@ -24,21 +24,23 @@
                     </div>
 
                     @*Es un nuevo cliente? en la caso de sí, CREAR NUEVO CLIENTE
-            sino buscarlo escribiendo, mediante lista *@
+        sino buscarlo escribiendo, mediante lista *@
 
-                    <div class="form-group" @*style="display:none"*@>
-                        <label asp-for="IDCliente" class="control-label" style="margin-top: 31px;">Cliente:</label>
-                        <select name="IDCliente" id="IDCliente" class="form-control" style="width: 22rem;">
+                <div class="form-group" @*style="display:none"*@>
+                    <input type="text" class="form-group" placeholder="Search..">
+                    <label asp-for="IDCliente" class="control-label" style="margin-top: 31px;">Cliente:</label>
+                    <select name="IDCliente" id="IDCliente" class="form-control" style="width: 22rem;">
 
-                            @foreach (var item in clientes)
-                            {
-                                <option value="@item.IDCliente">@item.Nombre</option>
-                            }
-                        </select>
-                    </div>
+                        @foreach (var item in clientes)
+                        {
+                            <option value="@item.IDCliente">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+                    
 
                     @*Se puede pasar un parámetro por la vista, el idVela
-            lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+        lista de nombres de las fragancias, puedes buscarlas escribiendo*@
                     <div class="form-group" style="display:none">
                         <label asp-for="IDVela" class="control-label"></label>
                         <input asp-for="IDVela" class="form-control" />

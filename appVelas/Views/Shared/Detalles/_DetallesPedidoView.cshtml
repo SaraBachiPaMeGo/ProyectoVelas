@@ -7,9 +7,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IDPedido)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FechaPedi)
             </th>
             <th>
@@ -27,9 +24,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDPedido)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaPedi)
             </td>
