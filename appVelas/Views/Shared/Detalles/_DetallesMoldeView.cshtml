@@ -85,7 +85,7 @@
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActMoldeView", new { IDMolde = item.IDMolde }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDMolde = item.IDMolde, vista = "Molde" }) |
                 @Html.ActionLink("Detalles", "_DetallesMoldeView1", new { IDMolde = item.IDMolde }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

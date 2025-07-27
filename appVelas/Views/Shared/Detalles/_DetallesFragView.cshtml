@@ -57,7 +57,7 @@
                 @*<p>
             <a asp-action="Create">Create New</a>
         </p>*@
-                @Html.ActionLink("Actualizar", "_ActFragView", new { IDFrag = item.IDFrag }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDFrag = item.IDFrag, vista = "Frag" }) |
                 @Html.ActionLink("Detalle", "_DetallesFragView1", new { IDFrag = item.IDFrag})
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

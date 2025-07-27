@@ -11,11 +11,16 @@
     <div >
         <form asp-action="_ActMechaView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDMecha" class="control-label"></label>
                 <input asp-for="IDMecha" class="form-control" />
                 <span asp-validation-for="IDMecha" class="text-danger"></span>
-            </div>*@
+            </div>
+            <div class="form-group" style="display: none">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
@@ -27,11 +32,11 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompradoEn" class="control-label"></label>
+                <label asp-for="CompradoEn" class="control-label">Comprado en:</label>
                 <input asp-for="CompradoEn" class="form-control" />
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

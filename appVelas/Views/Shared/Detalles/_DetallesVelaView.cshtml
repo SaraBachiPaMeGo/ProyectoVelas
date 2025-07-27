@@ -87,7 +87,7 @@
                 @Html.DisplayFor(modelItem => item.FechaVenta)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDVela, vista = "Vela" }) |
+                <span>@Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDVela, vista = "Vela" })</span>  |
                 @Html.ActionLink("Detalles", "_DetallesVelaView1", new { IDVela = item.IDVela })
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

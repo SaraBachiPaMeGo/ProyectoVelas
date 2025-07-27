@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActMechaView", new { IDMecha = item.IDMecha }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDMecha = item.IDMecha, vista = "Mecha" }) |
                 @Html.ActionLink("Detalles", "_DetallesMechaView1", new { IDMecha = item.IDMecha }) @*|
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

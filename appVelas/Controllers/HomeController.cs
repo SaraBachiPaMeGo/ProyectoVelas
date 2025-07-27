@@ -33,43 +33,32 @@ namespace appVelas.Controllers
 
         public IActionResult ActualizarView(Guid id, string vista)
         {
-            switch (vista)
+            ViewData["id"] = id;
+            ViewData["vista"] = vista;
+            string buscarModelo = "";
+
+            if (vista == "Frag")
             {
-                case "Vela":
-                    return _ActVelaView( id);
-
-                case "Pedido":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Cliente":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Molde":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Frag":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Pig":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Mecha":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Cera":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Endurecedor":
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                case "Pack":                 
-                    return PartialView("Actualizar/_Act" + vista + "View", id);
-                    ;
-                default:
-                    return PartialView("Shared/Error", "No se encontró ninguna vela con el IDVela recibido" +
-                    ". Error en el Controller de la vista _ActVelaView");
-
+                buscarModelo = $"BuscarFragancia";
             }
+            else if (vista == "Pig")
+            {
+
+                buscarModelo = $"BuscarPigmento";
+            }
+            else { 
+                buscarModelo = $"Buscar{vista}";
+            }
+
+            var metodo = this.repo.GetType().GetMethod(buscarModelo);
+
+            var model = metodo.Invoke(this.repo, new object[] { id });
+
+            // Arma el nombre del parcial de forma dinámica
+            string vistaParcial = $"~/Views/Shared/Actualizar/_Act{vista}View.cshtml";
+
+            // Retorna la vista principal contenedora
+            return View("ActualizarView", (vistaParcial, model));
         }
 
         // ------------------------------------- VELA ---------------------------------------------

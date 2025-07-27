@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActPigView", new { IDPig = item.IDPig }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDPig = item.IDPig, vista = "Pig" }) |
                 @Html.ActionLink("Detalles", "_DetallesPigView1", new { IDPig = item.IDPig }) 
             </td>
         </tr>

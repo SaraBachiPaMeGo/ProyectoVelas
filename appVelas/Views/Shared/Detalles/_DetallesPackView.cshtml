@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.IDVela)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActPackView", new { IDPack = item.IDPack }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack , vista = "Pack" }) |
                 @Html.ActionLink("Detalles", "_DetallesPackView1", new { IDPack = item.IDPack }) @*|
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

@@ -11,11 +11,11 @@
     <div >
         <form asp-action="_ActMoldeView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDMolde" class="control-label"></label>
                 <input asp-for="IDMolde" class="form-control" />
                 <span asp-validation-for="IDMolde" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
@@ -32,7 +32,7 @@
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GramCera" class="control-label"></label>
+                <label asp-for="GramCera" class="control-label">g Cera</label>
                 <input asp-for="GramCera" class="form-control" />
                 <span asp-validation-for="GramCera" class="text-danger"></span>
             </div>
@@ -47,7 +47,7 @@
                 <span asp-validation-for="Duracion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CMMecha" class="control-label"></label>
+                <label asp-for="CMMecha" class="control-label">cm Mecha</label>
                 <input asp-for="CMMecha" class="form-control" />
                 <span asp-validation-for="CMMecha" class="text-danger"></span>
             </div>
@@ -57,12 +57,12 @@
                 <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MilAgua" class="control-label"></label>
+                <label asp-for="MilAgua" class="control-label">ml Agua</label>
                 <input asp-for="MilAgua" class="form-control" />
                 <span asp-validation-for="MilAgua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IDVela" class="control-label"></label>
+                <label asp-for="IDVela" class="control-label" style="display: none"></label>
                 <input asp-for="IDVela" class="form-control" />
                 <span asp-validation-for="IDVela" class="text-danger"></span>
             </div>

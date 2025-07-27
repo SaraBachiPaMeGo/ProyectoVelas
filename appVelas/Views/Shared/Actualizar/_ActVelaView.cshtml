@@ -2,11 +2,11 @@
 
 @{
 
-    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha>;
-    List<Molde> moldes = ViewData["Moldes"] as List<Molde>;
-    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia>;
-    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento>;
-    List<Cera> cera = ViewData["Cera"] as List<Cera>;
+    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde>();
+    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia>();
+    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento>();
+    List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera>();
 
 }
 

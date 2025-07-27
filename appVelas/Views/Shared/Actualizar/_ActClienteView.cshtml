@@ -10,7 +10,7 @@
     <div >
         <form asp-action="_ActClienteView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDCliente" class="control-label"></label>
                 <input asp-for="IDCliente" class="form-control" />
                 <span asp-validation-for="IDCliente" class="text-danger"></span>
@@ -35,7 +35,7 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDPedido" class="control-label"></label>
                 <input asp-for="IDPedido" class="form-control" />
                 <span asp-validation-for="IDPedido" class="text-danger"></span>

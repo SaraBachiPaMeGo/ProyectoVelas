@@ -1,16 +1,14 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@{
     ViewData["Title"] = "Actualizar";
+
+    // Desempaqueta los valores del Tuple si es necesario
+    var (rutaParcial, model) = ((string, object))Model;
 }
 
-<h1>Actualizar</h1>
+<h1 class="text-center" style="color:orange">Actualizar</h1>
 
 <!-- Aquí inyectas tu parcial -->
-@*<div>
-    @Html.Partial("~/Views/Shared/Actualizar/_ActVelaView.cshtml")
-</div>*@
-
+<div id="contAct">
+    @await Html.PartialAsync(rutaParcial, model)
+</div>

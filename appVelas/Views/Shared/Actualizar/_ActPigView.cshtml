@@ -6,8 +6,8 @@
     <div >
         <form asp-action="_ActPigView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDPig" class="control-label"></label>
+            <div class="form-group" style="display: none">
+                <label asp-for="IDPig" class="control-label" style="display: none"></label>
                 <input asp-for="IDPig" class="form-control" />
                 <span asp-validation-for="IDPig" class="text-danger"></span>
             </div>
@@ -22,16 +22,16 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ColorNombre" class="control-label"></label>
+                <label asp-for="ColorNombre" class="control-label">Nombre</label>
                 <input asp-for="ColorNombre" class="form-control" />
                 <span asp-validation-for="ColorNombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompradoEn" class="control-label"></label>
+                <label asp-for="CompradoEn" class="control-label">Comprado en:</label>
                 <input asp-for="CompradoEn" class="form-control" />
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDVela" class="control-label"></label>
                 <input asp-for="IDVela" class="form-control" />
                 <span asp-validation-for="IDVela" class="text-danger"></span>

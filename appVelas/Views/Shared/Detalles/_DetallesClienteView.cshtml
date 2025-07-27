@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.IDPedido)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActClienteView", new { IDCliente = item.IDCliente }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDCliente = item.IDCliente, vista = "Cliente" }) |
                 @Html.ActionLink("Detalles", "_DetallesClienteView1", new { IDCliente = item.IDCliente }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

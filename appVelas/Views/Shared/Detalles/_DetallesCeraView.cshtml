@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.IDVela)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "_ActCeraView", new { IDCera = item.IDCera}) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDCera = item.IDCera, vista = "Cera" }) |
                 @Html.ActionLink("Detalles", "_DetallesCeraView1", new { IDCera = item.IDCera}) 
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>

@@ -10,7 +10,16 @@
     <div >
         <form asp-action="_ActEndurecedorView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+            <div class="form-group" style="display: none">
+                <label asp-for="IDEndurecedor" class="control-label"></label>
+                <input asp-for="IDEndurecedor" class="form-control" />
+                <span asp-validation-for="IDEndurecedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDVela" class="control-label" style="display: none"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />

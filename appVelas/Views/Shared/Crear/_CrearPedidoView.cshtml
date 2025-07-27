@@ -2,7 +2,7 @@
 
 @{
 
-    List<Cliente> clientes = ViewData["Cliente"] as List<Cliente>;
+    List<Cliente> clientes = ViewData["Cliente"] as List<Cliente> ?? new List<Cliente>();
 } 
 
         <h4>Pedido</h4>
