@@ -167,39 +167,39 @@ namespace appVelas.Repository
         {
             Pigmento pig = BuscarPigmento(pi.IDPig);
 
-            if (pi.Firma !=  null)
+            if (pi.Firma != pig.Firma)
             {
                 pig.Firma = pi.Firma;
 
             }
 
-            if (pi.Tipo != null)
+            if (pi.Tipo != pig.Tipo)
             {
                 pig.Tipo = pi.Tipo;
 
             }
 
-            if (pi.ColorNombre != null)
+            if (pi.ColorNombre != pig.ColorNombre)
             {
                 pig.ColorNombre = pi.ColorNombre;
             }
 
-            if (pi.CompradoEn != null)
+            if (pi.CompradoEn != pig.CompradoEn)
             {
                 pig.CompradoEn = pi.CompradoEn;
             }
 
-            if (pi.IDVela != null)
+            if (pi.IDVela != pig.IDVela)
             {
                 pig.IDVela = pi.IDVela;
             }
 
-            if (pi.Coste != null)
+            if (pi.Coste != pig.Coste)
             {
                 pig.Coste = pi.Coste;
             }
 
-            if (pi.Cantidad != null)
+            if (pi.Cantidad != pig.Cantidad)
             {
                 pig.Cantidad = pi.Cantidad;
             }
@@ -256,39 +256,39 @@ namespace appVelas.Repository
         {
             Fragancia frag = BuscarFragancia(fragan.IDFrag);
 
-            if (fragan.Firma != null)
+            if (fragan.Firma != frag.Firma)
             {
                 frag.Firma = fragan.Firma;
 
             }
 
-            if (fragan.Tipo != null)
+            if (fragan.Tipo != frag.Tipo)
             {
                 frag.Tipo = fragan.Tipo;
 
             }
 
-            if (fragan.CompradoEn != null)
+            if (fragan.CompradoEn != frag.CompradoEn)
             {
                 frag.CompradoEn = fragan.CompradoEn;
             }
 
-            if (fragan.IDVela != null)
+            if (fragan.IDVela != frag.IDVela)
             {
                 frag.IDVela = fragan.IDVela;
             }
 
-            if (fragan.FragNombre != null)
+            if (fragan.FragNombre != frag.FragNombre)
             {
                 frag.FragNombre = fragan.FragNombre;
             }
 
-            if (fragan.Coste != null)
+            if (fragan.Coste != frag.Coste)
             {
                 frag.Coste = fragan.Coste;
             }
 
-            if (fragan.Cantidad != null)
+            if (fragan.Cantidad != frag.Cantidad)
             {
                 frag.Cantidad = fragan.Cantidad;
             }
@@ -348,34 +348,34 @@ namespace appVelas.Repository
         {
             Mecha mecha = BuscarMecha(mech.IDMecha);
 
-            if (mech.Firma != null)
+            if (mech.Firma != mecha.Firma)
             {
                 mecha.Firma = mech.Firma;
 
             }
 
-            if (mech.Tipo != null)
+            if (mech.Tipo != mecha.Tipo)
             {
                 mecha.Tipo = mech.Tipo;
 
             }
 
-            if (mech.CompradoEn != null)
+            if (mech.CompradoEn != mecha.CompradoEn)
             {
                 mecha.CompradoEn = mech.CompradoEn;
             }
 
-            if (mech.IDVela != null)
+            if (mech.IDVela != mecha.IDVela)
             {
                 mecha.IDVela = mech.IDVela;
             }
 
-            if (mech.Cantidad != null)
+            if (mech.Cantidad != mecha.Cantidad)
             {
                 mecha.Cantidad = mech.Cantidad;
             }
 
-            if (mech.Coste != null)
+            if (mech.Coste != mecha.Coste)
             {
                 mecha.Coste = mech.Coste;
             }
@@ -434,58 +434,58 @@ namespace appVelas.Repository
         {
             Molde molde = BuscarMolde(mol.IDMolde);
 
-            if (mol.Firma != null)
+            if (mol.Firma != molde.Firma)
             {
                 molde.Firma = mol.Firma;
             }
 
-            if (mol.Tipo != null)
+            if (mol.Tipo != molde.Tipo)
             {
                 molde.Tipo = mol.Tipo;
 
             }
 
-            if (mol.CompradoEn != null)
+            if (mol.CompradoEn != molde.CompradoEn)
             {
                 molde.CompradoEn = mol.CompradoEn;
             }
 
-            if (mol.IDVela != null)
+            if (mol.IDVela != molde.IDVela)
             {
                 molde.IDVela = mol.IDVela;
             }
 
-            if (mol.CMMecha != null)
+            if (mol.CMMecha != molde.CMMecha)
             {
                 molde.CMMecha = mol.CMMecha;
             }
 
-            if (mol.GramCera != null)
+            if (mol.GramCera != molde.GramCera)
             {
                 molde.GramCera = mol.GramCera;
             }
 
-            if (mol.Medidas != null)
+            if (mol.Medidas != molde.Medidas)
             {
                 molde.Medidas = mol.Medidas;
             }
 
-            if (mol.Duracion != null)
+            if (mol.Duracion != molde.Duracion)
             {
                 molde.Duracion = mol.Duracion;
             }
 
-            if (mol.Observ != null)
+            if (mol.Observ != molde.Observ)
             {
                 molde.Observ = mol.Observ;
             }
 
-            if (mol.CompradoEn != null)
+            if (mol.CompradoEn != molde.CompradoEn)
             {
                 molde.CompradoEn = mol.CompradoEn;
             }
 
-            if (mol.Coste != null)
+            if (mol.Coste != molde.Coste)
             {
                 molde.Coste = mol.Coste;
             }
@@ -540,35 +540,35 @@ namespace appVelas.Repository
             Cera cera = BuscarCera(cer.IDCera);
 
 
-            if (cer.Firma != null)
+            if (cer.Firma != cera.Firma)
             {
                 cera.Firma = cer.Firma;
 
             }
 
-            if (cer.Tipo != null)
+            if (cer.Tipo != cera.Tipo)
             {
                 cera.Tipo = cer.Tipo;
 
             }
 
-            if (cer.CompradoEn != null)
+            if (cer.CompradoEn != cera.CompradoEn)
             {
                 cera.CompradoEn = cer.CompradoEn;
             }
 
-            if (cer.IDVela != null)
+            if (cer.IDVela != cera.IDVela)
             {
                 cera.IDVela = cer.IDVela;
             }
 
-            if (cer.Coste != null)
+            if (cer.Coste != cera.Coste)
             {
                 cera.Coste = cer.Coste;
 
             }
 
-            if (cer.Cantidad != null)
+            if (cer.Cantidad != cera.Cantidad)
             {
                 cera.Cantidad = cer.Cantidad;
 
@@ -620,29 +620,29 @@ namespace appVelas.Repository
             Cliente cli = BuscarCliente(clie.IDCliente);
 
 
-            if (clie.Nombre != null)
+            if (clie.Nombre != cli.Nombre)
             {
                 cli.Nombre = clie.Nombre;
 
             }
 
-            if (clie.Direccion != null)
+            if (clie.Direccion != cli.Direccion)
             {
                 cli.Direccion = clie.Direccion;
 
             }
 
-            if (clie.Telf != null)
+            if (clie.Telf != cli.Telf)
             {
                 cli.Telf = clie.Telf;
             }
 
-            if (clie.Email != null)
+            if (clie.Email != cli.Email)
             {
                 cli.Email = clie.Email;
             }
 
-            if (clie.IDPedido != null)
+            if (clie.IDPedido != cli.IDPedido)
             {
                 cli.IDPedido = clie.IDPedido;
             }
@@ -824,19 +824,19 @@ namespace appVelas.Repository
             Pedido pedi = BuscarPedido(idPedo);
 
 
-            if (fechaEntrega != null)
+            if (fechaEntrega != pedi.FechaEntrega)
             {
                 pedi.FechaEntrega = fechaEntrega;
 
             }
 
-            if (idCliente != null)
+            if (idCliente != pedi.IDCliente)
             {
                 pedi.IDCliente = idCliente;
 
             }
 
-            if (iDVela != null)
+            if (iDVela != pedi.IDVela)
             {
                 pedi.IDVela = iDVela;
             }
@@ -890,35 +890,35 @@ namespace appVelas.Repository
             Endurecedor cera = BuscarEndurecedor(cer.IDEndurecedor);
 
 
-            if (cer.Firma != null)
+            if (cer.Firma != cera.Firma)
             {
                 cera.Firma = cer.Firma;
 
             }
 
-            if (cer.Tipo != null)
+            if (cer.Tipo != cera.Tipo)
             {
                 cera.Tipo = cer.Tipo;
 
             }
 
-            if (cer.CompradoEn != null)
+            if (cer.CompradoEn != cera.CompradoEn)
             {
                 cera.CompradoEn = cer.CompradoEn;
             }
 
-            if (cer.IDVela != null)
+            if (cer.IDVela != cera.IDVela)
             {
                 cera.IDVela = cer.IDVela;
             }
 
-            if (cer.Coste != null)
+            if (cer.Coste != cera.Coste)
             {
                 cera.Coste = cer.Coste;
 
             }
 
-            if (cer.Cantidad != null)
+            if (cer.Cantidad != cera.Cantidad)
             {
                 cera.Cantidad = cer.Cantidad;
 
@@ -972,35 +972,35 @@ namespace appVelas.Repository
             Pack packa = BuscarPack(pack.IDPack);
 
 
-            if (pack.Firma != null)
+            if (pack.Firma != packa.Firma)
             {
                 packa.Firma = pack.Firma;
 
             }
 
-            if (pack.Tipo != null)
+            if (pack.Tipo != packa.Tipo)
             {
                 packa.Tipo = pack.Tipo;
 
             }
 
-            if (pack.CompradoEn != null)
+            if (pack.CompradoEn != packa.CompradoEn)
             {
                 packa.CompradoEn = pack.CompradoEn;
             }
 
-            if (pack.IDVela != null)
+            if (pack.IDVela != packa.IDVela)
             {
                 packa.IDVela = pack.IDVela;
             }
 
-            if (pack.Coste != null)
+            if (pack.Coste != packa.Coste)
             {
                 packa.Coste = pack.Coste;
 
             }
 
-            if (pack.Cantidad != null)
+            if (pack.Cantidad != packa.Cantidad)
             {
                 packa.Cantidad = pack.Cantidad;
 

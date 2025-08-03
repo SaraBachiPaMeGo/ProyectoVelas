@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<appVelas.Models.Pedido>
 
 <p>
-    <a asp-action="Create">Create New</a>
+     
 </p>
 <table class="table">
     <thead>
@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.IDCliente)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "ActualizarView", new { IDPedido = item.IDPedido, vista = "Pedido" }) |
-                @Html.ActionLink("Detalles", "_DetallesPedidoView1", new { IDPedido = item.IDPedido }) @*|
+                @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDPedido, vista = "Pedido" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { id = item.IDPedido, vista = "Pedido" }) @*|
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>

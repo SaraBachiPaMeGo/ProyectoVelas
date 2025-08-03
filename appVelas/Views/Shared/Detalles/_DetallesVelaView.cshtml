@@ -7,7 +7,7 @@
     List<Cera> cera = ViewData["Cera"] as List<Cera>;
 }
 <p>
-    <a asp-action="Create">Create New</a>
+     
 </p>
 <table class="table">
     <thead>
@@ -88,7 +88,7 @@
             </td>
             <td>
                 <span>@Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDVela, vista = "Vela" })</span>  |
-                @Html.ActionLink("Detalles", "_DetallesVelaView1", new { IDVela = item.IDVela })
+                @Html.ActionLink("Detalles", "DetallesView1", new { id = item.IDVela, vista = "Vela" })
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<appVelas.Models.Mecha>
 
 <p>
-    <a asp-action="Create">Create New</a>
+     
 </p>
 <table class="table">
     <thead>
@@ -49,8 +49,8 @@
                 @Html.DisplayFor(modelItem => item.Coste)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "ActualizarView", new { IDMecha = item.IDMecha, vista = "Mecha" }) |
-                @Html.ActionLink("Detalles", "_DetallesMechaView1", new { IDMecha = item.IDMecha }) @*|
+                @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDMecha, vista = "Mecha" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { id = item.IDMecha, vista = "Mecha" }) @*|
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>

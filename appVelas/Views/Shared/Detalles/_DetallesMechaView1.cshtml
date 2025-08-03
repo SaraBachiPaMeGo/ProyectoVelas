@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Actualizar", "_ActMechaView", new { IDMecha = Model.IDMecha }) |
+    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDMecha, vista = "Mecha" }) |
     <a asp-action="Index">Back to List</a>
 </div>

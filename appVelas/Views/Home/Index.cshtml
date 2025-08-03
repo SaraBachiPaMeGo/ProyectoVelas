@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Inicio";
+    //var (rutaParcial, model) = ((string, object))Model;
 }
 
 <script src="~/js/site.js"></script>
@@ -19,12 +20,16 @@
 
     </div>
 
-    <div id="contPedi" style="margin-top: 2rem;" >
+    <div id="contPedi" style="margin-top: 2rem;">
 
     </div>
 
     <div id="contCli" style="margin-top: 2rem;">
 
+    </div>
+
+    <div id="contDet">
+        @*@await Html.PartialAsync(rutaParcial, model)*@
     </div>
 </div>
 

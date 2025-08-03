@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Actualizar", "_ActPedidoView", new { IDPedido = Model.IDPedido }) |
+    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDPedido, vista = "Pedido" }) |
     <a asp-action="Index">Back to List</a>
 </div>
