@@ -57,5 +57,9 @@ namespace appVelas.Models
 
         [Column("IDCera")]
         public Guid IDCera { get; set; }
+
+        public List<VelaPigmento> Pigmentos { get; set; }
+        public List<VelaFragancia> Fragancias { get; set; }
     }
+
 }

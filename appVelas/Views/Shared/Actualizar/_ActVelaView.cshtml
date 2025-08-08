@@ -112,22 +112,22 @@
             @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
             <div class="form-group">
                 <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
-                <select name="IDFrag" id="IDFrag" multiple class="form-control">
-
-                    @foreach (var item in frag)
+                <select id="fragancias" name="IDFragancias" multiple="multiple" class="form-control select2">
+                    @foreach (var fragan in ViewBag.Fragancias as SelectList)
                     {
-                        <option value="@item.IDFrag">@item.FragNombre</option>
+                        var selected = ((List<Guid>)ViewBag.FraganciasSeleccionadas).Contains(Guid.Parse(fragan.Value)) ? "selected" : "";
+                        <option value="@fragan.Value" >@fragan.Text</option>
                     }
                 </select>
             </div>
 
             <div class="form-group">
                 <label asp-for="IDPig" class="control-label">Color/es</label>
-                <select name="IDPig" id="IDPig" multiple class="form-control">
-
-                    @foreach (var item in pig)
+                <select id="pigmentos" name="IDPigmentos" multiple="multiple" class="form-control select2">
+                    @foreach (var pigt in ViewBag.Pigmentos as SelectList)
                     {
-                        <option value="@item.IDPig">@item.ColorNombre</option>
+                        var selected = ((List<Guid>)ViewBag.PigmentosSeleccionados).Contains(Guid.Parse(pigt.Value)) ? "selected" : "";
+                        <option value="@pigt.Value" >@pigt.Text</option>
                     }
                 </select>
             </div>

@@ -1,4 +1,15 @@
-﻿
+﻿$(document).ready(function () {
+    $('#fragancias').select2({
+        placeholder: "Selecciona una fragancia",
+        allowClear: true
+    });
+
+    $('#pigmentos').select2({
+        placeholder: "Selecciona un pigmento",
+        allowClear: true
+    });
+});
+
 function cargarVistaParcial(tipoVista, contenedor, http) {
     switch (tipoVista) {
         case 'vela':

@@ -24,5 +24,7 @@ namespace appVelas.Data
         public DbSet<Pigmento> Pigmento { get; set; }
         public DbSet<Vela> Vela { get; set; }
 
+        public DbSet<VelaPigmento> VelaPigmento{ get; set; }
+        public DbSet<VelaFragancia> VelaFragancia { get; set; }
     }
 }

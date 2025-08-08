@@ -11,6 +11,9 @@ namespace appVelas.Repository
     {
         Contexto context;
 
+        public List<VelaPigmento> Pigmentos { get; private set; }
+        public List<VelaFragancia> Fragancias { get; private set; }
+
         public RepositoryVelas(Contexto context)
         {
             this.context = context;
@@ -36,12 +39,8 @@ namespace appVelas.Repository
         {
             Vela vela = new Vela();
 
-            //int? count = (from datos in context.Vela
-            //              select datos.IDVela).Count();
-
-                vela.IDVela =Guid.NewGuid();
+             vela.IDVela =Guid.NewGuid();
             
-
             vela.VelaNombre = vel.VelaNombre;
             vela.Endurecedor = vel.Endurecedor;
             vela.FechaVenta = DateTime.Now;
@@ -57,25 +56,33 @@ namespace appVelas.Repository
             vela.IDPig = vel.IDPig;
             vela.Observ = vel.Observ;
 
-            //LLAMADA A STORE PROCEDURE PARA QUE ME CALCULE EL GASTO DE UNA VELA
+            Pigmentos = new List<VelaPigmento>();
+            Fragancias = new List<VelaFragancia>();
 
-            //        await context.Database.ExecuteSqlRawAsync(
-            //"EXEC CalcularCosteVela @idVela = {0}", idVela);
+            // Agregar pigmentos asociados
+            foreach (var pigmento in vel.Pigmentos)
+            {
+                vela.Pigmentos.Add(new VelaPigmento
+                {
+                    IDVela = vela.IDVela,
+                    IDPig = pigmento.IDPig,
+                    Cantidad = pigmento.Cantidad,
+                    Coste = pigmento.Coste
+                });
+            }
 
-            //            var resultado = context.Database.SqlQuery<ResultadoCosteVela>(
-            //    "EXEC CalcularCosteVela @idVela = @id",
-            //    new SqlParameter("@id", idVela)
-            //).FirstOrDefault();
+            // Agregar fragancias asociadas
+            foreach (var fragancia in vel.Fragancias)
+            {
+                vela.Fragancias.Add(new VelaFragancia
+                {
+                    IDVela = vela.IDVela,
+                    IDFrag = fragancia.IDFrag,
+                    Cantidad = fragancia.Cantidad,
+                    Coste = fragancia.Coste
+                });
+            }
 
-                                //        var resultado = await context
-                                //.ResultadoCosteVela
-                                //.FromSqlInterpolated($"EXEC CalcularCosteVela @idVela = {idVela}")
-                                //.ToListAsync();
-
-            //decimal coste = resultado.FirstOrDefault()?.CosteTotal ?? 0;
-
-
-            //Controlar que la vuelta es un ok todo ha salido bien (200 en http)
             this.context.Vela.Add(vela);
             this.context.SaveChanges();
         }
@@ -83,6 +90,9 @@ namespace appVelas.Repository
         public void Actualizarvela(Vela vel)
         {
             Vela vela = BuscarVela(vel.IDVela);
+
+            if (vela == null)
+                throw new Exception("La vela no existe");
 
             //MIRAR SI LOS CAMPOS ANTIGUOS SON LOS MISMOS QUE LOS DATOS QUE VIENEN
             if (vel.Endurecedor != vela.Endurecedor)
@@ -101,8 +111,15 @@ namespace appVelas.Repository
                 vela.GradPig = vel.GradPig;
             }
 
-            vela.FechaReal = DateTime.UtcNow;
-            vela.FechaVenta = vel.FechaVenta; 
+            if (vel.FechaReal != vela.FechaReal)
+            {
+                vela.FechaReal = vel.FechaReal;
+            }
+
+            if (vel.FechaVenta != vela.FechaVenta)
+            {
+                vela.FechaVenta = vel.FechaVenta;
+            }
 
             if (vel.IDCera != vela.IDCera)
             {
@@ -129,6 +146,69 @@ namespace appVelas.Repository
                 vela.IDPedido = vel.IDPedido;
 
             }
+
+            // === Actualizar Pigmentos ===
+            // Eliminar pigmentos que ya no estén
+            var pigmentosAEliminar = vela.Pigmentos
+                .Where(p => !vela.Pigmentos.Any(np => np.IDPig == p.IDPig))
+                .ToList();
+
+            //foreach (var pEliminar in pigmentosAEliminar)
+            //{
+            //    this.context.VelaPigmento.Remove(pEliminar);
+            //}
+
+            // Agregar o actualizar pigmentos
+            foreach (var pigNuevo in vela.Pigmentos)
+            {
+                var pigExistente = vela.Pigmentos
+                    .FirstOrDefault(p => p.IDPig == pigNuevo.IDPig);
+
+                if (pigExistente != null)
+                {
+                    // Actualizar propiedades
+                    pigExistente.Cantidad = pigNuevo.Cantidad;
+                    pigExistente.Coste = pigNuevo.Coste;
+                }
+                //else
+                //{
+                //    // Agregar pigmento nuevo
+                //    pigNuevo.IDVela = vela.IDVela; // Asegurar FK
+                //    this.context.VelaPigmento.Add(pigNuevo);
+                //}
+            }
+
+            // === Actualizar Fragancias ===
+            // Eliminar fragancias que ya no estén
+            var fraganciasAEliminar = vela.Fragancias
+                .Where(f => !vela.Fragancias.Any(nf => nf.IDFrag == f.IDFrag))
+                .ToList();
+
+            //foreach (var fEliminar in fraganciasAEliminar)
+            //{
+            //    this.context.VelaFragancia.Remove(fEliminar);
+            //}
+
+            // Agregar o actualizar fragancias
+            foreach (var fragNuevo in vela.Fragancias)
+            {
+                var fragExistente = vela.Fragancias
+                    .FirstOrDefault(f => f.IDFrag == fragNuevo.IDFrag);
+
+                if (fragExistente != null)
+                {
+                    // Actualizar propiedades
+                    fragExistente.Cantidad = fragNuevo.Cantidad;
+                    fragExistente.Coste = fragNuevo.Coste;
+                }
+                //else
+                //{
+                //    // Agregar fragancia nueva
+                //    fragNuevo.IDVela = vela.IDVela;
+                //    this.context.VelaFragancia.Add(fragNuevo);
+                //}
+            }
+
 
             this.context.SaveChanges();
         }
@@ -218,6 +298,52 @@ namespace appVelas.Repository
                 (x => x.IDPig == idPig);
         }
 
+        // ------------------------------------- VELAFRAGANCIA ---------------------------------------------
+        public void InsertarVelaFragancia(Guid idVela, Guid idFrag)
+        {
+            var vf = new VelaFragancia { IDVela = idVela, IDFrag = idFrag };
+
+            //context.VelaFragancia.Add(vf);
+            context.SaveChanges();
+        }
+
+        public void EliminarRelacionesFragancias(Guid idVela)
+        {
+            //var rels = context.VelaFragancia.Where(vf => vf.IDVela == idVela);
+            //context.VelaFragancia.RemoveRange(rels);
+            //context.SaveChanges();
+        }
+
+        //public List<Fragancia> GetFraganciasPorVela(Guid idVela)
+        //{
+        //    return context.VelaFragancia
+        //        .Where(vf => vf.IDVela == idVela)
+        //        .Select(vf => vf.Fragancia) // Asumiendo que tienes la navegación Fragancia en VelaFragancia
+        //        .ToList();
+        //}
+        // ------------------------------------- VELAPIGMENTO ---------------------------------------------
+
+        public void InsertarVelaPigmento(Guid idVela, Guid idPig)
+        {
+            var vp = new VelaPigmento { IDVela = idVela, IDPig = idPig };
+            //context.VelaPigmento.Add(vp);
+            //context.SaveChanges();
+        }
+
+        public void EliminarRelacionesPigmentos(Guid idVela)
+        {
+            //var rels = context.VelaPigmento.Where(vp => vp.IDVela == idVela);
+            //context.VelaPigmento.RemoveRange(rels);
+            context.SaveChanges();
+        }
+
+        //public List<Pigmento> GetPigmentosPorVela(Guid idVela)
+        //{
+        //    //return context.VelaPigmento
+        //    //    .Where(vp => vp.IDVela == idVela)
+        //    //    .Select(vp => vp.Pigmento)  // Asumiendo que tienes la propiedad de navegación Pigmento en VelaPigmento
+        //    //    .ToList();
+        //}
         // ------------------------------------- FRAGANCIA ---------------------------------------------
 
         public void InsertarFragancia(Fragancia fragan)  

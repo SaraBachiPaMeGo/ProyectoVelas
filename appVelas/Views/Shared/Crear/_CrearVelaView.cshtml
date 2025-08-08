@@ -4,9 +4,11 @@
 
     List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
     List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde> ();
-    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
-    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
+    //List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
+    //List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
     List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera> ();
+    var fragancias = ViewBag.Fragancias as IEnumerable<SelectListItem> ?? new List<SelectListItem>();
+    var pigmentos = ViewBag.Pigmentos as IEnumerable<SelectListItem> ?? new List<SelectListItem>();
 
 }
 
@@ -110,23 +112,21 @@
 
                 @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
                 <div class="form-group">
-                    <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
-                    <select name="IDFrag" id="IDFrag" multiple class="form-control">
-
-                        @foreach (var item in frag)
+                    <label class="control-label">Fragrancias</label>
+                    <select name="IDFragancias" class="form-control select2" multiple="multiple" style="width: 100%;">
+                        @foreach (var fraga in fragancias as SelectList)
                         {
-                            <option value="@item.IDFrag">@item.FragNombre</option>
+                            <option value="@fraga.Value">@fraga.Text</option>
                         }
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IDPig" class="control-label">Color/es</label>
-                    <select name="IDPig" id="IDPig" multiple class="form-control">
-
-                        @foreach (var item in pig)
+                    <label class="control-label">Colores</label>
+                    <select name="IDPigmentos" class="form-control select2" multiple="multiple" style="width: 100%;">
+                        @foreach (var pigt in pigmentos as SelectList)
                         {
-                            <option value="@item.IDPig">@item.ColorNombre</option>
+                            <option value="@pigt.Value">@pigt.Text</option>
                         }
                     </select>
                 </div>
