@@ -10,7 +10,7 @@ namespace appVelas.Data
     public class Contexto : DbContext
     {
 
-        public Contexto(DbContextOptions options) : base(options)
+        public Contexto(DbContextOptions<Contexto> options) : base(options)
         { }
         public DbSet<Cera> Cera { get; set; }
         public DbSet<Pack> Pack { get; set; }

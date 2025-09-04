@@ -29,27 +29,27 @@ namespace appVelas.Models
         public string CompradoEn { get; set; }
 
         [Column("GramCera")]
-        public decimal GramCera { get; set; }
+        public decimal? GramCera { get; set; }
 
         [Column("Medidas")]
         public string Medidas { get; set; }
 
         [Column("Duracion")]
-        public decimal Duracion { get; set; }
+        public decimal? Duracion { get; set; }
 
         [Column("CMMecha")]
-        public decimal CMMecha { get; set; }
+        public decimal? CMMecha { get; set; }
 
         [Column("Observ")]
         public string Observ { get; set; }
 
         [Column("MilAgua")]
-        public decimal MilAgua { get; set; }
+        public decimal? MilAgua { get; set; }
 
         [Column("IDVela")]
         public Guid IDVela { get; set; }
 
         [Column("Coste")]
-        public decimal Coste { get; set; }
+        public decimal? Coste { get; set; }
     }
 }

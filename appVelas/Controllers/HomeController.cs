@@ -21,13 +21,12 @@ namespace appVelas.Controllers
         //    _logger = logger;
         //}
 
-        RepositoryVelas repo;
+        private readonly RepositoryVelas repo;
         //Contexto context;
 
-        public HomeController(RepositoryVelas repo /*,Contexto context*/)
+        public HomeController(RepositoryVelas repo )
         {
             this.repo = repo;
-            //this.context = context;
         }
 
         public IActionResult Index()

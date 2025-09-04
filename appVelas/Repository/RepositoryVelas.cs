@@ -9,16 +9,15 @@ namespace appVelas.Repository
 {
     public class RepositoryVelas
     {
-        Contexto context;
-
-        public List<VelaPigmento> Pigmentos { get; private set; }
-        public List<VelaFragancia> Fragancias { get; private set; }
+        private readonly Contexto context;
 
         public RepositoryVelas(Contexto context)
         {
-            this.context = context;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        //SELECT* FROM CosteAudit ORDER BY Fecha DESC;
+
+        public List<VelaPigmento> Pigmentos { get; set; }
+        public List<VelaFragancia> Fragancias { get; set; }
 
 
         // ------------------------------------- VELA ---------------------------------------------
@@ -623,6 +622,11 @@ namespace appVelas.Repository
 
         public List<Molde> GetMoldes()
         {
+            var conexionAbierta = context.Database.CanConnect(); // Esto retorna true si puede conectarse
+            if (!conexionAbierta)
+            {
+                throw new Exception("No se pudo conectar a la base de datos");
+            }
             return this.context.Molde.ToList();
         }
 

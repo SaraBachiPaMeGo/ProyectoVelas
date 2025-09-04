@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using appVelas.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,27 +29,20 @@ namespace appVelas
         public void ConfigureServices(IServiceCollection services)
         {
             String cadena = this.Configuration.GetConnectionString("proyektVelas");
-
+            
             if (cadena ==null)
             {
                 cadena = "Data Source=LAPTOP-SLC643FH;Initial Catalog=ProyektVelas;Persist Security Info=True;User ID=SA;Password=P@ssw0rdVelas1";
             }
 
-            services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
-            services.AddTransient<RepositoryVelas>();
+            services.AddDbContext<Contexto>(options =>
+                options.UseSqlServer(cadena));
+
+            //services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
+            services.AddScoped<RepositoryVelas>();
             services.AddMvc();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc(
-            //        name: "v1",
-            //        new OpenApiInfo
-            //        {
-            //            Title = "Projecto Velas",
-            //            Version = "v1",
-            //            Description = "Confiamos en el futuro"
-            //        }
-            //        );
-            //});
+
+            services.AddControllersWithViews(); // Si no lo tienes
 
             //HelperToken helper = new HelperToken(this.Configuration);
 
@@ -75,18 +68,6 @@ namespace appVelas
             app.UseHttpsRedirection();
             
             app.UseStaticFiles();
-
-            //app.UseSwagger();
-
-            //app.UseSwaggerUI(
-            //    c =>
-            //    {
-            //        c.SwaggerEndpoint(
-            //            url: "/swagger/v1/swagger.json",
-            //            name: "Api v1"
-            //            );
-            //        c.RoutePrefix = "";
-            //    });
 
             app.UseHttpsRedirection();
 
