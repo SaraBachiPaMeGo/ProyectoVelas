@@ -47,7 +47,7 @@ namespace appVelas.Models
         public decimal? MilAgua { get; set; }
 
         [Column("IDVela")]
-        public Guid IDVela { get; set; }
+        public Guid? IDVela { get; set; }
 
         [Column("Coste")]
         public decimal? Coste { get; set; }

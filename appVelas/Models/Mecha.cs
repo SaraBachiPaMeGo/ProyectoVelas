@@ -26,7 +26,7 @@ namespace appVelas.Models
         public string CompradoEn { get; set; }
 
         [Column("IDVela")]
-        public Guid IDVela { get; set; }
+        public Guid? IDVela { get; set; }
 
         [Column("Cantidad")]
         public decimal Cantidad { get; set; }

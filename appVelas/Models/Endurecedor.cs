@@ -33,6 +33,6 @@ namespace appVelas.Models
         public decimal Coste { get; set; }
 
         [Column("IDVela")]
-        public Guid IDVela { get; set; }
+        public Guid? IDVela { get; set; }
     }
 }

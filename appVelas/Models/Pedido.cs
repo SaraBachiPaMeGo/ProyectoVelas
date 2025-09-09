@@ -23,7 +23,7 @@ namespace appVelas.Models
         public DateTime FechaEntrega { get; set; }
 
         [Column("IDVela")]
-        public Guid IDVela { get; set; }
+        public Guid? IDVela { get; set; }
 
         [Column("IDCliente")]
         public Guid IDCliente { get; set; }
