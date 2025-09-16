@@ -228,13 +228,15 @@ namespace appVelas.Repository
             //context.SaveChanges();
         }
 
-        //public List<Fragancia> GetFraganciasPorVela(Guid idVela)
-        //{
-        //    return context.VelaFragancia
-        //        .Where(vf => vf.IDVela == idVela)
-        //        .Select(vf => vf.Fragancia) // Asumiendo que tienes la navegación Fragancia en VelaFragancia
-        //        .ToList();
-        //}
+        public List<Fragancia> GetFraganciasPorVela(Guid idVela)
+        {
+            return context.VelaFragancia
+                .Where(vf => vf.IDVela == idVela)
+                .Select(vf => vf.Fragancia) // Asumiendo que tienes la navegación Fragancia en VelaFragancia
+                .ToList();
+        }
+
+
         // ------------------------------------- VELAPIGMENTO ---------------------------------------------
 
         public void InsertarVelaPigmento(Guid idVela, Guid idPig)
@@ -251,15 +253,16 @@ namespace appVelas.Repository
             context.SaveChanges();
         }
 
-        //public List<Pigmento> GetPigmentosPorVela(Guid idVela)
-        //{
-        //    //return context.VelaPigmento
-        //    //    .Where(vp => vp.IDVela == idVela)
-        //    //    .Select(vp => vp.Pigmento)  // Asumiendo que tienes la propiedad de navegación Pigmento en VelaPigmento
-        //    //    .ToList();
-        //}
-                      
+        public List<Pigmento> GetPigmentosPorVela(Guid idVela)
+        {
+            return context.VelaPigmento
+                .Where(vp => vp.IDVela == idVela)
+                .Select(vp => vp.Pigmento)  // Asumiendo que tienes la propiedad de navegación Pigmento en VelaPigmento
+                .ToList();
+        }
+
         // ------------------------------------- COSTES ---------------------------------------------
+
         public void InsertarCoste(float tiempoprop, float horasLuz, float costeLuz, 
             float costeTarj, float costeFrag, float costeMecha, float costePack, float costeCera,
             float costeMolde, float costeVela, 
