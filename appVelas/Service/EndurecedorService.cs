@@ -3,12 +3,10 @@ using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
-
 
 namespace appVelas.Service
 {
@@ -28,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Endurecedor>> GetEndurecedorsAsync()
+        public async Task<CustomApiResponse<List<Endurecedor>>> GetEndurecedorsAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetEndurecedors");
+            var response = await Helper.ParseApiResponse<List<Endurecedor>>(
+                await _httpClient.GetAsync("/api/GetEndurecedors")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Endurecedor>>();
-
-            return new List<Endurecedor>();
+            return response;
         }
 
-        public async Task<Endurecedor> BuscarEndurecedorAsync(Guid idEndurecedor)
+        public async Task<CustomApiResponse<Endurecedor>> BuscarEndurecedorAsync(Guid idEndurecedor)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarEndurecedor/{idEndurecedor}");
+            var response = await Helper.ParseApiResponse<Endurecedor>(
+                await _httpClient.GetAsync($"/api/BuscarEndurecedor/{idEndurecedor}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Endurecedor>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarEndurecedorAsync(Endurecedor Endurecedor)
+        public async Task<CustomApiResponse<Endurecedor>> InsertarEndurecedorAsync(Endurecedor endurecedor)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarEndurecedor", Endurecedor);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Endurecedor>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarEndurecedor", endurecedor)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarEndurecedorAsync(Endurecedor Endurecedor)
+        public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarEndurecedor", Endurecedor);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Endurecedor>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarEndurecedor", endurecedor)
+            );
+
+            return response;
         }
     }
 }

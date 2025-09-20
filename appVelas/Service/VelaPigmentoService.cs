@@ -1,22 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using appVelas.Models;
+﻿using appVelas.Models;
 using appVelas.Service.Interfaces;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace appVelas.Service
 {
     public class VelaPigmentoService : IVelaPigmentoService
     {
-        public Task<List<VelaPigmento>> GetPigmentosPorVelaAsync()
+        private readonly HttpClient _httpClient;
+        private readonly string _baseUrl;
+
+        public VelaPigmentoService(HttpClient httpClient, IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _httpClient = httpClient;
+            _baseUrl = configuration["ApiSettings:BaseUrl"];
+
+            _httpClient.BaseAddress = new Uri(_baseUrl);
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public Task<bool> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> GetPigmentosPorVelaAsync()
         {
-            throw new NotImplementedException();
+            var response = await Helper.ParseApiResponse<List<VelaPigmento>>(
+                await _httpClient.GetAsync("/api/GetPigmentosPorVela")
+            );
+
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        {
+            var response = await Helper.ParseApiResponse<VelaPigmento>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarVelaPigmento", velaPigmento)
+            );
+
+            return response;
         }
     }
 }

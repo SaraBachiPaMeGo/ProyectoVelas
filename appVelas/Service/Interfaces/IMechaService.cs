@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IMechaService
     {
-        Task<List<Mecha>> GetMechasAsync();
-        Task<Mecha> BuscarMechaAsync(Guid idMecha);
-        Task<bool> InsertarMechaAsync(Mecha Mecha);
-        Task<bool> ActualizarMechaAsync(Mecha Mecha); 
+        Task<CustomApiResponse<List<Mecha>>> GetMechasAsync();
+        Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha);
+        Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha Mecha);
+        Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha Mecha); 
     }
 }

@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IMoldeService
     {
-        Task<List<Molde>> GetMoldesAsync();
-        Task<Molde> BuscarMoldeAsync(Guid idMolde);
-        Task<bool> InsertarMoldeAsync(Molde Molde);
-        Task<bool> ActualizarMoldeAsync(Molde Molde); 
+        Task<CustomApiResponse<List<Molde>>> GetMoldesAsync();
+        Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde);
+        Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde Molde);
+        Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde Molde); 
     }
 }

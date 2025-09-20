@@ -23,9 +23,10 @@ namespace appVelas.Repository
             return await _velaFraganciaService.GetFraganciasPorVelaAsync();
         }
 
-        public Task<bool> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        public async Task<bool> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            throw new NotImplementedException();
+            return await _velaFraganciaService.InsertarVelaFraganciaAsync(velaFragancia);
+
         }
     }
 }

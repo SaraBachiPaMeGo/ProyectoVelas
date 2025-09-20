@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IPedidoService
     {
-        Task<List<Pedido>> GetPedidosAsync();
-        Task<Pedido> BuscarPedidoAsync(Guid idPedido);
-        Task<bool> InsertarPedidoAsync(Pedido Pedido);
-        Task<bool> ActualizarPedidoAsync(Pedido Pedido);
+        Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync();
+        Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid idPedido);
+        Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido Pedido);
+        Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido Pedido);
     }
 }

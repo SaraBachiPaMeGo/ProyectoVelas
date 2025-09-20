@@ -2,14 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using appVelas.Service.Interfaces;
 using System.Net.Http.Json;
-
-
 
 namespace appVelas.Service
 {
@@ -29,37 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Fragancia>> GetFraganciasAsync()
+        public async Task<CustomApiResponse<List<Fragancia>>> GetFraganciasAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetFragancias");
+            var response = await Helper.ParseApiResponse<List<Fragancia>>(
+                await _httpClient.GetAsync("/api/GetFragancias")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Fragancia>>();
-
-            return new List<Fragancia>();
+            return response;
         }
 
-        public async Task<Fragancia> BuscarFraganciaAsync(Guid idFragancia)
+        public async Task<CustomApiResponse<Fragancia>> BuscarFraganciaAsync(Guid idFragancia)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarFragancia/{idFragancia}");
+            var response = await Helper.ParseApiResponse<Fragancia>(
+                await _httpClient.GetAsync($"/api/BuscarFragancia/{idFragancia}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Fragancia>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarFraganciaAsync(Fragancia Fragancia)
+        public async Task<CustomApiResponse<Fragancia>> InsertarFraganciaAsync(Fragancia fragancia)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarFragancia", Fragancia);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Fragancia>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarFragancia", fragancia)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarFraganciaAsync(Fragancia Fragancia)
+        public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Fragancia fragancia)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarFragancia", Fragancia);
-            return response.IsSuccessStatusCode;
-        }
+            var response = await Helper.ParseApiResponse<Fragancia>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarFragancia", fragancia)
+            );
 
+            return response;
+        }
     }
 }

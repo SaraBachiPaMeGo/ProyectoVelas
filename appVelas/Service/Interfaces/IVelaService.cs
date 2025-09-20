@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IVelaService
     {
-        Task<List<Vela>> GetVelasAsync();
-        Task<Vela> BuscarVelaAsync(Guid idVela);
-        Task<bool> InsertarVelaAsync(Vela Vela);
-        Task<bool> ActualizarVelaAsync(Vela Vela);
+        Task<CustomApiResponse<List<Vela>>> GetVelasAsync();
+        Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid idVela);
+        Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela Vela);
+        Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela Vela);
     }
 }

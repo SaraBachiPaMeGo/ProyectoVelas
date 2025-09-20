@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using appVelas.Models;
 using appVelas.Service.Interfaces;
 using System.Net.Http.Json;
-
 using Microsoft.Extensions.Configuration;
 
 namespace appVelas.Service
@@ -27,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Mecha>> GetMechasAsync()
+        public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetMechas");
+            var response = await Helper.ParseApiResponse<List<Mecha>>(
+                await _httpClient.GetAsync("/api/GetMechas")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Mecha>>();
-
-            return new List<Mecha>();
+            return response;
         }
 
-        public async Task<Mecha> BuscarMechaAsync(Guid idMecha)
+        public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarMecha/{idMecha}");
+            var response = await Helper.ParseApiResponse<Mecha>(
+                await _httpClient.GetAsync($"/api/BuscarMecha/{idMecha}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Mecha>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarMechaAsync(Mecha Mecha)
+        public async Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha mecha)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarMecha", Mecha);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Mecha>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarMecha", mecha)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarMechaAsync(Mecha Mecha)
+        public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarMecha", Mecha);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Mecha>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarMecha", mecha)
+            );
+
+            return response;
         }
     }
 }

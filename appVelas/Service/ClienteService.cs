@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using appVelas.Models;
 using appVelas.Service.Interfaces;
 using System.Net.Http.Json;
-
+using appVelas.Service;
 
 namespace appVelas.Services
 {
@@ -15,7 +15,6 @@ namespace appVelas.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl;
-             
 
         public ClienteService(HttpClient httpClient, IConfiguration configuration)
         {
@@ -28,36 +27,40 @@ namespace appVelas.Services
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Cliente>> GetClientesAsync()
+        public async Task<CustomApiResponse<List<Cliente>>> GetClientesAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetClientes");
+            var response = await Helper.ParseApiResponse<List<Cliente>>(
+                await _httpClient.GetAsync("/api/GetClientes")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Cliente>>();
-
-            return new List<Cliente>();
+            return response;
         }
 
-        public async Task<Cliente> BuscarClienteAsync(Guid idCliente)
+        public async Task<CustomApiResponse<Cliente>> BuscarClienteAsync(Guid idCliente)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarCliente/{idCliente}");
+            var response = await Helper.ParseApiResponse<Cliente>(
+                await _httpClient.GetAsync($"/api/BuscarCliente/{idCliente}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Cliente>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarClienteAsync(Cliente Cliente)
+        public async Task<CustomApiResponse<Cliente>> InsertarClienteAsync(Cliente cliente)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarCliente", Cliente);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Cliente>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarCliente", cliente)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarClienteAsync(Cliente Cliente)
+        public async Task<CustomApiResponse<Cliente>> ActualizarClienteAsync(Cliente cliente)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarCliente", Cliente);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Cliente>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarCliente", cliente)
+            );
+
+            return response;
         }
     }
 }

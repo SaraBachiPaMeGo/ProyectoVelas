@@ -8,7 +8,6 @@ using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
 
-
 namespace appVelas.Service
 {
     public class MoldeService : IMoldeService
@@ -27,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Molde>> GetMoldesAsync()
+        public async Task<CustomApiResponse<List<Molde>>> GetMoldesAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetMoldes");
+            var response = await Helper.ParseApiResponse<List<Molde>>(
+                await _httpClient.GetAsync("/api/GetMoldes")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Molde>>();
-
-            return new List<Molde>();
+            return response;
         }
 
-        public async Task<Molde> BuscarMoldeAsync(Guid idMolde)
+        public async Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarMolde/{idMolde}");
+            var response = await Helper.ParseApiResponse<Molde>(
+                await _httpClient.GetAsync($"/api/BuscarMolde/{idMolde}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Molde>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarMoldeAsync(Molde Molde)
+        public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde molde)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarMolde", Molde);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Molde>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarMolde", molde)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarMoldeAsync(Molde Molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarMolde", Molde);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Molde>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarMolde", molde)
+            );
+
+            return response;
         }
     }
 }

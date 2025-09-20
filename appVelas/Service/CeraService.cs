@@ -7,7 +7,7 @@ using appVelas.Models;
 using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
-
+using NPOI.SS.Formula.Functions;
 
 namespace appVelas.Service
 {
@@ -27,36 +27,32 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Cera>> GetCerasAsync()
+        public async Task<CustomApiResponse<List<Cera>>> GetCerasAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetCeras");
+            var response = await Helper.ParseApiResponse<List<Cera>>(await _httpClient.GetAsync("/api/GetCeras"));
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Cera>>();
-
-            return new List<Cera>();
+            return response;
         }
 
-        public async Task<Cera> BuscarCeraAsync(Guid idCera)
+        public async Task<CustomApiResponse<Cera>> BuscarCeraAsync(Guid idCera)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarCera/{idCera}");
+            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.GetAsync($"/api/BuscarCera/{idCera}"));
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Cera>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarCeraAsync(Cera cera)
+        public async Task<CustomApiResponse<Cera>> InsertarCeraAsync(Cera cera)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarCera", cera);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.PostAsJsonAsync("/api/InsertarCera", cera));
+
+            return response;
         }
 
-        public async Task<bool> ActualizarCeraAsync(Cera cera)
+        public async Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Cera cera)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarCera", cera);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.PutAsJsonAsync("/api/ActualizarCera", cera));
+
+            return response;
         }
     }
 }

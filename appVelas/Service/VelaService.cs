@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
 
 
-namespace appVelas.Services
+namespace appVelas.Service
 {
     public class VelaService : IVelaService
     {
@@ -27,36 +27,34 @@ namespace appVelas.Services
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Vela>> GetVelasAsync()
+        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetVelas");
-
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Vela>>();
-
-            return new List<Vela>();
+            var response = await Helper.ParseApiResponse<List<Vela>>(await _httpClient.GetAsync("/api/GetVelas"));
+            return response;
         }
 
-        public async Task<Vela> BuscarVelaAsync(Guid idVela)
+        public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid idVela)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarVela/{idVela}");
-
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Vela>();
-
-            return null;
+            var response = await Helper.ParseApiResponse<Vela>(
+                await _httpClient.GetAsync($"/api/BuscarVela/{idVela}")
+            );
+            return response;
         }
 
-        public async Task<bool> InsertarVelaAsync(Vela Vela)
+        public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarVela", Vela);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Vela>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarVela", vela)
+            );
+            return response;
         }
 
-        public async Task<bool> ActualizarVelaAsync(Vela Vela)
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarVela", Vela);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Vela>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarVela", vela)
+            );
+            return response;
         }
     }
 }

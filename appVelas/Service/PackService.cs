@@ -8,7 +8,6 @@ using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
 
-
 namespace appVelas.Service
 {
     public class PackService : IPackService
@@ -27,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Pack>> GetPacksAsync()
+        public async Task<CustomApiResponse<List<Pack>>> GetPacksAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetPacks");
+            var response = await Helper.ParseApiResponse<List<Pack>>(
+                await _httpClient.GetAsync("/api/GetPacks")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Pack>>();
-
-            return new List<Pack>();
+            return response;
         }
 
-        public async Task<Pack> BuscarPackAsync(Guid idPack)
+        public async Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid idPack)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarPack/{idPack}");
+            var response = await Helper.ParseApiResponse<Pack>(
+                await _httpClient.GetAsync($"/api/BuscarPack/{idPack}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Pack>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarPackAsync(Pack Pack)
+        public async Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack pack)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarPack", Pack);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pack>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarPack", pack)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarPackAsync(Pack Pack)
+        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarPack", Pack);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pack>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarPack", pack)
+            );
+
+            return response;
         }
     }
 }

@@ -26,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Pigmento>> GetPigmentosAsync()
+        public async Task<CustomApiResponse<List<Pigmento>>> GetPigmentosAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetPigmentos");
+            var response = await Helper.ParseApiResponse<List<Pigmento>>(
+                await _httpClient.GetAsync("/api/GetPigmentos")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Pigmento>>();
-
-            return new List<Pigmento>();
+            return response;
         }
 
-        public async Task<Pigmento> BuscarPigmentoAsync(Guid idPigmento)
+        public async Task<CustomApiResponse<Pigmento>> BuscarPigmentoAsync(Guid idPigmento)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarPigmento/{idPigmento}");
+            var response = await Helper.ParseApiResponse<Pigmento>(
+                await _httpClient.GetAsync($"/api/BuscarPigmento/{idPigmento}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Pigmento>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarPigmentoAsync(Pigmento Pigmento)
+        public async Task<CustomApiResponse<Pigmento>> InsertarPigmentoAsync(Pigmento pigmento)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarPigmento", Pigmento);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pigmento>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarPigmento", pigmento)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarPigmentoAsync(Pigmento Pigmento)
+        public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento pigmento)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarPigmento", Pigmento);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pigmento>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarPigmento", pigmento)
+            );
+
+            return response;
         }
     }
 }

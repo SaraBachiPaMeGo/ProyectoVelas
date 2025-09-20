@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IVelaFraganciaService
     {
-        Task<List<VelaFragancia>> GetFraganciasPorVelaAsync();
-        //Task<VelaFragancia> BuscarVelaFraganciaAsync(Guid idVelaFragancia);
-        Task<bool> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia);
-        //Task<bool> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia);
+        Task<CustomApiResponse<List<VelaFragancia>>> GetFraganciasPorVelaAsync();
+        //Task<CustomApiResponse<VelaFragancia>> BuscarVelaFraganciaAsync(Guid idVelaFragancia);
+        Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia);
+        //Task<CustomApiResponse<bool>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia);
     }
 }

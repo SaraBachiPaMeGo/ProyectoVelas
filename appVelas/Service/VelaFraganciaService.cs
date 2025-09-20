@@ -1,22 +1,48 @@
 ﻿using appVelas.Models;
 using appVelas.Service.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
+
 
 namespace appVelas.Service
 {
     public class VelaFraganciaService : IVelaFraganciaService
     {
-        public Task<List<VelaFragancia>> GetFraganciasPorVelaAsync()
+        private readonly HttpClient _httpClient;
+        private readonly string _baseUrl;
+
+        public VelaFraganciaService(HttpClient httpClient, IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _httpClient = httpClient;
+            _baseUrl = configuration["ApiSettings:BaseUrl"];
+
+            _httpClient.BaseAddress = new Uri(_baseUrl);
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public Task<bool> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        public async Task<CustomApiResponse<List<VelaFragancia>>> GetFraganciasPorVelaAsync()
         {
-            throw new NotImplementedException();
+            var response = await Helper.ParseApiResponse<List<VelaFragancia>>(
+                await _httpClient.GetAsync("/api/GetFraganciasPorVela")
+            );
+
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        {
+            var response = await Helper.ParseApiResponse<VelaFragancia>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarVelaFragancia", velaFragancia)
+            );
+
+            return response;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IPackService
     {
-        Task<List<Pack>> GetPacksAsync();
-        Task<Pack> BuscarPackAsync(Guid idPack);
-        Task<bool> InsertarPackAsync(Pack Pack);
-        Task<bool> ActualizarPackAsync(Pack Pack);
+        Task<CustomApiResponse<List<Pack>>> GetPacksAsync();
+        Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid idPack);
+        Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack Pack);
+        Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack Pack);
     }
 }

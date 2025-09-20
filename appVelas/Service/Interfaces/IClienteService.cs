@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IClienteService
     {
-        Task<List<Cliente>> GetClientesAsync();
-        Task<Cliente> BuscarClienteAsync(Guid idCliente);
-        Task<bool> InsertarClienteAsync(Cliente cliente);
-        Task<bool> ActualizarClienteAsync(Cliente cliente);
+        Task<CustomApiResponse<List<Cliente>>> GetClientesAsync();
+        Task<CustomApiResponse<Cliente>> BuscarClienteAsync(Guid idCliente);
+        Task<CustomApiResponse<Cliente>> InsertarClienteAsync(Cliente cliente);
+        Task<CustomApiResponse<Cliente>> ActualizarClienteAsync(Cliente cliente);
     }
 }

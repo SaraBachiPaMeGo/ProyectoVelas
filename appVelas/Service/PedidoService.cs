@@ -8,7 +8,6 @@ using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
 
-
 namespace appVelas.Service
 {
     public class PedidoService : IPedidoService
@@ -27,36 +26,40 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Pedido>> GetPedidosAsync()
+        public async Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync()
         {
-            var response = await _httpClient.GetAsync("/api/GetPedidos");
+            var response = await Helper.ParseApiResponse<List<Pedido>>(
+                await _httpClient.GetAsync("/api/GetPedidos")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<List<Pedido>>();
-
-            return new List<Pedido>();
+            return response;
         }
 
-        public async Task<Pedido> BuscarPedidoAsync(Guid idPedido)
+        public async Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid idPedido)
         {
-            var response = await _httpClient.GetAsync($"/api/BuscarPedido/{idPedido}");
+            var response = await Helper.ParseApiResponse<Pedido>(
+                await _httpClient.GetAsync($"/api/BuscarPedido/{idPedido}")
+            );
 
-            if (response.IsSuccessStatusCode)
-                return await response.Content.ReadFromJsonAsync<Pedido>();
-
-            return null;
+            return response;
         }
 
-        public async Task<bool> InsertarPedidoAsync(Pedido Pedido)
+        public async Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido pedido)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/InsertarPedido", Pedido);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pedido>(
+                await _httpClient.PostAsJsonAsync("/api/InsertarPedido", pedido)
+            );
+
+            return response;
         }
 
-        public async Task<bool> ActualizarPedidoAsync(Pedido Pedido)
+        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
         {
-            var response = await _httpClient.PutAsJsonAsync("/api/ActualizarPedido", Pedido);
-            return response.IsSuccessStatusCode;
+            var response = await Helper.ParseApiResponse<Pedido>(
+                await _httpClient.PutAsJsonAsync("/api/ActualizarPedido", pedido)
+            );
+
+            return response;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace appVelas.Service.Interfaces
 {
     public interface IPigmentoService
     {
-        Task<List<Pigmento>> GetPigmentosAsync();
-        Task<Pigmento> BuscarPigmentoAsync(Guid idPigmento);
-        Task<bool> InsertarPigmentoAsync(Pigmento Pigmento);
-        Task<bool> ActualizarPigmentoAsync(Pigmento Pigmento);
+        Task<CustomApiResponse<List<Pigmento>>> GetPigmentosAsync();
+        Task<CustomApiResponse<Pigmento>> BuscarPigmentoAsync(Guid idPigmento);
+        Task<CustomApiResponse<Pigmento>> InsertarPigmentoAsync(Pigmento Pigmento);
+        Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento Pigmento);
     }
 }

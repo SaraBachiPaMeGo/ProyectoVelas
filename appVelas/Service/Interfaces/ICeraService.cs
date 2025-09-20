@@ -8,9 +8,9 @@ namespace appVelas.Service
 {
     public interface ICeraService
     {
-        Task<List<Cera>> GetCerasAsync();
-        Task<Cera> BuscarCeraAsync(Guid idCera);
-        Task<bool> InsertarCeraAsync(Cera cera);
-        Task<bool> ActualizarCeraAsync(Cera cera);
+        Task<CustomApiResponse<List<Cera>>> GetCerasAsync();
+        Task<CustomApiResponse<Cera>> BuscarCeraAsync(Guid idCera);
+        Task<CustomApiResponse<Cera>> InsertarCeraAsync(Cera cera);
+        Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Cera cera);
     }
 }

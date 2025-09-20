@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace appVelas.Models
 {
-    public class CustomApiResponse
+    public class CustomApiResponse<T>
     {
-        public List<T> Object { get; set; }
+        public T Data { get; set; }
 
         public ErrorViewModel Error { get; set; }
     }

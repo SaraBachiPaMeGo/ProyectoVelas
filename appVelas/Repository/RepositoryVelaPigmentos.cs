@@ -23,10 +23,10 @@ namespace appVelas.Repository
             return await _velaPigmentoService.GetPigmentosPorVelaAsync();
         }
 
-        //public async Task<List<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
-        //{
-        //    return await _velaPigmentoService.InsertarVelaPigmentoAsync(velaPigmento);
+        public async Task<bool> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        {
+            return await _velaPigmentoService.InsertarVelaPigmentoAsync(velaPigmento);
 
-        //}
+        }
     }
 }
