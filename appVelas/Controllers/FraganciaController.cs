@@ -5,40 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class FraganciaController : Controller
     {
-        private readonly RepositoryFragancias repo;
+        private readonly RepositoryFragancias _fraganciaRepo;
 
-        public FraganciaController(RepositoryFragancias repo)
+        public FraganciaController(RepositoryFragancias fraganciaService)
         {
-            this.repo = repo;
+            _fraganciaRepo = fraganciaService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Fragancias = await _fraganciaRepo.GetFraganciasAsync();
+            return View(Fragancias);
         }
 
         // ------------------------------------- FRAGANCIA ---------------------------------------------
 
-        public IActionResult _CrearFragView()
+        public async Task<IActionResult> _CrearFragView()
         {
-            return PartialView("Crear/_CrearFragView", new Fragancia());
+            return PartialView("Crear/_CrearFragView",  new Fragancia());
         }
 
         [HttpPost]
-        public IActionResult _CrearFragView(Fragancia frag)
+        public async Task<IActionResult> _CrearFragView(Fragancia frag)
         {
-            this.repo.InsertarFragancia(frag);
+            await _fraganciaRepo.InsertarFraganciaAsync(frag);
             return PartialView("Sucess", frag);
         }
 
-        public PartialViewResult _ActFragView(Guid IDFrag)
+        public async Task<PartialViewResult>  _ActFragView(Guid IDFrag)
         {
-            Fragancia frag = this.repo.BuscarFragancia(IDFrag);
+            var frag = await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
 
             if (frag == null)
             {
@@ -58,24 +61,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActFragView(Fragancia frag)
+        public async Task<PartialViewResult> _ActFragView(Fragancia frag)
         {
-            this.repo.ActualizarFragancia(frag);
+            await _fraganciaRepo.ActualizarFraganciaAsync(frag);
 
             return PartialView("Sucess", frag);
         }
 
-        public PartialViewResult _DetallesFragView()
+        public async Task<PartialViewResult>  _DetallesFragView()
         {
-            List<Fragancia> frag = this.repo.GetFragancias();
+            List<Fragancia> frag = await _fraganciaRepo.GetFraganciasAsync();
 
             ViewData["FRAGS"] = frag;
             return PartialView("Detalles/_DetallesFragView", frag);
         }
 
-        public PartialViewResult _DetallesFragView1(Guid IDFrag)
+        public async Task<PartialViewResult>  _DetallesFragView1(Guid IDFrag)
         {
-            Fragancia frag = this.repo.BuscarFragancia(IDFrag);
+            Fragancia frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
 
             ViewData["FRAGS"] = frag;
             return PartialView("Detalles/_DetallesFragView1", frag);

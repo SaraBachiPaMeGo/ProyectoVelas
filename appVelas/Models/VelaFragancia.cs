@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace appVelas.Models
 {
-    [Table("VelaFragancia")]
     public class VelaFragancia
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDVela")]
+        
+        [JsonProperty("IDVela")]
         public Guid IDVela { get; set; }
 
-        [Column("Vela")]
+        [JsonProperty("Vela")]
         public Vela Vela { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDFrag")]
+        
+        [JsonProperty("IDFrag")]
         public Guid IDFrag { get; set; }
 
-        [Column("Fragancia")]
+        [JsonProperty("Fragancia")]
         public Fragancia Fragancia { get; set; }
 
-        [Column("Cantidad")]
+        [JsonProperty("Cantidad")]
         public decimal? Cantidad { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal? Coste { get; set; }
     }
 

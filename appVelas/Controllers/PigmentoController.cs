@@ -5,42 +5,45 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class PigmentoController : Controller
     {
-        private readonly RepositoryPigmentos repo;
+        private readonly RepositoryPigmentos _pigmentoRepo;
 
-        public PigmentoController(RepositoryPigmentos repo)
+        public PigmentoController(RepositoryPigmentos pigmentoService)
         {
-            this.repo = repo;
+            _pigmentoRepo = pigmentoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Pigmentos = await _pigmentoRepo.GetPigmentosAsync();
+            return View(Pigmentos);
         }
 
         // ------------------------------------- PIGMENTO ---------------------------------------------
 
-        public IActionResult _CrearPigView()
+        public async Task<IActionResult> _CrearPigView()
         {
             return PartialView("Crear/_CrearPigView");
         }
 
         [HttpPost]
-        public IActionResult _CrearPigView(Pigmento pig)
+        public async Task<IActionResult> _CrearPigView(Pigmento pig)
         {
-            this.repo.InsertarPigmento(pig);
+            await _pigmentoRepo.InsertarPigmentoAsync(pig);
 
             return PartialView("Sucess", pig);
         }
 
 
-        public PartialViewResult _ActPigView(Guid IDPig)
+        public async Task<PartialViewResult>  _ActPigView(Guid IDPig)
         {
-            Pigmento pig = this.repo.BuscarPigmento(IDPig);
+            Pigmento pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
             if (pig == null)
             {
@@ -60,24 +63,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActPigView(Pigmento pig)
+        public async Task<PartialViewResult>  _ActPigView(Pigmento pig)
         {
-            this.repo.ActualizarPigmento(pig);
+            await _pigmentoRepo.ActualizarPigmentoAsync(pig);
 
             return PartialView("Sucess", pig);
         }
 
-        public PartialViewResult _DetallesPigView()
+        public async Task<PartialViewResult>  _DetallesPigView()
         {
-            List<Pigmento> pig = this.repo.GetPigmentos();
+            List<Pigmento> pig = await _pigmentoRepo.GetPigmentosAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["PigmentoS"] = Pigmentos;
             return PartialView("Detalles/_DetallesPigView", pig);
         }
 
-        public PartialViewResult _DetallesPigView1(Guid IDPig)
+        public async Task<PartialViewResult>  _DetallesPigView1(Guid IDPig)
         {
-            Pigmento pig = this.repo.BuscarPigmento(IDPig);
+            Pigmento pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
             ViewData["PIG"] = pig;
             return PartialView("Detalles/_DetallesPigView1", pig);

@@ -5,40 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class MechaController : Controller
     {
-        private readonly RepositoryMechas repo;
+        private readonly RepositoryMechas _mechaRepo;
 
-        public MechaController(RepositoryMechas repo)
+        public MechaController(RepositoryMechas MechaService)
         {
-            this.repo = repo;
+            _mechaRepo = MechaService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Mechas = await _mechaRepo.GetMechasAsync();
+            return View(Mechas);
         }
 
         // ------------------------------------- MECHA ---------------------------------------------
 
-        public IActionResult _CrearMechaView()
+        public async Task<IActionResult> _CrearMechaView()
         {
             return PartialView("Crear/_CrearMechaView");
         }
 
         [HttpPost]
-        public IActionResult _CrearMechaView(Mecha mecha)
+        public async Task<IActionResult> _CrearMechaView(Mecha mecha)
         {
-            this.repo.InsertarMecha(mecha);
+            await _mechaRepo.InsertarMechaAsync(mecha);
             return PartialView("Sucess");
         }
 
-        public PartialViewResult _ActMechaView(Guid IDMecha)
+        public async Task<PartialViewResult>  _ActMechaView(Guid IDMecha)
         {
-            Mecha mecha = this.repo.BuscarMecha(IDMecha);
+            Mecha mecha = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
             if (mecha == null)
             {
@@ -58,24 +61,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActMechaView(Mecha mecha)
+        public async Task<PartialViewResult>  _ActMechaView(Mecha mecha)
         {
-            this.repo.ActualizarMecha(mecha);
+            await _mechaRepo.ActualizarMechaAsync(mecha);
 
             return PartialView("Sucess", mecha);
         }
 
-        public PartialViewResult _DetallesMechaView()
+        public async Task<PartialViewResult>  _DetallesMechaView()
         {
-            List<Mecha> mechas = this.repo.GetMechas();
+            List<Mecha> mechas = await _mechaRepo.GetMechasAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["MechaS"] = Mechas;
             return PartialView("Detalles/_DetallesMechaView", mechas);
         }
 
-        public PartialViewResult _DetallesMechaView1(Guid IDMecha)
+        public async Task<PartialViewResult>  _DetallesMechaView1(Guid IDMecha)
         {
-            Mecha me = this.repo.BuscarMecha(IDMecha);
+            Mecha me = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
             ViewData["MECHA"] = me;
             return PartialView("Detalles/_DetallesMechaView1", me);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,32 +8,31 @@ using System.Threading.Tasks;
 
 namespace appVelas.Models
 {
-    [Table("Endurecedor")]
 
     public class Endurecedor
 
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDEndurecedor")]
+       
+        
+        [JsonProperty("IDEndurecedor")]
         public Guid IDEndurecedor { get; set; }
 
-        [Column("Firma")]
+        [JsonProperty("Firma")]
         public string Firma { get; set; }
 
-        [Column("Tipo")]
+        [JsonProperty("Tipo")]
         public string Tipo { get; set; }
 
-        [Column("CompradoEn")]
+        [JsonProperty("CompradoEn")]
         public string CompradoEn { get; set; }
 
-        [Column("Cantidad")]
+        [JsonProperty("Cantidad")]
         public decimal Cantidad { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal Coste { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
     }
 }

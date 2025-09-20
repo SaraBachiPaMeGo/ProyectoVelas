@@ -2,100 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
 
 namespace appVelas.Repository
 {
     public class RepositoryEndurecedores
     {
-        private readonly Contexto context;
+        private readonly IEndurecedorService _endurecedorService;
 
-        public RepositoryEndurecedores(Contexto context)
+
+        public RepositoryEndurecedores(IEndurecedorService endurecedorService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _endurecedorService = endurecedorService;
         }
 
-        // ------------------------------------- ENDURECEDOR ---------------------------------------------
-        public void InsertarEndurecedor(Endurecedor cer)
+        // ------------------------------------- Endurecedor ---------------------------------------------
+        public async Task<List<Endurecedor>> GetEndurecedorsAsync()
         {
-            Endurecedor cera = new Endurecedor();
-
-            //int? count = (from datos in context.Mecha
-            //              select datos.IDMecha).Count();
-
-            //if (count == 0)
-            //{
-            //    cera.IDEndurecedor =Guid.NewGuid();
-            //}
-            //else
-            //{
-            //    //Error
-            //}
-            cera.IDEndurecedor = Guid.NewGuid();
-
-            cera.Tipo = cer.Tipo;
-            cera.CompradoEn = cer.CompradoEn;
-            cera.Firma = cer.Firma;
-            //cera.IDVela = Guid.NewGuid();
-            cera.Cantidad = cer.Cantidad;
-            cera.Coste = cer.Coste;
-
-            this.context.Endurecedor.Add(cera);
-            this.context.SaveChanges();
+            return await _endurecedorService.GetEndurecedorsAsync();
         }
 
-        public void ActualizarEndurecedor(Endurecedor cer)
+        public async Task<Endurecedor> BuscarEndurecedorAsync(Guid id)
         {
-            Endurecedor cera = BuscarEndurecedor(cer.IDEndurecedor);
-
-
-            if (cer.Firma != cera.Firma)
-            {
-                cera.Firma = cer.Firma;
-
-            }
-
-            if (cer.Tipo != cera.Tipo)
-            {
-                cera.Tipo = cer.Tipo;
-
-            }
-
-            if (cer.CompradoEn != cera.CompradoEn)
-            {
-                cera.CompradoEn = cer.CompradoEn;
-            }
-
-            if (cer.IDVela != cera.IDVela)
-            {
-                cera.IDVela = cer.IDVela;
-            }
-
-            if (cer.Coste != cera.Coste)
-            {
-                cera.Coste = cer.Coste;
-
-            }
-
-            if (cer.Cantidad != cera.Cantidad)
-            {
-                cera.Cantidad = cer.Cantidad;
-
-            }
-
-            this.context.SaveChanges();
+            return await _endurecedorService.BuscarEndurecedorAsync(id);
         }
 
-        public List<Endurecedor> GetEndurecedor()
+        public async Task<bool> InsertarEndurecedorAsync(Endurecedor endurecedor)
         {
-            return this.context.Endurecedor.ToList();
+            return await _endurecedorService.InsertarEndurecedorAsync(endurecedor);
         }
 
-        public Endurecedor BuscarEndurecedor(Guid idEndurecedor)
+        public async Task<bool> ActualizarEndurecedorAsync(Endurecedor endurecedor)
         {
-            return this.context.Endurecedor.SingleOrDefault
-                (x => x.IDEndurecedor == idEndurecedor);
+            return await _endurecedorService.ActualizarEndurecedorAsync(endurecedor);
         }
     }
 }

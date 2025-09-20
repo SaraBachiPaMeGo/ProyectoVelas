@@ -5,40 +5,44 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class ClienteController : Controller
     {
-        private readonly RepositoryClientes repo;
+        private readonly RepositoryClientes _clienteRepo;
 
-        public ClienteController(RepositoryClientes repo)
+        public ClienteController(RepositoryClientes clienteService)
         {
-            this.repo = repo;
+            _clienteRepo = clienteService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Clientes = await _clienteRepo.GetClientesAsync();
+            return View(Clientes);
         }
 
         // ------------------------------------- CLIENTE ---------------------------------------------
 
-        public IActionResult _CrearClienteView()
+        public async Task<IActionResult> _CrearClienteView()
         {
-            return PartialView("Crear/_CrearClienteView", new Cliente());
+            return PartialView("Crear/_CrearClienteView",  new Cliente());
         }
 
         [HttpPost]
-        public IActionResult _CrearClienteView(Cliente cli)
+        public async Task<IActionResult> _CrearClienteView(Cliente cli)
         {
-            this.repo.InsertarCliente(cli);
+             await _clienteRepo.InsertarClienteAsync(cli);
+
             return PartialView("Sucess", cli);
         }
 
-        public PartialViewResult _ActClienteView(Guid IDCli)
+        public async Task<PartialViewResult> _ActClienteView(Guid IDCli)
         {
-            Cliente cli = this.repo.BuscarCliente(IDCli);
+            var cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
             if (cli == null)
             {
@@ -58,24 +62,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActClienteView(Cliente cliente)
+        public async Task<PartialViewResult> _ActClienteView(Cliente cliente)
         {
-            this.repo.ActualizarCliente(cliente);
+             await _clienteRepo.ActualizarClienteAsync(cliente);
 
             return PartialView("Sucess", cliente);
         }
 
-        public PartialViewResult _DetallesClienteView()
+        public async Task<PartialViewResult> _DetallesClienteView()
         {
-            List<Cliente> clientes = this.repo.GetClientes();
+            List<Cliente> clientes =  await _clienteRepo.GetClientesAsync();
 
             ViewData["Clientes"] = clientes;
             return PartialView("Detalles/_DetallesClienteView", clientes);
         }
 
-        public PartialViewResult _DetallesClienteView1(Guid IDCli)
+        public async Task<PartialViewResult> _DetallesClienteView1(Guid IDCli)
         {
-            Cliente cli = this.repo.BuscarCliente(IDCli);
+            Cliente cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
             ViewData["Cliente"] = cli;
             return PartialView("Detalles/_DetallesClienteView1", cli);
@@ -83,7 +87,7 @@ namespace appVelas.Controllers
 
         public IActionResult _CrearCosteView()
         {
-            //await this.repo.InsertarCoste(NombreUs, email,
+            //await  await _clienteRepo.InsertarCoste(NombreUs, email,
             //  nickname, password);
             return PartialView("_CrearCosteView");
         }

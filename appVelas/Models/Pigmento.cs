@@ -3,38 +3,38 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace appVelas.Models
 {
-    [Table("Pigmento")]
 
     public class Pigmento
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDPig")]
+       
+        
+        [JsonProperty("IDPig")]
         public Guid IDPig { get; set; }
 
-        [Column("Firma")]
+        [JsonProperty("Firma")]
         public string Firma { get; set; }
 
-        [Column("Tipo")]
+        [JsonProperty("Tipo")]
         public string Tipo { get; set; }
 
-        [Column("ColorNombre")]
+        [JsonProperty("ColorNombre")]
         public string ColorNombre { get; set; }
 
-        [Column("CompradoEn")]
+        [JsonProperty("CompradoEn")]
         public string CompradoEn { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
 
-        [Column("Cantidad")]
+        [JsonProperty("Cantidad")]
         public decimal Cantidad { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal Coste { get; set; }
     }
 }

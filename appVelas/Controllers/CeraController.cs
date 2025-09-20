@@ -4,24 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using appVelas.Models;
 using appVelas.Repository;
+using appVelas.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class CeraController : Controller
     {
-        private readonly RepositoryCeras repo;
+        private readonly RepositoryCeras _ceraRepo;
 
-        public CeraController(RepositoryCeras repo)
+        public CeraController(RepositoryCeras ceraService)
         {
-            this.repo = repo;
+            _ceraRepo = ceraService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var ceras = await _ceraRepo.GetCerasAsync();
+            return View(ceras);
         }
-
+        
         // ------------------------------------- CERA ---------------------------------------------
 
         public PartialViewResult _CrearCeraView()
@@ -32,15 +35,15 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> _CrearCeraView(Cera cera)
         {
-            this.repo.InsertarCera(cera);
+            var ceras = await _ceraRepo.InsertarCeraAsync(cera);
 
             return PartialView("Sucess", cera);
 
         }
 
-        public PartialViewResult _ActCeraView(Guid IDCera)
+        public async Task<PartialViewResult> _ActCeraView(Guid IDCera)
         {
-            Cera cera = this.repo.BuscarCera(IDCera);
+            Cera cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
             if (cera == null)
             {
@@ -58,21 +61,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActCeraView(Cera cera)
+        public async Task<PartialViewResult> _ActCeraView(Cera cera)
         {
-            this.repo.ActualizarCera(cera);
+            var ceras = await _ceraRepo.ActualizarCeraAsync(cera);
 
             return PartialView("Sucess", cera);
         }
 
         public async Task<PartialViewResult> _DetallesCeraView()
         {
-            return PartialView("Detalles/_DetallesCeraView", await this.repo.GetCeras());
+            return PartialView("Detalles/_DetallesCeraView", await _ceraRepo.GetCerasAsync());
         }
 
         public async Task<PartialViewResult> _DetallesCeraView1(Guid IDCera)
         {
-            Cera cera = await this.repo.BuscarCera(IDCera);
+            Cera cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
             ViewData["CERA"] = cera;
             return PartialView("Detalles/_DetallesCeraView1", cera);

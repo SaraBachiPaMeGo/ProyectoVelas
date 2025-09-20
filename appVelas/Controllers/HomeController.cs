@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using appVelas.Models;
 using appVelas.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using appVelas.Data;
+
 
 namespace appVelas.Controllers
 {
@@ -18,7 +18,7 @@ namespace appVelas.Controllers
 
         public HomeController(RepositoryVelas repo )
         {
-            this.repo = repo;
+            
         }
 
         public IActionResult Index()

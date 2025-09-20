@@ -5,46 +5,49 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class PackController : Controller
     {
-        private readonly RepositoryPacks repo;
+        private readonly RepositoryPacks _packRepo;
 
-        public PackController(RepositoryPacks repo)
+        public PackController(RepositoryPacks PackService)
         {
-            this.repo = repo;
+            _packRepo = PackService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Packs = await _packRepo.GetPacksAsync();
+            return View(Packs);
         }
 
         // ------------------------------------- PACK ---------------------------------------------
 
-        public PartialViewResult _CrearPackView()
+        public async Task<IActionResult>  _CrearPackView()
         {
             return PartialView("Crear/_CrearPackView");
         }
 
         [HttpPost]
-        public PartialViewResult _CrearPackView(Pack pack)
+        public async Task<IActionResult>  _CrearPackView(Pack pack)
         {
             //if (!ModelState.IsValid)
             //{
             //}
-            this.repo.InsertarPack(pack);
+            await _packRepo.InsertarPackAsync(pack);
 
 
             return PartialView("Sucess", pack);
 
         }
 
-        public PartialViewResult _ActPackView(Guid IDPack)
+        public async Task<IActionResult>  _ActPackView(Guid IDPack)
         {
-            Pack pack = this.repo.BuscarPack(IDPack);
+            Pack pack = await _packRepo.BuscarPackAsync(IDPack);
 
             if (pack == null)
             {
@@ -64,24 +67,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActPackView(Pack pack)
+        public async Task<IActionResult>  _ActPackView(Pack pack)
         {
-            this.repo.ActualizarPack(pack);
+            await _packRepo.ActualizarPackAsync(pack);
 
             return PartialView("Sucess", pack);
         }
 
-        public PartialViewResult _DetallesPackView()
+        public async Task<IActionResult>  _DetallesPackView()
         {
-            List<Pack> pack = this.repo.GetPacks();
+            List<Pack> pack = await _packRepo.GetPacksAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["PackS"] = Packs;
             return PartialView("Detalles/_DetallesPackView", pack);
         }
 
-        public PartialViewResult _DetallesPackView1(Guid IDPack)
+        public async Task<IActionResult>  _DetallesPackView1(Guid IDPack)
         {
-            Pack pack = this.repo.BuscarPack(IDPack);
+            Pack pack = await _packRepo.BuscarPackAsync(IDPack);
 
             ViewData["PACK"] = pack;
             return PartialView("Detalles/_DetallesPackView1", pack);

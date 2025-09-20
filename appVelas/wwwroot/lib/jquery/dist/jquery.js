@@ -6863,15 +6863,15 @@ jQuery.extend( {
 	// Don't automatically add "px" to these possibly-unitless properties
 	cssNumber: {
 		"animationIterationCount": true,
-		"columnCount": true,
+		"JsonPropertyCount": true,
 		"fillOpacity": true,
 		"flexGrow": true,
 		"flexShrink": true,
 		"fontWeight": true,
 		"gridArea": true,
-		"gridColumn": true,
-		"gridColumnEnd": true,
-		"gridColumnStart": true,
+		"gridJsonProperty": true,
+		"gridJsonPropertyEnd": true,
+		"gridJsonPropertyStart": true,
 		"gridRow": true,
 		"gridRowEnd": true,
 		"gridRowStart": true,
@@ -7016,7 +7016,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
 
 					// Support: Safari 8+
-					// Table columns in Safari have non-zero offsetWidth & zero
+					// Table JsonPropertys in Safari have non-zero offsetWidth & zero
 					// getBoundingClientRect().width unless display is changed.
 					// Support: IE <=11 only
 					// Running getBoundingClientRect on a disconnected node

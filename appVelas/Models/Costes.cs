@@ -4,61 +4,61 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace appVelas.Models
 {
-    [Table("Costes")]
 
     public class Costes
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDCoste")]
+       
+        
+        [JsonProperty("IDCoste")]
         public int IDCoste { get; set; }
 
-        [Column("TiempoProp")]
+        [JsonProperty("TiempoProp")]
         public float TiempoProp { get; set; }
 
-        [Column("HorasLuz")]
+        [JsonProperty("HorasLuz")]
         public float HorasLuz{  get; set; }
 
-        [Column("CosteLuz")]
+        [JsonProperty("CosteLuz")]
         public float CosteLuz { get; set; }
 
-        [Column("CosteTarj")]
+        [JsonProperty("CosteTarj")]
         public float CosteTarj { get; set; }
 
-        [Column("CosteFrag")]
+        [JsonProperty("CosteFrag")]
         public float CosteFrag { get; set; }
 
-        [Column("CosteMecha")]
+        [JsonProperty("CosteMecha")]
         public float CosteMecha { get; set; }
 
-        [Column("CostePack")]
+        [JsonProperty("CostePack")]
         public float CostePack { get; set; }
 
-        [Column("CosteCera")]
+        [JsonProperty("CosteCera")]
         public float CosteCera { get; set; }
 
-        [Column("CosteMolde")]
+        [JsonProperty("CosteMolde")]
         public float CosteMolde { get; set; }
 
-        [Column("CosteVela")]
+        [JsonProperty("CosteVela")]
         public float CosteVela { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public int IDVela { get; set; }
 
-        [Column("IDFrag")]
+        [JsonProperty("IDFrag")]
         public int IDFrag { get; set; }
 
-        [Column("IDPig")]
+        [JsonProperty("IDPig")]
         public int IDPig { get; set; }
 
-        [Column("IDMolde")]
+        [JsonProperty("IDMolde")]
         public int IDMolde { get; set; }
 
-        [Column("IDMecha")]
+        [JsonProperty("IDMecha")]
         public int IDMecha { get; set; }
     }
 }

@@ -2,102 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+
 namespace appVelas.Repository
 {
     public class RepositoryPigmentos
     {
-        private readonly Contexto context;
+        private readonly IPigmentoService _pigmentoService;
 
-        public RepositoryPigmentos(Contexto context)
+
+        public RepositoryPigmentos(IPigmentoService pigmentoService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _pigmentoService = pigmentoService;
         }
 
-        // ------------------------------------- PIGMENTO ---------------------------------------------
-        public void InsertarPigmento(Pigmento pi)
+        // ------------------------------------- Pigmento ---------------------------------------------
+        public async Task<List<Pigmento>> GetPigmentosAsync()
         {
-            Pigmento pig = new Pigmento();
-
-            //int? count = (from datos in context.Pigmento
-            //              select datos.IDPig).Count();
-
-            //if (count == 0)
-            //{
-            //    pig.IDPig =Guid.NewGuid();
-            //}
-            //else
-            //{
-            //    //Error
-            //}
-
-            pig.IDPig = Guid.NewGuid();
-            pig.Firma = pi.Firma;
-            pig.Tipo = pi.Tipo;
-            pig.ColorNombre = pi.ColorNombre;
-            pig.CompradoEn = pi.CompradoEn;
-            pig.IDVela = pi.IDVela;
-            pig.Coste = pi.Coste;
-            pig.Cantidad = pi.Cantidad;
-
-            this.context.Pigmento.Add(pig);
-            this.context.SaveChanges();
+            return await _pigmentoService.GetPigmentosAsync();
         }
 
-        public void ActualizarPigmento(Pigmento pi)
+        public async Task<Pigmento> BuscarPigmentoAsync(Guid id)
         {
-            Pigmento pig = BuscarPigmento(pi.IDPig);
-
-            if (pi.Firma != pig.Firma)
-            {
-                pig.Firma = pi.Firma;
-
-            }
-
-            if (pi.Tipo != pig.Tipo)
-            {
-                pig.Tipo = pi.Tipo;
-
-            }
-
-            if (pi.ColorNombre != pig.ColorNombre)
-            {
-                pig.ColorNombre = pi.ColorNombre;
-            }
-
-            if (pi.CompradoEn != pig.CompradoEn)
-            {
-                pig.CompradoEn = pi.CompradoEn;
-            }
-
-            if (pi.IDVela != pig.IDVela)
-            {
-                pig.IDVela = pi.IDVela;
-            }
-
-            if (pi.Coste != pig.Coste)
-            {
-                pig.Coste = pi.Coste;
-            }
-
-            if (pi.Cantidad != pig.Cantidad)
-            {
-                pig.Cantidad = pi.Cantidad;
-            }
-
-            this.context.SaveChanges();
+            return await _pigmentoService.BuscarPigmentoAsync(id);
         }
 
-        public List<Pigmento> GetPigmentos()
+        public async Task<bool> InsertarPigmentoAsync(Pigmento pigmento)
         {
-            return this.context.Pigmento.ToList();
+            return await _pigmentoService.InsertarPigmentoAsync(pigmento);
         }
 
-        public Pigmento BuscarPigmento(Guid idPig)
+        public async Task<bool> ActualizarPigmentoAsync(Pigmento pigmento)
         {
-            return this.context.Pigmento.SingleOrDefault
-                (x => x.IDPig == idPig);
+            return await _pigmentoService.ActualizarPigmentoAsync(pigmento);
         }
     }
 }

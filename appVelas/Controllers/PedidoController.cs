@@ -5,44 +5,48 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class PedidoController : Controller
     {
-        private readonly RepositoryPedidos repo;
-   
-        public PedidoController(RepositoryPedidos repo)
+        private readonly RepositoryPedidos _pedidoRepo;
+
+        public PedidoController(RepositoryPedidos pedidoService)
         {
-            this.repo = repo;
+            _pedidoRepo = pedidoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Pedidos = await _pedidoRepo.GetPedidosAsync();
+            return View(Pedidos);
         }
 
         // ------------------------------------- PEDIDO ---------------------------------------------
 
-        public PartialViewResult _CrearPedidoView()
+        public async Task<PartialViewResult>  _CrearPedidoView()
         {
-            List<Cliente> listaCliente = this.repo.GetClientes();
+            List<Pedido> listaPedido = await _pedidoRepo.GetPedidosAsync();
 
-            ViewData["Cliente"] = listaCliente;
+            ViewData["Pedido"] = listaPedido;
 
             return PartialView("Crear/_CrearPedidoView", new Pedido());
         }
 
         [HttpPost]
-        public PartialViewResult _CrearPedidoView(Guid idCliente, Guid iDVela)
+        public async Task<PartialViewResult>  _CrearPedidoView(Pedido pedi)
         {
-            this.repo.InsertarPedido(idCliente, iDVela);
+            await _pedidoRepo.InsertarPedidoAsync(pedi);
             return PartialView("Sucess");
         }
 
-        public PartialViewResult _ActPedidoView(Guid IDPedido)
+        public async Task<PartialViewResult>  _ActPedidoView(Guid IDPedido)
         {
-            Pedido ped = this.repo.BuscarPedido(IDPedido);
+            Pedido ped = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
             if (ped == null)
             {
@@ -50,40 +54,40 @@ namespace appVelas.Controllers
                     ErrorViewModel
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna vela con el IDPedido recibido. IDPedido = " + IDPedido +
+                    Mensaje = "No se encontró ninguna Pedido con el IDPedido recibido. IDPedido = " + IDPedido +
                         "Error en el Controller de la vista _ActPedidoView"
                 });
             }
             else
             {
 
-                List<Cliente> listaClientes = this.repo.GetClientes();
+                List<Pedido> listaPedidos = await _pedidoRepo.GetPedidosAsync();
 
-                ViewData["clientes"] = listaClientes;
+                ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
                 return PartialView("Actualizar/_ActPedidoView", ped);
             }
         }
 
         [HttpPost]
-        public PartialViewResult _ActPedidoView(Pedido pedido)
+        public async Task<PartialViewResult>  _ActPedidoView(Pedido pedido)
         {
-            //this.repo.ActualizarPedido(pedido);
+            //await _pedidoRepo.ActualizarPedido(pedido);
 
             return PartialView("Actualizar/_ActPedidoView", pedido);
         }
 
-        public PartialViewResult _DetallesPedidoView()
+        public async Task<PartialViewResult>  _DetallesPedidoView()
         {
-            List<Pedido> pedidos = this.repo.GetPedidos();
+            List<Pedido> pedidos = await _pedidoRepo.GetPedidosAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["PedidoS"] = Pedidos;
             return PartialView("Detalles/_DetallesPedidoView", pedidos);
         }
 
-        public PartialViewResult _DetallesPedidoView1(Guid IDPedido)
+        public async Task<PartialViewResult>  _DetallesPedidoView1(Guid IDPedido)
         {
-            Pedido pedo = this.repo.BuscarPedido(IDPedido);
+            Pedido pedo = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
             ViewData["PEDIDO"] = pedo;
             return PartialView("Detalles/_DetallesPedidoView1", pedo);

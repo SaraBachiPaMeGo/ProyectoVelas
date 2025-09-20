@@ -3359,8 +3359,8 @@ input[type="button"].btn-block {
 }
 
 .btn-group-vertical {
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   -ms-flex-align: start;
   align-items: flex-start;
   -ms-flex-pack: center;
@@ -4186,8 +4186,8 @@ input[type="button"].btn-block {
 .navbar-nav {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -4553,8 +4553,8 @@ input[type="button"].btn-block {
   position: relative;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -4671,8 +4671,8 @@ input[type="button"].btn-block {
 .card-deck {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
 }
 
 .card-deck .card {
@@ -4691,8 +4691,8 @@ input[type="button"].btn-block {
     display: flex;
     -ms-flex: 1 0 0%;
     flex: 1 0 0%;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    -ms-flex-direction: JsonProperty;
+    flex-direction: JsonProperty;
     margin-right: 15px;
     margin-bottom: 0;
     margin-left: 15px;
@@ -4702,8 +4702,8 @@ input[type="button"].btn-block {
 .card-group {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
 }
 
 .card-group > .card {
@@ -4750,22 +4750,22 @@ input[type="button"].btn-block {
   }
 }
 
-.card-columns .card {
+.card-JsonPropertys .card {
   margin-bottom: 0.75rem;
 }
 
 @media (min-width: 576px) {
-  .card-columns {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-gap: 1.25rem;
-    -moz-column-gap: 1.25rem;
-    column-gap: 1.25rem;
+  .card-JsonPropertys {
+    -webkit-JsonProperty-count: 3;
+    -moz-JsonProperty-count: 3;
+    JsonProperty-count: 3;
+    -webkit-JsonProperty-gap: 1.25rem;
+    -moz-JsonProperty-gap: 1.25rem;
+    JsonProperty-gap: 1.25rem;
     orphans: 1;
     widows: 1;
   }
-  .card-columns .card {
+  .card-JsonPropertys .card {
     display: inline-block;
     width: 100%;
   }
@@ -5273,8 +5273,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 .progress-bar {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   -ms-flex-pack: center;
   justify-content: center;
   color: #fff;
@@ -5322,8 +5322,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 .list-group {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   padding-left: 0;
   margin-bottom: 0;
 }
@@ -5799,8 +5799,8 @@ a.close.disabled {
 }
 
 .modal-dialog-centered.modal-dialog-scrollable {
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   -ms-flex-pack: center;
   justify-content: center;
   height: 100%;
@@ -5818,8 +5818,8 @@ a.close.disabled {
   position: relative;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: JsonProperty;
+  flex-direction: JsonProperty;
   width: 100%;
   pointer-events: auto;
   background-color: #fff;
@@ -6967,9 +6967,9 @@ button.bg-dark:focus {
   flex-direction: row !important;
 }
 
-.flex-column {
-  -ms-flex-direction: column !important;
-  flex-direction: column !important;
+.flex-JsonProperty {
+  -ms-flex-direction: JsonProperty !important;
+  flex-direction: JsonProperty !important;
 }
 
 .flex-row-reverse {
@@ -6977,9 +6977,9 @@ button.bg-dark:focus {
   flex-direction: row-reverse !important;
 }
 
-.flex-column-reverse {
-  -ms-flex-direction: column-reverse !important;
-  flex-direction: column-reverse !important;
+.flex-JsonProperty-reverse {
+  -ms-flex-direction: JsonProperty-reverse !important;
+  flex-direction: JsonProperty-reverse !important;
 }
 
 .flex-wrap {
@@ -7137,17 +7137,17 @@ button.bg-dark:focus {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-sm-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-sm-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-sm-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-sm-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-sm-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-sm-wrap {
     -ms-flex-wrap: wrap !important;
@@ -7276,17 +7276,17 @@ button.bg-dark:focus {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-md-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-md-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-md-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-md-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-md-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-md-wrap {
     -ms-flex-wrap: wrap !important;
@@ -7415,17 +7415,17 @@ button.bg-dark:focus {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-lg-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-lg-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-lg-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-lg-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-lg-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-lg-wrap {
     -ms-flex-wrap: wrap !important;
@@ -7554,17 +7554,17 @@ button.bg-dark:focus {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-xl-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-xl-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-xl-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-xl-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-xl-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-xl-wrap {
     -ms-flex-wrap: wrap !important;

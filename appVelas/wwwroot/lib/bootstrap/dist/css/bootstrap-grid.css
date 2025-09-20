@@ -1184,9 +1184,9 @@ html {
   flex-direction: row !important;
 }
 
-.flex-column {
-  -ms-flex-direction: column !important;
-  flex-direction: column !important;
+.flex-JsonProperty {
+  -ms-flex-direction: JsonProperty !important;
+  flex-direction: JsonProperty !important;
 }
 
 .flex-row-reverse {
@@ -1194,9 +1194,9 @@ html {
   flex-direction: row-reverse !important;
 }
 
-.flex-column-reverse {
-  -ms-flex-direction: column-reverse !important;
-  flex-direction: column-reverse !important;
+.flex-JsonProperty-reverse {
+  -ms-flex-direction: JsonProperty-reverse !important;
+  flex-direction: JsonProperty-reverse !important;
 }
 
 .flex-wrap {
@@ -1354,17 +1354,17 @@ html {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-sm-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-sm-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-sm-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-sm-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-sm-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-sm-wrap {
     -ms-flex-wrap: wrap !important;
@@ -1493,17 +1493,17 @@ html {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-md-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-md-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-md-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-md-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-md-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-md-wrap {
     -ms-flex-wrap: wrap !important;
@@ -1632,17 +1632,17 @@ html {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-lg-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-lg-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-lg-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-lg-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-lg-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-lg-wrap {
     -ms-flex-wrap: wrap !important;
@@ -1771,17 +1771,17 @@ html {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
   }
-  .flex-xl-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
+  .flex-xl-JsonProperty {
+    -ms-flex-direction: JsonProperty !important;
+    flex-direction: JsonProperty !important;
   }
   .flex-xl-row-reverse {
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
   }
-  .flex-xl-column-reverse {
-    -ms-flex-direction: column-reverse !important;
-    flex-direction: column-reverse !important;
+  .flex-xl-JsonProperty-reverse {
+    -ms-flex-direction: JsonProperty-reverse !important;
+    flex-direction: JsonProperty-reverse !important;
   }
   .flex-xl-wrap {
     -ms-flex-wrap: wrap !important;

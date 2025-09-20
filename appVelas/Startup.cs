@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using appVelas.Service;
 
 namespace appVelas
 {
@@ -28,15 +29,7 @@ namespace appVelas
 
         public void ConfigureServices(IServiceCollection services)
         {
-            String cadena = this.Configuration.GetConnectionString("proyektVelas");
-            
-            if (cadena ==null)
-            {
-                cadena = "Data Source=LAPTOP-SLC643FH;Initial Catalog=ProyektVelas;Persist Security Info=True;User ID=SA;Password=P@ssw0rdVelas1";
-            }
-
-            services.AddDbContext<Contexto>(options =>
-                options.UseSqlServer(cadena));
+            services.AddHttpClient<ICeraService, CeraService>();
 
             //services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
             services.AddScoped<RepositoryVelas>();

@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace appVelas.Models
 {
-    [Table("Pedido")]
 
     public class Pedido
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDPedido")]
+       
+        
+        [JsonProperty("IDPedido")]
         public Guid IDPedido { get; set; }
 
-        [Column("FechaPedi")]
+        [JsonProperty("FechaPedi")]
         public DateTime FechaPedi { get; set; }
 
-        [Column("FechaEntrega")]
+        [JsonProperty("FechaEntrega")]
         public DateTime FechaEntrega { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
 
-        [Column("IDCliente")]
+        [JsonProperty("IDCliente")]
         public Guid IDCliente { get; set; }
     }
 }

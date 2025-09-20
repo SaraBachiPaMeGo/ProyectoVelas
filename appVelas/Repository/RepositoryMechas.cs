@@ -2,98 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
 
 namespace appVelas.Repository
 {
     public class RepositoryMechas
     {
-        private readonly Contexto context;
+        private readonly IMechaService _mechaService;
 
-        public RepositoryMechas(Contexto context)
+
+        public RepositoryMechas(IMechaService mechaService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _mechaService = mechaService;
         }
 
-        // ------------------------------------- MECHA ---------------------------------------------
-
-        public void InsertarMecha(Mecha mech)
+        // ------------------------------------- Mecha ---------------------------------------------
+        public async Task<List<Mecha>> GetMechasAsync()
         {
-            Mecha mecha = new Mecha();
-
-            int? count = (from datos in context.Mecha
-                          select datos.IDMecha).Count();
-
-            if (count == 0)
-            {
-                mecha.IDMecha = Guid.NewGuid();
-            }
-            else
-            {
-                //Error
-            }
-
-            mecha.Tipo = mech.Tipo;
-            mecha.CompradoEn = mech.CompradoEn;
-            mecha.Firma = mech.Firma;
-            mecha.IDVela = mech.IDVela;
-            mecha.Cantidad = mech.Cantidad;
-            mecha.Coste = mech.Coste;
-
-            this.context.Mecha.Add(mecha);
-            this.context.SaveChanges();
+            return await _mechaService.GetMechasAsync();
         }
 
-        public void ActualizarMecha(Mecha mech)
+        public async Task<Mecha> BuscarMechaAsync(Guid id)
         {
-            Mecha mecha = BuscarMecha(mech.IDMecha);
-
-            if (mech.Firma != mecha.Firma)
-            {
-                mecha.Firma = mech.Firma;
-
-            }
-
-            if (mech.Tipo != mecha.Tipo)
-            {
-                mecha.Tipo = mech.Tipo;
-
-            }
-
-            if (mech.CompradoEn != mecha.CompradoEn)
-            {
-                mecha.CompradoEn = mech.CompradoEn;
-            }
-
-            if (mech.IDVela != mecha.IDVela)
-            {
-                mecha.IDVela = mech.IDVela;
-            }
-
-            if (mech.Cantidad != mecha.Cantidad)
-            {
-                mecha.Cantidad = mech.Cantidad;
-            }
-
-            if (mech.Coste != mecha.Coste)
-            {
-                mecha.Coste = mech.Coste;
-            }
-
-
-            this.context.SaveChanges();
+            return await _mechaService.BuscarMechaAsync(id);
         }
 
-        public List<Mecha> GetMechas()
+        public async Task<bool> InsertarMechaAsync(Mecha mecha)
         {
-            return this.context.Mecha.ToList();
+            return await _mechaService.InsertarMechaAsync(mecha);
         }
 
-        public Mecha BuscarMecha(Guid idMecha)
+        public async Task<bool> ActualizarMechaAsync(Mecha mecha)
         {
-            return this.context.Mecha.SingleOrDefault
-                (x => x.IDMecha == idMecha);
+            return await _mechaService.ActualizarMechaAsync(mecha);
         }
     }
 }

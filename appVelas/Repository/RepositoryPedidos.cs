@@ -2,79 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
 
 namespace appVelas.Repository
 {
     public class RepositoryPedidos
     {
-        private readonly Contexto context;
+        private readonly IPedidoService _pedidoService;
 
-        public RepositoryPedidos(Contexto context)
+
+        public RepositoryPedidos(IPedidoService pedidoService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _pedidoService = pedidoService;
         }
 
-        // ------------------------------------- PEDIDO ---------------------------------------------
-        public void InsertarPedido(Guid idCliente, Guid iDVela)
+        // ------------------------------------- Pedido ---------------------------------------------
+        public async Task<List<Pedido>> GetPedidosAsync()
         {
-            Pedido pedi = new Pedido();
-
-            int? count = (from datos in context.Pedido
-                          select datos.IDPedido).Count();
-
-            if (count == 0)
-            {
-                pedi.IDPedido = Guid.NewGuid();
-            }
-            else
-            {
-                //Error
-            }
-
-            pedi.IDCliente = idCliente;
-            pedi.IDVela = iDVela;
-
-            this.context.Pedido.Add(pedi);
-            this.context.SaveChanges();
+            return await _pedidoService.GetPedidosAsync();
         }
 
-        public void ActualizarPedido(Guid idPedo, DateTime fechaEntrega, Guid idCliente,
-            Guid iDVela)
+        public async Task<Pedido> BuscarPedidoAsync(Guid id)
         {
-            Pedido pedi = BuscarPedido(idPedo);
-
-
-            if (fechaEntrega != pedi.FechaEntrega)
-            {
-                pedi.FechaEntrega = fechaEntrega;
-
-            }
-
-            if (idCliente != pedi.IDCliente)
-            {
-                pedi.IDCliente = idCliente;
-
-            }
-
-            if (iDVela != pedi.IDVela)
-            {
-                pedi.IDVela = iDVela;
-            }
-
-            this.context.SaveChanges();
+            return await _pedidoService.BuscarPedidoAsync(id);
         }
 
-        public List<Pedido> GetPedidos()
+        public async Task<bool> InsertarPedidoAsync(Pedido pedido)
         {
-            return this.context.Pedido.ToList();
+            return await _pedidoService.InsertarPedidoAsync(pedido);
         }
 
-        public Pedido BuscarPedido(Guid idPedo)
+        public async Task<bool> ActualizarPedidoAsync(Pedido pedido)
         {
-            return this.context.Pedido.SingleOrDefault
-                (x => x.IDPedido == idPedo);
+            return await _pedidoService.ActualizarPedidoAsync(pedido);
         }
 
 

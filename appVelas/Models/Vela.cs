@@ -3,59 +3,58 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace appVelas.Models
 {
-    [Table("Vela")]   
-
     public class Vela
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDVela")]
+       
+        
+        [JsonProperty("IDVela")]
         public Guid IDVela { get; set; }
 
-        [Column("VelaNombre")]
+        [JsonProperty("VelaNombre")]
         public string VelaNombre { get; set; }
 
-        [Column("Observ")]
+        [JsonProperty("Observ")]
         public string Observ { get; set; }
 
-        [Column("Endurecedor")]
+        [JsonProperty("Endurecedor")]
         public bool Endurecedor { get; set; }
 
-        [Column("FechaReal")]
+        [JsonProperty("FechaReal")]
         public DateTime FechaReal { get; set; }
 
-        [Column("FechaVenta")]
+        [JsonProperty("FechaVenta")]
         public DateTime FechaVenta { get; set; }
 
-        [Column("GradFrag")]
+        [JsonProperty("GradFrag")]
         public decimal GradFrag { get; set; }
 
-        [Column("GradPig")]
+        [JsonProperty("GradPig")]
         public decimal GradPig { get; set; }
 
-        [Column("IDFrag")]
+        [JsonProperty("IDFrag")]
         public Guid IDFrag { get; set; }
 
-        [Column("IDMolde")]
+        [JsonProperty("IDMolde")]
         public Guid IDMolde { get; set; }
 
-        [Column("IDPig")]
+        [JsonProperty("IDPig")]
         public Guid IDPig { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal Coste { get; set; }
 
-        [Column("IDPedido")]
+        [JsonProperty("IDPedido")]
         public Guid IDPedido { get; set; }
 
-        [Column("IDMecha")]
+        [JsonProperty("IDMecha")]
         public Guid IDMecha { get; set; }
 
-        [Column("IDCera")]
+        [JsonProperty("IDCera")]
         public Guid IDCera { get; set; }
 
         public List<VelaPigmento> Pigmentos { get; set; }

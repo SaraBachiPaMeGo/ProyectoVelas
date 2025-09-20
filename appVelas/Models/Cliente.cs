@@ -4,32 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-
+using Newtonsoft.Json;
 
 namespace appVelas.Models
 {
-    [Table("Cliente")]
 
     public class Cliente
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDCliente")]
+       
+        
+        [JsonProperty("IDCliente")]
         public Guid IDCliente { get; set; }
 
-        [Column("Nombre")]
+        [JsonProperty("Nombre")]
         public string Nombre { get; set; }
 
-        [Column("Direccion")]
+        [JsonProperty("Direccion")]
         public string Direccion { get; set; }
 
-        [Column("Telf")]
+        [JsonProperty("Telf")]
         public string Telf { get; set; }
 
-        [Column("Email")]
+        [JsonProperty("Email")]
         public string Email { get; set; }
 
-        [Column("IDPedido")]
+        [JsonProperty("IDPedido")]
         public Guid IDPedido { get; set; }
     }
 }

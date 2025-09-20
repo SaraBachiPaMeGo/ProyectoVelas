@@ -2,91 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
 
 namespace appVelas.Repository
 {
     public class RepositoryClientes
     {
-        private readonly Contexto context;
+        private readonly IClienteService _clienteService;
 
-        public RepositoryClientes(Contexto context)
+
+        public RepositoryClientes(IClienteService clienteService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _clienteService = clienteService;
         }
 
-        // ------------------------------------- CLIENTE ---------------------------------------------
-        public void InsertarCliente(Cliente clie)
+        // ------------------------------------- Cliente ---------------------------------------------
+        public async Task<List<Cliente>> GetClientesAsync()
         {
-            Cliente cli = new Cliente();
-
-            int? count = (from datos in context.Cliente
-                          select datos.IDCliente).Count();
-
-            if (count == 0)
-            {
-                cli.IDCliente = Guid.NewGuid();
-            }
-            else
-            {
-                //Error
-            }
-
-            cli.Nombre = clie.Nombre;
-            cli.Direccion = clie.Direccion;
-            cli.Telf = clie.Telf;
-            cli.Email = clie.Email;
-            cli.IDPedido = clie.IDPedido;
-
-            this.context.Cliente.Add(cli);
-            this.context.SaveChanges();
+            return await _clienteService.GetClientesAsync();
         }
 
-        public void ActualizarCliente(Cliente clie)
+        public async Task<Cliente> BuscarClienteAsync(Guid id)
         {
-            Cliente cli = BuscarCliente(clie.IDCliente);
-
-
-            if (clie.Nombre != cli.Nombre)
-            {
-                cli.Nombre = clie.Nombre;
-
-            }
-
-            if (clie.Direccion != cli.Direccion)
-            {
-                cli.Direccion = clie.Direccion;
-
-            }
-
-            if (clie.Telf != cli.Telf)
-            {
-                cli.Telf = clie.Telf;
-            }
-
-            if (clie.Email != cli.Email)
-            {
-                cli.Email = clie.Email;
-            }
-
-            if (clie.IDPedido != cli.IDPedido)
-            {
-                cli.IDPedido = clie.IDPedido;
-            }
-
-            this.context.SaveChanges();
+            return await _clienteService.BuscarClienteAsync(id);
         }
 
-        public List<Cliente> GetClientes()
+        public async Task<bool> InsertarClienteAsync(Cliente cliente)
         {
-            return this.context.Cliente.ToList();
+            return await _clienteService.InsertarClienteAsync(cliente);
         }
 
-        public Cliente BuscarCliente(Guid idCliente)
+        public async Task<bool> ActualizarClienteAsync(Cliente cliente)
         {
-            return this.context.Cliente.SingleOrDefault
-                (x => x.IDCliente == idCliente);
+            return await _clienteService.ActualizarClienteAsync(cliente);
         }
 
     }

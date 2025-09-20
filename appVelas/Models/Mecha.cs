@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace appVelas.Models
 {
-    [Table("Mecha")]
-
     public class Mecha
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDMecha")]
+       
+        
+        [JsonProperty("IDMecha")]
         public Guid IDMecha { get; set; }
 
-        [Column("Firma")]
+        [JsonProperty("Firma")]
         public string Firma { get; set; }
 
-        [Column("Tipo")]
+        [JsonProperty("Tipo")]
         public string Tipo { get; set; }
 
-        [Column("CompradoEn")]
+        [JsonProperty("CompradoEn")]
         public string CompradoEn { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
 
-        [Column("Cantidad")]
+        [JsonProperty("Cantidad")]
         public decimal Cantidad { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal Coste { get; set; }
     }
 }

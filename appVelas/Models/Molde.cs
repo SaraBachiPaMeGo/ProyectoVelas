@@ -3,53 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace appVelas.Models
 {
-    [Table("Molde")]
 
     public class Molde
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("IDMolde")]
+       
+        
+        [JsonProperty("IDMolde")]
         public Guid IDMolde { get; set; }
 
-        [Column("MoldeNombre")]
+        [JsonProperty("MoldeNombre")]
         public string MoldeNombre { get; set; }
 
-        [Column("Firma")]
+        [JsonProperty("Firma")]
         public string Firma { get; set; }
 
-        [Column("Tipo")]
+        [JsonProperty("Tipo")]
         public string Tipo { get; set; }
 
-        [Column("CompradoEn")]
+        [JsonProperty("CompradoEn")]
         public string CompradoEn { get; set; }
 
-        [Column("GramCera")]
+        [JsonProperty("GramCera")]
         public decimal? GramCera { get; set; }
 
-        [Column("Medidas")]
+        [JsonProperty("Medidas")]
         public string Medidas { get; set; }
 
-        [Column("Duracion")]
+        [JsonProperty("Duracion")]
         public decimal? Duracion { get; set; }
 
-        [Column("CMMecha")]
+        [JsonProperty("CMMecha")]
         public decimal? CMMecha { get; set; }
 
-        [Column("Observ")]
+        [JsonProperty("Observ")]
         public string Observ { get; set; }
 
-        [Column("MilAgua")]
+        [JsonProperty("MilAgua")]
         public decimal? MilAgua { get; set; }
 
-        [Column("IDVela")]
+        [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
 
-        [Column("Coste")]
+        [JsonProperty("Coste")]
         public decimal? Coste { get; set; }
     }
 }

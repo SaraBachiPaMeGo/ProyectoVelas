@@ -4,46 +4,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
+using appVelas.Service.Interfaces;
+using appVelas.Models;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class EndurecedorController : Controller
     {
-        private readonly RepositoryEndurecedores repo;
+        private readonly RepositoryEndurecedores _endurecedorRepo;
 
-        public EndurecedorController(RepositoryEndurecedores repo)
+        public EndurecedorController(RepositoryEndurecedores endurecedorService)
         {
-            this.repo = repo;
+            _endurecedorRepo = endurecedorService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Endurecedors = await _endurecedorRepo.GetEndurecedorsAsync();
+            return View(Endurecedors);
         }
 
         // ------------------------------------- ENDURECEDOR ---------------------------------------------
 
-        public PartialViewResult _CrearEndurecedorView()
+        public async Task<PartialViewResult> _CrearEndurecedorView()
         {
             return PartialView("Crear/_CrearEndurecedorView");
         }
 
         [HttpPost]
-        public PartialViewResult _CrearEndurecedorView(Endurecedor end)
+        public async Task<PartialViewResult> _CrearEndurecedorView(Endurecedor end)
         {
             //if (!ModelState.IsValid)
             //{
             //}
-            this.repo.InsertarEndurecedor(end);
+             await _endurecedorRepo.InsertarEndurecedorAsync(end);
 
 
             return PartialView("Sucess", end);
 
         }
 
-        public PartialViewResult _ActEndurecedorView(Guid IDEnd)
+        public async Task<PartialViewResult> _ActEndurecedorView(Guid IDEnd)
         {
-            Endurecedor end = this.repo.BuscarEndurecedor(IDEnd);
+            Endurecedor end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
             if (end == null)
             {
@@ -63,24 +67,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _ActEndurecedorView(Endurecedor end)
+        public async Task<PartialViewResult> _ActEndurecedorView(Endurecedor end)
         {
-            this.repo.ActualizarEndurecedor(end);
+             await _endurecedorRepo.ActualizarEndurecedorAsync(end);
 
             return PartialView("Sucess", end);
         }
 
-        public PartialViewResult _DetallesEndurecedorView()
+        public async Task<PartialViewResult> _DetallesEndurecedorView()
         {
-            List<Endurecedor> end = this.repo.GetEndurecedor();
+            List<Endurecedor> end =  await _endurecedorRepo.GetEndurecedorsAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["EndurecedorS"] = Endurecedors;
             return PartialView("Detalles/_DetallesEndurecedorView", end);
         }
 
-        public PartialViewResult _DetallesEndurecedorView1(Guid IDEnd)
+        public async Task<PartialViewResult> _DetallesEndurecedorView1(Guid IDEnd)
         {
-            Endurecedor end = this.repo.BuscarEndurecedor(IDEnd);
+            Endurecedor end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
             ViewData["END"] = end;
             return PartialView("Detalles/_DetallesEndurecedorView1", end);

@@ -5,32 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class VelaController : Controller
     {
-        private readonly RepositoryVelas repo;
+        private readonly RepositoryVelas _velaRepo;
 
-        public VelaController(RepositoryVelas repo)
+        public VelaController(RepositoryVelas velaRepo)
         {
-            this.repo = repo;
+            _velaRepo = velaRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var velas = await _velaRepo.GetVelasAsync();
+            return View(velas);
         }
 
         // ------------------------------------- VELA ---------------------------------------------
 
-        public PartialViewResult _CrearVelaView()
+        public async Task<PartialViewResult>  _CrearVelaView()
         {
-            List<Molde> listaMoldes = this.repo.GetMoldes();
-            List<Fragancia> listaFrag = this.repo.GetFragancias();
-            List<Pigmento> listaPig = this.repo.GetPigmentos();
-            List<Cera> listaCera = this.repo.GetCeras();
-            List<Mecha> listaMecha = this.repo.GetMechas();
+            List<Molde> listaMoldes = await _velaRepo.getMoldes();
+            List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
+            List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
+            List<Cera> listaCera = await _velaRepo.GetCeras();
+            List<Mecha> listaMecha = await _velaRepo.GetMechas();
 
             //ViewBag.Fragancias = new SelectList(this.context.Fragancia.ToList(), "IDFrag", "FragNombre");
             //ViewBag.Pigmentos = new SelectList(this.context.Pigmento.ToList(), "IDPig", "ColorNombre");
@@ -45,30 +48,30 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos)
+        public async Task<PartialViewResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos)
         {
             // Insertar fragancias
             foreach (var idFrag in IDFragancias)
             {
-                this.repo.InsertarVelaFragancia(vela.IDVela, idFrag);
+                await _velaRepo.InsertarVelaFragancia(vela.IDVela, idFrag);
             }
 
             // Insertar pigmentos
             foreach (var idPig in IDPigmentos)
             {
-                this.repo.InsertarVelaPigmento(vela.IDVela, idPig);
+                await _velaRepo.InsertarVelaPigmento(vela.IDVela, idPig);
             }
 
-            this.repo.InsertarVela(vela);
+            await _velaRepo.InsertarVelaAsync(vela);
 
 
             return PartialView("Sucess", vela);
 
         }
 
-        public PartialViewResult _ActVelaView(Guid IDVela)
+        public async Task<PartialViewResult>  _ActVelaView(Guid IDVela)
         {
-            Vela vela = this.repo.BuscarVela(IDVela);
+            Vela vela = await _velaRepo.BuscarVelaAsync(IDVela);
 
             if (vela == null)
             {
@@ -82,21 +85,21 @@ namespace appVelas.Controllers
             }
             else
             {
-                List<Molde> listaMoldes = this.repo.GetMoldes();
-                //List<Fragancia> listaFrag = this.repo.GetFragancias();
-                //List<Pigmento> listaPig = this.repo.GetPigmentos();
-                List<Cera> listaCera = this.repo.GetCeras();
-                List<Mecha> listaMecha = this.repo.GetMechas();
+                List<Molde> listaMoldes = await _velaRepo.GetMoldes();
+                //List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
+                //List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
+                List<Cera> listaCera = await _velaRepo.GetCeras();
+                List<Mecha> listaMecha = await _velaRepo.GetMechas();
 
                 // Carga todas las fragancias y pigmentos para los selects
                 //ViewBag.Fragancias = new SelectList(context.Fragancia.ToList(), "IDFrag", "FragNombre");
                 //ViewBag.Pigmentos = new SelectList(context.Pigmento.ToList(), "IDPig", "ColorNombre");
 
                 // Carga las fragancias seleccionadas para esta vela
-                //ViewBag.FraganciasSeleccionadas = this.repo.GetFraganciasPorVela(IDVela).Select(f => f.IDFrag).ToList();
+                //ViewBag.FraganciasSeleccionadas = await _velaRepo.GetFraganciasPorVela(IDVela).Select(f => f.IDFrag).ToList();
 
                 // Carga los pigmentos seleccionados para esta vela
-                //ViewBag.PigmentosSeleccionados = this.repo.GetPigmentosPorVela(IDVela).Select(p => p.IDPig).ToList();
+                //ViewBag.PigmentosSeleccionados = await _velaRepo.GetPigmentosPorVela(IDVela).Select(p => p.IDPig).ToList();
 
                 ViewData["Moldes"] = listaMoldes;
                 //ViewData["Frag"] = listaFrag;
@@ -108,12 +111,10 @@ namespace appVelas.Controllers
 
                 return PartialView("Actualizar/_ActVelaView", vela);
             }
-
-
         }
 
         [HttpPost]
-        public PartialViewResult _ActVelaView(Vela vela)
+        public async Task<PartialViewResult>  _ActVelaView(Vela vela)
         {
             if (vela == null)
                 return PartialView("Error", new
@@ -144,20 +145,20 @@ namespace appVelas.Controllers
                 }
             }
 
-            this.repo.Actualizarvela(vela);
+            await _velaRepo.ActualizarVelaAsync(vela);
 
             return PartialView("Sucess");
         }
 
-        public PartialViewResult _DetallesVelaView()
+        public async Task<PartialViewResult>  _DetallesVelaView()
         {
-            List<Vela> velas = this.repo.GetVelas();
+            List<Vela> velas = await _velaRepo.GetVelasAsync();
 
-            List<Molde> listaMoldes = this.repo.GetMoldes();
-            List<Fragancia> listaFrag = this.repo.GetFragancias();
-            List<Pigmento> listaPig = this.repo.GetPigmentos();
-            List<Cera> listaCera = this.repo.GetCeras();
-            List<Mecha> listaMecha = this.repo.GetMechas();
+            List<Molde> listaMoldes = await _velaRepo.GetMoldes();
+            List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
+            List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
+            List<Cera> listaCera = await _velaRepo.GetCeras();
+            List<Mecha> listaMecha = await _velaRepo.GetMechas();
 
             ViewData["Moldes"] = listaMoldes;
             ViewData["Frag"] = listaFrag;
@@ -169,17 +170,17 @@ namespace appVelas.Controllers
             return PartialView("Detalles/_DetallesVelaView", velas);
         }
 
-        public PartialViewResult _DetallesVelaView1(Guid IDVela)
+        public async Task<PartialViewResult>  _DetallesVelaView1(Guid IDVela)
         {
-            Vela vela = this.repo.BuscarVela(IDVela);
-            Molde Moldes = this.repo.BuscarMolde(vela.IDMolde);
-            Fragancia Frag = this.repo.BuscarFragancia(vela.IDFrag);
-            Pigmento Pig = this.repo.BuscarPigmento(vela.IDPig);
-            Cera Cera = this.repo.BuscarCera(vela.IDCera);
-            Mecha Mecha = this.repo.BuscarMecha(vela.IDMecha);
-            Pedido pedi = this.repo.BuscarPedido(vela.IDPedido);
+            Vela vela = await _velaRepo.BuscarVelaAsync(IDVela);
+            Molde Moldes = await _velaRepo.BuscarMolde(vela.IDMolde);
+            Fragancia Frag = await _velaRepo.BuscarFragancia(vela.IDFrag);
+            Pigmento Pig = await _velaRepo.BuscarPigmento(vela.IDPig);
+            Cera Cera = await _velaRepo.BuscarCera(vela.IDCera);
+            Mecha Mecha = await _velaRepo.BuscarMecha(vela.IDMecha);
+            Pedido pedi = await _velaRepo.BuscarPedido(vela.IDPedido);
             Guid cli = pedi.IDCliente;
-            string clien = this.repo.BuscarCliente(cli).Nombre;
+            string clien = await _velaRepo.BuscarCliente(cli).Nombre;
 
             ViewData["Moldes"] = Moldes;
             ViewData["Frag"] = Frag;

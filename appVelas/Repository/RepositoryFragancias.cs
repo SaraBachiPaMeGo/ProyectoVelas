@@ -2,114 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using appVelas.Data;
+
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+
 namespace appVelas.Repository
 {
     public class RepositoryFragancias
     {
-        private readonly Contexto context;
+        private readonly IFraganciaService _fraganciaService;
 
-        public RepositoryFragancias(Contexto context)
+
+        public RepositoryFragancias(IFraganciaService FraganciaService)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _fraganciaService = FraganciaService;
         }
 
-        // ------------------------------------- FRAGANCIA ---------------------------------------------
-
-        public void InsertarFragancia(Fragancia fragan)
+        // ------------------------------------- Fragancia ---------------------------------------------
+        public async Task<List<Fragancia>> GetFraganciasAsync()
         {
-            //String fragNombre, String tipo,
-            //String compradoEn, String firma, int iDVela, int idCoste
-            Fragancia frag = new Fragancia();
-
-            //int? count = (from datos in context.Fragancia
-            //              select datos.IDFrag).Count();
-
-            //if (count == 0)
-            //{
-            //    frag.IDFrag = Guid.NewGuid();
-            //}
-            //else
-            //{
-            //    //Error
-            //}
-
-            frag.IDFrag = Guid.NewGuid();
-            frag.FragNombre = fragan.FragNombre;
-            frag.Tipo = fragan.Tipo;
-            frag.CompradoEn = fragan.CompradoEn;
-            frag.Firma = fragan.Firma;
-            frag.IDVela = fragan.IDVela;
-            frag.Coste = fragan.Coste;
-            frag.Cantidad = fragan.Cantidad;
-
-
-            this.context.Fragancia.Add(frag);
-            this.context.SaveChanges();
+            return await _fraganciaService.GetFraganciasAsync();
         }
 
-        public void ActualizarFragancia(Fragancia fragan)
+        public async Task<Fragancia> BuscarFraganciaAsync(Guid id)
         {
-            Fragancia frag = BuscarFragancia(fragan.IDFrag);
-
-            if (fragan.Firma != frag.Firma)
-            {
-                frag.Firma = fragan.Firma;
-
-            }
-
-            if (fragan.Tipo != frag.Tipo)
-            {
-                frag.Tipo = fragan.Tipo;
-
-            }
-
-            if (fragan.CompradoEn != frag.CompradoEn)
-            {
-                frag.CompradoEn = fragan.CompradoEn;
-            }
-
-            if (fragan.IDVela != frag.IDVela)
-            {
-                frag.IDVela = fragan.IDVela;
-            }
-
-            if (fragan.FragNombre != frag.FragNombre)
-            {
-                frag.FragNombre = fragan.FragNombre;
-            }
-
-            if (fragan.Coste != frag.Coste)
-            {
-                frag.Coste = fragan.Coste;
-            }
-
-            if (fragan.Cantidad != frag.Cantidad)
-            {
-                frag.Cantidad = fragan.Cantidad;
-            }
-
-
-            this.context.SaveChanges();
+            return await _fraganciaService.BuscarFraganciaAsync(id);
         }
 
-        public List<Fragancia> GetFragancias()
+        public async Task<bool> InsertarFraganciaAsync(Fragancia fragancia)
         {
-            int? count = (from datos in context.Fragancia
-                          select datos.IDFrag).Count();
-
-            Fragancia frag = this.context.Fragancia.FirstOrDefault();
-
-            List<Fragancia> frags = this.context.Fragancia.ToList();
-
-            return frags;
+            return await _fraganciaService.InsertarFraganciaAsync(fragancia);
         }
 
-        public Fragancia BuscarFragancia(Guid idFragancia)
+        public async Task<bool> ActualizarFraganciaAsync(Fragancia fragancia)
         {
-            return this.context.Fragancia.SingleOrDefault
-                (x => x.IDFrag == idFragancia);
+            return await _fraganciaService.ActualizarFraganciaAsync(fragancia);
         }
     }
 }

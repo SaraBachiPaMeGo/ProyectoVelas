@@ -5,46 +5,49 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using appVelas.Repository;
 using appVelas.Models;
+using appVelas.Service.Interfaces;
+using System.Diagnostics;
 
 namespace appVelas.Controllers
 {
     public class MoldeController : Controller
     {
-        private readonly RepositoryMoldes repo;
+        private readonly RepositoryMoldes _moldeRepo;
 
-        public MoldeController(RepositoryMoldes repo)
+        public MoldeController(RepositoryMoldes moldeService)
         {
-            this.repo = repo;
+            _moldeRepo = moldeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Moldes = await _moldeRepo.GetMoldesAsync();
+            return View(Moldes);
         }
 
         // ------------------------------------- MOLDE ---------------------------------------------
 
-        public PartialViewResult _CrearMoldeView()
+        public async Task<PartialViewResult>  _CrearMoldeView()
         {
-            return PartialView("Crear/_CrearMoldeView", new Molde());
+            return PartialView("Crear/_CrearMoldeView",  new Molde());
         }
 
         [HttpPost]
-        public PartialViewResult _CrearMoldeView(Molde molde)
+        public async Task<PartialViewResult>  _CrearMoldeView(Molde molde)
         {
             //if (!ModelState.IsValid)
             //{
             //}
-            this.repo.InsertarMolde(molde);
+            await _moldeRepo.InsertarMoldeAsync(molde);
 
 
             return PartialView("Sucess", molde);
 
         }
 
-        public PartialViewResult _ActMoldeView(Guid IDMolde)
+        public async Task<PartialViewResult>  _ActMoldeView(Guid IDMolde)
         {
-            Molde mol = this.repo.BuscarMolde(IDMolde);
+            Molde mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
             if (mol == null)
             {
@@ -52,36 +55,36 @@ namespace appVelas.Controllers
                     ErrorViewModel
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna vela con el IDMolde recibido. IDMolde = " + IDMolde +
+                    Mensaje = "No se encontró ninguna Molde con el IDMolde recibido. IDMolde = " + IDMolde +
                         "Error en el Controller de la vista _ActMoldeView"
                 });
             }
             else
             {
                 ViewData["IDMolde"] = IDMolde;
-                return PartialView("Actualizar/_CrearMoldeView", this.repo.BuscarMolde(IDMolde));
+                return PartialView("Actualizar/_CrearMoldeView", await _moldeRepo.BuscarMoldeAsync(IDMolde));
             }
         }
 
         [HttpPost]
-        public PartialViewResult _ActMoldeView(Molde molde)
+        public async Task<PartialViewResult>  _ActMoldeView(Molde molde)
         {
-            this.repo.ActualizarMolde(molde);
+            await _moldeRepo.ActualizarMoldeAsync(molde);
 
             return PartialView("Sucess", molde);
         }
 
-        public PartialViewResult _DetallesMoldeView()
+        public async Task<PartialViewResult>  _DetallesMoldeView()
         {
-            List<Molde> moldes = this.repo.GetMoldes();
+            List<Molde> moldes = await _moldeRepo.GetMoldesAsync();
 
-            //ViewData["VELAS"] = velas;
+            //ViewData["MoldeS"] = Moldes;
             return PartialView("Detalles/_DetallesMoldeView", moldes);
         }
 
-        public PartialViewResult _DetallesMoldeView1(Guid IDMolde)
+        public async Task<PartialViewResult>  _DetallesMoldeView1(Guid IDMolde)
         {
-            Molde mol = this.repo.BuscarMolde(IDMolde);
+            Molde mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
             ViewData["MOLDE"] = mol;
             return PartialView("Detalles/_DetallesMoldeView1", mol);
