@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Pedido ---------------------------------------------
-        public async Task<List<Pedido>> GetPedidosAsync()
+        public async Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync()
         {
             return await _pedidoService.GetPedidosAsync();
         }
 
-        public async Task<Pedido> BuscarPedidoAsync(Guid id)
+        public async Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid id)
         {
             return await _pedidoService.BuscarPedidoAsync(id);
         }
 
-        public async Task<bool> InsertarPedidoAsync(Pedido pedido)
+        public async Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido pedido)
         {
             return await _pedidoService.InsertarPedidoAsync(pedido);
         }
 
-        public async Task<bool> ActualizarPedidoAsync(Pedido pedido)
+        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
         {
             return await _pedidoService.ActualizarPedidoAsync(pedido);
         }

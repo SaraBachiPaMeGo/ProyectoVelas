@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Cliente ---------------------------------------------
-        public async Task<List<Cliente>> GetClientesAsync()
+        public async Task<CustomApiResponse<List<Cliente>>> GetClientesAsync()
         {
             return await _clienteService.GetClientesAsync();
         }
 
-        public async Task<Cliente> BuscarClienteAsync(Guid id)
+        public async Task<CustomApiResponse<Cliente>> BuscarClienteAsync(Guid id)
         {
             return await _clienteService.BuscarClienteAsync(id);
         }
 
-        public async Task<bool> InsertarClienteAsync(Cliente cliente)
+        public async Task<CustomApiResponse<Cliente>> InsertarClienteAsync(Cliente cliente)
         {
             return await _clienteService.InsertarClienteAsync(cliente);
         }
 
-        public async Task<bool> ActualizarClienteAsync(Cliente cliente)
+        public async Task<CustomApiResponse<Cliente>> ActualizarClienteAsync(Cliente cliente)
         {
             return await _clienteService.ActualizarClienteAsync(cliente);
         }

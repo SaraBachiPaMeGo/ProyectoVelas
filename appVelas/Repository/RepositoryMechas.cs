@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Mecha ---------------------------------------------
-        public async Task<List<Mecha>> GetMechasAsync()
+        public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
         {
             return await _mechaService.GetMechasAsync();
         }
 
-        public async Task<Mecha> BuscarMechaAsync(Guid id)
+        public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid id)
         {
             return await _mechaService.BuscarMechaAsync(id);
         }
 
-        public async Task<bool> InsertarMechaAsync(Mecha mecha)
+        public async Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha mecha)
         {
             return await _mechaService.InsertarMechaAsync(mecha);
         }
 
-        public async Task<bool> ActualizarMechaAsync(Mecha mecha)
+        public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
         {
             return await _mechaService.ActualizarMechaAsync(mecha);
         }

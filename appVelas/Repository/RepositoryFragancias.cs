@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Fragancia ---------------------------------------------
-        public async Task<List<Fragancia>> GetFraganciasAsync()
+        public async Task<CustomApiResponse<List<Fragancia>>> GetFraganciasAsync()
         {
             return await _fraganciaService.GetFraganciasAsync();
         }
 
-        public async Task<Fragancia> BuscarFraganciaAsync(Guid id)
+        public async Task<CustomApiResponse<Fragancia>> BuscarFraganciaAsync(Guid id)
         {
             return await _fraganciaService.BuscarFraganciaAsync(id);
         }
 
-        public async Task<bool> InsertarFraganciaAsync(Fragancia fragancia)
+        public async Task<CustomApiResponse<Fragancia>> InsertarFraganciaAsync(Fragancia fragancia)
         {
             return await _fraganciaService.InsertarFraganciaAsync(fragancia);
         }
 
-        public async Task<bool> ActualizarFraganciaAsync(Fragancia fragancia)
+        public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Fragancia fragancia)
         {
             return await _fraganciaService.ActualizarFraganciaAsync(fragancia);
         }

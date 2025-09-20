@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Molde ---------------------------------------------
-        public async Task<List<Molde>> GetMoldesAsync()
+        public async Task<CustomApiResponse<List<Molde>>> GetMoldesAsync()
         {
             return await _moldeService.GetMoldesAsync();
         }
 
-        public async Task<Molde> BuscarMoldeAsync(Guid id)
+        public async Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid id)
         {
             return await _moldeService.BuscarMoldeAsync(id);
         }
 
-        public async Task<bool> InsertarMoldeAsync(Molde molde)
+        public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde molde)
         {
             return await _moldeService.InsertarMoldeAsync(molde);
         }
 
-        public async Task<bool> ActualizarMoldeAsync(Molde molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
         {
             return await _moldeService.ActualizarMoldeAsync(molde);
         }

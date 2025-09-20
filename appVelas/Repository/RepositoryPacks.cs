@@ -19,22 +19,22 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Pack ---------------------------------------------
-        public async Task<List<Pack>> GetPacksAsync()
+        public async Task<CustomApiResponse<List<Pack>>> GetPacksAsync()
         {
             return await _packService.GetPacksAsync();
         }
 
-        public async Task<Pack> BuscarPackAsync(Guid id)
+        public async Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid id)
         {
             return await _packService.BuscarPackAsync(id);
         }
 
-        public async Task<bool> InsertarPackAsync(Pack pack)
+        public async Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack pack)
         {
             return await _packService.InsertarPackAsync(pack);
         }
 
-        public async Task<bool> ActualizarPackAsync(Pack pack)
+        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
         {
             return await _packService.ActualizarPackAsync(pack);
         }

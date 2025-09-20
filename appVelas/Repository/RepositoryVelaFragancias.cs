@@ -18,12 +18,12 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Fragancia ---------------------------------------------
-        public async Task<List<VelaFragancia>> GetVelaFraganciasAsync()
+        public async Task<CustomApiResponse<List<VelaFragancia>>> GetVelaFraganciasAsync()
         {
             return await _velaFraganciaService.GetFraganciasPorVelaAsync();
         }
 
-        public async Task<bool> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        public async Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
             return await _velaFraganciaService.InsertarVelaFraganciaAsync(velaFragancia);
 

@@ -25,22 +25,22 @@ namespace appVelas.Repository
         // ------------------------------------- VELA ---------------------------------------------
         
 
-        public async Task<List<Vela>> GetVelasAsync()
+        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()
         {
             return await _velaService.GetVelasAsync();
         }
 
-        public async Task<Vela> BuscarVelaAsync(Guid id)
+        public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid id)
         {
             return await _velaService.BuscarVelaAsync(id);
         }
 
-        public async Task<bool> InsertarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
         {
             return await _velaService.InsertarVelaAsync(vela);
         }
 
-        public async Task<bool> ActualizarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
         {
             return await _velaService.ActualizarVelaAsync(vela);
         }

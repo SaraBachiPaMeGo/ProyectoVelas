@@ -18,12 +18,12 @@ namespace appVelas.Repository
         }
 
         // ------------------------------------- Pigmento ---------------------------------------------
-        public async Task<List<VelaPigmento>> GetVelaPigmentosAsync()
+        public async Task<CustomApiResponse<List<VelaPigmento>>> GetVelaPigmentosAsync()
         {
             return await _velaPigmentoService.GetPigmentosPorVelaAsync();
         }
 
-        public async Task<bool> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
         {
             return await _velaPigmentoService.InsertarVelaPigmentoAsync(velaPigmento);
 
