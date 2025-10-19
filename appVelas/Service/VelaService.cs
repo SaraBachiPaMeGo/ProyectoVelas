@@ -19,7 +19,7 @@ namespace appVelas.Service
         public VelaService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _baseUrl = configuration["ApiSettings:BaseUrl"];
+            _baseUrl = "https://localhost:44346/";
 
             _httpClient.BaseAddress = new Uri(_baseUrl);
             _httpClient.DefaultRequestHeaders.Accept.Clear();

@@ -71,7 +71,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesClienteView()
         {
-            List<Cliente> clientes =  await _clienteRepo.GetClientesAsync();
+            var clientes =  await _clienteRepo.GetClientesAsync();
 
             ViewData["Clientes"] = clientes;
             return PartialView("Detalles/_DetallesClienteView", clientes);
@@ -79,7 +79,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesClienteView1(Guid IDCli)
         {
-            Cliente cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
+            var cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
             ViewData["Cliente"] = cli;
             return PartialView("Detalles/_DetallesClienteView1", cli);

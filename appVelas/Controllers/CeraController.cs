@@ -43,7 +43,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _ActCeraView(Guid IDCera)
         {
-            Cera cera = await _ceraRepo.BuscarCeraAsync(IDCera);
+            var cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
             if (cera == null)
             {
@@ -75,7 +75,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesCeraView1(Guid IDCera)
         {
-            Cera cera = await _ceraRepo.BuscarCeraAsync(IDCera);
+            var cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
             ViewData["CERA"] = cera;
             return PartialView("Detalles/_DetallesCeraView1", cera);

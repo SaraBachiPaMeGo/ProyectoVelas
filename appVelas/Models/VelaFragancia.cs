@@ -16,8 +16,7 @@ namespace appVelas.Models
 
         [JsonProperty("Vela")]
         public Vela Vela { get; set; }
-
-        
+                
         [JsonProperty("IDFrag")]
         public Guid IDFrag { get; set; }
 

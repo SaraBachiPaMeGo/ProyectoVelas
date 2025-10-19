@@ -70,7 +70,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesFragView()
         {
-            List<Fragancia> frag = await _fraganciaRepo.GetFraganciasAsync();
+            var frag = await _fraganciaRepo.GetFraganciasAsync();
 
             ViewData["FRAGS"] = frag;
             return PartialView("Detalles/_DetallesFragView", frag);
@@ -78,7 +78,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesFragView1(Guid IDFrag)
         {
-            Fragancia frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
+            var frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
 
             ViewData["FRAGS"] = frag;
             return PartialView("Detalles/_DetallesFragView1", frag);

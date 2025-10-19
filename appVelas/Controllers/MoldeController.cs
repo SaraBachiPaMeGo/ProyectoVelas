@@ -47,7 +47,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _ActMoldeView(Guid IDMolde)
         {
-            Molde mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
+            var mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
             if (mol == null)
             {
@@ -76,7 +76,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesMoldeView()
         {
-            List<Molde> moldes = await _moldeRepo.GetMoldesAsync();
+            var moldes = await _moldeRepo.GetMoldesAsync();
 
             //ViewData["MoldeS"] = Moldes;
             return PartialView("Detalles/_DetallesMoldeView", moldes);
@@ -84,7 +84,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesMoldeView1(Guid IDMolde)
         {
-            Molde mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
+            var mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
             ViewData["MOLDE"] = mol;
             return PartialView("Detalles/_DetallesMoldeView1", mol);

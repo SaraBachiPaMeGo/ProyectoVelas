@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using appVelas.Service;
+using appVelas.Service.Interfaces;
+using appVelas.Services;
 
 namespace appVelas
 {
@@ -30,9 +32,33 @@ namespace appVelas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<ICeraService, CeraService>();
+            services.AddHttpClient<IClienteService, ClienteService>();
+            services.AddHttpClient<IEndurecedorService, EndurecedorService>();
+            services.AddHttpClient<Helper>();
+            services.AddHttpClient<IFraganciaService, FraganciaService>();
+            services.AddHttpClient<IMechaService, MechaService>();
+            services.AddHttpClient<IMoldeService, MoldeService>();
+            services.AddHttpClient<IPackService, PackService>();
+            services.AddHttpClient<IPedidoService, PedidoService>();
+            services.AddHttpClient<IPigmentoService, PigmentoService>();
+            services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>();
+            services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>();
+            services.AddHttpClient<IVelaService, VelaService>();
 
             //services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
             services.AddScoped<RepositoryVelas>();
+            services.AddScoped<RepositoryCeras>();
+            services.AddScoped<RepositoryClientes>();
+            services.AddScoped<RepositoryEndurecedores>();
+            services.AddScoped<RepositoryFragancias>();
+            services.AddScoped<RepositoryMechas>();
+            services.AddScoped<RepositoryMoldes>();
+            services.AddScoped<RepositoryPacks>();
+            services.AddScoped<RepositoryPedidos>();
+            services.AddScoped<RepositoryPigmentos>();
+            services.AddScoped<RepositoryVelaFragancias>();
+            services.AddScoped<RepositoryVelaPigmentos>();
+
             services.AddMvc();
 
             services.AddControllersWithViews(); // Si no lo tienes

@@ -28,5 +28,23 @@ namespace appVelas.Repository
             return await _velaFraganciaService.InsertarVelaFraganciaAsync(velaFragancia);
 
         }
+
+        public async Task<CustomApiResponse<VelaFragancia>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        {
+            return await _velaFraganciaService.ActualizarVelaFraganciaAsync(velaFragancia);
+
+        }
+
+        public async Task<CustomApiResponse<VelaFragancia>> BuscarVelaFraganciaAsync(Guid idVelaFragancia)
+        {
+            return await _velaFraganciaService.BuscarVelaFraganciaAsync(idVelaFragancia);
+
+        }
+
+        public async Task<CustomApiResponse<VelaFragancia>> EliminarRelacionesFraganciaAsync(Guid idVelaFragancia)
+        {
+            return await _velaFraganciaService.EliminarRelacionesFraganciaAsync(idVelaFragancia);
+
+        }
     }
 }

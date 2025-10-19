@@ -28,5 +28,24 @@ namespace appVelas.Repository
             return await _velaPigmentoService.InsertarVelaPigmentoAsync(velaPigmento);
 
         }
+
+        public async Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        {
+            return await _velaPigmentoService.ActualizarVelaPigmentoAsync(velaPigmento);
+
+        }
+
+        public async Task<CustomApiResponse<VelaPigmento>> BuscarVelaPigmentoAsync(Guid idVelaPigmento)
+        {
+            return await _velaPigmentoService.BuscarVelaPigmentoAsync(idVelaPigmento);
+
+        }
+
+        public async Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
+        {
+            return await _velaPigmentoService.EliminarRelacionesPigmentosAsync(idVelaPigmento);
+
+        }
+        
     }
 }

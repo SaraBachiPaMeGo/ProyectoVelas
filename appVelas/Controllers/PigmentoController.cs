@@ -43,7 +43,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _ActPigView(Guid IDPig)
         {
-            Pigmento pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
+            var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
             if (pig == null)
             {
@@ -72,7 +72,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesPigView()
         {
-            List<Pigmento> pig = await _pigmentoRepo.GetPigmentosAsync();
+            var pig = await _pigmentoRepo.GetPigmentosAsync();
 
             //ViewData["PigmentoS"] = Pigmentos;
             return PartialView("Detalles/_DetallesPigView", pig);
@@ -80,7 +80,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesPigView1(Guid IDPig)
         {
-            Pigmento pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
+            var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
             ViewData["PIG"] = pig;
             return PartialView("Detalles/_DetallesPigView1", pig);

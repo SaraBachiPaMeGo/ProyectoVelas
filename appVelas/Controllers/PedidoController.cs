@@ -30,7 +30,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearPedidoView()
         {
-            List<Pedido> listaPedido = await _pedidoRepo.GetPedidosAsync();
+            var listaPedido = await _pedidoRepo.GetPedidosAsync();
 
             ViewData["Pedido"] = listaPedido;
 
@@ -46,7 +46,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _ActPedidoView(Guid IDPedido)
         {
-            Pedido ped = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
+            var ped = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
             if (ped == null)
             {
@@ -61,7 +61,7 @@ namespace appVelas.Controllers
             else
             {
 
-                List<Pedido> listaPedidos = await _pedidoRepo.GetPedidosAsync();
+                var listaPedidos = await _pedidoRepo.GetPedidosAsync();
 
                 ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
@@ -79,7 +79,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesPedidoView()
         {
-            List<Pedido> pedidos = await _pedidoRepo.GetPedidosAsync();
+            var pedidos = await _pedidoRepo.GetPedidosAsync();
 
             //ViewData["PedidoS"] = Pedidos;
             return PartialView("Detalles/_DetallesPedidoView", pedidos);
@@ -87,7 +87,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesPedidoView1(Guid IDPedido)
         {
-            Pedido pedo = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
+            var pedo = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
             ViewData["PEDIDO"] = pedo;
             return PartialView("Detalles/_DetallesPedidoView1", pedo);

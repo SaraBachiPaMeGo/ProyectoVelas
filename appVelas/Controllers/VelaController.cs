@@ -13,10 +13,31 @@ namespace appVelas.Controllers
     public class VelaController : Controller
     {
         private readonly RepositoryVelas _velaRepo;
+        private readonly RepositoryMoldes _moldeRepo;
+        private readonly RepositoryFragancias _fragRepo;
+        private readonly RepositoryPigmentos _pigRepo;
+        private readonly RepositoryCeras _ceraRepo;
+        private readonly RepositoryMechas _mechaRepo;
+        private readonly RepositoryVelaFragancias _vFragRepo;
+        private readonly RepositoryVelaPigmentos _vPigRepo;
+        private readonly RepositoryPedidos _pediRepo;
+        private readonly RepositoryClientes _cliRepo;
 
-        public VelaController(RepositoryVelas velaRepo)
+        public VelaController(RepositoryVelas velaRepo, RepositoryMoldes moldeRepo, RepositoryFragancias fragRepo,
+            RepositoryPigmentos pigRepo, RepositoryCeras ceraRepo, RepositoryMechas mechaRepo, RepositoryVelaFragancias velaFragRepo,
+            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo)
         {
             _velaRepo = velaRepo;
+            _moldeRepo = moldeRepo;
+            _fragRepo = fragRepo;
+            _pigRepo = pigRepo;
+            _ceraRepo = ceraRepo;
+            _mechaRepo = mechaRepo;
+            _vFragRepo = velaFragRepo;
+            _vPigRepo = velaPigRepo;
+            _pediRepo = pediRepo;
+            _cliRepo = cliRepo;
+
         }
 
         public async Task<IActionResult> Index()
@@ -29,11 +50,11 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearVelaView()
         {
-            List<Molde> listaMoldes = await _velaRepo.getMoldes();
-            List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
-            List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
-            List<Cera> listaCera = await _velaRepo.GetCeras();
-            List<Mecha> listaMecha = await _velaRepo.GetMechas();
+            var listaMoldes = await _moldeRepo.GetMoldesAsync();
+            var listaFrag = await _fragRepo.GetFraganciasAsync();
+            var listaPig = await _pigRepo.GetPigmentosAsync();
+            var listaCera = await _ceraRepo.GetCerasAsync();
+            var listaMecha = await _mechaRepo.GetMechasAsync();
 
             //ViewBag.Fragancias = new SelectList(this.context.Fragancia.ToList(), "IDFrag", "FragNombre");
             //ViewBag.Pigmentos = new SelectList(this.context.Pigmento.ToList(), "IDPig", "ColorNombre");
@@ -50,16 +71,25 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos)
         {
+            var velfrag = new CustomApiResponse<VelaFragancia>();
+            var velpig = new CustomApiResponse<VelaPigmento>();
+
             // Insertar fragancias
             foreach (var idFrag in IDFragancias)
             {
-                await _velaRepo.InsertarVelaFragancia(vela.IDVela, idFrag);
+                velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
+
+                await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
             }
+
+            
 
             // Insertar pigmentos
             foreach (var idPig in IDPigmentos)
             {
-                await _velaRepo.InsertarVelaPigmento(vela.IDVela, idPig);
+                velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
+
+                await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
             }
 
             await _velaRepo.InsertarVelaAsync(vela);
@@ -71,7 +101,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _ActVelaView(Guid IDVela)
         {
-            Vela vela = await _velaRepo.BuscarVelaAsync(IDVela);
+            var vela = await _velaRepo.BuscarVelaAsync(IDVela);
 
             if (vela == null)
             {
@@ -85,11 +115,11 @@ namespace appVelas.Controllers
             }
             else
             {
-                List<Molde> listaMoldes = await _velaRepo.GetMoldes();
+                var listaMoldes = await _moldeRepo.GetMoldesAsync();
                 //List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
                 //List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
-                List<Cera> listaCera = await _velaRepo.GetCeras();
-                List<Mecha> listaMecha = await _velaRepo.GetMechas();
+                var listaCera = await _ceraRepo.GetCerasAsync();
+                var listaMecha = await _mechaRepo.GetMechasAsync();
 
                 // Carga todas las fragancias y pigmentos para los selects
                 //ViewBag.Fragancias = new SelectList(context.Fragancia.ToList(), "IDFrag", "FragNombre");
@@ -116,6 +146,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult>  _ActVelaView(Vela vela)
         {
+
             if (vela == null)
                 return PartialView("Error", new
                     ErrorViewModel
@@ -126,22 +157,23 @@ namespace appVelas.Controllers
                 });
 
             // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
-            repo.EliminarRelacionesFragancias(vela.IDVela);
+            await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
+
             if (vela.Fragancias != null)
             {
                 foreach (var idFrag in vela.Fragancias)
                 {
-                    repo.InsertarVelaFragancia(vela.IDVela, idFrag.IDFrag); // IDFragancia es el GUID dentro del objeto
+                    await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
                 }
             }
 
-            repo.EliminarRelacionesPigmentos(vela.IDVela);
+            await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
 
             if (vela.Pigmentos != null)
             {
                 foreach (var idPig in vela.Pigmentos)
                 {
-                    repo.InsertarVelaPigmento(vela.IDVela, idPig.IDPig); // o como se llame la propiedad del GUID dentro del objeto
+                    await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
                 }
             }
 
@@ -152,13 +184,13 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesVelaView()
         {
-            List<Vela> velas = await _velaRepo.GetVelasAsync();
+            var velas = await _velaRepo.GetVelasAsync();
 
-            List<Molde> listaMoldes = await _velaRepo.GetMoldes();
-            List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
-            List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
-            List<Cera> listaCera = await _velaRepo.GetCeras();
-            List<Mecha> listaMecha = await _velaRepo.GetMechas();
+            var listaMoldes = await _moldeRepo.GetMoldesAsync();
+            var listaFrag = await _fragRepo.GetFraganciasAsync();
+            var listaPig = await _pigRepo.GetPigmentosAsync();
+            var listaCera = await _ceraRepo.GetCerasAsync();
+            var listaMecha = await _mechaRepo.GetMechasAsync();
 
             ViewData["Moldes"] = listaMoldes;
             ViewData["Frag"] = listaFrag;
@@ -172,15 +204,16 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesVelaView1(Guid IDVela)
         {
-            Vela vela = await _velaRepo.BuscarVelaAsync(IDVela);
-            Molde Moldes = await _velaRepo.BuscarMolde(vela.IDMolde);
-            Fragancia Frag = await _velaRepo.BuscarFragancia(vela.IDFrag);
-            Pigmento Pig = await _velaRepo.BuscarPigmento(vela.IDPig);
-            Cera Cera = await _velaRepo.BuscarCera(vela.IDCera);
-            Mecha Mecha = await _velaRepo.BuscarMecha(vela.IDMecha);
-            Pedido pedi = await _velaRepo.BuscarPedido(vela.IDPedido);
-            Guid cli = pedi.IDCliente;
-            string clien = await _velaRepo.BuscarCliente(cli).Nombre;
+            var vela = await _velaRepo.BuscarVelaAsync(IDVela);
+            var Moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde);
+            var Frag = await _fragRepo.BuscarFraganciaAsync(vela.Data.IDFrag);
+            var Pig = await _pigRepo.BuscarPigmentoAsync(vela.Data.IDPig);
+            var Cera = await _ceraRepo.BuscarCeraAsync(vela.Data.IDCera);
+            var Mecha = await _mechaRepo.BuscarMechaAsync(vela.Data.IDMecha);
+            var pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido);
+            Guid id = pedi.Data.IDCliente;
+
+            CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(id);
 
             ViewData["Moldes"] = Moldes;
             ViewData["Frag"] = Frag;

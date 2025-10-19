@@ -41,7 +41,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _ActMechaView(Guid IDMecha)
         {
-            Mecha mecha = await _mechaRepo.BuscarMechaAsync(IDMecha);
+            var mecha = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
             if (mecha == null)
             {
@@ -70,7 +70,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesMechaView()
         {
-            List<Mecha> mechas = await _mechaRepo.GetMechasAsync();
+            var mechas = await _mechaRepo.GetMechasAsync();
 
             //ViewData["MechaS"] = Mechas;
             return PartialView("Detalles/_DetallesMechaView", mechas);
@@ -78,7 +78,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _DetallesMechaView1(Guid IDMecha)
         {
-            Mecha me = await _mechaRepo.BuscarMechaAsync(IDMecha);
+            var me = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
             ViewData["MECHA"] = me;
             return PartialView("Detalles/_DetallesMechaView1", me);

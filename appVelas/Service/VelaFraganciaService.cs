@@ -27,6 +27,32 @@ namespace appVelas.Service
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        public async Task<CustomApiResponse<VelaFragancia>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        {
+            var response = await Helper.ParseApiResponse<VelaFragancia>(
+               await _httpClient.PutAsJsonAsync("/api/ActualizarVelaFragancia", velaFragancia)
+           );
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaFragancia>> BuscarVelaFraganciaAsync(Guid idVelaFragancia)
+        {
+            var response = await Helper.ParseApiResponse<VelaFragancia>(
+               await _httpClient.GetAsync($"/api/BuscarVelaFragancia/{idVelaFragancia}")
+           );
+
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaFragancia>> EliminarRelacionesFraganciaAsync(Guid idvelaFragancia)
+        {
+            var response = await Helper.ParseApiResponse<VelaFragancia>(
+              await _httpClient.GetAsync($"/api/EliminarVelaFragancia/{idvelaFragancia}")
+          );
+
+            return response;
+        }
+
         public async Task<CustomApiResponse<List<VelaFragancia>>> GetFraganciasPorVelaAsync()
         {
             var response = await Helper.ParseApiResponse<List<VelaFragancia>>(
@@ -44,5 +70,6 @@ namespace appVelas.Service
 
             return response;
         }
+
     }
 }

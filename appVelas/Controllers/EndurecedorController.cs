@@ -47,7 +47,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _ActEndurecedorView(Guid IDEnd)
         {
-            Endurecedor end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
+            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
             if (end == null)
             {
@@ -76,7 +76,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesEndurecedorView()
         {
-            List<Endurecedor> end =  await _endurecedorRepo.GetEndurecedorsAsync();
+            var end =  await _endurecedorRepo.GetEndurecedorsAsync();
 
             //ViewData["EndurecedorS"] = Endurecedors;
             return PartialView("Detalles/_DetallesEndurecedorView", end);
@@ -84,7 +84,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesEndurecedorView1(Guid IDEnd)
         {
-            Endurecedor end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
+            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
             ViewData["END"] = end;
             return PartialView("Detalles/_DetallesEndurecedorView1", end);

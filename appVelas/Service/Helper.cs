@@ -1,4 +1,5 @@
 ﻿using appVelas.Models;
+using appVelas.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace appVelas.Service
                     Error = new ErrorViewModel
                     {
                         RequestId = "EmptyResponse",
-                        Mensaje = "La API devolvió una respuesta vacía"
+                        Mensaje = "La API devolvió una respuesta vacía, no ha podido 'Parsearlo'"
                     }
                 };
             }

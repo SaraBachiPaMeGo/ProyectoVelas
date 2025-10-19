@@ -35,11 +35,39 @@ namespace appVelas.Service
             return response;
         }
 
+
         public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
         {
             var response = await Helper.ParseApiResponse<VelaPigmento>(
                 await _httpClient.PostAsJsonAsync("/api/InsertarVelaPigmento", velaPigmento)
             );
+
+            return response;
+        }
+
+
+        public async Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        {
+            var response = await Helper.ParseApiResponse<VelaPigmento>(
+             await _httpClient.PutAsJsonAsync("/api/ActualizarVelaPigmento", velaPigmento)
+         );
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
+        {
+            var response = await Helper.ParseApiResponse<VelaPigmento>(
+              await _httpClient.GetAsync($"/api/EliminarVelaPigmento/{idVelaPigmento}")
+          );
+
+            return response;
+        }
+
+        public async Task<CustomApiResponse<VelaPigmento>> BuscarVelaPigmentoAsync(Guid idVelaPigmento)
+        {
+            var response = await Helper.ParseApiResponse<VelaPigmento>(
+               await _httpClient.GetAsync($"/api/BuscarVelaPigmento/{idVelaPigmento}")
+           );
 
             return response;
         }

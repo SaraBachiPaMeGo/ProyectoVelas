@@ -18,6 +18,9 @@ namespace appVelas.Models
         [JsonProperty("VelaNombre")]
         public string VelaNombre { get; set; }
 
+        [JsonProperty("Image")]
+        public string Image { get; set; }
+
         [JsonProperty("Observ")]
         public string Observ { get; set; }
 
