@@ -16,7 +16,7 @@ namespace appVelas.Service
 
         public MoldeService(HttpClient httpClient)
         {
-            Helper.ConexionApi(httpClient);
+             
             _httpClient = httpClient;
         }
 

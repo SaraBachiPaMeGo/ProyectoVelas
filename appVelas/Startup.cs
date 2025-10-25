@@ -16,6 +16,7 @@ using appVelas.Service;
 using appVelas.Service.Interfaces;
 using appVelas.Services;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace appVelas
 {
@@ -32,11 +33,41 @@ namespace appVelas
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<RepositoryVelas>();
+            services.AddScoped<RepositoryCeras>();
+            services.AddScoped<RepositoryClientes>();
+            services.AddScoped<RepositoryEndurecedores>();
+            services.AddScoped<RepositoryFragancias>();
+            services.AddScoped<RepositoryMechas>();
+            services.AddScoped<RepositoryMoldes>();
+            services.AddScoped<RepositoryPacks>();
+            services.AddScoped<RepositoryPedidos>();
+            services.AddScoped<RepositoryPigmentos>();
+            services.AddScoped<RepositoryVelaFragancias>();
+            services.AddScoped<RepositoryVelaPigmentos>();
+
+            // ✅ Configuración global del HttpClientAction<IServiceProvider, HttpClient> configureClient = (sp, client) =>
+
+            string _baseUrl =  "https://localhost:44346/api"; //Configuration["ApiSettings: BaseUrl"] ??
+
+            services.AddHttpClient("ApiClient", client =>
+            {
+                client.BaseAddress = new Uri(Configuration["ApiSettings: BaseUrl"]);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            });
+
             services.AddHttpClient<ICeraService, CeraService>();
             services.AddHttpClient<IClienteService, ClienteService>();
             services.AddHttpClient<IEndurecedorService, EndurecedorService>();
             services.AddHttpClient<IFraganciaService, FraganciaService>();
-            services.AddHttpClient<IMechaService, MechaService>();
+            services.AddTransient<IMechaService, MechaService>();
             services.AddHttpClient<IMoldeService, MoldeService>();
             services.AddHttpClient<IPackService, PackService>();
             services.AddHttpClient<IPedidoService, PedidoService>();
@@ -44,33 +75,16 @@ namespace appVelas
             services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>();
             services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>();
             services.AddHttpClient<IVelaService, VelaService>();
-
-            //// ✅ Configuración global del HttpClient
-            //Action<IServiceProvider, HttpClient> configureClient = (sp, client) =>
-            //{
-            //    client.BaseAddress = new Uri(Configuration["ApiSettings:BaseUrl"]);
-            //    client.DefaultRequestHeaders.Accept.Add(
-            //        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            //};
+                 
 
             // ✅ Manejador genérico que ignora certificados locales
-           
-            services.AddHttpClient("ApiClient", client =>
+            Func<HttpClientHandler> handler = () => new HttpClientHandler
             {
-                client.BaseAddress = new Uri(Configuration["ApiSettings:BaseUrl"]);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-            })
-            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-            {
-                // Ignora errores SSL SOLO en desarrollo
                 ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-            });
-
-
+            };
 
             // ✅ Registramos todos los servicios que usan HttpClient
+
             //services.AddHttpClient<IMechaService, MechaService>(configureClient)
             //        .ConfigurePrimaryHttpMessageHandler(handler);
             //services.AddHttpClient<IVelaService, VelaService>(configureClient)
@@ -89,22 +103,10 @@ namespace appVelas
             //        .ConfigurePrimaryHttpMessageHandler(handler);
             //services.AddHttpClient<IPackService, PackService>(configureClient)
             //        .ConfigurePrimaryHttpMessageHandler(handler);
-
-
-
-            //services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
-            services.AddScoped<RepositoryVelas>();
-            services.AddScoped<RepositoryCeras>();
-            services.AddScoped<RepositoryClientes>();
-            services.AddScoped<RepositoryEndurecedores>();
-            services.AddScoped<RepositoryFragancias>();
-            services.AddScoped<RepositoryMechas>();
-            services.AddScoped<RepositoryMoldes>();
-            services.AddScoped<RepositoryPacks>();
-            services.AddScoped<RepositoryPedidos>();
-            services.AddScoped<RepositoryPigmentos>();
-            services.AddScoped<RepositoryVelaFragancias>();
-            services.AddScoped<RepositoryVelaPigmentos>();
+            //services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>(configureClient)
+            //       .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>(configureClient)
+            //       .ConfigurePrimaryHttpMessageHandler(handler);
 
             services.AddMvc();
 

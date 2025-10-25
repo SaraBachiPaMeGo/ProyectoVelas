@@ -16,7 +16,7 @@ namespace appVelas.Service
 
         public VelaPigmentoService(HttpClient httpClient)
         {
-            Helper.ConexionApi(httpClient);
+             
             _httpClient = httpClient;
         }
 

@@ -14,39 +14,37 @@ namespace appVelas.Service
     {
         private readonly HttpClient _httpClient;
 
-        public MechaService(HttpClient httpClient)
+        public MechaService()
         {
-            Helper.ConexionApi(httpClient);
-            _httpClient = httpClient;
         }
-
         public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
         {
-            //string url = _httpClient.BaseAddress.ToString();
             try
             {
-                var mechas = await _httpClient.GetAsync("/Mecha/GetMechas");
-                var response = await Helper.ParseApiResponse<List<Mecha>>(
-                mechas
-            );
+                using (HttpClient client = new HttpClient())
+                {
 
+                    client.BaseAddress = new Uri("https://localhost:44346/api");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                           new MediaTypeWithQualityHeaderValue("application/json"));
 
-                Console.WriteLine($"StatusCode: {mechas.StatusCode}");
+                    var response = await Helper.ParseApiResponse<List<Mecha>>(
+                        await client.GetAsync($"Mecha/GetMechas")
+                    );
 
-                var content = await mechas.Content.ReadAsStringAsync();
-                Console.WriteLine($"Contenido: {content}");
+                    return response;
 
-
-                return response;
+                }
             }
             catch (Exception e)
             {
-                
+
                 string url2 = _httpClient.BaseAddress.ToString();
 
-                throw ; 
+                throw;
             }
-                        
+                                                
         }
 
         public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha)

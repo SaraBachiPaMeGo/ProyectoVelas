@@ -17,7 +17,7 @@ namespace appVelas.Service
 
         public VelaFraganciaService(HttpClient httpClient)
         {
-            Helper.ConexionApi(httpClient);
+             
             _httpClient = httpClient;
         }
 

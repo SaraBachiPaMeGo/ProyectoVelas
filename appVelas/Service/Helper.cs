@@ -14,17 +14,17 @@ namespace appVelas.Service
     public class Helper
     {
 
-        public static HttpClient ConexionApi(HttpClient _httpClient)
-        {
-            string _baseUrl = "https://localhost:44346/api";//configuration["ApiSettings: BaseUrl"];
+        //public static HttpClient ConexionApi(HttpClient _httpClient)
+        //{
+        //    string _baseUrl = "https://localhost:44346/api";//configuration["ApiSettings: BaseUrl"];
 
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+        //    _httpClient.BaseAddress = new Uri(_baseUrl);
+        //    _httpClient.DefaultRequestHeaders.Accept.Clear();
+        //    _httpClient.DefaultRequestHeaders.Accept.Add(
+        //        new MediaTypeWithQualityHeaderValue("application/json"));
 
-            return _httpClient;
-        }
+        //    return _httpClient;
+        //}
 
         public static async Task<CustomApiResponse<T>> ParseApiResponse<T>(HttpResponseMessage response)
         {

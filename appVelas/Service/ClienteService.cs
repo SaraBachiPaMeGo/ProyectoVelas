@@ -17,7 +17,7 @@ namespace appVelas.Services
 
         public ClienteService(HttpClient httpClient)
         {
-            Helper.ConexionApi(httpClient);
+             
             _httpClient = httpClient;
         }
 
