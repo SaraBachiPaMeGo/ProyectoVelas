@@ -1,0 +1,47 @@
+﻿@model IEnumerable<appVelas.Models.Pedido>
+
+<p>
+     
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPedi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPedi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCliente)
+            </td>
+            <td>
+                @Html.ActionLink("Pedido", "ActualizarView", new { id = item.IDPedido, vista = "Pedido" }) |
+                @Html.ActionLink("Pedido", "DetallesView1", new { id = item.IDPedido, vista = "Pedido" }) @*|
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

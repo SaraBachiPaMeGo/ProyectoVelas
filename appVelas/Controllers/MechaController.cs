@@ -18,7 +18,7 @@ namespace appVelas.Controllers
         {
             _mechaRepo = MechaService;
         }
-
+       [Route("/Mecha/Index")]
         public async Task<IActionResult> Index()
         {
             var Mechas = await _mechaRepo.GetMechasAsync();
@@ -26,10 +26,17 @@ namespace appVelas.Controllers
         }
 
         // ------------------------------------- MECHA ---------------------------------------------
-
+        [HttpGet]
         public async Task<IActionResult> _CrearMechaView()
         {
-            return PartialView("Crear/_CrearMechaView");
+            try
+            {
+                return PartialView("_CrearMechaView");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
 
         [HttpPost]
@@ -56,7 +63,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDMecha"] = IDMecha;
-                return PartialView("Actualizar/_ActMechaView", mecha);
+                return PartialView("_ActMechaView", mecha);
             }
         }
 

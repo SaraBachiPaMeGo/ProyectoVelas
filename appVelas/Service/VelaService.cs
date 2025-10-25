@@ -14,17 +14,11 @@ namespace appVelas.Service
     public class VelaService : IVelaService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
 
-        public VelaService(HttpClient httpClient, IConfiguration configuration)
+        public VelaService(HttpClient httpClient)
         {
+            Helper.ConexionApi(httpClient);
             _httpClient = httpClient;
-            _baseUrl = "https://localhost:44346/";
-
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()

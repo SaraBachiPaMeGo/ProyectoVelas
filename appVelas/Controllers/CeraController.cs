@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public PartialViewResult _CrearCeraView()
         {
-            return PartialView("Crear/_CrearCeraView");
+            return PartialView("Cera/_CrearCeraView");
         }
 
         [HttpPost]
@@ -57,7 +57,7 @@ namespace appVelas.Controllers
             }
             else
                 ViewData["IDCera"] = IDCera;
-            return PartialView("Actualizar/_ActCeraView", cera);
+            return PartialView("Cera/_ActCeraView", cera);
         }
 
         [HttpPost]

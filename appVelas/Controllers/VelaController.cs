@@ -65,7 +65,7 @@ namespace appVelas.Controllers
             ViewData["Cera"] = listaCera;
             ViewData["Mecha"] = listaMecha;
 
-            return PartialView("Crear/_CrearVelaView");
+            return PartialView("Vela/_CrearVelaView");
         }
 
         [HttpPost]
@@ -139,7 +139,7 @@ namespace appVelas.Controllers
 
                 ViewData["IDVela"] = IDVela;
 
-                return PartialView("Actualizar/_ActVelaView", vela);
+                return PartialView("Vela/_ActVelaView", vela);
             }
         }
 

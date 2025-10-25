@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _CrearEndurecedorView()
         {
-            return PartialView("Crear/_CrearEndurecedorView");
+            return PartialView("Endurecedor/_CrearEndurecedorView");
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace appVelas.Controllers
             {
                 ViewData["IDEnd"] = IDEnd;
             }
-            return PartialView("Actualizar/_ActEndurecedorView", end);
+            return PartialView("Endurecedor/_ActEndurecedorView", end);
         }
 
         [HttpPost]

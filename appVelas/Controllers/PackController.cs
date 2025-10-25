@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult>  _CrearPackView()
         {
-            return PartialView("Crear/_CrearPackView");
+            return PartialView("Pack/_CrearPackView");
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace appVelas.Controllers
             {
                 ViewData["IDPack"] = IDPack;
             }
-            return PartialView("Actualizar/_ActPackView", pack);
+            return PartialView("Pack/_ActPackView", pack);
         }
 
         [HttpPost]

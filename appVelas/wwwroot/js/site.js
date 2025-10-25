@@ -14,7 +14,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
     switch (tipoVista) {
         case 'vela':
             $.ajax({
-                url: '/Home/_'+http+'VelaView', 
+                url: '/Vela/_'+http+'VelaView', 
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data); 
@@ -29,7 +29,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 contenedor = 'miContenedor'
             }
             $.ajax({
-                url: '/Home/_' + http +'PedidoView', 
+                url: '/Pedido/_' + http +'PedidoView', 
                 type: 'GET',
                 success: function (data) {
                     $('#' + contenedor).html(data); 
@@ -41,7 +41,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'cliente':
             $.ajax({
-                url: '/Home/_' + http +'ClienteView',
+                url: '/Cliente/_' + http +'ClienteView',
                 type: 'GET',
                 success: function (data) {
                     $('#' + contenedor).html(data);
@@ -53,7 +53,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'molde':
             $.ajax({
-                url: '/Home/_' + http +'MoldeView', 
+                url: '/Molde/_' + http +'MoldeView', 
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data); 
@@ -65,7 +65,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'frag':
             $.ajax({
-                url: '/Home/_' + http +'FragView',
+                url: '/Fragancia/_' + http +'FragView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);
@@ -77,7 +77,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'pig':
             $.ajax({
-                url: '/Home/_' + http +'PigView',
+                url: '/Pigmento/_' + http +'PigView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);
@@ -89,19 +89,19 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'mecha':
             $.ajax({
-                url: '/Home/_' + http +'MechaView',
+                url: '/Mecha/Index',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);
                 },
                 error: function () {
-                    alert('Error al cargar la vista parcial.');
+                    alert();
                 }
             });
             break;
         case 'cera':
             $.ajax({
-                url: '/Home/_' + http +'CeraView',
+                url: '/Cera/_' + http +'CeraView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);
@@ -113,7 +113,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'end':
             $.ajax({
-                url: '/Home/_' + http + 'EndurecedorView',
+                url: '/Endurecedor/_' + http + 'EndurecedorView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);
@@ -125,7 +125,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'pack':
             $.ajax({
-                url: '/Home/_' + http + 'PackView',
+                url: '/Pack/_' + http + 'PackView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);

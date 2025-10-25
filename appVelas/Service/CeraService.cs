@@ -14,17 +14,11 @@ namespace appVelas.Service
     public class CeraService : ICeraService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
 
-        public CeraService(HttpClient httpClient, IConfiguration configuration)
+        public CeraService(HttpClient httpClient)
         {
+            Helper.ConexionApi(httpClient);
             _httpClient = httpClient;
-            _baseUrl = configuration["ApiSettings:BaseUrl"];
-
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<CustomApiResponse<List<Cera>>> GetCerasAsync()

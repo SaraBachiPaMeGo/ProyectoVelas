@@ -13,17 +13,11 @@ namespace appVelas.Service
     public class EndurecedorService : IEndurecedorService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
 
-        public EndurecedorService(HttpClient httpClient, IConfiguration configuration)
+        public EndurecedorService(HttpClient httpClient)
         {
+            Helper.ConexionApi(httpClient);
             _httpClient = httpClient;
-            _baseUrl = configuration["ApiSettings:BaseUrl"];
-
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<CustomApiResponse<List<Endurecedor>>> GetEndurecedorsAsync()

@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearMoldeView()
         {
-            return PartialView("Crear/_CrearMoldeView",  new Molde());
+            return PartialView("Molde/_CrearMoldeView",  new Molde());
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDMolde"] = IDMolde;
-                return PartialView("Actualizar/_CrearMoldeView", await _moldeRepo.BuscarMoldeAsync(IDMolde));
+                return PartialView("Molde/_CrearMoldeView", await _moldeRepo.BuscarMoldeAsync(IDMolde));
             }
         }
 

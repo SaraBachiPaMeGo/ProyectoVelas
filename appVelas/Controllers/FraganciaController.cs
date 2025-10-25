@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearFragView()
         {
-            return PartialView("Crear/_CrearFragView",  new Fragancia());
+            return PartialView("Fragancia/_CrearFragView",  new Fragancia());
         }
 
         [HttpPost]
@@ -56,7 +56,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDFrag"] = IDFrag;
-                return PartialView("Actualizar/_ActFragView", frag);
+                return PartialView("Fragancia/_ActFragView", frag);
             }
         }
 

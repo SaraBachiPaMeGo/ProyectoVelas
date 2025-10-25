@@ -34,7 +34,7 @@ namespace appVelas.Controllers
 
             ViewData["Pedido"] = listaPedido;
 
-            return PartialView("Crear/_CrearPedidoView", new Pedido());
+            return PartialView("Pedido/_CrearPedidoView", new Pedido());
         }
 
         [HttpPost]
@@ -65,7 +65,7 @@ namespace appVelas.Controllers
 
                 ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
-                return PartialView("Actualizar/_ActPedidoView", ped);
+                return PartialView("Pedido/_ActPedidoView", ped);
             }
         }
 
@@ -74,7 +74,7 @@ namespace appVelas.Controllers
         {
             //await _pedidoRepo.ActualizarPedido(pedido);
 
-            return PartialView("Actualizar/_ActPedidoView", pedido);
+            return PartialView("Pedido/_ActPedidoView", pedido);
         }
 
         public async Task<PartialViewResult>  _DetallesPedidoView()

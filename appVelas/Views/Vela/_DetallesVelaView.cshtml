@@ -1,0 +1,97 @@
+﻿@model IEnumerable<appVelas.Models.Vela>
+@{
+    List<Mecha> mechas = ViewData["Mecha"] as List<Mecha>;
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde>;
+    List<Fragancia> frag = ViewData["Frag"] as List<Fragancia>;
+    List<Pigmento> pig = ViewData["Pig"] as List<Pigmento>;
+    List<Cera> cera = ViewData["Cera"] as List<Cera>;
+}
+<p>
+     
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VelaNombre)
+            </th>
+            <th>
+                Fragancia
+            </th>
+            <th>
+                Pigmento
+            </th>
+            <th>
+                Molde
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Coste)
+            </th>
+            @*<th>
+            Es un pedido
+        </th>*@
+            <th>
+                Mecha
+            </th>
+            <th>
+                Cera
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaReal)
+            </th>
+            <th>
+                Fecha venta
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VelaNombre)
+            </td>
+
+            <td>
+                @frag.FirstOrDefault(f => f.IDFrag == item.IDFrag)?.FragNombre
+
+            </td>
+            <td>
+                @pig.FirstOrDefault(f => f.IDPig == item.IDPig)?.ColorNombre
+            </td>
+            <td>
+                @moldes.FirstOrDefault(f => f.IDMolde == item.IDMolde)?.MoldeNombre
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Coste)
+            </td>
+            @*<td>
+            @pedis.FirstOrDefault(f => f.IDPedido == item.IDPedido).FragNombre
+
+        </td>*@
+        <td>
+            @mechas.FirstOrDefault(f => f.IDMecha == item.IDMecha)?.Tipo
+
+        </td>
+        <td>
+            @cera.FirstOrDefault(f => f.IDCera == item.IDCera)?.Tipo
+
+        </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaVenta)
+            </td>
+            <td>
+                <span>@Html.ActionLink("Vela", "ActualizarView", new { id = item.IDVela, vista = "Vela" })</span>  |
+                @Html.ActionLink("Vela", "DetallesView1", new { id = item.IDVela, vista = "Vela" })
+                @*@Html.ActionLink("Vela", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

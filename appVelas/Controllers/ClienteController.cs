@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearClienteView()
         {
-            return PartialView("Crear/_CrearClienteView",  new Cliente());
+            return PartialView("Cliente/_CrearClienteView",  new Cliente());
         }
 
         [HttpPost]
@@ -57,7 +57,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDCli"] = IDCli;
-                return PartialView("Actualizar/_ActClienteView", cli);
+                return PartialView("Cliente/_ActClienteView", cli);
             }
         }
 

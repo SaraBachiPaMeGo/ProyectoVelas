@@ -14,17 +14,11 @@ namespace appVelas.Services
     public class ClienteService : IClienteService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
 
-        public ClienteService(HttpClient httpClient, IConfiguration configuration)
+        public ClienteService(HttpClient httpClient)
         {
+            Helper.ConexionApi(httpClient);
             _httpClient = httpClient;
-            _baseUrl = configuration["ApiSettings:BaseUrl"];
-
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<CustomApiResponse<List<Cliente>>> GetClientesAsync()

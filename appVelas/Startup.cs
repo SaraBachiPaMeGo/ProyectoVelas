@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using appVelas.Service;
 using appVelas.Service.Interfaces;
 using appVelas.Services;
+using System.Net.Http;
 
 namespace appVelas
 {
@@ -34,7 +35,6 @@ namespace appVelas
             services.AddHttpClient<ICeraService, CeraService>();
             services.AddHttpClient<IClienteService, ClienteService>();
             services.AddHttpClient<IEndurecedorService, EndurecedorService>();
-            services.AddHttpClient<Helper>();
             services.AddHttpClient<IFraganciaService, FraganciaService>();
             services.AddHttpClient<IMechaService, MechaService>();
             services.AddHttpClient<IMoldeService, MoldeService>();
@@ -44,6 +44,53 @@ namespace appVelas
             services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>();
             services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>();
             services.AddHttpClient<IVelaService, VelaService>();
+
+            //// ✅ Configuración global del HttpClient
+            //Action<IServiceProvider, HttpClient> configureClient = (sp, client) =>
+            //{
+            //    client.BaseAddress = new Uri(Configuration["ApiSettings:BaseUrl"]);
+            //    client.DefaultRequestHeaders.Accept.Add(
+            //        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            //};
+
+            // ✅ Manejador genérico que ignora certificados locales
+           
+            services.AddHttpClient("ApiClient", client =>
+            {
+                client.BaseAddress = new Uri(Configuration["ApiSettings:BaseUrl"]);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                // Ignora errores SSL SOLO en desarrollo
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+            });
+
+
+
+            // ✅ Registramos todos los servicios que usan HttpClient
+            //services.AddHttpClient<IMechaService, MechaService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IVelaService, VelaService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<ICeraService, CeraService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IMoldeService, MoldeService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IFraganciaService, FraganciaService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IPigmentoService, PigmentoService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IClienteService, ClienteService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IEndurecedorService, EndurecedorService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+            //services.AddHttpClient<IPackService, PackService>(configureClient)
+            //        .ConfigurePrimaryHttpMessageHandler(handler);
+
+
 
             //services.AddDbContext<Contexto>(options => options.UseSqlServer(cadena));
             services.AddScoped<RepositoryVelas>();
@@ -68,6 +115,7 @@ namespace appVelas
             //services.AddAuthentication(helper.GetAuthOptions()).
             //    AddJwtBearer(helper.GetJwtOptions());
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

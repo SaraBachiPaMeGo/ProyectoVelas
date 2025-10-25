@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearPigView()
         {
-            return PartialView("Crear/_CrearPigView");
+            return PartialView("Pigmento/_CrearPigView");
         }
 
         [HttpPost]
@@ -58,7 +58,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDPig"] = IDPig;
-                return PartialView("Actualizar/_ActPigView", pig);
+                return PartialView("Pigmento/_ActPigView", pig);
             }
         }
 

@@ -13,32 +13,46 @@ namespace appVelas.Service
     public class MechaService : IMechaService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
 
-        public MechaService(HttpClient httpClient, IConfiguration configuration)
+        public MechaService(HttpClient httpClient)
         {
+            Helper.ConexionApi(httpClient);
             _httpClient = httpClient;
-            _baseUrl = configuration["ApiSettings:BaseUrl"];
-
-            _httpClient.BaseAddress = new Uri(_baseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
         {
-            var response = await Helper.ParseApiResponse<List<Mecha>>(
-                await _httpClient.GetAsync("/api/GetMechas")
+            //string url = _httpClient.BaseAddress.ToString();
+            try
+            {
+                var mechas = await _httpClient.GetAsync("/Mecha/GetMechas");
+                var response = await Helper.ParseApiResponse<List<Mecha>>(
+                mechas
             );
 
-            return response;
+
+                Console.WriteLine($"StatusCode: {mechas.StatusCode}");
+
+                var content = await mechas.Content.ReadAsStringAsync();
+                Console.WriteLine($"Contenido: {content}");
+
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                
+                string url2 = _httpClient.BaseAddress.ToString();
+
+                throw ; 
+            }
+                        
         }
 
         public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha)
         {
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.GetAsync($"/api/BuscarMecha/{idMecha}")
+                await _httpClient.GetAsync($"Mecha/BuscarMecha/{idMecha}")
             );
 
             return response;
@@ -47,7 +61,7 @@ namespace appVelas.Service
         public async Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha mecha)
         {
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarMecha", mecha)
+                await _httpClient.PostAsJsonAsync("Mecha/InsertarMecha", mecha)
             );
 
             return response;
@@ -56,7 +70,7 @@ namespace appVelas.Service
         public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
         {
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarMecha", mecha)
+                await _httpClient.PutAsJsonAsync("Mecha/ActualizarMecha", mecha)
             );
 
             return response;
