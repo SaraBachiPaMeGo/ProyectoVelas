@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync()
         {
+            var respons = await _httpClient.GetAsync("/api/Pedido/GetPedidos");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Pedido>>(
-                await _httpClient.GetAsync("/api/GetPedidos")
+                dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid idPedido)
         {
+            var respons = await _httpClient.GetAsync($"/api/Pedido/BuscarPedido/{idPedido}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pedido>(
-                await _httpClient.GetAsync($"/api/BuscarPedido/{idPedido}")
+              dos
             );
 
             return response;
@@ -40,8 +48,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido pedido)
         {
+            var respons = await _httpClient.PostAsJsonAsync("/api/Pedido/InsertarPedido", pedido);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pedido>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarPedido", pedido)
+              dos
             );
 
             return response;
@@ -49,8 +61,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
         {
+            var respons = await _httpClient.PutAsJsonAsync("/api/Pedido/ActualizarPedido", pedido);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pedido>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarPedido", pedido)
+              dos
             );
 
             return response;

@@ -23,8 +23,12 @@ namespace appVelas.Services
 
         public async Task<CustomApiResponse<List<Cliente>>> GetClientesAsync()
         {
+            var respons = await _httpClient.GetAsync($"/api/Cliente/GetClientes");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Cliente>>(
-                await _httpClient.GetAsync("/api/GetClientes")
+              dos
             );
 
             return response;
@@ -32,8 +36,12 @@ namespace appVelas.Services
 
         public async Task<CustomApiResponse<Cliente>> BuscarClienteAsync(Guid idCliente)
         {
+            var respons = await _httpClient.GetAsync($"/api/Cliente/BuscarCliente/{idCliente}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Cliente>(
-                await _httpClient.GetAsync($"/api/BuscarCliente/{idCliente}")
+              dos
             );
 
             return response;
@@ -41,8 +49,12 @@ namespace appVelas.Services
 
         public async Task<CustomApiResponse<Cliente>> InsertarClienteAsync(Cliente cliente)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Cliente/InsertarCliente", cliente);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Cliente>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarCliente", cliente)
+              dos
             );
 
             return response;
@@ -50,8 +62,12 @@ namespace appVelas.Services
 
         public async Task<CustomApiResponse<Cliente>> ActualizarClienteAsync(Cliente cliente)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Cliente/ActualizarCliente", cliente);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Cliente>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarCliente", cliente)
+              dos
             );
 
             return response;

@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pigmento>>> GetPigmentosAsync()
         {
+            var respons = await _httpClient.GetAsync("/api/Pigmento/GetPigmentos");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Pigmento>>(
-                await _httpClient.GetAsync("/api/GetPigmentos")
+                dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pigmento>> BuscarPigmentoAsync(Guid idPigmento)
         {
+            var respons = await _httpClient.GetAsync($"/api/Pigmento/BuscarPigmento/{idPigmento}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pigmento>(
-                await _httpClient.GetAsync($"/api/BuscarPigmento/{idPigmento}")
+                dos
             );
 
             return response;
@@ -40,8 +48,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pigmento>> InsertarPigmentoAsync(Pigmento pigmento)
         {
+            var respons = await _httpClient.PostAsJsonAsync("/api/Pigmento/InsertarPigmento", pigmento);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pigmento>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarPigmento", pigmento)
+                dos
             );
 
             return response;
@@ -49,8 +61,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento pigmento)
         {
+            var respons = await _httpClient.PutAsJsonAsync("/api/Pigmento/ActualizarPigmento", pigmento);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pigmento>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarPigmento", pigmento)
+                dos
             );
 
             return response;

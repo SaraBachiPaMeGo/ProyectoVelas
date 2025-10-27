@@ -89,7 +89,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'mecha':
             $.ajax({
-                url: '/Mecha/Index',
+                url: '/Mecha/_' + http + 'MechaView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);

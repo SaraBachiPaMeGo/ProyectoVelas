@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pack>>> GetPacksAsync()
         {
+            var respons = await _httpClient.GetAsync($"/api/Pack/GetPacks");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Pack>>(
-                await _httpClient.GetAsync("/api/GetPacks")
+              dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid idPack)
         {
+            var respons = await _httpClient.GetAsync($"/api/Pack/BuscarPack/{idPack}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pack>(
-                await _httpClient.GetAsync($"/api/BuscarPack/{idPack}")
+              dos
             );
 
             return response;
@@ -40,8 +48,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack pack)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Pack/InsertarPack", pack);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pack>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarPack", pack)
+              dos
             );
 
             return response;
@@ -49,8 +61,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Pack/ActualizarPack", pack);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Pack>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarPack", pack)
+              dos
             );
 
             return response;

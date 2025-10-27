@@ -23,28 +23,53 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Cera>>> GetCerasAsync()
         {
-            var response = await Helper.ParseApiResponse<List<Cera>>(await _httpClient.GetAsync("/api/GetCeras"));
+            var respons = await _httpClient.GetAsync("/api/Cera/GetCeras");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<List<Cera>>(
+              dos
+            );
 
             return response;
         }
 
         public async Task<CustomApiResponse<Cera>> BuscarCeraAsync(Guid idCera)
         {
-            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.GetAsync($"/api/BuscarCera/{idCera}"));
+            var respons = await _httpClient.GetAsync($"/api/Cera/BuscarCera/{idCera}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<Cera>(
+              dos
+            );
 
             return response;
         }
 
         public async Task<CustomApiResponse<Cera>> InsertarCeraAsync(Cera cera)
         {
-            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.PostAsJsonAsync("/api/InsertarCera", cera));
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Cera/InsertarCera", cera);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<Cera>(
+              dos
+            );
+
 
             return response;
         }
 
         public async Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Cera cera)
         {
-            var response = await Helper.ParseApiResponse<Cera>(await _httpClient.PutAsJsonAsync("/api/ActualizarCera", cera));
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Cera/ActualizarCera", cera);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<Cera>(
+              dos
+            );
 
             return response;
         }

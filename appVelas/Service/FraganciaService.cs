@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Fragancia>>> GetFraganciasAsync()
         {
+            var respons = await _httpClient.GetAsync($"/api/Fragancia/GetFragancias");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Fragancia>>(
-                await _httpClient.GetAsync("/api/GetFragancias")
+              dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Fragancia>> BuscarFraganciaAsync(Guid idFragancia)
         {
+            var respons = await _httpClient.GetAsync($"/api/Fragancia/BuscarFragancia/{idFragancia}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Fragancia>(
-                await _httpClient.GetAsync($"/api/BuscarFragancia/{idFragancia}")
+              dos
             );
 
             return response;
@@ -40,8 +48,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Fragancia>> InsertarFraganciaAsync(Fragancia fragancia)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Fragancia/InsertarFragancia", fragancia);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Fragancia>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarFragancia", fragancia)
+              dos
             );
 
             return response;
@@ -49,8 +61,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Fragancia fragancia)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Fragancia/ActualizarFragancia", fragancia);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Fragancia>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarFragancia", fragancia)
+              dos
             );
 
             return response;

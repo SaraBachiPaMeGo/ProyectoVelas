@@ -26,33 +26,55 @@ namespace appVelas.Service
         //    _httpClient = httpClientFactory.CreateClient("ApiClient");
         //}
 
-        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()
+        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()        
         {
-            var response = await Helper.ParseApiResponse<List<Vela>>(await _httpClient.GetAsync("/Vela/GetVelas"));
+            var respons = await _httpClient.GetAsync("/api/Vela/GetVelas");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<List<Vela>>(
+              dos
+            );
+
             return response;
         }
 
         public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid idVela)
         {
+            var respons = await _httpClient.GetAsync($"/api/Vela/BuscarVela/{idVela}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Vela>(
-                await _httpClient.GetAsync($"/Vela/BuscarVela/{idVela}")
+              dos
             );
+
             return response;
         }
 
         public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Vela/InsertarVela", vela);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Vela>(
-                await _httpClient.PostAsJsonAsync("/Vela/InsertarVela", vela)
+              dos
             );
+
             return response;
         }
 
         public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela", vela);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Vela>(
-                await _httpClient.PutAsJsonAsync("/Vela/ActualizarVela", vela)
+              dos
             );
+
             return response;
         }
     }

@@ -23,17 +23,26 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<VelaFragancia>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
+            var respons = await _httpClient.PutAsJsonAsync("/api/VelaFragancia/ActualizarVelaFragancia", velaFragancia);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<VelaFragancia>(
-               await _httpClient.PutAsJsonAsync("/api/ActualizarVelaFragancia", velaFragancia)
-           );
+                dos
+            );
+
             return response;
         }
 
         public async Task<CustomApiResponse<VelaFragancia>> BuscarVelaFraganciaAsync(Guid idVelaFragancia)
         {
+            var respons = await _httpClient.GetAsync($"/api/VelaFragancia/BuscarVelaFragancia/{idVelaFragancia}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<VelaFragancia>(
-               await _httpClient.GetAsync($"/api/BuscarVelaFragancia/{idVelaFragancia}")
-           );
+                dos
+            );
 
             return response;
         }
@@ -49,8 +58,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<VelaFragancia>>> GetFraganciasPorVelaAsync()
         {
+            var respons = await _httpClient.GetAsync("/api/VelaFragancia/GetFraganciasPorVela");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<VelaFragancia>>(
-                await _httpClient.GetAsync("/api/GetFraganciasPorVela")
+                dos
             );
 
             return response;
@@ -58,10 +71,14 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            var response = await Helper.ParseApiResponse<VelaFragancia>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarVelaFragancia", velaFragancia)
-            );
+            var respons = await _httpClient.PostAsJsonAsync("/api/VelaFragancia/InsertarVelaFragancia", velaFragancia);
 
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<VelaFragancia>(
+                dos
+            );
+            
             return response;
         }
 

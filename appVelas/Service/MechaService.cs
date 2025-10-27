@@ -24,13 +24,17 @@ namespace appVelas.Service
                 using (HttpClient client = new HttpClient())
                 {
 
-                    client.BaseAddress = new Uri("https://localhost:44346/api");
+                    client.BaseAddress = new Uri("http://localhost:5000");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
                            new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    var respons = await client.GetAsync($"/api/Mecha/GetMechas");
+
+                    var dos = await respons.Content.ReadAsStringAsync();
+
                     var response = await Helper.ParseApiResponse<List<Mecha>>(
-                        await client.GetAsync($"Mecha/GetMechas")
+                        dos
                     );
 
                     return response;
@@ -49,8 +53,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha)
         {
+            var respons = await _httpClient.GetAsync($"/api/Mecha/BuscarMecha/{idMecha}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.GetAsync($"Mecha/BuscarMecha/{idMecha}")
+                dos
             );
 
             return response;
@@ -58,8 +66,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha mecha)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Mecha/InsertarMecha", mecha);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.PostAsJsonAsync("Mecha/InsertarMecha", mecha)
+              dos
             );
 
             return response;
@@ -67,8 +79,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Mecha/ActualizarMecha", mecha);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Mecha>(
-                await _httpClient.PutAsJsonAsync("Mecha/ActualizarMecha", mecha)
+              dos
             );
 
             return response;

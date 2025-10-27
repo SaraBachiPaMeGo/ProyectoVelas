@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Molde>>> GetMoldesAsync()
         {
+            var respons = await _httpClient.GetAsync($"/api/Molde/GetMoldes");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Molde>>(
-                await _httpClient.GetAsync("/api/GetMoldes")
+              dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde)
         {
+            var respons = await _httpClient.GetAsync($"/api/Molde/BuscarMolde/{idMolde}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Molde>(
-                await _httpClient.GetAsync($"/api/BuscarMolde/{idMolde}")
+              dos
             );
 
             return response;
@@ -40,8 +48,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde molde)
         {
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Molde/InsertarMolde", molde);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Molde>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarMolde", molde)
+              dos
             );
 
             return response;
@@ -49,8 +61,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde", molde);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Molde>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarMolde", molde)
+              dos
             );
 
             return response;

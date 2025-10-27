@@ -22,8 +22,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Endurecedor>>> GetEndurecedorsAsync()
         {
+            var respons = await _httpClient.GetAsync($"/api/Endurecedor/GetEndurecedores");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<List<Endurecedor>>(
-                await _httpClient.GetAsync("/api/GetEndurecedors")
+              dos
             );
 
             return response;
@@ -31,8 +35,12 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Endurecedor>> BuscarEndurecedorAsync(Guid idEndurecedor)
         {
+            var respons = await _httpClient.GetAsync($"/api/Endurecedor/BuscarEndurecedor/{idEndurecedor}");
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Endurecedor>(
-                await _httpClient.GetAsync($"/api/BuscarEndurecedor/{idEndurecedor}")
+              dos
             );
 
             return response;
@@ -40,17 +48,25 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Endurecedor>> InsertarEndurecedorAsync(Endurecedor endurecedor)
         {
-            var response = await Helper.ParseApiResponse<Endurecedor>(
-                await _httpClient.PostAsJsonAsync("/api/InsertarEndurecedor", endurecedor)
-            );
+            var respons = await _httpClient.PostAsJsonAsync($"/api/Endurecedor/InsertarEndurecedor", endurecedor);
 
+            var dos = await respons.Content.ReadAsStringAsync();
+
+            var response = await Helper.ParseApiResponse<Endurecedor>(
+              dos
+            );
+            
             return response;
         }
 
         public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor)
         {
+            var respons = await _httpClient.PutAsJsonAsync($"/api/Endurecedor/ActualizarEndurecedor", endurecedor);
+
+            var dos = await respons.Content.ReadAsStringAsync();
+
             var response = await Helper.ParseApiResponse<Endurecedor>(
-                await _httpClient.PutAsJsonAsync("/api/ActualizarEndurecedor", endurecedor)
+              dos
             );
 
             return response;
