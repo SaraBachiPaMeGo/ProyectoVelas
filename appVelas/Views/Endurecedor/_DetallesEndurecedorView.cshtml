@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<appVelas.Models.Endurecedor>
-
+@{
+    Layout = null;
+}
 <p>
-     
+
 </p>
 <table class="table">
     <thead>
@@ -28,32 +30,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompradoEn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Coste)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDVela)
-            </td>
-            <td>
-                @Html.ActionLink("Endurecedor", "ActualizarView", new { id = item.IDEndurecedor, vista = "Endurecedor" }) |
-                @Html.ActionLink("Endurecedor", "DetallesView1", new { id = item.IDEndurecedor, vista = "Endurecedor" }) @*|
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompradoEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Coste)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDVela)
+                </td>
+                <td>
+                    @Html.ActionLink("Endurecedor", "ActualizarView", new { id = item.IDEndurecedor, vista = "Endurecedor" }) |
+                    @Html.ActionLink("Endurecedor", "DetallesView1", new { id = item.IDEndurecedor, vista = "Endurecedor" }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

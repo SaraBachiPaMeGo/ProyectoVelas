@@ -56,7 +56,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDFrag"] = IDFrag;
-                return PartialView("Fragancia/_ActFragView", frag);
+                return PartialView("~/Views/Fragancia/_ActFragView.cshtml", frag.Data);
             }
         }
 
@@ -73,15 +73,15 @@ namespace appVelas.Controllers
             var frag = await _fraganciaRepo.GetFraganciasAsync();
 
             ViewData["FRAGS"] = frag;
-            return PartialView("Detalles/_DetallesFragView", frag);
+            return PartialView("~/Views/Fragancia/_DetallesFragView.cshtml", frag.Data);
         }
 
-        public async Task<PartialViewResult>  _DetallesFragView1(Guid IDFrag)
+        public async Task<IActionResult> DetallesView1(Guid IDFrag)
         {
             var frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
 
             ViewData["FRAGS"] = frag;
-            return PartialView("Detalles/_DetallesFragView1", frag);
+            return View("~/Views/Fragancia/_DetallesFragView1.cshtml", frag.Data);
         }
     }
 }

@@ -65,7 +65,7 @@ namespace appVelas.Controllers
 
                 ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
-                return PartialView("Pedido/_ActPedidoView", ped);
+                return PartialView("~/Views/Pedido/_ActPedidoView", ped.Data);
             }
         }
 
@@ -74,7 +74,7 @@ namespace appVelas.Controllers
         {
             //await _pedidoRepo.ActualizarPedido(pedido);
 
-            return PartialView("Pedido/_ActPedidoView", pedido);
+            return PartialView("~/Views/Pedido/_ActPedidoView.cshtml", pedido);
         }
 
         public async Task<PartialViewResult>  _DetallesPedidoView()
@@ -82,15 +82,15 @@ namespace appVelas.Controllers
             var pedidos = await _pedidoRepo.GetPedidosAsync();
 
             //ViewData["PedidoS"] = Pedidos;
-            return PartialView("Detalles/_DetallesPedidoView", pedidos);
+            return PartialView("~/Views/Pedido/_DetallesPedidoView.cshtml", pedidos.Data);
         }
 
-        public async Task<PartialViewResult>  _DetallesPedidoView1(Guid IDPedido)
+        public async Task<IActionResult> DetallesView1(Guid IDPedido)
         {
             var pedo = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
             ViewData["PEDIDO"] = pedo;
-            return PartialView("Detalles/_DetallesPedidoView1", pedo);
+            return View("~/Views/Pedido/_DetallesPedidoView1.cshtml", pedo.Data);
         }
     }
 }

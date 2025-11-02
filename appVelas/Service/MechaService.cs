@@ -14,9 +14,10 @@ namespace appVelas.Service
     {
         private readonly HttpClient _httpClient;
 
-        public MechaService()
+        public MechaService(HttpClient httpClient)
         {
 
+            _httpClient = httpClient;
         }
 
         public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
@@ -25,7 +26,7 @@ namespace appVelas.Service
 
             try
             {
-                var respons = await _httpClient.GetAsync($"/api/Mecha/GetMechas");
+                var respons = await _httpClient.GetAsync("/api/Mecha/GetMechas");
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

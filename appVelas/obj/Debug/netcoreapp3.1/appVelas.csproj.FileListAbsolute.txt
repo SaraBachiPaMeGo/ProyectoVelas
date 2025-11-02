@@ -384,7 +384,6 @@ C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcor
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Home\DetallesView1.cshtml.g.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Mecha\Index.cshtml.g.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Mecha\_ActMechaView.cshtml.g.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Mecha\_CrearMechaView.cshtml.g.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Mecha\_DetallesMechaView.cshtml.g.cs

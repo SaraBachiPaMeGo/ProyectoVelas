@@ -49,11 +49,11 @@ namespace appVelas
 
             // ✅ Configuración global del HttpClientAction<IServiceProvider, HttpClient> configureClient = (sp, client) =>
 
-            string _baseUrl =  "https://localhost:44346/api"; //Configuration["ApiSettings: BaseUrl"] ??
+            string _baseUrl = "http://localhost:5000/"; //Configuration["ApiSettings: BaseUrl"] ??
 
             services.AddHttpClient("ApiClient", client =>
             {
-                client.BaseAddress = new Uri(Configuration["ApiSettings: BaseUrl"]);
+                client.BaseAddress = new Uri(_baseUrl); //Configuration["ApiSettings: BaseUrl"]
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -63,19 +63,102 @@ namespace appVelas
                 ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
             });
 
-            services.AddHttpClient<ICeraService, CeraService>();
-            services.AddHttpClient<IClienteService, ClienteService>();
-            services.AddHttpClient<IEndurecedorService, EndurecedorService>();
-            services.AddHttpClient<IFraganciaService, FraganciaService>();
-            services.AddTransient<IMechaService, MechaService>();
-            services.AddHttpClient<IMoldeService, MoldeService>();
-            services.AddHttpClient<IPackService, PackService>();
-            services.AddHttpClient<IPedidoService, PedidoService>();
-            services.AddHttpClient<IPigmentoService, PigmentoService>();
-            services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>();
-            services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>();
-            services.AddHttpClient<IVelaService, VelaService>();
-                 
+            //services.AddHttpClient<ICeraService, CeraService>();
+            services.AddScoped<ICeraService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new CeraService(client);
+            });
+
+            //services.AddHttpClient<IClienteService, ClienteService>();
+            services.AddScoped<IClienteService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new ClienteService(client);
+            });
+
+            //services.AddHttpClient<IEndurecedorService, EndurecedorService>();
+            services.AddScoped<IEndurecedorService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new EndurecedorService(client);
+            });
+                        
+            //services.AddHttpClient<IFraganciaService, FraganciaService>();
+            services.AddScoped<IFraganciaService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new FraganciaService(client);
+            });
+
+            //services.AddTransient<IMechaService, MechaService>();
+            services.AddScoped<IMechaService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new MechaService(client);
+            });
+
+            //services.AddHttpClient<IMoldeService, MoldeService>();
+            services.AddScoped<IMoldeService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new MoldeService(client);
+            });
+
+            //services.AddHttpClient<IPackService, PackService>();
+            services.AddScoped<IPackService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new PackService(client);
+            });
+
+            //services.AddHttpClient<IPedidoService, PedidoService>();
+            services.AddScoped<IPedidoService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new PedidoService(client);
+            });
+
+            //services.AddHttpClient<IPigmentoService, PigmentoService>();
+            services.AddScoped<IPigmentoService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new PigmentoService(client);
+            });
+
+            //services.AddHttpClient<IVelaFraganciaService, VelaFraganciaService>();
+            services.AddScoped<IVelaFraganciaService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new VelaFraganciaService(client);
+            });
+
+            //services.AddHttpClient<IVelaPigmentoService, VelaPigmentoService>();
+            services.AddScoped<IVelaPigmentoService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new VelaPigmentoService(client);
+            });
+
+            //services.AddHttpClient<IVelaService, VelaService>();
+            services.AddScoped<IVelaService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new VelaService(client);
+            });
+
 
             // ✅ Manejador genérico que ignora certificados locales
             Func<HttpClientHandler> handler = () => new HttpClientHandler

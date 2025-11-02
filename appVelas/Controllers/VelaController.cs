@@ -139,7 +139,7 @@ namespace appVelas.Controllers
 
                 ViewData["IDVela"] = IDVela;
 
-                return PartialView("Vela/_ActVelaView", vela);
+                return PartialView("Vela/_ActVelaView", vela.Data);
             }
         }
 
@@ -199,10 +199,10 @@ namespace appVelas.Controllers
             ViewData["Mecha"] = listaMecha;
 
             //ViewData["VELAS"] = velas;
-            return PartialView("Detalles/_DetallesVelaView", velas);
+            return PartialView("Detalles/_DetallesVelaView", velas.Data);
         }
 
-        public async Task<PartialViewResult>  _DetallesVelaView1(Guid IDVela)
+        public async Task<IActionResult> DetallesView1(Guid IDVela)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
             var Moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde);
@@ -224,7 +224,7 @@ namespace appVelas.Controllers
             ViewData["clien"] = clien;
             ViewData["pedi"] = pedi;
 
-            return PartialView("Detalles/_DetallesVelaView1", vela);
+            return View("Detalles/_DetallesVelaView1", vela.Data);
         }
     }
 }

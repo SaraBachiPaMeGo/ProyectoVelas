@@ -6,16 +6,16 @@
     var (rutaParcial, model) = ((string, object))Model;
 }
 
-    <div style="margin-left: -8rem;">
+<div style="margin-left: -8rem;">
 
-        <h1 class="text-center" style="color:blue; padding: 2rem;">Detalles</h1>
+    <h1 class="text-center" style="color:blue; padding: 2rem;">Detalles</h1>
 
-        <!-- Aquí inyectas tu parcial -->
-        <div id="contDet">
-            @await Html.PartialAsync(rutaParcial, model)
-        </div>
+    <!-- Aquí inyectas tu parcial -->
+    <div id="contDet">
+        @await Html.PartialAsync(rutaParcial, model)
     </div>
-   
+</div>
+
 @{
     ViewData["Title"] = "DetallesView1";
 }

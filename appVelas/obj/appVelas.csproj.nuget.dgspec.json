@@ -81,10 +81,6 @@
             "System.Net.Http.Json": {
               "target": "Package",
               "version": "[9.0.9, )"
-            },
-            "dotnet-dev-certs": {
-              "target": "Package",
-              "version": "[2.2.0, )"
             }
           },
           "imports": [

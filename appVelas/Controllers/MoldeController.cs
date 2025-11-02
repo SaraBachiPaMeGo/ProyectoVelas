@@ -62,7 +62,8 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDMolde"] = IDMolde;
-                return PartialView("Molde/_CrearMoldeView", await _moldeRepo.BuscarMoldeAsync(IDMolde));
+                var moldes = await _moldeRepo.BuscarMoldeAsync(IDMolde);
+                return PartialView("~/Views/Molde/_ActMoldeView.cshtml", moldes.Data);
             }
         }
 
@@ -79,15 +80,15 @@ namespace appVelas.Controllers
             var moldes = await _moldeRepo.GetMoldesAsync();
 
             //ViewData["MoldeS"] = Moldes;
-            return PartialView("Detalles/_DetallesMoldeView", moldes);
+            return PartialView("~/Views/Molde/_DetallesMoldeView.cshtml", moldes.Data);
         }
 
-        public async Task<PartialViewResult>  _DetallesMoldeView1(Guid IDMolde)
+        public async Task<IActionResult> DetallesView1(Guid IDMolde)
         {
             var mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
             ViewData["MOLDE"] = mol;
-            return PartialView("Detalles/_DetallesMoldeView1", mol);
+            return View("~/Views/Molde/_DetallesMoldeView1.cshtml", mol.Data);
         }
     }
 }

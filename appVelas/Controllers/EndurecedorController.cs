@@ -63,7 +63,7 @@ namespace appVelas.Controllers
             {
                 ViewData["IDEnd"] = IDEnd;
             }
-            return PartialView("Endurecedor/_ActEndurecedorView", end);
+            return PartialView("~/Views/Endurecedor/_ActEndurecedorView.cshtml", end.Data);
         }
 
         [HttpPost]
@@ -79,15 +79,15 @@ namespace appVelas.Controllers
             var end =  await _endurecedorRepo.GetEndurecedorsAsync();
 
             //ViewData["EndurecedorS"] = Endurecedors;
-            return PartialView("Detalles/_DetallesEndurecedorView", end);
+            return PartialView("~/Views/Endurecedor/_DetallesEndurecedorView.cshtml", end.Data);
         }
 
-        public async Task<PartialViewResult> _DetallesEndurecedorView1(Guid IDEnd)
+        public async Task<IActionResult> DetallesView1(Guid IDEnd)
         {
             var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
             ViewData["END"] = end;
-            return PartialView("Detalles/_DetallesEndurecedorView1", end);
+            return View("~/Views/Endurecedor/_DetallesEndurecedorView1.cshtml", end.Data);
         }
 
     }

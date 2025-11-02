@@ -63,7 +63,7 @@ namespace appVelas.Controllers
             {
                 ViewData["IDPack"] = IDPack;
             }
-            return PartialView("Pack/_ActPackView", pack);
+            return PartialView("~/Views/Pack/_ActPackView.cshtml", pack.Data);
         }
 
         [HttpPost]
@@ -79,15 +79,15 @@ namespace appVelas.Controllers
             var pack = await _packRepo.GetPacksAsync();
 
             //ViewData["PackS"] = Packs;
-            return PartialView("Detalles/_DetallesPackView", pack);
+            return PartialView("~/Views/Pack/_DetallesPackView.cshtml", pack.Data);
         }
 
-        public async Task<IActionResult>  _DetallesPackView1(Guid IDPack)
+        public async Task<IActionResult> DetallesView1(Guid IDPack)
         {
             var pack = await _packRepo.BuscarPackAsync(IDPack);
 
             ViewData["PACK"] = pack;
-            return PartialView("Detalles/_DetallesPackView1", pack);
+            return View("~/Views/Pack/_DetallesPackView1.cshtml", pack.Data);
         }
 
     }

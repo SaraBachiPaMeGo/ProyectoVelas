@@ -57,7 +57,7 @@ namespace appVelas.Controllers
             }
             else
                 ViewData["IDCera"] = IDCera;
-            return PartialView("Cera/_ActCeraView", cera);
+            return PartialView("~/Views/Cera/_ActCeraView.cshtml", cera.Data);
         }
 
         [HttpPost]
@@ -70,15 +70,17 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _DetallesCeraView()
         {
-            return PartialView("Detalles/_DetallesCeraView", await _ceraRepo.GetCerasAsync());
+            var cera = await _ceraRepo.GetCerasAsync();
+
+            return PartialView("~/Views/Cera/_DetallesCeraView.cshtml",cera.Data);
         }
 
-        public async Task<PartialViewResult> _DetallesCeraView1(Guid IDCera)
+        public async Task<IActionResult> DetallesView1(Guid IDCera)
         {
             var cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
             ViewData["CERA"] = cera;
-            return PartialView("Detalles/_DetallesCeraView1", cera);
+            return View("~/Views/Cera/_DetallesCeraView1.cshtml", cera.Data);
         }
 
     }

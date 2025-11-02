@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<appVelas.Models.Fragancia>
-
+@{
+    Layout = null;
+}
 <table class="table">
     <thead>
         <tr>
             <th>
-               Nombre
+                Nombre
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tipo)
@@ -28,40 +30,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.FragNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompradoEn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDVela)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Coste)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-                @*<p>
-             
-        </p>*@
-                @Html.ActionLink("Fragancia", "ActualizarView", new { id = item.IDFrag, vista = "Frag" }) |
-                @Html.ActionLink("Fragancia", "DetallesView1", new { id = item.IDFrag, vista = "Frag" })
-                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.FragNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompradoEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDVela)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Coste)
+                </td>
+                <td>
+
+                    @*<p>
+
+                        </p>*@
+                    @Html.ActionLink("Fragancia", "ActualizarView", new { id = item.IDFrag, vista = "Frag" }) |
+                    @Html.ActionLink("Fragancia", "DetallesView1", new { id = item.IDFrag, vista = "Frag" })
+                    @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

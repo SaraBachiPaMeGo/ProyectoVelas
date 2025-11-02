@@ -57,7 +57,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDCli"] = IDCli;
-                return PartialView("Cliente/_ActClienteView", cli);
+                return PartialView("~/Views/Cliente/_ActClienteView.cshtml", cli.Data);
             }
         }
 
@@ -74,15 +74,15 @@ namespace appVelas.Controllers
             var clientes =  await _clienteRepo.GetClientesAsync();
 
             ViewData["Clientes"] = clientes;
-            return PartialView("Detalles/_DetallesClienteView", clientes);
+            return PartialView("~/Views/Cliente/_DetallesClienteView.cshtml", clientes.Data);
         }
 
-        public async Task<PartialViewResult> _DetallesClienteView1(Guid IDCli)
+        public async Task<IActionResult> DetallesView1(Guid IDCli)
         {
             var cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
             ViewData["Cliente"] = cli;
-            return PartialView("Detalles/_DetallesClienteView1", cli);
+            return View("~/Views/Cliente/_DetallesClienteView1.cshtml", cli.Data);
         }
 
         public IActionResult _CrearCosteView()

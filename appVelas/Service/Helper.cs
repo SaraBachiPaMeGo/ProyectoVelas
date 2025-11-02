@@ -17,7 +17,7 @@ namespace appVelas.Service
 
         public static HttpClient ConexionApi(HttpClient _httpClient)
         {
-            string _baseUrl = "http://localhost:44346/api";//configuration["ApiSettings: BaseUrl"];
+            string _baseUrl = "http://localhost:5000/";//configuration["ApiSettings: BaseUrl"];
 
             _httpClient.BaseAddress = new Uri(_baseUrl);
             _httpClient.DefaultRequestHeaders.Accept.Clear();
