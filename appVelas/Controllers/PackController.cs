@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult>  _CrearPackView()
         {
-            return PartialView("Pack/_CrearPackView");
+            return PartialView("_CrearPackView");
         }
 
         [HttpPost]

@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearClienteView()
         {
-            return PartialView("Cliente/_CrearClienteView",  new Cliente());
+            return PartialView("_CrearClienteView",  new Cliente());
         }
 
         [HttpPost]

@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult> _CrearEndurecedorView()
         {
-            return PartialView("Endurecedor/_CrearEndurecedorView");
+            return PartialView("_CrearEndurecedorView");
         }
 
         [HttpPost]

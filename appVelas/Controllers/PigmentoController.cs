@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearPigView()
         {
-            return PartialView("Pigmento/_CrearPigView");
+            return PartialView("_CrearPigView");
         }
 
         [HttpPost]

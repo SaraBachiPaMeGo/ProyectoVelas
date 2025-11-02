@@ -23,55 +23,108 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Cera>>> GetCerasAsync()
         {
-            var respons = await _httpClient.GetAsync("/api/Cera/GetCeras");
+            var response = new CustomApiResponse<List<Cera>>();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/Cera/GetCeras");
 
-            var dos = await respons.Content.ReadAsStringAsync();
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            var response = await Helper.ParseApiResponse<List<Cera>>(
-              dos
-            );
+                response = await Helper.ParseApiResponse<List<Cera>>(
+                  dos
+                );
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Cera>> BuscarCeraAsync(Guid idCera)
         {
-            var respons = await _httpClient.GetAsync($"/api/Cera/BuscarCera/{idCera}");
+            var response = new CustomApiResponse<Cera>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Cera/BuscarCera/{idCera}");
 
-            var response = await Helper.ParseApiResponse<Cera>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                 response = await Helper.ParseApiResponse<Cera>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
+            
         }
 
         public async Task<CustomApiResponse<Cera>> InsertarCeraAsync(Cera cera)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Cera/InsertarCera", cera);
+            var response = new CustomApiResponse<Cera>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Cera/InsertarCera", cera);
 
-            var response = await Helper.ParseApiResponse<Cera>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<Cera>(
+                  dos
+                );
 
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Cera cera)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Cera/ActualizarCera", cera);
+            var response = new CustomApiResponse<Cera>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Cera/ActualizarCera", cera);
 
-            var response = await Helper.ParseApiResponse<Cera>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Cera>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
+            
         }
     }
 }

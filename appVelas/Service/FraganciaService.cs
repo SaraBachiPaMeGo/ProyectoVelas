@@ -22,54 +22,104 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Fragancia>>> GetFraganciasAsync()
         {
-            var respons = await _httpClient.GetAsync($"/api/Fragancia/GetFragancias");
+            var response = new CustomApiResponse<List<Fragancia>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Fragancia/GetFragancias");
 
-            var response = await Helper.ParseApiResponse<List<Fragancia>>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Fragancia>>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Fragancia>> BuscarFraganciaAsync(Guid idFragancia)
         {
-            var respons = await _httpClient.GetAsync($"/api/Fragancia/BuscarFragancia/{idFragancia}");
+            var response = new CustomApiResponse<Fragancia>();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Fragancia/BuscarFragancia/{idFragancia}");
 
-            var dos = await respons.Content.ReadAsStringAsync();
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            var response = await Helper.ParseApiResponse<Fragancia>(
-              dos
-            );
+                response = await Helper.ParseApiResponse<Fragancia>(
+                  dos
+                );
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Fragancia>> InsertarFraganciaAsync(Fragancia fragancia)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Fragancia/InsertarFragancia", fragancia);
+            var response = new CustomApiResponse<Fragancia>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Fragancia/InsertarFragancia", fragancia);
 
-            var response = await Helper.ParseApiResponse<Fragancia>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Fragancia>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Fragancia fragancia)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Fragancia/ActualizarFragancia", fragancia);
+            var response = new CustomApiResponse<Fragancia>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Fragancia/ActualizarFragancia", fragancia);
 
-            var response = await Helper.ParseApiResponse<Fragancia>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Fragancia>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
         }
     }
 }

@@ -16,78 +16,111 @@ namespace appVelas.Service
 
         public MechaService()
         {
+
         }
+
         public async Task<CustomApiResponse<List<Mecha>>> GetMechasAsync()
         {
+            var response = new CustomApiResponse<List<Mecha>>();
+
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
+                var respons = await _httpClient.GetAsync($"/api/Mecha/GetMechas");
 
-                    client.BaseAddress = new Uri("http://localhost:5000");
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(
-                           new MediaTypeWithQualityHeaderValue("application/json"));
+                var dos = await respons.Content.ReadAsStringAsync();
 
-                    var respons = await client.GetAsync($"/api/Mecha/GetMechas");
+                response = await Helper.ParseApiResponse<List<Mecha>>(
+                    dos
+                );
 
-                    var dos = await respons.Content.ReadAsStringAsync();
+                return response;
 
-                    var response = await Helper.ParseApiResponse<List<Mecha>>(
-                        dos
-                    );
-
-                    return response;
-
-                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
 
-                string url2 = _httpClient.BaseAddress.ToString();
+                return response;
 
-                throw;
             }
-                                                
         }
 
         public async Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha)
         {
-            var respons = await _httpClient.GetAsync($"/api/Mecha/BuscarMecha/{idMecha}");
+            var response = new CustomApiResponse<Mecha>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Mecha/BuscarMecha/{idMecha}");
 
-            var response = await Helper.ParseApiResponse<Mecha>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Mecha>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha mecha)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Mecha/InsertarMecha", mecha);
+            var response = new CustomApiResponse<Mecha>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Mecha/InsertarMecha", mecha);
 
-            var response = await Helper.ParseApiResponse<Mecha>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Mecha>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Mecha/ActualizarMecha", mecha);
+            var response = new CustomApiResponse<Mecha>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Mecha/ActualizarMecha", mecha);
 
-            var response = await Helper.ParseApiResponse<Mecha>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                 response = await Helper.ParseApiResponse<Mecha>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
     }
 }

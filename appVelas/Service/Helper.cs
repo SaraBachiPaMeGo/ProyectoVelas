@@ -45,14 +45,5 @@ namespace appVelas.Service
             
         }
 
-        public static async Task<CustomApiResponse<T>> ParseApiResponse<T>(HttpResponseMessage response)
-        {
-           
-            return null;
-
-        }
-
-
-
     }
 }

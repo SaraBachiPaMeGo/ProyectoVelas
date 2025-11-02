@@ -95,7 +95,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                     $('#miContenedor').html(data);
                 },
                 error: function () {
-                    alert();
+                    alert('Error al cargar la vista parcial.');
                 }
             });
             break;

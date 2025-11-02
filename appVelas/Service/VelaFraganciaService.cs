@@ -23,63 +23,133 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<VelaFragancia>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            var respons = await _httpClient.PutAsJsonAsync("/api/VelaFragancia/ActualizarVelaFragancia", velaFragancia);
+            var response = new CustomApiResponse<VelaFragancia>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync("/api/VelaFragancia/ActualizarVelaFragancia", velaFragancia);
 
-            var response = await Helper.ParseApiResponse<VelaFragancia>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<VelaFragancia>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<VelaFragancia>> BuscarVelaFraganciaAsync(Guid idVelaFragancia)
         {
-            var respons = await _httpClient.GetAsync($"/api/VelaFragancia/BuscarVelaFragancia/{idVelaFragancia}");
+            var response = new CustomApiResponse<VelaFragancia>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/VelaFragancia/BuscarVelaFragancia/{idVelaFragancia}");
 
-            var response = await Helper.ParseApiResponse<VelaFragancia>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<VelaFragancia>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<VelaFragancia>> EliminarRelacionesFraganciaAsync(Guid idvelaFragancia)
         {
-            var response = await Helper.ParseApiResponse<VelaFragancia>(
-              await _httpClient.GetAsync($"/api/EliminarVelaFragancia/{idvelaFragancia}")
-          );
+            var response = new CustomApiResponse<VelaFragancia>();
 
-            return response;
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/EliminarVelaFragancia/{idvelaFragancia}");
+
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<VelaFragancia>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
+            
         }
 
         public async Task<CustomApiResponse<List<VelaFragancia>>> GetFraganciasPorVelaAsync()
         {
-            var respons = await _httpClient.GetAsync("/api/VelaFragancia/GetFraganciasPorVela");
+            var response = new CustomApiResponse<List<VelaFragancia>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/VelaFragancia/GetFraganciasPorVela");
 
-            var response = await Helper.ParseApiResponse<List<VelaFragancia>>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<VelaFragancia>>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            var respons = await _httpClient.PostAsJsonAsync("/api/VelaFragancia/InsertarVelaFragancia", velaFragancia);
+            var response = new CustomApiResponse<VelaFragancia>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync("/api/VelaFragancia/InsertarVelaFragancia", velaFragancia);
 
-            var response = await Helper.ParseApiResponse<VelaFragancia>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<VelaFragancia>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
             
-            return response;
         }
 
     }

@@ -22,69 +22,133 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<VelaPigmento>>> GetPigmentosPorVelaAsync()
         {
-            var respons = await _httpClient.GetAsync("/api/VelaPigmento/GetPigmentosPorVela");
+            var response = new CustomApiResponse<List<VelaPigmento>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/VelaPigmento/GetPigmentosPorVela");
 
-            var response = await Helper.ParseApiResponse<List<VelaPigmento>>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<VelaPigmento>>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
 
         public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
         {
-            var respons = await _httpClient.PostAsJsonAsync("/api/VelaPigmento/InsertarVelaPigmento", velaPigmento);
+            var response = new CustomApiResponse<VelaPigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync("/api/VelaPigmento/InsertarVelaPigmento", velaPigmento);
 
-            var response = await Helper.ParseApiResponse<VelaPigmento>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<VelaPigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
-
 
         public async Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento)
         {
-            var respons = await _httpClient.PutAsJsonAsync("/api/VelaPigmento/ActualizarVelaPigmento", velaPigmento);
+            var response = new CustomApiResponse<VelaPigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync("/api/VelaPigmento/ActualizarVelaPigmento", velaPigmento);
 
-            var response = await Helper.ParseApiResponse<VelaPigmento>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<VelaPigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
         {
-            var respons = await _httpClient.GetAsync($"/api/VelaPigmento/EliminarVelaPigmento/{idVelaPigmento}");
+            var response = new CustomApiResponse<VelaPigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/VelaPigmento/EliminarVelaPigmento/{idVelaPigmento}");
 
-            var response = await Helper.ParseApiResponse<VelaPigmento>(
-                dos
-            );
-                        
-            return response;
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<VelaPigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<VelaPigmento>> BuscarVelaPigmentoAsync(Guid idVelaPigmento)
         {
-            var respons = await _httpClient.GetAsync($"/api/VelaPigmento/BuscarVelaPigmento/{idVelaPigmento}");
+            var response = new CustomApiResponse<VelaPigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/VelaPigmento/BuscarVelaPigmento/{idVelaPigmento}");
 
-            var response = await Helper.ParseApiResponse<VelaPigmento>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<VelaPigmento>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

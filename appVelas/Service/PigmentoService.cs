@@ -22,54 +22,104 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pigmento>>> GetPigmentosAsync()
         {
-            var respons = await _httpClient.GetAsync("/api/Pigmento/GetPigmentos");
+            var response = new CustomApiResponse<List<Pigmento>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/Pigmento/GetPigmentos");
 
-            var response = await Helper.ParseApiResponse<List<Pigmento>>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Pigmento>>(
+                    dos
+                );
+
+                return response;           }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }            
         }
 
         public async Task<CustomApiResponse<Pigmento>> BuscarPigmentoAsync(Guid idPigmento)
         {
-            var respons = await _httpClient.GetAsync($"/api/Pigmento/BuscarPigmento/{idPigmento}");
+            var response = new CustomApiResponse<Pigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Pigmento/BuscarPigmento/{idPigmento}");
 
-            var response = await Helper.ParseApiResponse<Pigmento>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pigmento>> InsertarPigmentoAsync(Pigmento pigmento)
         {
-            var respons = await _httpClient.PostAsJsonAsync("/api/Pigmento/InsertarPigmento", pigmento);
+            var response = new CustomApiResponse<Pigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync("/api/Pigmento/InsertarPigmento", pigmento);
 
-            var response = await Helper.ParseApiResponse<Pigmento>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento pigmento)
         {
-            var respons = await _httpClient.PutAsJsonAsync("/api/Pigmento/ActualizarPigmento", pigmento);
+            var response = new CustomApiResponse<Pigmento>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync("/api/Pigmento/ActualizarPigmento", pigmento);
 
-            var response = await Helper.ParseApiResponse<Pigmento>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pigmento>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

@@ -22,28 +22,54 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Molde>>> GetMoldesAsync()
         {
-            var respons = await _httpClient.GetAsync($"/api/Molde/GetMoldes");
+            var response = new CustomApiResponse<List<Molde>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Molde/GetMoldes");
 
-            var response = await Helper.ParseApiResponse<List<Molde>>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Molde>>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde)
         {
-            var respons = await _httpClient.GetAsync($"/api/Molde/BuscarMolde/{idMolde}");
+            var response = new CustomApiResponse<Molde>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Molde/BuscarMolde/{idMolde}");
 
-            var response = await Helper.ParseApiResponse<Molde>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Molde>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+          
         }
 
         public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde molde)
@@ -61,15 +87,28 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde", molde);
+            var response = new CustomApiResponse<Molde>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde", molde);
 
-            var response = await Helper.ParseApiResponse<Molde>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Molde>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

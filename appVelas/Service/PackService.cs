@@ -22,54 +22,106 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pack>>> GetPacksAsync()
         {
-            var respons = await _httpClient.GetAsync($"/api/Pack/GetPacks");
+            var response = new CustomApiResponse<List<Pack>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Pack/GetPacks");
 
-            var response = await Helper.ParseApiResponse<List<Pack>>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Pack>>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid idPack)
         {
-            var respons = await _httpClient.GetAsync($"/api/Pack/BuscarPack/{idPack}");
+            var response = new CustomApiResponse<Pack>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Pack/BuscarPack/{idPack}");
 
-            var response = await Helper.ParseApiResponse<Pack>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pack>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack pack)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Pack/InsertarPack", pack);
+            var response = new CustomApiResponse<Pack>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Pack/InsertarPack", pack);
 
-            var response = await Helper.ParseApiResponse<Pack>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pack>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Pack/ActualizarPack", pack);
+            var response = new CustomApiResponse<Pack>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Pack/ActualizarPack", pack);
 
-            var response = await Helper.ParseApiResponse<Pack>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pack>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

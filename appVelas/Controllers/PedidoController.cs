@@ -34,7 +34,7 @@ namespace appVelas.Controllers
 
             ViewData["Pedido"] = listaPedido;
 
-            return PartialView("Pedido/_CrearPedidoView", new Pedido());
+            return PartialView("_CrearPedidoView", new Pedido());
         }
 
         [HttpPost]

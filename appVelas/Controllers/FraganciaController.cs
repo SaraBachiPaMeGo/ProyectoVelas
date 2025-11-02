@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _CrearFragView()
         {
-            return PartialView("Fragancia/_CrearFragView",  new Fragancia());
+            return PartialView("_CrearFragView",  new Fragancia());
         }
 
         [HttpPost]

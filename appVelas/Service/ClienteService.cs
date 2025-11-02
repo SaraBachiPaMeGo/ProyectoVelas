@@ -23,54 +23,106 @@ namespace appVelas.Services
 
         public async Task<CustomApiResponse<List<Cliente>>> GetClientesAsync()
         {
-            var respons = await _httpClient.GetAsync($"/api/Cliente/GetClientes");
+            var response = new CustomApiResponse<List<Cliente>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Cliente/GetClientes");
 
-            var response = await Helper.ParseApiResponse<List<Cliente>>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Cliente>>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Cliente>> BuscarClienteAsync(Guid idCliente)
         {
-            var respons = await _httpClient.GetAsync($"/api/Cliente/BuscarCliente/{idCliente}");
+            var response = new CustomApiResponse<Cliente>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Cliente/BuscarCliente/{idCliente}");
 
-            var response = await Helper.ParseApiResponse<Cliente>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Cliente>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+           
         }
 
         public async Task<CustomApiResponse<Cliente>> InsertarClienteAsync(Cliente cliente)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Cliente/InsertarCliente", cliente);
+            var response = new CustomApiResponse<Cliente>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Cliente/InsertarCliente", cliente);
 
-            var response = await Helper.ParseApiResponse<Cliente>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Cliente>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Cliente>> ActualizarClienteAsync(Cliente cliente)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Cliente/ActualizarCliente", cliente);
+            var response = new CustomApiResponse<Cliente>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Cliente/ActualizarCliente", cliente);
 
-            var response = await Helper.ParseApiResponse<Cliente>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Cliente>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
     }
 }

@@ -21,61 +21,107 @@ namespace appVelas.Service
             _httpClient = httpClient;
         }
 
-        //(IHttpClientFactory httpClientFactory)
-        //{
-        //    _httpClient = httpClientFactory.CreateClient("ApiClient");
-        //}
-
         public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()        
         {
-            var respons = await _httpClient.GetAsync("/api/Vela/GetVelas");
+            var response = new CustomApiResponse<List<Vela>>();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/Vela/GetVelas");
 
-            var dos = await respons.Content.ReadAsStringAsync();
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            var response = await Helper.ParseApiResponse<List<Vela>>(
-              dos
-            );
+                response = await Helper.ParseApiResponse<List<Vela>>(
+                  dos
+                );
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid idVela)
         {
-            var respons = await _httpClient.GetAsync($"/api/Vela/BuscarVela/{idVela}");
+            var response = new CustomApiResponse<Vela>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Vela/BuscarVela/{idVela}");
 
-            var response = await Helper.ParseApiResponse<Vela>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Vela>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+           
         }
 
         public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Vela/InsertarVela", vela);
+            var response = new CustomApiResponse<Vela>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Vela/InsertarVela", vela);
 
-            var response = await Helper.ParseApiResponse<Vela>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Vela>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela", vela);
+            var response = new CustomApiResponse<Vela>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela", vela);
 
-            var response = await Helper.ParseApiResponse<Vela>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Vela>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

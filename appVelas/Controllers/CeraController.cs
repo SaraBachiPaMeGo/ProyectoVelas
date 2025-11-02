@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public PartialViewResult _CrearCeraView()
         {
-            return PartialView("Cera/_CrearCeraView");
+            return PartialView("_CrearCeraView");
         }
 
         [HttpPost]

@@ -29,7 +29,7 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearMoldeView()
         {
-            return PartialView("Molde/_CrearMoldeView",  new Molde());
+            return PartialView("_CrearMoldeView",  new Molde());
         }
 
         [HttpPost]

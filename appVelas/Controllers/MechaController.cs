@@ -75,20 +75,24 @@ namespace appVelas.Controllers
             return PartialView("Sucess", mecha);
         }
 
+        [HttpGet]
+
         public async Task<PartialViewResult>  _DetallesMechaView()
         {
             var mechas = await _mechaRepo.GetMechasAsync();
 
             //ViewData["MechaS"] = Mechas;
-            return PartialView("Detalles/_DetallesMechaView", mechas);
+            return PartialView("_DetallesMechaView", mechas);
         }
+
+        [HttpGet]
 
         public async Task<PartialViewResult>  _DetallesMechaView1(Guid IDMecha)
         {
             var me = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
             ViewData["MECHA"] = me;
-            return PartialView("Detalles/_DetallesMechaView1", me);
+            return PartialView("DetallesView1/_DetallesMechaView1", me);
         }
     }
 }

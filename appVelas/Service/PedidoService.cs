@@ -22,54 +22,106 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync()
         {
-            var respons = await _httpClient.GetAsync("/api/Pedido/GetPedidos");
+            var response = new CustomApiResponse<List<Pedido>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync("/api/Pedido/GetPedidos");
 
-            var response = await Helper.ParseApiResponse<List<Pedido>>(
-                dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Pedido>>(
+                    dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid idPedido)
         {
-            var respons = await _httpClient.GetAsync($"/api/Pedido/BuscarPedido/{idPedido}");
+            var response = new CustomApiResponse<Pedido>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Pedido/BuscarPedido/{idPedido}");
 
-            var response = await Helper.ParseApiResponse<Pedido>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pedido>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido pedido)
         {
-            var respons = await _httpClient.PostAsJsonAsync("/api/Pedido/InsertarPedido", pedido);
+            var response = new CustomApiResponse<Pedido>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync("/api/Pedido/InsertarPedido", pedido);
 
-            var response = await Helper.ParseApiResponse<Pedido>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pedido>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
 
         public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
         {
-            var respons = await _httpClient.PutAsJsonAsync("/api/Pedido/ActualizarPedido", pedido);
+            var response = new CustomApiResponse<Pedido>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync("/api/Pedido/ActualizarPedido", pedido);
 
-            var response = await Helper.ParseApiResponse<Pedido>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Pedido>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+            
         }
     }
 }

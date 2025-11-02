@@ -22,54 +22,107 @@ namespace appVelas.Service
 
         public async Task<CustomApiResponse<List<Endurecedor>>> GetEndurecedorsAsync()
         {
-            var respons = await _httpClient.GetAsync($"/api/Endurecedor/GetEndurecedores");
+            var response = new CustomApiResponse<List<Endurecedor>>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Endurecedor/GetEndurecedores");
 
-            var response = await Helper.ParseApiResponse<List<Endurecedor>>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<List<Endurecedor>>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Endurecedor>> BuscarEndurecedorAsync(Guid idEndurecedor)
         {
-            var respons = await _httpClient.GetAsync($"/api/Endurecedor/BuscarEndurecedor/{idEndurecedor}");
+            var response = new CustomApiResponse<Endurecedor>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Endurecedor/BuscarEndurecedor/{idEndurecedor}");
 
-            var response = await Helper.ParseApiResponse<Endurecedor>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Endurecedor>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
 
         public async Task<CustomApiResponse<Endurecedor>> InsertarEndurecedorAsync(Endurecedor endurecedor)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Endurecedor/InsertarEndurecedor", endurecedor);
+            var response = new CustomApiResponse<Endurecedor>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PostAsJsonAsync($"/api/Endurecedor/InsertarEndurecedor", endurecedor);
 
-            var response = await Helper.ParseApiResponse<Endurecedor>(
-              dos
-            );
-            
-            return response;
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<Endurecedor>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
+
         }
 
         public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor)
         {
-            var respons = await _httpClient.PutAsJsonAsync($"/api/Endurecedor/ActualizarEndurecedor", endurecedor);
+            var response = new CustomApiResponse<Endurecedor>();
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            try
+            {
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Endurecedor/ActualizarEndurecedor", endurecedor);
 
-            var response = await Helper.ParseApiResponse<Endurecedor>(
-              dos
-            );
+                var dos = await respons.Content.ReadAsStringAsync();
 
-            return response;
+                response = await Helper.ParseApiResponse<Endurecedor>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+
         }
     }
 }
