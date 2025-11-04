@@ -27,13 +27,13 @@ namespace appVelas.Controllers
 
         // ------------------------------------- MOLDE ---------------------------------------------
 
-        public async Task<PartialViewResult>  _CrearMoldeView()
+        public async Task<PartialViewResult> _CrearMoldeView()
         {
-            return PartialView("_CrearMoldeView",  new Molde());
+            return PartialView("_CrearMoldeView", new Molde());
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _CrearMoldeView(Molde molde)
+        public async Task<PartialViewResult> _CrearMoldeView(Molde molde)
         {
             //if (!ModelState.IsValid)
             //{
@@ -45,7 +45,8 @@ namespace appVelas.Controllers
 
         }
 
-        public async Task<PartialViewResult>  _ActMoldeView(Guid IDMolde)
+        [HttpGet]
+        public async Task<IActionResult> ActualizarView(Guid IDMolde)
         {
             var mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
@@ -63,12 +64,12 @@ namespace appVelas.Controllers
             {
                 ViewData["IDMolde"] = IDMolde;
                 var moldes = await _moldeRepo.BuscarMoldeAsync(IDMolde);
-                return PartialView("~/Views/Molde/_ActMoldeView.cshtml", moldes.Data);
+                return View("~/Views/Molde/_ActMoldeView.cshtml", moldes.Data);
             }
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _ActMoldeView(Guid id, Molde molde)
+        public async Task<PartialViewResult> ActualizarView(Guid id, Molde molde)
         {
             await _moldeRepo.ActualizarMoldeAsync(id, molde);
 

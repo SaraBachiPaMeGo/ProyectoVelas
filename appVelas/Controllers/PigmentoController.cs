@@ -41,7 +41,7 @@ namespace appVelas.Controllers
         }
 
 
-        public async Task<PartialViewResult>  _ActPigView(Guid IDPig)
+        public async Task<IActionResult> ActualizarView(Guid IDPig)
         {
             var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
@@ -58,12 +58,12 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDPig"] = IDPig;
-                return PartialView("~/Views/Pigmento/_ActPigViewcshtml", pig.Data);
+                return View("~/Views/Pigmento/_ActPigViewcshtml", pig.Data);
             }
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _ActPigView(Pigmento pig)
+        public async Task<PartialViewResult> ActualizarView(Pigmento pig)
         {
             await _pigmentoRepo.ActualizarPigmentoAsync(pig);
 

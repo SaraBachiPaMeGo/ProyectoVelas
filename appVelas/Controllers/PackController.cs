@@ -45,7 +45,9 @@ namespace appVelas.Controllers
 
         }
 
-        public async Task<IActionResult>  _ActPackView(Guid IDPack)
+        [HttpGet]
+
+        public async Task<IActionResult> ActualizarView(Guid IDPack)
         {
             var pack = await _packRepo.BuscarPackAsync(IDPack);
 
@@ -63,11 +65,11 @@ namespace appVelas.Controllers
             {
                 ViewData["IDPack"] = IDPack;
             }
-            return PartialView("~/Views/Pack/_ActPackView.cshtml", pack.Data);
+            return View("~/Views/Pack/_ActPackView.cshtml", pack.Data);
         }
 
         [HttpPost]
-        public async Task<IActionResult>  _ActPackView(Pack pack)
+        public async Task<PartialViewResult> ActualizarView(Pack pack)
         {
             await _packRepo.ActualizarPackAsync(pack);
 

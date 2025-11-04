@@ -99,7 +99,8 @@ namespace appVelas.Controllers
 
         }
 
-        public async Task<PartialViewResult>  _ActVelaView(Guid IDVela)
+        [HttpGet]
+        public async Task<IActionResult> ActualizarView(Guid IDVela)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
 
@@ -139,12 +140,12 @@ namespace appVelas.Controllers
 
                 ViewData["IDVela"] = IDVela;
 
-                return PartialView("Vela/_ActVelaView", vela.Data);
+                return View("~/Views/Vela/_ActVelaView", vela.Data);
             }
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _ActVelaView(Vela vela)
+        public async Task<PartialViewResult> ActualizarView(Vela vela)
         {
 
             if (vela == null)
@@ -199,7 +200,7 @@ namespace appVelas.Controllers
             ViewData["Mecha"] = listaMecha;
 
             //ViewData["VELAS"] = velas;
-            return PartialView("Detalles/_DetallesVelaView", velas.Data);
+            return PartialView("~/Views/Vela/_DetallesVelaView", velas.Data);
         }
 
         public async Task<IActionResult> DetallesView1(Guid IDVela)

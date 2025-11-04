@@ -45,7 +45,7 @@ namespace appVelas.Controllers
 
         }
 
-        public async Task<PartialViewResult> _ActEndurecedorView(Guid IDEnd)
+        public async Task<IActionResult> ActualizarView(Guid IDEnd)
         {
             var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
 
@@ -63,11 +63,11 @@ namespace appVelas.Controllers
             {
                 ViewData["IDEnd"] = IDEnd;
             }
-            return PartialView("~/Views/Endurecedor/_ActEndurecedorView.cshtml", end.Data);
+            return View("~/Views/Endurecedor/_ActEndurecedorView.cshtml", end.Data);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _ActEndurecedorView(Endurecedor end)
+        public async Task<PartialViewResult> ActualizarView(Endurecedor end)
         {
              await _endurecedorRepo.ActualizarEndurecedorAsync(end);
 

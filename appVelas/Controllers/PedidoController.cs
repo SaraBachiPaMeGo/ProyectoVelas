@@ -46,7 +46,7 @@ namespace appVelas.Controllers
 
         [HttpGet]
 
-        public async Task<PartialViewResult>  _ActPedidoView(Guid IDPedido)
+        public async Task<IActionResult> ActualizarView(Guid IDPedido)
         {
             var ped = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
@@ -67,12 +67,12 @@ namespace appVelas.Controllers
 
                 ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
-                return PartialView("~/Views/Pedido/_ActPedidoView", ped.Data);
+                return View("~/Views/Pedido/_ActPedidoView", ped.Data);
             }
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _ActPedidoView(Guid id, Pedido pedido)
+        public async Task<PartialViewResult> ActualizarView(Guid id, Pedido pedido)
         {
             var pedi = await _pedidoRepo.ActualizarPedidoAsync(id, pedido);
 

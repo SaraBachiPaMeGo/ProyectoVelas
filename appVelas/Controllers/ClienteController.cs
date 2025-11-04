@@ -40,7 +40,9 @@ namespace appVelas.Controllers
             return PartialView("Sucess", cli);
         }
 
-        public async Task<PartialViewResult> _ActClienteView(Guid IDCli)
+        [HttpGet]
+
+        public async Task<IActionResult> ActualizarView(Guid IDCli)
         {
             var cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
@@ -57,12 +59,12 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDCli"] = IDCli;
-                return PartialView("~/Views/Cliente/_ActClienteView.cshtml", cli.Data);
+                return View("~/Views/Cliente/_ActClienteView.cshtml", cli.Data);
             }
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _ActClienteView(Cliente cliente)
+        public async Task<PartialViewResult> ActualizarView(Cliente cliente)
         {
              await _clienteRepo.ActualizarClienteAsync(cliente);
 
