@@ -100,13 +100,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Cera cera)
+        public async Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Guid id, Cera cera)
         {
             var response = new CustomApiResponse<Cera>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Cera/ActualizarCera", cera);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Cera/ActualizarCera/{id}", cera);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

@@ -11,6 +11,6 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Pack>>> GetPacksAsync();
         Task<CustomApiResponse<Pack>> BuscarPackAsync(Guid idPack);
         Task<CustomApiResponse<Pack>> InsertarPackAsync(Pack Pack);
-        Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack Pack);
+        Task<CustomApiResponse<Pack>> ActualizarPackAsync(Guid id, Pack Pack);
     }
 }

@@ -98,13 +98,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
+        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Guid id, Pack pack)
         {
             var response = new CustomApiResponse<Pack>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Pack/ActualizarPack", pack);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Pack/ActualizarPack/{id}", pack);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

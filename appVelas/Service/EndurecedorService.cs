@@ -99,13 +99,13 @@ namespace appVelas.Service
 
         }
 
-        public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor)
+        public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Guid id, Endurecedor endurecedor)
         {
             var response = new CustomApiResponse<Endurecedor>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Endurecedor/ActualizarEndurecedor", endurecedor);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Endurecedor/ActualizarEndurecedor/{id}", endurecedor);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

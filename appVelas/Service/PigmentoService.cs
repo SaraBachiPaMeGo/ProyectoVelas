@@ -96,13 +96,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento pigmento)
+        public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Guid id, Pigmento pigmento)
         {
             var response = new CustomApiResponse<Pigmento>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync("/api/Pigmento/ActualizarPigmento", pigmento);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Pigmento/ActualizarPigmento/{id}", pigmento);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

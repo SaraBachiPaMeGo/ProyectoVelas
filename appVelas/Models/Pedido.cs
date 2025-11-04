@@ -23,9 +23,18 @@ namespace appVelas.Models
         public DateTime FechaEntrega { get; set; }
 
         [JsonProperty("IDVela")]
-        public Guid? IDVela { get; set; }
+        public Guid IDVela { get; set; }
+
+        [JsonProperty("Vendido")]
+        public bool? Vendido { get; set; }
 
         [JsonProperty("IDCliente")]
         public Guid IDCliente { get; set; }
+
+
+        public Cliente Cliente { get; set; }
+
+        // 🔗 Relación con Velas (un pedido -> muchas velas)
+        public List<Vela> Velas { get; set; } = new List<Vela>();
     }
 }

@@ -98,13 +98,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, Vela vela)
         {
             var response = new CustomApiResponse<Vela>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela", vela);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela/{idVela}", vela);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

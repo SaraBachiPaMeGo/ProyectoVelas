@@ -205,26 +205,51 @@ namespace appVelas.Controllers
         public async Task<IActionResult> DetallesView1(Guid IDVela)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
-            var Moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde);
-            var Frag = await _fragRepo.BuscarFraganciaAsync(vela.Data.IDFrag);
-            var Pig = await _pigRepo.BuscarPigmentoAsync(vela.Data.IDPig);
             var Cera = await _ceraRepo.BuscarCeraAsync(vela.Data.IDCera);
             var Mecha = await _mechaRepo.BuscarMechaAsync(vela.Data.IDMecha);
-            var pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido);
-            Guid id = pedi.Data.IDCliente;
 
-            CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(id);
+            if (vela.Data.IDMolde.HasValue && vela.Data.IDMolde.Value != Guid.Empty)
+            {
+                CustomApiResponse<Molde> moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde ?? Guid.Empty);
 
-            ViewData["Moldes"] = Moldes;
-            ViewData["Frag"] = Frag;
-            ViewData["Pig"] = Pig;
+                ViewData["Moldes"] = moldes;
+
+            }
+
+            if (vela.Data.IDFrag.HasValue && vela.Data.IDFrag.Value != Guid.Empty)
+            {
+                CustomApiResponse<Fragancia> frag = await _fragRepo.BuscarFraganciaAsync(vela.Data.IDFrag ?? Guid.Empty);
+                ViewData["Frag"] = frag;
+
+            }
+
+            if (vela.Data.Pigmentos != null)
+            {
+                CustomApiResponse<Pigmento> pig = await _pigRepo.BuscarPigmentoAsync(vela.Data.IDPig ?? Guid.Empty);
+                ViewData["Pig"] = pig;
+
+
+            }
+
+            if (vela.Data.IDPedido.HasValue && vela.Data.IDPedido.Value != Guid.Empty)
+            {
+                CustomApiResponse<Pedido> pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido ?? Guid.Empty);
+                ViewData["pedi"] = pedi;
+
+                if (pedi.Data.IDCliente != Guid.Empty)
+                {
+                    CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(pedi.Data.IDCliente);
+                    ViewData["clien"] = clien;
+
+                }
+            }
+            
+
             ViewData["Cera"] = Cera;
             ViewData["Mecha"] = Mecha;
             ViewData["VELA"] = vela;
-            ViewData["clien"] = clien;
-            ViewData["pedi"] = pedi;
 
-            return View("Detalles/_DetallesVelaView1", vela.Data);
+            return View("~/Views/Vela/_DetallesVelaView1", vela.Data);
         }
     }
 }

@@ -98,13 +98,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
+        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Guid id, Pedido pedido)
         {
             var response = new CustomApiResponse<Pedido>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync("/api/Pedido/ActualizarPedido", pedido);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Pedido/ActualizarPedido/{id}", pedido);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

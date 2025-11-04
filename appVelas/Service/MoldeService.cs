@@ -85,13 +85,13 @@ namespace appVelas.Service
             return response;
         }
 
-        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde molde)
         {
             var response = new CustomApiResponse<Molde>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde", molde);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde/{id}", molde);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

@@ -30,5 +30,8 @@ namespace appVelas.Models
 
         [JsonProperty("IDPedido")]
         public Guid IDPedido { get; set; }
+
+        public List<Pedido> Pedidos { get; set; } = new List<Pedido>();
+
     }
 }

@@ -44,6 +44,8 @@ namespace appVelas.Controllers
             return PartialView("Sucess");
         }
 
+        [HttpGet]
+
         public async Task<PartialViewResult>  _ActPedidoView(Guid IDPedido)
         {
             var ped = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
@@ -70,20 +72,32 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _ActPedidoView(Pedido pedido)
+        public async Task<PartialViewResult>  _ActPedidoView(Guid id, Pedido pedido)
         {
-            //await _pedidoRepo.ActualizarPedido(pedido);
+            var pedi = await _pedidoRepo.ActualizarPedidoAsync(id, pedido);
 
-            return PartialView("~/Views/Pedido/_ActPedidoView.cshtml", pedido);
+            return PartialView("Sucess", pedi);
         }
 
-        public async Task<PartialViewResult>  _DetallesPedidoView()
-        {
-            var pedidos = await _pedidoRepo.GetPedidosAsync();
+        [HttpGet]
 
-            //ViewData["PedidoS"] = Pedidos;
-            return PartialView("~/Views/Pedido/_DetallesPedidoView.cshtml", pedidos.Data);
+        public async Task<IActionResult>  _DetallesPedidoView()
+        {
+            try
+            {
+                var pedidos = await _pedidoRepo.GetPedidosAsync();
+
+                ViewData["PedidoS"] = pedidos;
+                return PartialView("~/Views/Pedido/_DetallesPedidoView.cshtml", pedidos.Data);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+
         }
+
+        [HttpGet]
 
         public async Task<IActionResult> DetallesView1(Guid IDPedido)
         {

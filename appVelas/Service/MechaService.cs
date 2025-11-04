@@ -98,13 +98,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Mecha mecha)
+        public async Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Guid id, Mecha mecha)
         {
             var response = new CustomApiResponse<Mecha>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Mecha/ActualizarMecha", mecha);
+                var respons = await _httpClient.PutAsJsonAsync($"/api/Mecha/ActualizarMecha/{id}", mecha);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

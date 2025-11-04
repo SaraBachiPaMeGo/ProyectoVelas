@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _pedidoService.InsertarPedidoAsync(pedido);
         }
 
-        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido pedido)
+        public async Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Guid id, Pedido pedido)
         {
-            return await _pedidoService.ActualizarPedidoAsync(pedido);
+            return await _pedidoService.ActualizarPedidoAsync(id, pedido);
         }
 
 

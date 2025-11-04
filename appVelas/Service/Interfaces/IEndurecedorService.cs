@@ -11,6 +11,6 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Endurecedor>>> GetEndurecedorsAsync();
         Task<CustomApiResponse<Endurecedor>> BuscarEndurecedorAsync(Guid idEndurecedor);
         Task<CustomApiResponse<Endurecedor>> InsertarEndurecedorAsync(Endurecedor endurecedor);
-        Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor);
+        Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Guid id, Endurecedor endurecedor);
     }
 }

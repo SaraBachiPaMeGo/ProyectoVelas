@@ -11,6 +11,6 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Pedido>>> GetPedidosAsync();
         Task<CustomApiResponse<Pedido>> BuscarPedidoAsync(Guid idPedido);
         Task<CustomApiResponse<Pedido>> InsertarPedidoAsync(Pedido Pedido);
-        Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Pedido Pedido);
+        Task<CustomApiResponse<Pedido>> ActualizarPedidoAsync(Guid id, Pedido Pedido);
     }
 }

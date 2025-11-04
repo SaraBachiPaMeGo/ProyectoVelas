@@ -34,31 +34,33 @@ namespace appVelas.Models
         public DateTime FechaVenta { get; set; }
 
         [JsonProperty("GradFrag")]
-        public decimal GradFrag { get; set; }
+        public decimal? GradFrag { get; set; }
 
         [JsonProperty("GradPig")]
-        public decimal GradPig { get; set; }
+        public decimal? GradPig { get; set; }
 
         [JsonProperty("IDFrag")]
-        public Guid IDFrag { get; set; }
+        public Guid? IDFrag { get; set; }
 
         [JsonProperty("IDMolde")]
-        public Guid IDMolde { get; set; }
+        public Guid? IDMolde { get; set; }
 
         [JsonProperty("IDPig")]
-        public Guid IDPig { get; set; }
+        public Guid? IDPig { get; set; }
 
         [JsonProperty("Coste")]
-        public decimal Coste { get; set; }
+        public decimal? Coste { get; set; }
 
         [JsonProperty("IDPedido")]
-        public Guid IDPedido { get; set; }
+        public Guid? IDPedido { get; set; }
 
         [JsonProperty("IDMecha")]
         public Guid IDMecha { get; set; }
 
         [JsonProperty("IDCera")]
         public Guid IDCera { get; set; }
+
+        public Pedido Pedido { get; set; }
 
         public List<VelaPigmento> Pigmentos { get; set; }
         public List<VelaFragancia> Fragancias { get; set; }

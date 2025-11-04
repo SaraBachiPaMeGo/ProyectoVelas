@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _moldeService.InsertarMoldeAsync(molde);
         }
 
-        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde molde)
         {
-            return await _moldeService.ActualizarMoldeAsync(molde);
+            return await _moldeService.ActualizarMoldeAsync(id, molde);
         }
     }
 }

@@ -112,11 +112,20 @@ namespace appVelas.Controllers
         [HttpGet]
         public async Task<IActionResult> DetallesView1(Guid IDMecha)
         {
-            var me = await _mechaRepo.BuscarMechaAsync(IDMecha);
+            try
+            {
+                var me = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
-            ViewData["MECHA"] = me;
-            //return PartialView("DetallesView1/_DetallesMechaView1", me);
-            return View("~/Views/Mecha/_DetallesMechaView1.cshtml", me.Data);
+                ViewData["MECHA"] = me;
+                //return PartialView("DetallesView1/_DetallesMechaView1", me);
+                return View("~/Views/Mecha/_DetallesMechaView1.cshtml", me.Data);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+
+            
         }
     }
 }

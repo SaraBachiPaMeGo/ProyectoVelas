@@ -11,6 +11,6 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Molde>>> GetMoldesAsync();
         Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde);
         Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde Molde);
-        Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Molde Molde); 
+        Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde Molde); 
     }
 }
