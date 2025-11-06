@@ -89,12 +89,21 @@ namespace appVelas.Controllers
 
         }
 
+        [HttpGet]
         public async Task<IActionResult> DetallesView1(Guid IDPig)
         {
-            var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
+            try
+            {
+                var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
-            ViewData["PIG"] = pig;
-            return View("~/Views/Pigmento/_DetallesPigView1.cshtml", pig.Data);
+                ViewData["PIG"] = pig;
+                return View("~/Views/Pigmento/_DetallesPigView1.cshtml", pig.Data);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+           
         }
 
     }

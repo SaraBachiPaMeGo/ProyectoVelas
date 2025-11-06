@@ -8,9 +8,25 @@
         placeholder: "Selecciona un pigmento",
         allowClear: true
     });
+
+    window.addEventListener('load', function () {
+        const pendiente = sessionStorage.getItem('vistaPendiente');
+        if (pendiente) {
+            const { tipoVista, contenedor, http } = JSON.parse(pendiente);
+            sessionStorage.removeItem('vistaPendiente');
+            // Ejecuta la carga AJAX automáticamente
+            cargarVistaParcial(tipoVista, contenedor, http);
+        }
+    });
 });
 
 function cargarVistaParcial(tipoVista, contenedor, http) {
+    // Guarda temporalmente los parámetros antes de recargar
+    sessionStorage.setItem('vistaPendiente', JSON.stringify({ tipoVista, contenedor, http }));
+
+    // Redirige al home base
+    window.location.href = `${window.location.origin}/#`;
+
     switch (tipoVista) {
         case 'vela':
             $.ajax({

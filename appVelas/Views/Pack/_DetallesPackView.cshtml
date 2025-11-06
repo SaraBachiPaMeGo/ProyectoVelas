@@ -54,8 +54,8 @@
                     @Html.DisplayFor(modelItem => item.IDVela)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDPack, vista = "Pack" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { id = item.IDPack, vista = "Pack" }) @*|
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack, vista = "Pack" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" }) @*|
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
             </tr>

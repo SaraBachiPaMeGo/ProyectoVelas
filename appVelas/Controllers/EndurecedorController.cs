@@ -82,9 +82,10 @@ namespace appVelas.Controllers
             return PartialView("~/Views/Endurecedor/_DetallesEndurecedorView.cshtml", end.Data);
         }
 
-        public async Task<IActionResult> DetallesView1(Guid IDEnd)
+        [HttpGet]
+        public async Task<IActionResult> DetallesView1(Guid IDEndurecedor)
         {
-            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
+            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEndurecedor);
 
             ViewData["END"] = end;
             return View("~/Views/Endurecedor/_DetallesEndurecedorView1.cshtml", end.Data);
