@@ -66,7 +66,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Cliente cliente)
         {
-             await _clienteRepo.ActualizarClienteAsync(cliente);
+             await _clienteRepo.ActualizarClienteAsync(cliente.IDCliente, cliente);
 
             return PartialView("Sucess", cliente);
         }

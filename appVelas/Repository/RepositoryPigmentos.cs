@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _pigmentoService.InsertarPigmentoAsync(pigmento);
         }
 
-        public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Pigmento pigmento)
+        public async Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Guid id, Pigmento pigmento)
         {
-            return await _pigmentoService.ActualizarPigmentoAsync(pigmento);
+            return await _pigmentoService.ActualizarPigmentoAsync(id,pigmento);
         }
     }
 }

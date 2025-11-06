@@ -63,7 +63,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Fragancia frag)
         {
-            await _fraganciaRepo.ActualizarFraganciaAsync(frag);
+            await _fraganciaRepo.ActualizarFraganciaAsync(frag.IDFrag, frag);
 
             return PartialView("Sucess", frag);
         }

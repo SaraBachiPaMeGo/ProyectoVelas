@@ -88,7 +88,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Mecha mecha)
         {
-            await _mechaRepo.ActualizarMechaAsync(mecha);
+            await _mechaRepo.ActualizarMechaAsync(mecha.IDMecha, mecha);
 
             return PartialView("Sucess", mecha);
         }

@@ -178,7 +178,7 @@ namespace appVelas.Controllers
                 }
             }
 
-            await _velaRepo.ActualizarVelaAsync(vela);
+            await _velaRepo.ActualizarVelaAsync(vela.IDVela, vela);
 
             return PartialView("Sucess");
         }

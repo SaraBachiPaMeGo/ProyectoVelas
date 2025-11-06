@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _fraganciaService.InsertarFraganciaAsync(fragancia);
         }
 
-        public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Fragancia fragancia)
+        public async Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Guid id, Fragancia fragancia)
         {
-            return await _fraganciaService.ActualizarFraganciaAsync(fragancia);
+            return await _fraganciaService.ActualizarFraganciaAsync(id, fragancia);
         }
     }
 }

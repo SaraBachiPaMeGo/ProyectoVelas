@@ -90,8 +90,8 @@
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.ActionLink("Molde", "ActualizarView", new { id = item.IDMolde, vista = "Molde" }) |
-                    @Html.ActionLink("Molde", "DetallesView1", new { id = item.IDMolde, vista = "Molde" }) |
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { id = item.IDMolde, vista = "Molde" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { id = item.IDMolde, vista = "Molde" }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>

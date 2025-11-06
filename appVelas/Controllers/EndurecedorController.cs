@@ -69,7 +69,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Endurecedor end)
         {
-             await _endurecedorRepo.ActualizarEndurecedorAsync(end);
+             await _endurecedorRepo.ActualizarEndurecedorAsync(end.IDEndurecedor, end);
 
             return PartialView("Sucess", end);
         }

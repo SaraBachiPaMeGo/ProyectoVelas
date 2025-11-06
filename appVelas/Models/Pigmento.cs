@@ -32,9 +32,12 @@ namespace appVelas.Models
         public Guid? IDVela { get; set; }
 
         [JsonProperty("Cantidad")]
-        public decimal Cantidad { get; set; }
+        public decimal? Cantidad { get; set; }
 
         [JsonProperty("Coste")]
-        public decimal Coste { get; set; }
+        public decimal? Coste { get; set; }
+
+        public List<VelaPigmento> VelaPigmentos { get; set; }
+
     }
 }

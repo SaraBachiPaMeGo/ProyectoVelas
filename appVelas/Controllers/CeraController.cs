@@ -65,7 +65,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Cera cera)
         {
-            var ceras = await _ceraRepo.ActualizarCeraAsync(cera);
+            var ceras = await _ceraRepo.ActualizarCeraAsync(cera.IDCera, cera);
 
             return PartialView("Sucess", cera);
         }

@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _endurecedorService.InsertarEndurecedorAsync(endurecedor);
         }
 
-        public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Endurecedor endurecedor)
+        public async Task<CustomApiResponse<Endurecedor>> ActualizarEndurecedorAsync(Guid id, Endurecedor endurecedor)
         {
-            return await _endurecedorService.ActualizarEndurecedorAsync(endurecedor);
+            return await _endurecedorService.ActualizarEndurecedorAsync(id, endurecedor);
         }
     }
 }

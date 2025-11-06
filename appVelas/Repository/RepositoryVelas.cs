@@ -40,9 +40,9 @@ namespace appVelas.Repository
             return await _velaService.InsertarVelaAsync(vela);
         }
 
-        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, Vela vela)
         {
-            return await _velaService.ActualizarVelaAsync(vela);
+            return await _velaService.ActualizarVelaAsync(idVela,vela);
         }
     }
 

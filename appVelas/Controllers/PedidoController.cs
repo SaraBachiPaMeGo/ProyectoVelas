@@ -103,7 +103,7 @@ namespace appVelas.Controllers
         {
             var pedo = await _pedidoRepo.BuscarPedidoAsync(IDPedido);
 
-            ViewData["PEDIDO"] = pedo;
+            ViewData["PEDIDO"] = pedo.Data;
             return View("~/Views/Pedido/_DetallesPedidoView1.cshtml", pedo.Data);
         }
     }

@@ -34,9 +34,9 @@ namespace appVelas.Repository
             return await _packService.InsertarPackAsync(pack);
         }
 
-        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Pack pack)
+        public async Task<CustomApiResponse<Pack>> ActualizarPackAsync(Guid id, Pack pack)
         {
-            return await _packService.ActualizarPackAsync(pack);
+            return await _packService.ActualizarPackAsync(id, pack);
         }
     }
 }

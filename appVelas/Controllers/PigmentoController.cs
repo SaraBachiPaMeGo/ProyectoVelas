@@ -65,17 +65,28 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Pigmento pig)
         {
-            await _pigmentoRepo.ActualizarPigmentoAsync(pig);
+            await _pigmentoRepo.ActualizarPigmentoAsync(pig.IDPig, pig);
 
             return PartialView("Sucess", pig);
         }
 
-        public async Task<PartialViewResult>  _DetallesPigView()
+        [HttpGet]
+        public async Task<IActionResult>  _DetallesPigView()
         {
-            var pig = await _pigmentoRepo.GetPigmentosAsync();
+            try
+            {
+                var pig = await _pigmentoRepo.GetPigmentosAsync();
 
-            //ViewData["PigmentoS"] = Pigmentos;
-            return PartialView("~/Views/Pigmento/_DetallesPigViewcshtml", pig.Data);
+                ViewData["PigmentoS"] = pig.Data;
+                return PartialView("~/Views/Pigmento/_DetallesPigView.cshtml", pig.Data);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"Error: {ex.Message}");
+
+            }
+
         }
 
         public async Task<IActionResult> DetallesView1(Guid IDPig)

@@ -71,7 +71,7 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult> ActualizarView(Pack pack)
         {
-            await _packRepo.ActualizarPackAsync(pack);
+            await _packRepo.ActualizarPackAsync(pack.IDPack,pack);
 
             return PartialView("Sucess", pack);
         }
