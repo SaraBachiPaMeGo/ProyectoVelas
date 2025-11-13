@@ -60,6 +60,9 @@ namespace appVelas.Models
         [JsonProperty("IDCera")]
         public Guid IDCera { get; set; }
 
+        public ICollection<Documento>? Documentos { get; set; }
+
+
         public Pedido Pedido { get; set; }
 
         public List<VelaPigmento> Pigmentos { get; set; }

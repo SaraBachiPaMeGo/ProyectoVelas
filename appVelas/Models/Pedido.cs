@@ -36,5 +36,8 @@ namespace appVelas.Models
 
         // 🔗 Relación con Velas (un pedido -> muchas velas)
         public List<Vela> Velas { get; set; } = new List<Vela>();
+
+        public ICollection<Documento>? Documentos { get; set; }
+
     }
 }

@@ -30,11 +30,8 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearPedidoView()
         {
-            var listaPedido = await _pedidoRepo.GetPedidosAsync();
 
-            ViewData["Pedido"] = listaPedido;
-
-            return PartialView("_CrearPedidoView", new Pedido());
+            return PartialView("_CrearPedidoView");
         }
 
         [HttpPost]

@@ -34,5 +34,8 @@ namespace appVelas.Models
 
         [JsonProperty("IDVela")]
         public Guid? IDVela { get; set; }
+
+        public ICollection<Documento>? Documentos { get; set; }
+
     }
 }

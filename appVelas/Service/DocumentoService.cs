@@ -99,6 +99,7 @@ namespace appVelas.Service
 
             try
             {
+                Documento.FechaSubida = DateTime.Now;
                 var respons = await _httpClient.PostAsJsonAsync($"/api/Documento/InsertarDocumento", Documento);
 
                 var dos = await respons.Content.ReadAsStringAsync();
