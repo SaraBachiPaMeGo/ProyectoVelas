@@ -45,9 +45,9 @@ namespace appVelas.Controllers
 
         }
 
-        public async Task<IActionResult> ActualizarView(Guid IDEnd)
+        public async Task<IActionResult> ActualizarView(Guid IDEndurecedor)
         {
-            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEnd);
+            var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEndurecedor);
 
             if (end == null)
             {
@@ -55,13 +55,13 @@ namespace appVelas.Controllers
                     ErrorViewModel
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna endurecedor con el IDEnd recibido. IDEnd = " + IDEnd +
+                    Mensaje = "No se encontró ninguna endurecedor con el IDEnd recibido. IDEnd = " + IDEndurecedor +
                         "Error en el Controller de la vista _ActEndurecedorView"
                 });
             }
             else
             {
-                ViewData["IDEnd"] = IDEnd;
+                ViewData["IDEnd"] = IDEndurecedor;
             }
             return View("~/Views/Endurecedor/_ActEndurecedorView.cshtml", end.Data);
         }

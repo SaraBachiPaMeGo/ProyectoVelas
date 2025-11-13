@@ -1,0 +1,89 @@
+﻿@model appVelas.Models.Documento
+
+<h4>Documento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="_CrearDocView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IDDoc" class="control-label"></label>
+                <input asp-for="IDDoc" class="form-control" />
+                <span asp-validation-for="IDDoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDPack" class="control-label"></label>
+                <input asp-for="IDPack" class="form-control" />
+                <span asp-validation-for="IDPack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDEndurecedor" class="control-label"></label>
+                <input asp-for="IDEndurecedor" class="form-control" />
+                <span asp-validation-for="IDEndurecedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDMecha" class="control-label"></label>
+                <input asp-for="IDMecha" class="form-control" />
+                <span asp-validation-for="IDMecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDCera" class="control-label"></label>
+                <input asp-for="IDCera" class="form-control" />
+                <span asp-validation-for="IDCera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDFrag" class="control-label"></label>
+                <input asp-for="IDFrag" class="form-control" />
+                <span asp-validation-for="IDFrag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDPig" class="control-label"></label>
+                <input asp-for="IDPig" class="form-control" />
+                <span asp-validation-for="IDPig" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDMolde" class="control-label"></label>
+                <input asp-for="IDMolde" class="form-control" />
+                <span asp-validation-for="IDMolde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreDoc" class="control-label"></label>
+                <input asp-for="NombreDoc" class="form-control" />
+                <span asp-validation-for="NombreDoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDoc" class="control-label"></label>
+                <input asp-for="TipoDoc" class="form-control" />
+                <span asp-validation-for="TipoDoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ruta" class="control-label"></label>
+                <input asp-for="Ruta" class="form-control" />
+                <span asp-validation-for="Ruta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datos" class="control-label"></label>
+                <input asp-for="Datos" class="form-control" />
+                <span asp-validation-for="Datos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaSubida" class="control-label"></label>
+                <input asp-for="FechaSubida" class="form-control" />
+                <span asp-validation-for="FechaSubida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

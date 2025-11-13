@@ -1,0 +1,107 @@
+﻿@model IEnumerable<appVelas.Models.Documento>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDEndurecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCera)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDFrag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPig)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMolde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ruta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaSubida)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDDoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDEndurecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCera)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDFrag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMolde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreDoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ruta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSubida)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

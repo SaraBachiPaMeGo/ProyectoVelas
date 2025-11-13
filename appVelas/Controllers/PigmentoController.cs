@@ -58,7 +58,7 @@ namespace appVelas.Controllers
             else
             {
                 ViewData["IDPig"] = IDPig;
-                return View("~/Views/Pigmento/_ActPigViewcshtml", pig.Data);
+                return View("~/Views/Pigmento/_ActPigView.cshtml", pig.Data);
             }
         }
 

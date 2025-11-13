@@ -20,12 +20,21 @@
     });
 });
 
+function recargarPag(tipoVista, contenedor, http) {
+    sessionStorage.setItem('vistaPendiente', JSON.stringify({ tipoVista, contenedor, http }));
+
+    var url = `${window.location.origin}`;
+    cargarVistaParcial(tipoVista, contenedor, http);
+
+    window.location.href = url;
+}
+
 function cargarVistaParcial(tipoVista, contenedor, http) {
     // Guarda temporalmente los parámetros antes de recargar
     sessionStorage.setItem('vistaPendiente', JSON.stringify({ tipoVista, contenedor, http }));
 
     // Redirige al home base
-    window.location.href = `${window.location.origin}/#`;
+    //window.location.href = `${window.location.origin}`;
 
     switch (tipoVista) {
         case 'vela':
@@ -118,6 +127,18 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
         case 'cera':
             $.ajax({
                 url: '/Cera/_' + http +'CeraView',
+                type: 'GET',
+                success: function (data) {
+                    $('#miContenedor').html(data);
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
+        case 'doc':
+            $.ajax({
+                url: '/Cera/_' + http + 'DocView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);

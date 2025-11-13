@@ -67,7 +67,7 @@ namespace appVelas.Controllers
 
                 ViewData["Pedidos"] = listaPedidos;
                 ViewData["IDPedido"] = IDPedido;
-                return View("~/Views/Pedido/_ActPedidoView", ped.Data);
+                return View("~/Views/Pedido/_ActPedidoView.cshtml", ped.Data);
             }
         }
 
