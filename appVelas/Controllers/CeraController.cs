@@ -37,7 +37,7 @@ namespace appVelas.Controllers
         {
             var ceras = await _ceraRepo.InsertarCeraAsync(cera);
 
-            return PartialView("Sucess", cera);
+            return PartialView("Sucess", ceras.Data);
 
         }
 

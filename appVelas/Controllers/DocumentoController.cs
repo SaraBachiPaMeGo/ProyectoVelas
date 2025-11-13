@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using appVelas.Models;
 using appVelas.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace appVelas.Controllers
@@ -50,12 +52,34 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _CrearDocView(Documento Documento)
+        public async Task<PartialViewResult> _CrearDocView(Documento documento, IFormFile? archivo)
         {
-            var Documentos = await _docRepo.InsertarDocumentoAsync(Documento);
 
-            return PartialView("Sucess", Documento);
+            if (archivo != null && archivo.Length > 0)
+            {
+                // Carpeta donde se guardarán los archivos (asegúrate de que exista)
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "documentos");
 
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                // Generar nombre único
+                string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(archivo.FileName)}";
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Guardar archivo en disco
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await archivo.CopyToAsync(fileStream);
+                }
+
+                // Guardar ruta relativa en la base de datos
+                documento.Ruta = $"/uploads/documentos/{uniqueFileName}";
+            }
+
+            var resultado = await _docRepo.InsertarDocumentoAsync(documento);
+
+            return PartialView("Sucess");
         }
 
         [HttpGet]

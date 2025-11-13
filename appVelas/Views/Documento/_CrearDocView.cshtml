@@ -62,16 +62,20 @@
                 <input asp-for="TipoDoc" class="form-control" />
                 <span asp-validation-for="TipoDoc" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ruta" class="control-label"></label>
-                <input asp-for="Ruta" class="form-control" />
-                <span asp-validation-for="Ruta" class="text-danger"></span>
-            </div>
+
+
+            @*//------------------------*@
             <div class="form-group">
                 <label asp-for="Datos" class="control-label"></label>
                 <input asp-for="Datos" class="form-control" />
                 <span asp-validation-for="Datos" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label for="Documento">Seleccionar documento PDF</label>
+                <input type="file" name="archivo" accept="application/pdf" class="form-control" />
+            </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
