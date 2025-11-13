@@ -97,8 +97,8 @@
                 @Html.DisplayFor(modelItem => item.FechaSubida)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = item.IDDoc, vista = "Documento" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { IDDoc = item.IDDoc, vista = "Documento" }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
