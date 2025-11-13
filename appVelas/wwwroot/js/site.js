@@ -138,7 +138,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
             break;
         case 'doc':
             $.ajax({
-                url: '/Cera/_' + http + 'DocView',
+                url: '/Documento/_' + http + 'DocView',
                 type: 'GET',
                 success: function (data) {
                     $('#miContenedor').html(data);

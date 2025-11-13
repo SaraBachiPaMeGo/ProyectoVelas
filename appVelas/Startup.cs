@@ -37,6 +37,7 @@ namespace appVelas
             services.AddScoped<RepositoryVelas>();
             services.AddScoped<RepositoryCeras>();
             services.AddScoped<RepositoryClientes>();
+            services.AddScoped<RepositoryDocumentos>();
             services.AddScoped<RepositoryEndurecedores>();
             services.AddScoped<RepositoryFragancias>();
             services.AddScoped<RepositoryMechas>();
@@ -77,6 +78,14 @@ namespace appVelas
                 var factory = sp.GetRequiredService<IHttpClientFactory>();
                 var client = factory.CreateClient("ApiClient");
                 return new ClienteService(client);
+            });
+
+            //services.AddHttpClient<IClienteService, ClienteService>();
+            services.AddScoped<IDocumentoService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new DocumentoService(client);
             });
 
             //services.AddHttpClient<IEndurecedorService, EndurecedorService>();
