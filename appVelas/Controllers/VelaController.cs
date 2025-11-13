@@ -7,6 +7,8 @@ using appVelas.Repository;
 using appVelas.Models;
 using appVelas.Service.Interfaces;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace appVelas.Controllers
 {
@@ -100,9 +102,32 @@ namespace appVelas.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ActualizarView(Guid IDVela)
+        public async Task<IActionResult> ActualizarView(Guid IDVela, IFormFile? imagen)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
+
+            if (imagen != null && imagen.Length > 0)
+            {
+                // Carpeta donde guardar las imágenes
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "imagenes");
+
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                // Generar nombre único
+                string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(imagen.FileName)}";
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Guardar archivo físicamente
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imagen.CopyToAsync(fileStream);
+                }
+
+                // Guardar ruta relativa en la BD
+                vela.Data.Image = $"/uploads/imagenes/{uniqueFileName}";
+            }
+
 
             if (vela == null)
             {

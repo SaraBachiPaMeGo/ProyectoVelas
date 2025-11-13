@@ -83,6 +83,14 @@
     </div>
 </div>
 
+@*@if (!string.IsNullOrEmpty(Model.Documento))
+{
+    <p>
+        <a href="@Model.Documento" target="_blank">📄 Ver Documento</a>
+    </p>
+}*@
+
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
