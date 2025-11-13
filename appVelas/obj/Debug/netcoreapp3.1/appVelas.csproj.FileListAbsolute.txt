@@ -424,3 +424,7 @@ C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcor
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.dll
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.pdb
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.genruntimeconfig.cache
+C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Documento\_ActDocView.cshtml.g.cs
+C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Documento\_CrearDocView.cshtml.g.cs
+C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Documento\_DetallesDocView.cshtml.g.cs
+C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Documento\_DetallesDocView1.cshtml.g.cs

@@ -20,12 +20,11 @@ namespace appVelas.Controllers
         private readonly RepositoryVelaFragancias _vFragRepo;
         private readonly RepositoryVelaPigmentos _vPigRepo;
         private readonly RepositoryPedidos _pediRepo;
-        private readonly RepositoryClientes _cliRepo;
         private readonly RepositoryDocumentos _docRepo;
 
         public DocumentoController(RepositoryVelas velaRepo, RepositoryMoldes moldeRepo, RepositoryFragancias fragRepo,
             RepositoryPigmentos pigRepo, RepositoryCeras ceraRepo, RepositoryMechas mechaRepo, RepositoryVelaFragancias velaFragRepo,
-            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo)
+            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryDocumentos _docRepo)
         {
             _velaRepo = velaRepo;
             _moldeRepo = moldeRepo;
@@ -36,16 +35,22 @@ namespace appVelas.Controllers
             _vFragRepo = velaFragRepo;
             _vPigRepo = velaPigRepo;
             _pediRepo = pediRepo;
-            _cliRepo = cliRepo;
-
+            _docRepo = _docRepo;
         }
-        public PartialViewResult _CrearCeraView()
+
+        public async Task<IActionResult> Index()
         {
-            return PartialView("_CrearCeraView");
+            var doc = await _docRepo.GetDocumentosAsync();
+            return View(doc);
+        }
+
+        public PartialViewResult _CrearDocView()
+        {
+            return PartialView("_CrearDocView");
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _CrearDocumentoView(Documento Documento)
+        public async Task<PartialViewResult> _CrearDocView(Documento Documento)
         {
             var Documentos = await _docRepo.InsertarDocumentoAsync(Documento);
 
@@ -55,9 +60,9 @@ namespace appVelas.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> ActualizarView(Guid IDDocumento)
+        public async Task<IActionResult> ActualizarView(Guid IDDoc)
         {
-            var Documento = await _docRepo.BuscarDocumentoAsync(IDDocumento);
+            var Documento = await _docRepo.BuscarDocumentoAsync(IDDoc);
 
             if (Documento == null)
             {
@@ -65,28 +70,28 @@ namespace appVelas.Controllers
                     ErrorViewModel
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna Documento con el IDDocumento recibido. IDDocumento = " + IDDocumento +
-                        "Error en el Controller de la vista _ActDocumentoView"
+                    Mensaje = "No se encontró ningún Documento con el IDDoc recibido. IDDoc = " + IDDoc +
+                        "Error en el Controller de la vista _ActDocView"
                 });
             }
             else
-                ViewData["IDDocumento"] = IDDocumento;
-            return View("~/Views/Documento/_ActDocumentoView.cshtml", Documento.Data);
+                ViewData["IDDoc"] = IDDoc;
+            return View("~/Views/Documento/_ActDocView.cshtml", Documento.Data);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Documento documento)
+        public async Task<PartialViewResult> ActualizarView(Documento doc)
         {
-            var Documentos = await _docRepo.ActualizarDocumentoAsync(documento.IDDoc, documento);
+            var documento = await _docRepo.ActualizarDocumentoAsync(doc.IDDoc, doc);
 
             return PartialView("Sucess", documento);
         }
 
-        public async Task<PartialViewResult> _DetallesDocumentoView()
+        public async Task<PartialViewResult> _DetallesDocView()
         {
             var Documento = await _docRepo.GetDocumentosAsync();
 
-            return PartialView("~/Views/Documento/_DetallesDocumentoView.cshtml", Documento.Data);
+            return PartialView("~/Views/Documento/_DetallesDocView.cshtml", Documento.Data);
         }
 
         public async Task<IActionResult> DetallesView1(Guid IDDoc)
@@ -94,7 +99,7 @@ namespace appVelas.Controllers
             var Documento = await _docRepo.BuscarDocumentoAsync(IDDoc);
 
             ViewData["Documento"] = Documento;
-            return View("~/Views/Documento/_DetallesDocumentoView1.cshtml", Documento.Data);
+            return View("~/Views/Documento/_DetallesDocView1.cshtml", Documento.Data);
         }
 
     }
