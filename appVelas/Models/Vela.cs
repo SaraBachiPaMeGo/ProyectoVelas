@@ -45,6 +45,9 @@ namespace appVelas.Models
         [JsonProperty("IDMolde")]
         public Guid? IDMolde { get; set; }
 
+        [JsonProperty("IDPack")]
+        public Guid? IDPack { get; set; }
+
         [JsonProperty("IDPig")]
         public Guid? IDPig { get; set; }
 
