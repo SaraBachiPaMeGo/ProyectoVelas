@@ -60,8 +60,26 @@ namespace appVelas.Models
         [JsonProperty("IDCera")]
         public Guid IDCera { get; set; }
 
-        public ICollection<Documento>? Documentos { get; set; }
+        [JsonProperty("CantidadCera")]
+        public decimal? CantidadCera { get; set; }
 
+        [JsonProperty("CantidadMecha")]
+        public decimal? CantidadMecha { get; set; }
+
+        [JsonProperty("CantidadFrag")]
+        public decimal? CantidadFrag { get; set; }
+
+        [JsonProperty("CantidadPig")]
+        public decimal? CantidadPig { get; set; }
+
+        [JsonProperty("CantidadEnd")]
+        public decimal? CantidadEnd { get; set; }
+
+
+        [JsonProperty("CantidadPack")]
+        public decimal? CantidadPack { get; set; }
+
+        public ICollection<Documento>? Documentos { get; set; }
 
         public Pedido Pedido { get; set; }
 

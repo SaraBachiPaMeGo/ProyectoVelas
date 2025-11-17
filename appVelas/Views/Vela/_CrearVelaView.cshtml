@@ -73,22 +73,28 @@
                 </div>
 
                 @*Por defecto la de siempre*@
-            <div class="form-group">
-                <label asp-for="IDMecha" class="control-label">Mecha:</label>
-                <select name="IDMecha" id="IDMecha" class="form-control">
+                <div class="form-group">
+                    <label asp-for="IDMecha" class="control-label">Mecha:</label>
+                    <select name="IDMecha" id="IDMecha" class="form-control">
 
-                    @foreach (var item in mechas)
-                    {
-                        <option value="@item.IDMecha">@item.Firma</option>
-                    }
-                </select>
-            </div>
-         
+                        @foreach (var item in mechas)
+                        {
+                            <option value="@item.IDMecha">@item.Firma</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CantidadMecha" class="control-label">cm:</label>
+                    <input asp-for="CantidadMecha" class="form-control" />
+                    <span asp-validation-for="CantidadMecha" class="text-danger"></span>
+                </div>
+
 
                 @*Por defecto la de siempre*@
                 <div class="form-group">
                     <label asp-for="IDCera" class="control-label">Cera:</label>
-                    <select  name="IDCera" id="IDCera" class="form-control" >
+                    <select name="IDCera" id="IDCera" class="form-control">
 
                         @foreach (var item in cera)
                         {
@@ -97,27 +103,22 @@
                     </select>
                     @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
                 </div>
-                
+
+                <div class="form-group">
+                    <label asp-for="CantidadCera" class="control-label">g:</label>
+                    <input asp-for="CantidadCera" class="form-control" />
+                    <span asp-validation-for="CantidadCera" class="text-danger"></span>
+                </div>
+
 
                 @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
-            <div class="form-group">
-                <label asp-for="IDMolde" class="control-label">Molde:</label>
-                <select name="IDMolde" id="IDMolde" class="form-control" >
-                     
+                <div class="form-group">
+                    <label asp-for="IDMolde" class="control-label">Molde:</label>
+                    <select name="IDMolde" id="IDMolde" class="form-control">
+
                         @foreach (var item in moldes)
                         {
                             <option value="@item.IDMolde">@item.MoldeNombre</option>
-                        }
-                    </select>
-            </div>
-
-                @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
-                <div class="form-group">
-                    <label class="control-label">Fragrancias</label>
-                    <select name="IDFragancias" class="form-control select2" multiple="multiple" style="width: 100%;">
-                        @foreach (var fraga in fragancias)
-                        {
-                            <option value="@fraga.IDFrag">@fraga.FragNombre</option>
                         }
                     </select>
                 </div>
@@ -131,22 +132,46 @@
                         }
                     </select>
                 </div>
-                
-                <div class="form-group">
-                    <label asp-for="GradFrag" class="control-label">Cera ºC + fragancia:</label>
-                    <input asp-for="GradFrag" class="form-control" />
-                    <span asp-validation-for="GradFrag" class="text-danger"></span>
-                </div>
 
                 <div class="form-group">
-                    <label asp-for="GradPig" class="control-label">Cera ºC + pigmento:</label>
+                    <label asp-for="GradPig" class="control-label">ºC:</label>
                     <input asp-for="GradPig" class="form-control" />
                     <span asp-validation-for="GradPig" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
+                    <label asp-for="CantidadPig" class="control-label">ml:</label>
+                    <input asp-for="CantidadPig" class="form-control" />
+                    <span asp-validation-for="CantidadPig" class="text-danger"></span>
+                </div>
+
+
+                @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+                <div class="form-group">
+                    <label class="control-label">Fragrancias</label>
+                    <select name="IDFragancias" class="form-control select2" multiple="multiple" style="width: 100%;">
+                        @foreach (var fraga in fragancias)
+                        {
+                            <option value="@fraga.IDFrag">@fraga.FragNombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CantidadFrag" class="control-label">ml :</label>
+                    <input asp-for="CantidadFrag" class="form-control" />
+                    <span asp-validation-for="CantidadFrag" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GradFrag" class="control-label">ºC :</label>
+                    <input asp-for="GradFrag" class="form-control" />
+                    <span asp-validation-for="GradFrag" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
                     <label asp-for="Observ" class="control-label"></label>
-                    <textarea asp-for="Observ" class="form-control" ></textarea>
+                    <textarea asp-for="Observ" class="form-control"></textarea>
                     <span asp-validation-for="Observ" class="text-danger"></span>
                 </div>
                 @*</div>*@

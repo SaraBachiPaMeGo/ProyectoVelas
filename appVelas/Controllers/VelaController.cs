@@ -24,10 +24,11 @@ namespace appVelas.Controllers
         private readonly RepositoryVelaPigmentos _vPigRepo;
         private readonly RepositoryPedidos _pediRepo;
         private readonly RepositoryClientes _cliRepo;
+        private readonly RepositoryPacks _packRepo;
 
         public VelaController(RepositoryVelas velaRepo, RepositoryMoldes moldeRepo, RepositoryFragancias fragRepo,
             RepositoryPigmentos pigRepo, RepositoryCeras ceraRepo, RepositoryMechas mechaRepo, RepositoryVelaFragancias velaFragRepo,
-            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo)
+            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo, RepositoryPacks packRepo)
         {
             _velaRepo = velaRepo;
             _moldeRepo = moldeRepo;
@@ -39,7 +40,7 @@ namespace appVelas.Controllers
             _vPigRepo = velaPigRepo;
             _pediRepo = pediRepo;
             _cliRepo = cliRepo;
-
+            _packRepo = packRepo;
         }
 
         public async Task<IActionResult> Index()
@@ -142,8 +143,9 @@ namespace appVelas.Controllers
             else
             {
                 var listaMoldes = await _moldeRepo.GetMoldesAsync();
-                //List<Fragancia> listaFrag = await _velaRepo.GetFragancias();
-                //List<Pigmento> listaPig = await _velaRepo.GetPigmentos();
+                var listaFrag = await _fragRepo.GetFraganciasAsync();
+                var listaPig = await _pigRepo.GetPigmentosAsync();
+                var listaPack = await _packRepo.GetPacksAsync();
                 var listaCera = await _ceraRepo.GetCerasAsync();
                 var listaMecha = await _mechaRepo.GetMechasAsync();
 
@@ -158,10 +160,11 @@ namespace appVelas.Controllers
                 //ViewBag.PigmentosSeleccionados = await _velaRepo.GetPigmentosPorVela(IDVela).Select(p => p.IDPig).ToList();
 
                 ViewData["Moldes"] = listaMoldes.Data;
-                //ViewData["Frag"] = listaFrag.Data;
-                //ViewData["Pig"] = listaPig.Data;
+                ViewData["Frag"] = listaFrag.Data;
+                ViewData["Pig"] = listaPig.Data;
                 ViewData["Cera"] = listaCera.Data;
                 ViewData["Mecha"] = listaMecha.Data;
+                ViewData["Pack"] = listaMecha.Data;
 
                 ViewData["IDVela"] = IDVela;
 
