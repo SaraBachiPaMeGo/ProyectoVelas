@@ -14,10 +14,12 @@ namespace appVelas.Controllers
     public class PedidoController : Controller
     {
         private readonly RepositoryPedidos _pedidoRepo;
+        private readonly RepositoryClientes _cliRepo;
 
-        public PedidoController(RepositoryPedidos pedidoService)
+        public PedidoController(RepositoryPedidos pedidoService, RepositoryClientes cliService)
         {
             _pedidoRepo = pedidoService;
+            _cliRepo = cliService;
         }
 
         public async Task<IActionResult> Index()
@@ -30,7 +32,9 @@ namespace appVelas.Controllers
 
         public async Task<PartialViewResult>  _CrearPedidoView()
         {
+            var clientes = await _cliRepo.GetClientesAsync();
 
+            ViewData["Clientes"] = clientes.Data;
             return PartialView("_CrearPedidoView");
         }
 
@@ -62,7 +66,7 @@ namespace appVelas.Controllers
 
                 var listaPedidos = await _pedidoRepo.GetPedidosAsync();
 
-                ViewData["Pedidos"] = listaPedidos;
+                ViewData["Pedidos"] = listaPedidos.Data;
                 ViewData["IDPedido"] = IDPedido;
                 return View("~/Views/Pedido/_ActPedidoView.cshtml", ped.Data);
             }
@@ -84,7 +88,7 @@ namespace appVelas.Controllers
             {
                 var pedidos = await _pedidoRepo.GetPedidosAsync();
 
-                ViewData["PedidoS"] = pedidos;
+                ViewData["PedidoS"] = pedidos.Data;
                 return PartialView("~/Views/Pedido/_DetallesPedidoView.cshtml", pedidos.Data);
             }
             catch (Exception ex)

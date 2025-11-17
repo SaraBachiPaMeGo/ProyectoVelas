@@ -116,7 +116,7 @@ namespace appVelas.Controllers
             {
                 var me = await _mechaRepo.BuscarMechaAsync(IDMecha);
 
-                ViewData["MECHA"] = me;
+                ViewData["MECHA"] = me.Data;
                 //return PartialView("DetallesView1/_DetallesMechaView1", me);
                 return View("~/Views/Mecha/_DetallesMechaView1.cshtml", me.Data);
             }

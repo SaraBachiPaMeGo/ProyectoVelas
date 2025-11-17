@@ -80,7 +80,7 @@ namespace appVelas.Controllers
         {
             var moldes = await _moldeRepo.GetMoldesAsync();
 
-            //ViewData["MoldeS"] = Moldes;
+            ViewData["Moldes"] = moldes.Data;
             return PartialView("~/Views/Molde/_DetallesMoldeView.cshtml", moldes.Data);
         }
 
@@ -88,7 +88,7 @@ namespace appVelas.Controllers
         {
             var mol = await _moldeRepo.BuscarMoldeAsync(IDMolde);
 
-            ViewData["MOLDE"] = mol;
+            ViewData["MOLDE"] = mol.Data;
             return View("~/Views/Molde/_DetallesMoldeView1.cshtml", mol.Data);
         }
     }

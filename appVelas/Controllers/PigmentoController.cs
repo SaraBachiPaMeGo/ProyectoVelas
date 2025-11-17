@@ -96,7 +96,7 @@ namespace appVelas.Controllers
             {
                 var pig = await _pigmentoRepo.BuscarPigmentoAsync(IDPig);
 
-                ViewData["PIG"] = pig;
+                ViewData["PIG"] = pig.Data;
                 return View("~/Views/Pigmento/_DetallesPigView1.cshtml", pig.Data);
             }
             catch (Exception ex)

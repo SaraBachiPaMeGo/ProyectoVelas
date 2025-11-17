@@ -22,7 +22,7 @@ namespace appVelas.Controllers
         public async Task<IActionResult> Index()
         {
             var Packs = await _packRepo.GetPacksAsync();
-            return View(Packs);
+            return View(Packs.Data);
         }
 
         // ------------------------------------- PACK ---------------------------------------------
@@ -80,7 +80,7 @@ namespace appVelas.Controllers
         {
             var pack = await _packRepo.GetPacksAsync();
 
-            //ViewData["PackS"] = Packs;
+            ViewData["Packes"] = pack.Data;
             return PartialView("~/Views/Pack/_DetallesPackView.cshtml", pack.Data);
         }
 
@@ -88,7 +88,7 @@ namespace appVelas.Controllers
         {
             var pack = await _packRepo.BuscarPackAsync(IDPack);
 
-            ViewData["PACK"] = pack;
+            ViewData["PACK"] = pack.Data;
             return View("~/Views/Pack/_DetallesPackView1.cshtml", pack.Data);
         }
 

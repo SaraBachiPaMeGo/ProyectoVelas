@@ -21,12 +21,15 @@ namespace appVelas.Controllers
         private readonly RepositoryMechas _mechaRepo;
         private readonly RepositoryVelaFragancias _vFragRepo;
         private readonly RepositoryVelaPigmentos _vPigRepo;
+        private readonly RepositoryEndurecedores _endRepo;
+        private readonly RepositoryPacks _packRepo;
         private readonly RepositoryPedidos _pediRepo;
         private readonly RepositoryDocumentos _docRepo;
 
         public DocumentoController(RepositoryVelas velaRepo, RepositoryMoldes moldeRepo, RepositoryFragancias fragRepo,
             RepositoryPigmentos pigRepo, RepositoryCeras ceraRepo, RepositoryMechas mechaRepo, RepositoryVelaFragancias velaFragRepo,
-            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryDocumentos _docRepo)
+            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryDocumentos docRepo, RepositoryEndurecedores endRepo,
+            RepositoryPacks packRepo)
         {
             _velaRepo = velaRepo;
             _moldeRepo = moldeRepo;
@@ -37,7 +40,9 @@ namespace appVelas.Controllers
             _vFragRepo = velaFragRepo;
             _vPigRepo = velaPigRepo;
             _pediRepo = pediRepo;
-            _docRepo = _docRepo;
+            _docRepo = docRepo;
+            _packRepo = packRepo;
+            _endRepo = endRepo;
         }
 
         public async Task<IActionResult> Index()
@@ -46,8 +51,26 @@ namespace appVelas.Controllers
             return View(doc);
         }
 
-        public PartialViewResult _CrearDocView()
+        public async Task<PartialViewResult> _CrearDocView()
         {
+            var fragancias = await _fragRepo.GetFraganciasAsync();
+            var pigmentos = await _pigRepo.GetPigmentosAsync();
+            var mechas = await _mechaRepo.GetMechasAsync();
+            var cera = await  _ceraRepo.GetCerasAsync();
+            var vela = await _velaRepo.GetVelasAsync();
+            var molde = await  _moldeRepo.GetMoldesAsync();
+            var end = await _endRepo.GetEndurecedorsAsync() ;
+            var pack = await _packRepo.GetPacksAsync() ;
+
+            ViewData["Vela"] = vela.Data.Select(x => x.VelaNombre).ToList();
+            ViewData["Mecha"] = mechas.Data.Select(x => x.Firma).ToList();
+            ViewData["Moldes"] = molde.Data.Select(x => x.MoldeNombre).ToList(); 
+            ViewData["Cera"] =  cera.Data.Select(x => x.Firma) ;
+            ViewData["Frag"] = fragancias.Data.Select(x => x.FragNombre); 
+            ViewData["Pig"] = pigmentos.Data.Select(x => x.ColorNombre); 
+            ViewData["End"] = end.Data.Select(x => x.Firma); 
+            ViewData["Pack"] = end.Data.Select(x => x.Firma); 
+
             return PartialView("_CrearDocView");
         }
 

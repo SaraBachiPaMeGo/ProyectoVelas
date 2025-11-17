@@ -72,7 +72,7 @@ namespace appVelas.Controllers
         {
             var frag = await _fraganciaRepo.GetFraganciasAsync();
 
-            ViewData["FRAGS"] = frag;
+            ViewData["FRAGS"] = frag.Data;
             return PartialView("~/Views/Fragancia/_DetallesFragView.cshtml", frag.Data);
         }
 
@@ -80,7 +80,7 @@ namespace appVelas.Controllers
         {
             var frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
 
-            ViewData["FRAGS"] = frag;
+            ViewData["FRAGS"] = frag.Data;
             return View("~/Views/Fragancia/_DetallesFragView1.cshtml", frag.Data);
         }
     }

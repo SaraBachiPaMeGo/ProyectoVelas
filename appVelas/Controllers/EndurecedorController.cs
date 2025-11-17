@@ -78,7 +78,7 @@ namespace appVelas.Controllers
         {
             var end =  await _endurecedorRepo.GetEndurecedorsAsync();
 
-            //ViewData["EndurecedorS"] = Endurecedors;
+            ViewData["Endurecedores"] = end.Data;
             return PartialView("~/Views/Endurecedor/_DetallesEndurecedorView.cshtml", end.Data);
         }
 
@@ -87,7 +87,7 @@ namespace appVelas.Controllers
         {
             var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEndurecedor);
 
-            ViewData["END"] = end;
+            ViewData["END"] = end.Data;
             return View("~/Views/Endurecedor/_DetallesEndurecedorView1.cshtml", end.Data);
         }
 

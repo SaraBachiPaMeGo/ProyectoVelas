@@ -81,7 +81,7 @@ namespace appVelas.Controllers
         {
             var cera = await _ceraRepo.BuscarCeraAsync(IDCera);
 
-            ViewData["CERA"] = cera;
+            ViewData["CERA"] = cera.Data;
             return View("~/Views/Cera/_DetallesCeraView1.cshtml", cera.Data);
         }
 

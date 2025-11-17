@@ -42,7 +42,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Vela/_'+http+'VelaView', 
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data); 
+                     $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -81,7 +81,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Molde/_' + http +'MoldeView', 
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data); 
+                     $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -93,7 +93,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Fragancia/_' + http +'FragView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -105,7 +105,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Pigmento/_' + http +'PigView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -117,7 +117,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Mecha/_' + http + 'MechaView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -129,7 +129,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Cera/_' + http +'CeraView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -141,7 +141,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Documento/_' + http + 'DocView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -153,7 +153,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Endurecedor/_' + http + 'EndurecedorView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -165,7 +165,7 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 url: '/Pack/_' + http + 'PackView',
                 type: 'GET',
                 success: function (data) {
-                    $('#miContenedor').html(data);
+                    $('#' + contenedor).html(data); 
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -178,15 +178,33 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
 }
 
 function manejarCheckbox(contenedor, idCheck, tipoVista, http) {
-    
     const checkbox = document.getElementById(idCheck);
 
     if (checkbox.checked) {
-        //estadoSpan.textContent = "Sí";
+
         document.getElementById(contenedor).style.display = "block";
+
+        // carga la vista parcial de Mecha, Cera, etc
         cargarVistaParcial(tipoVista, contenedor, http);
+
     } else {
-        console.log(document.getElementById(contenedor))
         document.getElementById(contenedor).style.display = "none";
+        document.getElementById(contenedor).innerHTML = "";
     }
+    //const checkbox = document.getElementById(idCheck);
+
+   
+    //if (checkbox.checked) {
+    //    //estadoSpan.textContent = "Sí";
+    //    if (tipoVista == 'doc') {
+    //        //Si la vista es doc, y el check box está seleccionado, mirar a qué estilo pertenece para que aparezca SOLO
+    //        //la lista de x estilos (mechas,ceras,...)
+    //    }
+    //    document.getElementById(contenedor).style.display = "block";
+    //    cargarVistaParcial(tipoVista, contenedor, http);
+    //} else {
+       
+    //    console.log(document.getElementById(contenedor))
+    //    document.getElementById(contenedor).style.display = "none";
+    //}
 }

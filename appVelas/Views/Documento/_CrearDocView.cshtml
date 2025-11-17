@@ -1,5 +1,17 @@
 ﻿@model appVelas.Models.Documento
 
+@{
+    List<string> mechas = ViewData["Mecha"] as List<string> ?? new List<string>();
+    List<string> moldes = ViewData["Moldes"] as List<string> ?? new List<string>();
+    List<string> pack = ViewData["Pack"] as List<string> ?? new List<string>();
+    //List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
+    //List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
+    List<string> cera = ViewData["Cera"] as List<string> ?? new List<string>();
+    List<string> frag = ViewData["Frag"] as List<string> ?? new List<string>();
+    List<string> pig = ViewData["Pig"] as List<string> ?? new List<string>();
+    List<string> end = ViewData["End"] as List<string> ?? new List<string>();
+
+}
 <h4>Documento</h4>
 <hr />
 <div class="row" style=" display: block; margin-left: 3%;">
@@ -8,55 +20,147 @@
             <div></div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Pack:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckPack" class="checkbox-label">Pack:</label>
+                <input type="checkbox" id="idCheckPack" onclick="manejarCheckbox('contPack', 'idCheckPack','pack','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IDDoc" class="control-label"></label>
-                <input asp-for="IDDoc" class="form-control" />
-                <span asp-validation-for="IDDoc" class="text-danger"></span>
+
+            <div id="contPack" style="display:none;">
+                @foreach (var item in pack)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" /> @item
+                        </label>
+                    </div>
+                }
             </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Vela:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckVela" class="checkbox-label">Vela:</label>
+                <input type="checkbox" id="idCheckVela" onclick="manejarCheckbox('contVela', 'idCheckVela','vela','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contVela" style="display:none;">
+                @foreach (var item in pack)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Endurecedor:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckEnd" class="checkbox-label">Endurecedor:</label>
+                <input type="checkbox" id="idCheckEnd" onclick="manejarCheckbox('contEnd', 'idCheckEnd','end','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contEnd" style="display:none;">
+                @foreach (var item in pack)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Mecha:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckMecha" class="checkbox-label">Mecha:</label>
+                <input type="checkbox" id="idCheckMecha" onclick="manejarCheckbox('contMecha', 'idCheckMecha','mecha','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contMecha" style="display:none;">
+                @foreach (var item in mechas)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Cera:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckCera" class="checkbox-label">Cera:</label>
+                <input type="checkbox" id="idCheckCera" onclick="manejarCheckbox('contCera', 'idCheckCera','cera','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contCera" style="display:none;">
+                @foreach (var item in cera)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Fragancia:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckFrag" class="checkbox-label">Fragancia:</label>
+                <input type="checkbox" id="idCheckFrag" onclick="manejarCheckbox('contFrag', 'idCheckFrag','fragancia','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contFrag" style="display:none;">
+                @foreach (var item in frag)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Pigmento:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckPig" class="checkbox-label">Pigmento:</label>
+                <input type="checkbox" id="idCheckPig" onclick="manejarCheckbox('contPig', 'idCheckPig','pigmento','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contPig" style="display:none;">
+                @foreach (var item in pig)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="checkbox-container form-group">
-                <label for="miCheckbox" class="checkbox-label">Molde:</label>
-                <input type="checkbox" id="idCheckCli" onclick="manejarCheckbox('contCli', 'idCheckCli','cliente','Crear')" class="checkbox-input">
-                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@>Sí</span>
+                <label for="idCheckMolde" class="checkbox-label">Molde:</label>
+                <input type="checkbox" id="idCheckMolde" onclick="manejarCheckbox('contMolde', 'idCheckMolde','molde','Detalles')" class="checkbox-input">
+                <span class="checkbox-text" @*onclick="cargarVistaParcial('pedido')"*@></span>
             </div>
+
+            <div id="contMolde" style="display:none;">
+                @foreach (var item in moldes)
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"  /> @item
+                        </label>
+                    </div>
+                }
+            </div>
+
             <div class="form-group">
                 <label asp-for="NombreDoc" class="control-label"></label>
                 <input asp-for="NombreDoc" class="form-control" />
                 <span asp-validation-for="NombreDoc" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="TipoDoc" class="control-label">Tipo:</label>
                 <input asp-for="TipoDoc" class="form-control" />

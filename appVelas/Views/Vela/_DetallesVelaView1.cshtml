@@ -72,6 +72,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Observ)
                     </th>
+                    <th>Imagen</th>
                     <th></th>
                 </tr>
             </thead>
@@ -131,6 +132,16 @@
                     <td>
                         @Html.ActionLink("Vela", "ActualizarView", new { id = Model.IDVela, vista = "Vela" })
 
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="@Model.Image" alt="Imagen de la vela" style="max-width:200px; border-radius:10px;" />
+                        }
+                        else
+                        {
+                            <p>No hay imagen asociada</p>
+                        }
                     </td>
                 </tr>
 

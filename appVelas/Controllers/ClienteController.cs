@@ -75,7 +75,7 @@ namespace appVelas.Controllers
         {
             var clientes =  await _clienteRepo.GetClientesAsync();
 
-            ViewData["Clientes"] = clientes;
+            ViewData["Clientes"] = clientes.Data;
             return PartialView("~/Views/Cliente/_DetallesClienteView.cshtml", clientes.Data);
         }
 
@@ -83,7 +83,7 @@ namespace appVelas.Controllers
         {
             var cli =  await _clienteRepo.BuscarClienteAsync(IDCli);
 
-            ViewData["Cliente"] = cli;
+            ViewData["Cliente"] = cli.Data;
             return View("~/Views/Cliente/_DetallesClienteView1.cshtml", cli.Data);
         }
 

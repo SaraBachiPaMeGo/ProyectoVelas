@@ -4,11 +4,12 @@
 
     List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
     List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde> ();
+    List<Pack> pack = ViewData["Pack"] as List<Pack> ?? new List<Pack> ();
     //List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
     //List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
     List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera> ();
-    var fragancias = ViewBag.Fragancias as IEnumerable<SelectListItem> ?? new List<SelectListItem>();
-    var pigmentos = ViewBag.Pigmentos as IEnumerable<SelectListItem> ?? new List<SelectListItem>();
+    var fragancias = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia>();
+    var pigmentos = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento>(); 
 
 }
 
@@ -114,9 +115,9 @@
                 <div class="form-group">
                     <label class="control-label">Fragrancias</label>
                     <select name="IDFragancias" class="form-control select2" multiple="multiple" style="width: 100%;">
-                        @foreach (var fraga in fragancias as SelectList)
+                        @foreach (var fraga in fragancias)
                         {
-                            <option value="@fraga.Value">@fraga.Text</option>
+                            <option value="@fraga.IDFrag">@fraga.FragNombre</option>
                         }
                     </select>
                 </div>
@@ -124,9 +125,9 @@
                 <div class="form-group">
                     <label class="control-label">Colores</label>
                     <select name="IDPigmentos" class="form-control select2" multiple="multiple" style="width: 100%;">
-                        @foreach (var pigt in pigmentos as SelectList)
+                        @foreach (var pigt in pigmentos)
                         {
-                            <option value="@pigt.Value">@pigt.Text</option>
+                            <option value="@pigt.IDPig">@pigt.ColorNombre</option>
                         }
                     </select>
                 </div>

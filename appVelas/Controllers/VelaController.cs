@@ -61,11 +61,11 @@ namespace appVelas.Controllers
             //ViewBag.Fragancias = new SelectList(this.context.Fragancia.ToList(), "IDFrag", "FragNombre");
             //ViewBag.Pigmentos = new SelectList(this.context.Pigmento.ToList(), "IDPig", "ColorNombre");
 
-            ViewData["Moldes"] = listaMoldes;
-            ViewData["Frag"] = listaFrag;
-            ViewData["Pig"] = listaPig;
-            ViewData["Cera"] = listaCera;
-            ViewData["Mecha"] = listaMecha;
+            ViewData["Moldes"] = listaMoldes.Data;
+            ViewData["Frag"] = listaFrag.Data;
+            ViewData["Pig"] = listaPig.Data;
+            ViewData["Cera"] = listaCera.Data;
+            ViewData["Mecha"] = listaMecha.Data;
 
             return PartialView("_CrearVelaView");
         }
@@ -157,11 +157,11 @@ namespace appVelas.Controllers
                 // Carga los pigmentos seleccionados para esta vela
                 //ViewBag.PigmentosSeleccionados = await _velaRepo.GetPigmentosPorVela(IDVela).Select(p => p.IDPig).ToList();
 
-                ViewData["Moldes"] = listaMoldes;
-                //ViewData["Frag"] = listaFrag;
-                //ViewData["Pig"] = listaPig;
-                ViewData["Cera"] = listaCera;
-                ViewData["Mecha"] = listaMecha;
+                ViewData["Moldes"] = listaMoldes.Data;
+                //ViewData["Frag"] = listaFrag.Data;
+                //ViewData["Pig"] = listaPig.Data;
+                ViewData["Cera"] = listaCera.Data;
+                ViewData["Mecha"] = listaMecha.Data;
 
                 ViewData["IDVela"] = IDVela;
 
@@ -218,11 +218,11 @@ namespace appVelas.Controllers
             var listaCera = await _ceraRepo.GetCerasAsync();
             var listaMecha = await _mechaRepo.GetMechasAsync();
 
-            ViewData["Moldes"] = listaMoldes;
-            ViewData["Frag"] = listaFrag;
-            ViewData["Pig"] = listaPig;
-            ViewData["Cera"] = listaCera;
-            ViewData["Mecha"] = listaMecha;
+            ViewData["Moldes"] = listaMoldes.Data;
+            ViewData["Frag"] = listaFrag.Data;
+            ViewData["Pig"] = listaPig.Data;
+            ViewData["Cera"] = listaCera.Data;
+            ViewData["Mecha"] = listaMecha.Data;
 
             //ViewData["VELAS"] = velas;
             return PartialView("~/Views/Vela/_DetallesVelaView", velas.Data);
@@ -238,21 +238,21 @@ namespace appVelas.Controllers
             {
                 CustomApiResponse<Molde> moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde ?? Guid.Empty);
 
-                ViewData["Moldes"] = moldes;
+                ViewData["Moldes"] = moldes.Data;
 
             }
 
             if (vela.Data.IDFrag.HasValue && vela.Data.IDFrag.Value != Guid.Empty)
             {
                 CustomApiResponse<Fragancia> frag = await _fragRepo.BuscarFraganciaAsync(vela.Data.IDFrag ?? Guid.Empty);
-                ViewData["Frag"] = frag;
+                ViewData["Frag"] = frag.Data;
 
             }
 
             if (vela.Data.Pigmentos != null)
             {
                 CustomApiResponse<Pigmento> pig = await _pigRepo.BuscarPigmentoAsync(vela.Data.IDPig ?? Guid.Empty);
-                ViewData["Pig"] = pig;
+                ViewData["Pig"] = pig.Data;
 
 
             }
@@ -260,20 +260,20 @@ namespace appVelas.Controllers
             if (vela.Data.IDPedido.HasValue && vela.Data.IDPedido.Value != Guid.Empty)
             {
                 CustomApiResponse<Pedido> pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido ?? Guid.Empty);
-                ViewData["pedi"] = pedi;
+                ViewData["pedi"] = pedi.Data;
 
                 if (pedi.Data.IDCliente != Guid.Empty)
                 {
                     CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(pedi.Data.IDCliente);
-                    ViewData["clien"] = clien;
+                    ViewData["clien"] = clien.Data;
 
                 }
             }
             
 
-            ViewData["Cera"] = Cera;
-            ViewData["Mecha"] = Mecha;
-            ViewData["VELA"] = vela;
+            ViewData["Cera"] = Cera.Data;
+            ViewData["Mecha"] = Mecha.Data;
+            ViewData["VELA"] = vela.Data;
 
             return View("~/Views/Vela/_DetallesVelaView1", vela.Data);
         }
