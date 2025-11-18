@@ -2,16 +2,17 @@
 
 @{
     // List<Vela> velas = ViewData["VELAS"] as List<Vela>;
-    string IDCera = ViewData["IDCera"] as string;
+    //string IDCera = ViewData["IDCera"] as string;
 
+    Endurecedor end =  ViewData["end"]  as Endurecedor ?? new Endurecedor() ;
     Molde molde=  ViewData["Moldes"]  as Molde ?? new Molde() ;
     Fragancia frag = ViewData["Frag"] as Fragancia  ?? new Fragancia() ;
     Pigmento pig  = ViewData["Pig"]  as Pigmento ?? new Pigmento();
     Cera  cera = ViewData["Cera"]  as  Cera ?? new Cera();
     Mecha mecha  = ViewData["Mecha"]  as Mecha ?? new Mecha();
-    Vela vela = ViewData["VELA"]  as Vela ?? new Vela();
-    string clien = ViewData["clien"] as string;
-    Pedido pedi = ViewData["pedi"]  as Pedido ?? new Pedido();
+
+    //string clien = ViewData["clien"] as string;
+    //Pedido pedi = ViewData["pedi"]  as Pedido ?? new Pedido();
 
 }
 
@@ -88,7 +89,7 @@
                         @Html.DisplayFor(model => model.Coste)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.Endurecedor)
+                        @end.Firma
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.FechaReal)
@@ -112,13 +113,13 @@
                         @molde.MoldeNombre;
                     </td>
 
-                    <td>
+                    @*<td>
                         @pedi.FechaPedi
                     </td>
                     <td>
                         @pedi.FechaEntrega
-                    </td>
-                    <td>@clien</td>
+                    </td>*@
+                    @*<td>@clien</td>*@
                     <td>
                         @mecha.Tipo
                     </td>

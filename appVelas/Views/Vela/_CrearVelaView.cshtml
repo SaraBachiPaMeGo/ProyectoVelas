@@ -79,12 +79,6 @@
                     <span asp-validation-for="VelaNombre" class="text-danger"></span>
                 </div>
 
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Endurecedor" /> @Html.DisplayNameFor(model => model.Endurecedor)
-                    </label>
-                </div>
-
                 @*Por defecto la de siempre*@
                 <div class="form-group">
                     <label asp-for="IDMecha" class="control-label">Mecha:</label>
@@ -179,7 +173,6 @@
                     <input asp-for="CantidadPig" class="form-control" />
                     <span asp-validation-for="CantidadPig" class="text-danger"></span>
                 </div>
-
 
                 @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
                 <div class="form-group">

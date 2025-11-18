@@ -216,26 +216,37 @@ namespace appVelas.Controllers
             return PartialView("Sucess");
         }
 
-        public async Task<PartialViewResult>  _DetallesVelaView()
+        [HttpGet]
+        public async Task<IActionResult>  _DetallesVelaView()
         {
-            var velas = await _velaRepo.GetVelasAsync();
+            try
+            {
+                var velas = await _velaRepo.GetVelasAsync();
 
-            //var listaMoldes = await _moldeRepo.GetMoldesAsync();
-            //var listaFrag = await _fragRepo.GetFraganciasAsync();
-            //var listaPig = await _pigRepo.GetPigmentosAsync();
-            //var listaCera = await _ceraRepo.GetCerasAsync();
-            //var listaMecha = await _mechaRepo.GetMechasAsync();
+                var listaMoldes = await _moldeRepo.GetMoldesAsync();
+                var listaEnd = await _endepo.GetEndurecedorsAsync();
+                var listaFrag = await _fragRepo.GetFraganciasAsync();
+                var listaPig = await _pigRepo.GetPigmentosAsync();
+                var listaCera = await _ceraRepo.GetCerasAsync();
+                var listaMecha = await _mechaRepo.GetMechasAsync();
 
-            //ViewData["Moldes"] = listaMoldes.Data;
-            //ViewData["Frag"] = listaFrag.Data;
-            //ViewData["Pig"] = listaPig.Data;
-            //ViewData["Cera"] = listaCera.Data;
-            //ViewData["Mecha"] = listaMecha.Data;
+                ViewData["Moldes"] = listaMoldes.Data;
+                ViewData["end"] = listaEnd.Data;
+                ViewData["Frag"] = listaFrag.Data;
+                ViewData["Pig"] = listaPig.Data;
+                ViewData["Cera"] = listaCera.Data;
+                ViewData["Mecha"] = listaMecha.Data;
 
-            //ViewData["VELAS"] = velas;
-            return PartialView("~/Views/Vela/_DetallesVelaView", velas.Data);
+                //ViewData["VELAS"] = velas;
+                return PartialView("~/Views/Vela/_DetallesVelaView.cshtml", velas.Data);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
 
+        [HttpGet]
         public async Task<IActionResult> DetallesView1(Guid IDVela)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
@@ -247,6 +258,14 @@ namespace appVelas.Controllers
                 CustomApiResponse<Molde> moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde ?? Guid.Empty);
 
                 ViewData["Moldes"] = moldes.Data;
+
+            }
+
+            if (vela.Data.IDEnd.HasValue && vela.Data.IDEnd.Value != Guid.Empty)
+            {
+                CustomApiResponse<Molde> end = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDEnd ?? Guid.Empty);
+
+                ViewData["end"] = end.Data;
 
             }
 
@@ -283,7 +302,7 @@ namespace appVelas.Controllers
             ViewData["Mecha"] = Mecha.Data;
             ViewData["VELA"] = vela.Data;
 
-            return View("~/Views/Vela/_DetallesVelaView1", vela.Data);
+            return View("~/Views/Vela/_DetallesVelaView1.cshtml", vela.Data);
         }
     }
 }
