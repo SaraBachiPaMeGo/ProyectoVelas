@@ -24,9 +24,6 @@ namespace appVelas.Models
         [JsonProperty("Observ")]
         public string Observ { get; set; }
 
-        [JsonProperty("Endurecedor")]
-        public bool Endurecedor { get; set; }
-
         [JsonProperty("FechaReal")]
         public DateTime FechaReal { get; set; }
 
@@ -47,6 +44,12 @@ namespace appVelas.Models
 
         [JsonProperty("IDPack")]
         public Guid? IDPack { get; set; }
+
+        [JsonProperty("IDEndurecedor")]
+        public Guid? IDEnd { get; set; }
+
+        [JsonProperty("GradEnd")]
+        public decimal? GradEnd { get; set; }
 
         [JsonProperty("IDPig")]
         public Guid? IDPig { get; set; }

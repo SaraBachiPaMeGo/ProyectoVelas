@@ -4,6 +4,7 @@
 
     List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
     List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde> ();
+    List<Endurecedor> end = ViewData["end"] as List<Endurecedor> ?? new List<Endurecedor> ();
     List<Pack> pack = ViewData["Pack"] as List<Pack> ?? new List<Pack> ();
     //List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
     //List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
@@ -53,7 +54,19 @@
 <div style="margin-left: 3%;">
     <h4>Vela</h4>
     <hr />
-
+    <div>
+        <p>
+            Para velas con mucho detalle
+        </p>
+        <p>
+            <ul>
+                <li>CERA + END = 75 - 80 ºC</li>
+                <li>CERA + PIG = 65 - 70 ºC</li>
+                <li>CERA + FRAG = 60 - 65 ºC</li>
+                <li>VERTER EN MOLDE 68 - 72 ºC</li>
+            </ul>
+        </p>
+    </div>
     <div class="row">
         <div>
             <form asp-action="_CrearVelaView" method="post" style="/*display: flex;*/padding: 0rem;margin: 0rem;-webkit-JsonProperty-count: 4;display: inline;margin-left: 3%; ">
@@ -121,6 +134,28 @@
                             <option value="@item.IDMolde">@item.MoldeNombre</option>
                         }
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Endurecedor:</label>
+                    <select name="IDPigmentos" class="form-control select2" multiple="multiple" style="width: 100%;">
+                        @foreach (var e in end)
+                        {
+                            <option value="@e.IDEndurecedor">@e.Firma</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GradEnd" class="control-label">ºC:</label>
+                    <input asp-for="GradEnd" class="form-control" />
+                    <span asp-validation-for="GradEnd" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CantidadEnd" class="control-label">g:</label>
+                    <input asp-for="CantidadEnd" class="form-control" />
+                    <span asp-validation-for="CantidadEnd" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">

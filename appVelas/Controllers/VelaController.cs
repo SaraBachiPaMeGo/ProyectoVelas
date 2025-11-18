@@ -16,6 +16,7 @@ namespace appVelas.Controllers
     {
         private readonly RepositoryVelas _velaRepo;
         private readonly RepositoryMoldes _moldeRepo;
+        private readonly RepositoryEndurecedores _endepo;
         private readonly RepositoryFragancias _fragRepo;
         private readonly RepositoryPigmentos _pigRepo;
         private readonly RepositoryCeras _ceraRepo;
@@ -28,7 +29,8 @@ namespace appVelas.Controllers
 
         public VelaController(RepositoryVelas velaRepo, RepositoryMoldes moldeRepo, RepositoryFragancias fragRepo,
             RepositoryPigmentos pigRepo, RepositoryCeras ceraRepo, RepositoryMechas mechaRepo, RepositoryVelaFragancias velaFragRepo,
-            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo, RepositoryPacks packRepo)
+            RepositoryVelaPigmentos velaPigRepo, RepositoryPedidos pediRepo, RepositoryClientes cliRepo, RepositoryPacks packRepo,
+            RepositoryEndurecedores endepo)
         {
             _velaRepo = velaRepo;
             _moldeRepo = moldeRepo;
@@ -41,6 +43,7 @@ namespace appVelas.Controllers
             _pediRepo = pediRepo;
             _cliRepo = cliRepo;
             _packRepo = packRepo;
+            _endepo = endepo;
         }
 
         public async Task<IActionResult> Index()
@@ -54,6 +57,7 @@ namespace appVelas.Controllers
         public async Task<PartialViewResult>  _CrearVelaView()
         {
             var listaMoldes = await _moldeRepo.GetMoldesAsync();
+            var listaEND = await _endepo.GetEndurecedorsAsync();
             var listaFrag = await _fragRepo.GetFraganciasAsync();
             var listaPig = await _pigRepo.GetPigmentosAsync();
             var listaCera = await _ceraRepo.GetCerasAsync();
@@ -67,6 +71,7 @@ namespace appVelas.Controllers
             ViewData["Pig"] = listaPig.Data;
             ViewData["Cera"] = listaCera.Data;
             ViewData["Mecha"] = listaMecha.Data;
+            ViewData["End"] = listaEND.Data;
 
             return PartialView("_CrearVelaView");
         }
@@ -215,17 +220,17 @@ namespace appVelas.Controllers
         {
             var velas = await _velaRepo.GetVelasAsync();
 
-            var listaMoldes = await _moldeRepo.GetMoldesAsync();
-            var listaFrag = await _fragRepo.GetFraganciasAsync();
-            var listaPig = await _pigRepo.GetPigmentosAsync();
-            var listaCera = await _ceraRepo.GetCerasAsync();
-            var listaMecha = await _mechaRepo.GetMechasAsync();
+            //var listaMoldes = await _moldeRepo.GetMoldesAsync();
+            //var listaFrag = await _fragRepo.GetFraganciasAsync();
+            //var listaPig = await _pigRepo.GetPigmentosAsync();
+            //var listaCera = await _ceraRepo.GetCerasAsync();
+            //var listaMecha = await _mechaRepo.GetMechasAsync();
 
-            ViewData["Moldes"] = listaMoldes.Data;
-            ViewData["Frag"] = listaFrag.Data;
-            ViewData["Pig"] = listaPig.Data;
-            ViewData["Cera"] = listaCera.Data;
-            ViewData["Mecha"] = listaMecha.Data;
+            //ViewData["Moldes"] = listaMoldes.Data;
+            //ViewData["Frag"] = listaFrag.Data;
+            //ViewData["Pig"] = listaPig.Data;
+            //ViewData["Cera"] = listaCera.Data;
+            //ViewData["Mecha"] = listaMecha.Data;
 
             //ViewData["VELAS"] = velas;
             return PartialView("~/Views/Vela/_DetallesVelaView", velas.Data);

@@ -4,6 +4,7 @@
 
     List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
     List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde>();
+    List<Endurecedor> end = ViewData["end"] as List<Endurecedor> ?? new List<Endurecedor>();
     List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia>();
     List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento>();
     List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera>();
@@ -57,57 +58,34 @@
 <h4>Vela</h4>
 <hr />
 <div class="row" style="display: block;margin-left: 3%;">
-    <div >
+    <div>
         <form asp-action="_ActVelaView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*IDVela*@
             <div class="form-group" style="display:none">
                 <label asp-for="IDVela" class="control-label"></label>
                 <input asp-for="IDVela" class="form-control" />
                 <span asp-validation-for="IDVela" class="text-danger"></span>
             </div>
+            @*VelaNombre*@
             <div class="form-group">
                 <label asp-for="VelaNombre" class="control-label"></label>
                 <input asp-for="VelaNombre" class="form-control" />
                 <span asp-validation-for="VelaNombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Observ" class="control-label"></label>
-                <input asp-for="Observ" class="form-control" />
-                <span asp-validation-for="Observ" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Endurecedor" /> @Html.DisplayNameFor(model => model.Endurecedor)
-                </label>
-            </div>
+            @*FechaReal*@
             <div class="form-group">
                 <label asp-for="FechaReal" class="control-label"></label>
                 <input asp-for="FechaReal" class="form-control" />
                 <span asp-validation-for="FechaReal" class="text-danger"></span>
             </div>
+            @*FechaVenta*@
             <div class="form-group">
                 <label asp-for="FechaVenta" class="control-label"></label>
                 <input asp-for="FechaVenta" class="form-control" />
                 <span asp-validation-for="FechaVenta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="GradFrag" class="control-label"></label>
-                <input asp-for="GradFrag" class="form-control" />
-                <span asp-validation-for="GradFrag" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GradPig" class="control-label"></label>
-                <input asp-for="GradPig" class="form-control" />
-                <span asp-validation-for="GradPig" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">Image</label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-
-            @*Por defecto la de siempre*@
+            @*Mecha*@
             <div class="form-group">
                 <label asp-for="IDMecha" class="control-label">Mecha:</label>
                 <select name="IDMecha" id="IDMecha" class="form-control">
@@ -126,8 +104,7 @@
                     }
                 </select>
             </div>
-
-            @*Por defecto la de siempre*@
+            @*Cera*@
             <div class="form-group">
                 <label asp-for="IDCera" class="control-label">Cera:</label>
                 <select name="IDCera" id="IDCera" class="form-control">
@@ -139,8 +116,7 @@
                 </select>
                 @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
             </div>
-
-            @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
+            @*Molde*@
             <div class="form-group">
                 <label asp-for="IDMolde" class="control-label">Molde:</label>
                 <select name="IDMolde" id="IDMolde" class="form-control">
@@ -159,7 +135,75 @@
                     }
                 </select>
             </div>
-
+            @*Endurecedor*@
+            <div class="form-group">
+                <label class="control-label">Endurecedor:</label>
+                <select name="IDPigmentos" class="form-control select2" multiple="multiple" style="width: 100%;">
+                    @foreach (var e in end)
+                    {
+                        <option value="@e.IDEndurecedor">@e.Firma</option>
+                    }
+                </select>
+            </div>
+            @*GradEnd*@
+            <div class="form-group">
+                <label asp-for="GradEnd" class="control-label">ºC:</label>
+                <input asp-for="GradEnd" class="form-control" />
+                <span asp-validation-for="GradEnd" class="text-danger"></span>
+            </div>
+            @*CantidadEnd*@
+            <div class="form-group">
+                <label asp-for="CantidadEnd" class="control-label">g:</label>
+                <input asp-for="CantidadEnd" class="form-control" />
+                <span asp-validation-for="CantidadEnd" class="text-danger"></span>
+            </div>
+            @*PIGMENTO*@
+            <div class="form-group">
+                <label asp-for="IDPig" class="control-label">Color/es</label>
+                <select id="pigmentos" name="IDPigmentos" multiple="multiple" class="form-control select2">
+                    @foreach (var pigt in ViewBag.Pigmentos as SelectList)
+                    {
+                        var selected = ((List<Guid>)ViewBag.PigmentosSeleccionados).Contains(Guid.Parse(pigt.Value)) ? "selected" : "";
+                        <option value="@pigt.Value">@pigt.Text</option>
+                    }
+                </select>
+            </div>
+            @*GradPig*@
+            <div class="form-group">
+                <label asp-for="GradPig" class="control-label">ºC:</label>
+                <input asp-for="GradPig" class="form-control" />
+                <span asp-validation-for="GradPig" class="text-danger"></span>
+            </div>
+            @*CantidadPig*@
+            <div class="form-group">
+                <label asp-for="CantidadPig" class="control-label">ml:</label>
+                <input asp-for="CantidadPig" class="form-control" />
+                <span asp-validation-for="CantidadPig" class="text-danger"></span>
+            </div>
+            @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
+            <div class="form-group">
+                <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
+                <select id="fragancias" name="IDFragancias" multiple="multiple" class="form-control select2">
+                    @foreach (var fragan in ViewBag.Fragancias as SelectList)
+                    {
+                        var selected = ((List<Guid>)ViewBag.FraganciasSeleccionadas).Contains(Guid.Parse(fragan.Value)) ? "selected" : "";
+                        <option value="@fragan.Value">@fragan.Text</option>
+                    }
+                </select>
+            </div>
+            @*GradFrag*@
+            <div class="form-group">
+                <label asp-for="GradFrag" class="control-label">ºC :</label>
+                <input asp-for="GradFrag" class="form-control" />
+                <span asp-validation-for="GradFrag" class="text-danger"></span>
+            </div>
+            @*CantidadFrag*@
+            <div class="form-group">
+                <label asp-for="CantidadFrag" class="control-label">ml :</label>
+                <input asp-for="CantidadFrag" class="form-control" />
+                <span asp-validation-for="CantidadFrag" class="text-danger"></span>
+            </div>
+            @*Pack*@
             <div class="form-group">
                 <label asp-for="IDPack" class="control-label">Pack:</label>
                 <select name="IDPack" id="IDMolde" class="form-control">
@@ -178,65 +222,29 @@
                     }
                 </select>
             </div>
-
+            @*Image*@
             <div class="form-group">
-                <label asp-for="IDPig" class="control-label">Color/es</label>
-                <select id="pigmentos" name="IDPigmentos" multiple="multiple" class="form-control select2">
-                    @foreach (var pigt in ViewBag.Pigmentos as SelectList)
-                    {
-                        var selected = ((List<Guid>)ViewBag.PigmentosSeleccionados).Contains(Guid.Parse(pigt.Value)) ? "selected" : "";
-                        <option value="@pigt.Value">@pigt.Text</option>
-                    }
-                </select>
+                <label asp-for="Image" class="control-label">Image</label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-
-
-            <div class="form-group">
-                <label asp-for="GradPig" class="control-label">ºC:</label>
-                <input asp-for="GradPig" class="form-control" />
-                <span asp-validation-for="GradPig" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="CantidadPig" class="control-label">ml:</label>
-                <input asp-for="CantidadPig" class="form-control" />
-                <span asp-validation-for="CantidadPig" class="text-danger"></span>
-            </div>
-
-            @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
-            <div class="form-group">
-                <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
-                <select id="fragancias" name="IDFragancias" multiple="multiple" class="form-control select2">
-                    @foreach (var fragan in ViewBag.Fragancias as SelectList)
-                    {
-                        var selected = ((List<Guid>)ViewBag.FraganciasSeleccionadas).Contains(Guid.Parse(fragan.Value)) ? "selected" : "";
-                        <option value="@fragan.Value">@fragan.Text</option>
-                    }
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="CantidadFrag" class="control-label">ml :</label>
-                <input asp-for="CantidadFrag" class="form-control" />
-                <span asp-validation-for="CantidadFrag" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="GradFrag" class="control-label">ºC :</label>
-                <input asp-for="GradFrag" class="form-control" />
-                <span asp-validation-for="GradFrag" class="text-danger"></span>
-            </div>
-
+            @*Coste*@
             <div class="form-group">
                 <label asp-for="Coste" class="control-label"></label>
                 <input asp-for="Coste" class="form-control" />
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
+            @*IDPedido*@
             <div class="form-group">
                 <label asp-for="IDPedido" class="control-label"></label>
                 <input asp-for="IDPedido" class="form-control" />
                 <span asp-validation-for="IDPedido" class="text-danger"></span>
+            </div>
+            @*Observ*@
+            <div class="form-group">
+                <label asp-for="Observ" class="control-label"></label>
+                <input asp-for="Observ" class="form-control" />
+                <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
 
             <div id="dropzone">Arrastra tu imagen aquí</div>
@@ -253,7 +261,7 @@
                 <input type="submit" value="Actualizar" class="btn btn-outline-warning" />
             </div>
         </form>
-    </div>
+</div>
 </div>
 
 <div>
