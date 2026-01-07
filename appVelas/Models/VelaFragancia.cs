@@ -10,18 +10,11 @@ namespace appVelas.Models
 {
     public class VelaFragancia
     {
-        
-        [JsonProperty("IDVela")]
-        public Guid IDVela { get; set; }
-
-        [JsonProperty("Vela")]
-        public Vela Vela { get; set; }
-                
         [JsonProperty("IDFrag")]
         public Guid IDFrag { get; set; }
 
-        [JsonProperty("Fragancia")]
-        public Fragancia Fragancia { get; set; }
+        [JsonProperty("NombreFragancia")]
+        public string NombreFragancia { get; set; }
 
         [JsonProperty("Cantidad")]
         public decimal? Cantidad { get; set; }

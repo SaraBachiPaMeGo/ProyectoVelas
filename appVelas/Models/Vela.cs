@@ -27,9 +27,6 @@ namespace appVelas.Models
         [JsonProperty("FechaReal")]
         public DateTime FechaReal { get; set; }
 
-        [JsonProperty("FechaVenta")]
-        public DateTime FechaVenta { get; set; }
-
         [JsonProperty("GradFrag")]
         public decimal? GradFrag { get; set; }
 
@@ -41,9 +38,6 @@ namespace appVelas.Models
 
         [JsonProperty("IDMolde")]
         public Guid? IDMolde { get; set; }
-
-        [JsonProperty("IDPack")]
-        public Guid? IDPack { get; set; }
 
         [JsonProperty("IDEndurecedor")]
         public Guid? IDEnd { get; set; }
@@ -57,9 +51,6 @@ namespace appVelas.Models
         [JsonProperty("Coste")]
         public decimal? Coste { get; set; }
 
-        [JsonProperty("IDPedido")]
-        public Guid? IDPedido { get; set; }
-
         [JsonProperty("IDMecha")]
         public Guid IDMecha { get; set; }
 
@@ -72,22 +63,18 @@ namespace appVelas.Models
         [JsonProperty("CantidadMecha")]
         public decimal? CantidadMecha { get; set; }
 
-        [JsonProperty("CantidadFrag")]
+        [JsonProperty("CantidadEnd")]
+        public decimal? CantidadEnd { get; set; }
+
+        [Column("CantidadFrag")]
         public decimal? CantidadFrag { get; set; }
 
         [JsonProperty("CantidadPig")]
         public decimal? CantidadPig { get; set; }
 
-        [JsonProperty("CantidadEnd")]
-        public decimal? CantidadEnd { get; set; }
-
-
-        [JsonProperty("CantidadPack")]
-        public decimal? CantidadPack { get; set; }
+        public decimal? Cantidad { get; set; }
 
         public ICollection<Documento>? Documentos { get; set; }
-
-        public Pedido Pedido { get; set; }
 
         public List<VelaPigmento> Pigmentos { get; set; }
         public List<VelaFragancia> Fragancias { get; set; }

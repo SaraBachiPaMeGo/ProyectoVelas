@@ -1,0 +1,56 @@
+﻿@model appVelas.Models.VelaFinalizada
+
+<h4>Vela Finalizada</h4>
+<hr />
+<div class="row" style="display: block;margin-left: 3%;">
+
+    <div>
+        <form asp-action="_CrearVelaFinalizadaView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="IDVela" class="control-label"></label>
+                <input asp-for="IDVela" class="form-control" />
+                <span asp-validation-for="IDVela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDPack" class="control-label"></label>
+                <input asp-for="IDPack" class="form-control" />
+                <span asp-validation-for="IDPack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Coste" class="control-label"></label>
+                <input asp-for="Coste" class="form-control" />
+                <span asp-validation-for="Coste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beneficio" class="control-label"></label>
+                <input asp-for="Beneficio" class="form-control" />
+                <span asp-validation-for="Beneficio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PVP" class="control-label"></label>
+                <input asp-for="PVP" class="form-control" />
+                <span asp-validation-for="PVP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDPedido" class="control-label"></label>
+                <input asp-for="IDPedido" class="form-control" />
+                <span asp-validation-for="IDPedido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaFin" class="control-label"></label>
+                <input asp-for="FechaFin" class="form-control" />
+                <span asp-validation-for="FechaFin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

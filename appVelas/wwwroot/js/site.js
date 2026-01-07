@@ -49,6 +49,18 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
                 }
             });
             break;
+        case 'velaFin':
+            $.ajax({
+                url: '/VelaFinalizada/_' + http + 'VelaFinalizadaView',
+                type: 'GET',
+                success: function (data) {
+                    $('#' + contenedor).html(data);
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
         case 'pedido':
             if (contenedor === '' || contenedor === null) {
                 contenedor = 'miContenedor'

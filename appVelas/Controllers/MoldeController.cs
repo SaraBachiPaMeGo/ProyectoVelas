@@ -69,9 +69,9 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Guid id, Molde molde)
+        public async Task<PartialViewResult> ActualizarView( Molde molde)
         {
-            await _moldeRepo.ActualizarMoldeAsync(id, molde);
+            await _moldeRepo.ActualizarMoldeAsync(molde.IDMolde, molde);
 
             return PartialView("Sucess", molde);
         }

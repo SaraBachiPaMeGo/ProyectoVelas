@@ -1,0 +1,71 @@
+﻿@model IEnumerable<appVelas.Models.VelaFinalizada>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVelaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDVela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beneficio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PVP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVelaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDVela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beneficio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PVP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" })
+                
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>

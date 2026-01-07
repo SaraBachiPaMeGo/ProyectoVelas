@@ -79,29 +79,57 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<PartialViewResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos)
         {
-            var velfrag = new CustomApiResponse<VelaFragancia>();
-            var velpig = new CustomApiResponse<VelaPigmento>();
-
-            // Insertar fragancias
-            foreach (var idFrag in IDFragancias)
+            if (vela.Cantidad == 0 || !vela.Cantidad.HasValue)
             {
-                velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
+                var velfrag = new CustomApiResponse<VelaFragancia>();
+                var velpig = new CustomApiResponse<VelaPigmento>();
 
-                await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
+                // Insertar fragancias
+                foreach (var idFrag in IDFragancias)
+                {
+                    velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
+
+                    await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
+                }
+
+
+
+                // Insertar pigmentos
+                foreach (var idPig in IDPigmentos)
+                {
+                    velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
+
+                    await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
+                }
+
+                await _velaRepo.InsertarVelaAsync(vela);
             }
-
-            
-
-            // Insertar pigmentos
-            foreach (var idPig in IDPigmentos)
+            else
             {
-                velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
+                for (int i = 0; i < vela.Cantidad; i++)
+                {
+                    var velfrag = new CustomApiResponse<VelaFragancia>();
+                    var velpig = new CustomApiResponse<VelaPigmento>();
 
-                await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
+                    // Insertar fragancias
+                    foreach (var idFrag in IDFragancias)
+                    {
+                        velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
+
+                        await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
+                    }
+
+                    // Insertar pigmentos
+                    foreach (var idPig in IDPigmentos)
+                    {
+                        velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
+
+                        await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
+                    }
+
+                    await _velaRepo.InsertarVelaAsync(vela);
+                }
             }
-
-            await _velaRepo.InsertarVelaAsync(vela);
-
 
             return PartialView("Sucess", vela);
 
@@ -284,18 +312,18 @@ namespace appVelas.Controllers
 
             }
 
-            if (vela.Data.IDPedido.HasValue && vela.Data.IDPedido.Value != Guid.Empty)
-            {
-                CustomApiResponse<Pedido> pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido ?? Guid.Empty);
-                ViewData["pedi"] = pedi.Data;
+            //if (vela.Data.IDPedido.HasValue && vela.Data.IDPedido.Value != Guid.Empty)
+            //{
+            //    CustomApiResponse<Pedido> pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido ?? Guid.Empty);
+            //    ViewData["pedi"] = pedi.Data;
 
-                if (pedi.Data.IDCliente != Guid.Empty)
-                {
-                    CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(pedi.Data.IDCliente);
-                    ViewData["clien"] = clien.Data;
+            //    if (pedi.Data.IDCliente != Guid.Empty)
+            //    {
+            //        CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(pedi.Data.IDCliente);
+            //        ViewData["clien"] = clien.Data;
 
-                }
-            }
+            //    }
+            //}
             
 
             ViewData["Cera"] = Cera.Data;

@@ -59,7 +59,7 @@
             Para velas con mucho detalle
         </p>
         <p>
-            <ul>
+            <ul style="background:inherit">
                 <li>CERA + END = 75 - 80 ºC</li>
                 <li>CERA + PIG = 65 - 70 ºC</li>
                 <li>CERA + FRAG = 60 - 65 ºC</li>
@@ -71,6 +71,12 @@
         <div>
             <form asp-action="_CrearVelaView" method="post" style="/*display: flex;*/padding: 0rem;margin: 0rem;-webkit-JsonProperty-count: 4;display: inline;margin-left: 3%; ">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                ¿Cuántas velas vas a crear?:
+                <div class="form-group">
+                    <label asp-for="Cantidad" class="control-label">ºC :</label>
+                    <input asp-for="Cantidad" type="number" step="any" class="form-control" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
 
                 @*<div >*@
                 <div class="form-group">
@@ -199,7 +205,7 @@
 
                 <div class="form-group">
                     <label asp-for="Observ" class="control-label"></label>
-                    <textarea asp-for="Observ" class="form-control"></textarea>
+                    <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
                     <span asp-validation-for="Observ" class="text-danger"></span>
                 </div>
                 @*</div>*@

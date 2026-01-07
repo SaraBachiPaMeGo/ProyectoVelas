@@ -51,20 +51,21 @@
                 <input asp-for="CMMecha" class="form-control" />
                 <span asp-validation-for="CMMecha" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Observ" class="control-label"></label>
-                <input asp-for="Observ" class="form-control" />
-                <span asp-validation-for="Observ" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="MilAgua" class="control-label">ml Agua</label>
                 <input asp-for="MilAgua" class="form-control" />
                 <span asp-validation-for="MilAgua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IDVela" class="control-label" style="display: none"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
+                <label asp-for="Coste" class="control-label" style="></label>
+                <input asp-for="Coste" class="form-control" />
+                <span asp-validation-for="Coste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observ" class="control-label"></label>
+                <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
+                <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizar" class="btn btn-outline-warning" />

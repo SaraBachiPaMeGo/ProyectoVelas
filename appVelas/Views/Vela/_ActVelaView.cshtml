@@ -80,11 +80,11 @@
                 <span asp-validation-for="FechaReal" class="text-danger"></span>
             </div>
             @*FechaVenta*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="FechaVenta" class="control-label"></label>
                 <input asp-for="FechaVenta" class="form-control" />
                 <span asp-validation-for="FechaVenta" class="text-danger"></span>
-            </div>
+            </div>*@
             @*Mecha*@
             <div class="form-group">
                 <label asp-for="IDMecha" class="control-label">Mecha:</label>
@@ -204,7 +204,7 @@
                 <span asp-validation-for="CantidadFrag" class="text-danger"></span>
             </div>
             @*Pack*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDPack" class="control-label">Pack:</label>
                 <select name="IDPack" id="IDMolde" class="form-control">
 
@@ -221,7 +221,7 @@
                         }
                     }
                 </select>
-            </div>
+            </div>*@
             @*Image*@
             <div class="form-group">
                 <label asp-for="Image" class="control-label">Image</label>
@@ -235,15 +235,15 @@
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
             @*IDPedido*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDPedido" class="control-label"></label>
                 <input asp-for="IDPedido" class="form-control" />
                 <span asp-validation-for="IDPedido" class="text-danger"></span>
-            </div>
+            </div>*@
             @*Observ*@
             <div class="form-group">
                 <label asp-for="Observ" class="control-label"></label>
-                <input asp-for="Observ" class="form-control" />
+                <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
                 <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
 

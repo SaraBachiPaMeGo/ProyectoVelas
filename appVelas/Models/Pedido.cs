@@ -22,8 +22,8 @@ namespace appVelas.Models
         [JsonProperty("FechaEntrega")]
         public DateTime FechaEntrega { get; set; }
 
-        [JsonProperty("IDVela")]
-        public Guid IDVela { get; set; }
+        [JsonProperty("IDVelaFin")]
+        public Guid IDVelaFin { get; set; }
 
         [JsonProperty("Vendido")]
         public bool? Vendido { get; set; }
@@ -35,7 +35,8 @@ namespace appVelas.Models
         public Cliente Cliente { get; set; }
 
         // 🔗 Relación con Velas (un pedido -> muchas velas)
-        public List<Vela> Velas { get; set; } = new List<Vela>();
+        public virtual ICollection<VelaFinalizada> VelaFin { get; set; } = new List<VelaFinalizada>();
+
 
         public ICollection<Documento>? Documentos { get; set; }
 

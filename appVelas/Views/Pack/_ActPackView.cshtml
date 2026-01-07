@@ -11,12 +11,12 @@
     <div>
         <form asp-action="_ActPackView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDPack" class="control-label" style="display: none"></label>
+            <div class="form-group" style="display: none">
+                <label asp-for="IDPack" class="control-label" ></label>
                 <input asp-for="IDPack" class="form-control" />
                 <span asp-validation-for="IDPack" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 <label asp-for="IDVela" class="control-label" style="display: none"></label>
                 <input asp-for="IDVela" class="form-control" />
                 <span asp-validation-for="IDVela" class="text-danger"></span>

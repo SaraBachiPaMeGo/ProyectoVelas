@@ -47,6 +47,7 @@ namespace appVelas
             services.AddScoped<RepositoryPigmentos>();
             services.AddScoped<RepositoryVelaFragancias>();
             services.AddScoped<RepositoryVelaPigmentos>();
+            services.AddScoped<RepositoryVelasFinalizadas>();
 
             // ✅ Configuración global del HttpClientAction<IServiceProvider, HttpClient> configureClient = (sp, client) =>
 
@@ -166,6 +167,14 @@ namespace appVelas
                 var factory = sp.GetRequiredService<IHttpClientFactory>();
                 var client = factory.CreateClient("ApiClient");
                 return new VelaService(client);
+            });
+
+            //services.AddHttpClient<IVelaFinalizadaService, VelaFinalizadaService>();
+            services.AddScoped<IVelaFinService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new VelaFinalizadaService(client);
             });
 
 
