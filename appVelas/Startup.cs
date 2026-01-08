@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ using appVelas.Service.Interfaces;
 using appVelas.Services;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Localization;
 
 namespace appVelas
 {
@@ -240,6 +242,16 @@ namespace appVelas
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
+
+            var supportedCultures = new[] { new CultureInfo("en-US") };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
 
             app.UseRouting();
                
