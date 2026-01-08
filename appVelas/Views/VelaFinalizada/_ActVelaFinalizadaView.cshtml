@@ -1,10 +1,10 @@
 ﻿@model appVelas.Models.VelaFinalizada
 
-<h4>VelaFinalizada</h4>
+<h4>Vela Finalizada</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="_ActVelaView">
+        <form asp-action="ActualizarView" asp-controller="VelaFinalizada" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IDVelaFin" class="control-label"></label>
