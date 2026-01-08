@@ -47,7 +47,7 @@ namespace appVelas.Controllers
             try
             {
                 await _mechaRepo.InsertarMechaAsync(mecha);
-                return PartialView("Sucess");
+                return View("DetallesView1", mecha.IDMecha);
             }
             catch (Exception ex)
             {
@@ -86,11 +86,13 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Mecha mecha)
+        public async Task<IActionResult> ActualizarView(Mecha mecha)
         {
-            await _mechaRepo.ActualizarMechaAsync(mecha.IDMecha, mecha);
+            var response = await _mechaRepo.ActualizarMechaAsync(mecha.IDMecha, mecha);
+            
+            //var (rutaParcial, mechaModel) = ($"~/Views/{vista}/_Detalles{vista}View1.cshtml", (object)response.Data);
 
-            return PartialView("Sucess", mecha);
+            return RedirectToAction("DetallesView1", "Home", new { id = mecha.IDMecha, vista = "Mecha" });
         }
 
         [HttpGet]

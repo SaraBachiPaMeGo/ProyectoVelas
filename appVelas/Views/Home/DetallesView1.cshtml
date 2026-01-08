@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Actualizar";
+
+    ViewData["Title"] = "Detalle";
 
     // Desempaqueta los valores del Tuple si es necesario
     var (rutaParcial, model) = ((string, object))Model;
@@ -11,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
-<div style="margin-left: -8rem;">
+
 
     <h1 class="text-center" style="color:blue; padding: 2rem;">Detalles</h1>
 
@@ -19,10 +20,9 @@
     <div id="contDet">
         @await Html.PartialAsync(rutaParcial, model)
     </div>
-</div>
+
 
 @{
-    ViewData["Title"] = "DetallesView1";
 }
 
 
