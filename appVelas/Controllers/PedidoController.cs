@@ -39,10 +39,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _CrearPedidoView(Pedido pedi)
+        public async Task<IActionResult>  _CrearPedidoView(Pedido pedi)
         {
-            await _pedidoRepo.InsertarPedidoAsync(pedi);
-            return PartialView("Sucess");
+            var response = await _pedidoRepo.InsertarPedidoAsync(pedi);
+
+            if (response.Data.IDPedido != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPedido = response.Data.IDPedido });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]
@@ -73,11 +84,22 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Guid id, Pedido pedido)
+        public async Task<IActionResult> ActualizarView(Guid id, Pedido pedido)
         {
-            var pedi = await _pedidoRepo.ActualizarPedidoAsync(id, pedido);
+            var response = await _pedidoRepo.ActualizarPedidoAsync(id, pedido);
 
-            return PartialView("Sucess", pedi);
+
+            if (response.Data.IDPedido != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPedido = response.Data.IDPedido });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]

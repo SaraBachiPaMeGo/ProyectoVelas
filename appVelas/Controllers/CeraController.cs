@@ -33,11 +33,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _CrearCeraView(Cera cera)
+        public async Task<IActionResult> _CrearCeraView(Cera cera)
         {
-            var ceras = await _ceraRepo.InsertarCeraAsync(cera);
+            var response = await _ceraRepo.InsertarCeraAsync(cera);
 
-            return PartialView("Sucess", ceras.Data);
+            if (response.Data.IDCera != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDCera = response.Data.IDCera });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
 
         }
 
@@ -63,14 +73,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Cera cera)
+        public async Task<IActionResult> ActualizarView(Cera cera)
         {
-            var ceras = await _ceraRepo.ActualizarCeraAsync(cera.IDCera, cera);
+            var response = await _ceraRepo.ActualizarCeraAsync(cera.IDCera, cera);
 
-            return PartialView("Sucess", cera);
+            if (response.Data.IDCera != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDCera = response.Data.IDCera });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
-        public async Task<PartialViewResult> _DetallesCeraView()
+        public async Task<IActionResult> _DetallesCeraView()
         {
             var cera = await _ceraRepo.GetCerasAsync();
 

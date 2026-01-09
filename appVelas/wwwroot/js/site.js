@@ -28,13 +28,38 @@ function recargarPag(tipoVista, contenedor, http) {
 
     window.location.href = url;
 }
+document.addEventListener('DOMContentLoaded', () => {
+
+    const pendiente = sessionStorage.getItem('vistaPendiente');
+
+    if (pendiente) {
+        const { tipoVista, contenedor, http } = JSON.parse(pendiente);
+        sessionStorage.removeItem('vistaPendiente');
+
+        ejecutarCargaVista(tipoVista, contenedor, http);
+    }
+});
 
 function cargarVistaParcial(tipoVista, contenedor, http) {
-    // Guarda temporalmente los parámetros antes de recargar
-    sessionStorage.setItem('vistaPendiente', JSON.stringify({ tipoVista, contenedor, http }));
 
-    // Redirige al home base
-    //window.location.href = `${window.location.origin}`;
+    sessionStorage.setItem(
+        'vistaPendiente',
+        JSON.stringify({ tipoVista, contenedor, http })
+    );
+
+    // Si NO estamos en Home → redirige SOLO
+    if (window.location.pathname !== '/') {
+        window.location.href = '/#';
+        return; // ⛔ IMPORTANTE
+    }
+
+    ejecutarCargaVista(tipoVista, contenedor, http);
+}
+
+
+
+function ejecutarCargaVista(tipoVista, contenedor, http) {
+  
 
     switch (tipoVista) {
         case 'vela':

@@ -92,5 +92,6 @@
 </div>
 <div>
     @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = Model.IDDoc, vista = "Documento" }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('doc','miContenedor','Detalles')"> Back to List</a>
+
 </div>

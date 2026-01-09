@@ -46,12 +46,23 @@ namespace appVelas.Controllers
             
             try
             {
-                await _mechaRepo.InsertarMechaAsync(mecha);
-                return View("DetallesView1", mecha.IDMecha);
+                var mech = await _mechaRepo.InsertarMechaAsync(mecha);
+                if (mech.Data.IDMecha != Guid.Empty)
+                {
+                    return RedirectToAction("DetallesView1", new { IDMecha = mech.Data.IDMecha });
+
+                }
+                else
+                {
+                    ViewData["Error"] = mech.Error.Mensaje;
+
+                    return View();
+                }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error: {ex.Message}");
+                ViewData["Error"] = ex.Message;
+                return PartialView("~/Views/Mecha/DetallesMechaView1.cshtml", mecha.IDMecha);
             }
         }
 
@@ -89,10 +100,18 @@ namespace appVelas.Controllers
         public async Task<IActionResult> ActualizarView(Mecha mecha)
         {
             var response = await _mechaRepo.ActualizarMechaAsync(mecha.IDMecha, mecha);
-            
-            //var (rutaParcial, mechaModel) = ($"~/Views/{vista}/_Detalles{vista}View1.cshtml", (object)response.Data);
 
-            return RedirectToAction("DetallesView1", "Home", new { id = mecha.IDMecha, vista = "Mecha" });
+            if (response.Data.IDMecha != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDMecha = response.Data.IDMecha });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]

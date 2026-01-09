@@ -1,47 +1,54 @@
 ﻿@model appVelas.Models.Mecha
+@{
+    string error = ViewData["Error"] as string;
 
-<div>
-    <h4>Mecha</h4>
-    <hr />
-    <dl class="row">
+}
+    <div>
+        <h4>Mecha</h4>
+        <hr />
+        <div>
+            <p style="color:firebrick">@error</p>
+        </div>
+        <dl class="row">
 
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IDMecha)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Firma)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Firma)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-        <dt class="col-sm-2">
-            Comprado en:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CompradoEn)
+            @*<dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IDMecha)
+            </dd>*@
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Firma)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Firma)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tipo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Tipo)
+            </dd>
+            <dt class="col-sm-2">
+                Comprado en
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CompradoEn)
 
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Coste)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Coste)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Mecha", "ActualizarView", new { id = Model.IDMecha, vista = "Mecha" }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cantidad)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Coste)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Coste)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Mecha", "ActualizarView", new { id = Model.IDMecha, vista = "Mecha" }) |
+        <a href="#" onclick="cargarVistaParcial('mecha','miContenedor','Detalles')"> Back to List</a>
+
+    </div>

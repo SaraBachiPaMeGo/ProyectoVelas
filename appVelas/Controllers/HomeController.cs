@@ -52,66 +52,66 @@ namespace appVelas.Controllers
             return View();
         }
 
-        public IActionResult ActualizarView(Guid id, string vista)
-        {
-            ViewData["id"] = id;
-            ViewData["vista"] = vista;
-            string buscarModelo = "";
+        //public IActionResult ActualizarView(Guid id, string vista)
+        //{
+        //    ViewData["id"] = id;
+        //    ViewData["vista"] = vista;
+        //    string buscarModelo = "";
 
-            if (vista == "Frag")
-            {
-                buscarModelo = $"BuscarFragancia";
-            }
-            else if (vista == "Pig")
-            {
+        //    if (vista == "Frag")
+        //    {
+        //        buscarModelo = $"BuscarFragancia";
+        //    }
+        //    else if (vista == "Pig")
+        //    {
 
-                buscarModelo = $"BuscarPigmento";
-            }
-            else { 
-                buscarModelo = $"Buscar{vista}";
-            }
+        //        buscarModelo = $"BuscarPigmento";
+        //    }
+        //    else { 
+        //        buscarModelo = $"Buscar{vista}";
+        //    }
 
-            //var metodo = this.repo.GetType().GetMethod(buscarModelo);
+        //    //var metodo = this.repo.GetType().GetMethod(buscarModelo);
 
-            //var model = metodo.Invoke(this.repo, new object[] { id });
+        //    //var model = metodo.Invoke(this.repo, new object[] { id });
 
-            //// Arma el nombre del parcial de forma dinámica
-            string vistaParcial = $"~/Views/Shared/Actualizar/_Act{vista}View.cshtml";
+        //    //// Arma el nombre del parcial de forma dinámica
+        //    string vistaParcial = $"~/Views/Shared/Actualizar/_Act{vista}View.cshtml";
 
-            // Retorna la vista principal contenedora
-            return View("ActualizarView", (vistaParcial, (object)buscarModelo));
-        }
+        //    // Retorna la vista principal contenedora
+        //    return View("ActualizarView", (vistaParcial, (object)buscarModelo));
+        //}
 
-        public IActionResult DetallesView1(Guid id, string vista)
-        {
-            ViewData["id"] = id;
-            ViewData["vista"] = vista;
-            string buscarModelo = "";
+        //public IActionResult DetallesView1(Guid id, string vista)
+        //{
+        //    ViewData["id"] = id;
+        //    ViewData["vista"] = vista;
+        //    string buscarModelo = "";
 
-            if (vista == "Frag")
-            {
-                buscarModelo = $"BuscarFragancia";
-            }
-            else if (vista == "Pig")
-            {
+        //    if (vista == "Frag")
+        //    {
+        //        buscarModelo = $"BuscarFragancia";
+        //    }
+        //    else if (vista == "Pig")
+        //    {
 
-                buscarModelo = $"BuscarPigmento";
-            }
-            else
-            {
-                buscarModelo = $"Buscar{vista}";
-            }
+        //        buscarModelo = $"BuscarPigmento";
+        //    }
+        //    else
+        //    {
+        //        buscarModelo = $"Buscar{vista}";
+        //    }
 
-            //var metodo = this.repo.GetType().GetMethod(buscarModelo);
+        //    //var metodo = this.repo.GetType().GetMethod(buscarModelo);
 
-            //var model = metodo.Invoke(this.repo, new object[] { id });
+        //    //var model = metodo.Invoke(this.repo, new object[] { id });
 
-            // Arma el nombre del parcial de forma dinámica
-            string vistaParcial = $"~/Views/{vista}/_Detalles{vista}View1.cshtml";
+        //    // Arma el nombre del parcial de forma dinámica
+        //    string vistaParcial = $"~/Views/{vista}/_Detalles{vista}View1.cshtml";
 
-            // Retorna la vista principal contenedora
-            return View("DetallesView1", (vistaParcial, (object)buscarModelo));
-        }
+        //    // Retorna la vista principal contenedora
+        //    return View("DetallesView1", (vistaParcial, (object)buscarModelo));
+        //}
 
         public IActionResult Privacy()
         {

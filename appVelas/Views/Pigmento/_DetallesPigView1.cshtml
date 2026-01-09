@@ -4,12 +4,7 @@
     <h4>Pigmento</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDPig)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDPig)
-        </dd>
+        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Firma)
         </dt>
@@ -35,12 +30,6 @@
             @Html.DisplayFor(model => model.CompradoEn)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDVela)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDVela)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Coste)
         </dt>
         <dd class = "col-sm-10">
@@ -50,5 +39,6 @@
 </div>
 <div>
     @Html.ActionLink("Pigmento", "ActualizarView", new { id = Model.IDPig, vista = "Pig" }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Detalles')"> Back to List</a>
+
 </div>

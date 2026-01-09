@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
+@{
 
+    string error = ViewData["Error"] as string;
+}
 
 <html lang="en">
 <head>
@@ -77,6 +80,10 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (error != null)
+            {
+                <p style="color:firebrick">@error</p>
+            }
             @RenderBody()
         </main>
     </div>

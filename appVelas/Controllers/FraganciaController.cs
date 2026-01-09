@@ -35,10 +35,23 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<IActionResult> _CrearFragView(Fragancia frag)
         {
-            await _fraganciaRepo.InsertarFraganciaAsync(frag);
-            return PartialView("Sucess", frag);
+            var response = await _fraganciaRepo.InsertarFraganciaAsync(frag);
+
+
+            if (response.Data.IDFrag != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDFrag = response.Data.IDFrag });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
+        [HttpGet]
         public async Task<IActionResult> ActualizarView(Guid IDFrag)
         {
             var frag = await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);
@@ -61,14 +74,26 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Fragancia frag)
+        public async Task<IActionResult> ActualizarView(Fragancia frag)
         {
-            await _fraganciaRepo.ActualizarFraganciaAsync(frag.IDFrag, frag);
+            var response = await _fraganciaRepo.ActualizarFraganciaAsync(frag.IDFrag, frag);
 
-            return PartialView("Sucess", frag);
+
+            if (response.Data.IDFrag != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDFrag = response.Data.IDFrag });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
-        public async Task<PartialViewResult>  _DetallesFragView()
+        [HttpGet]
+        public async Task<IActionResult>  _DetallesFragView()
         {
             var frag = await _fraganciaRepo.GetFraganciasAsync();
 
@@ -76,6 +101,7 @@ namespace appVelas.Controllers
             return PartialView("~/Views/Fragancia/_DetallesFragView.cshtml", frag.Data);
         }
 
+        [HttpGet]
         public async Task<IActionResult> DetallesView1(Guid IDFrag)
         {
             var frag =  await _fraganciaRepo.BuscarFraganciaAsync(IDFrag);

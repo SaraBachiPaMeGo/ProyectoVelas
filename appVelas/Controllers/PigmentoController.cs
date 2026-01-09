@@ -35,9 +35,20 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<IActionResult> _CrearPigView(Pigmento pig)
         {
-            await _pigmentoRepo.InsertarPigmentoAsync(pig);
+            var response = await _pigmentoRepo.InsertarPigmentoAsync(pig);
 
-            return PartialView("Sucess", pig);
+
+            if (response.Data.IDPig != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPig = response.Data.IDPig });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
 
@@ -63,11 +74,22 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Pigmento pig)
+        public async Task<IActionResult> ActualizarView(Pigmento pig)
         {
-            await _pigmentoRepo.ActualizarPigmentoAsync(pig.IDPig, pig);
+            var response = await _pigmentoRepo.ActualizarPigmentoAsync(pig.IDPig, pig);
 
-            return PartialView("Sucess", pig);
+
+            if (response.Data.IDPig != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPig = response.Data.IDPig });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]

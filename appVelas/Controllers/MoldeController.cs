@@ -33,15 +33,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _CrearMoldeView(Molde molde)
+        public async Task<IActionResult> _CrearMoldeView(Molde molde)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //}
-            await _moldeRepo.InsertarMoldeAsync(molde);
+           var response =  await _moldeRepo.InsertarMoldeAsync(molde);
 
+            if (response.Data.IDMolde != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDMecha = response.Data.IDMolde });
 
-            return PartialView("Sucess", molde);
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
 
         }
 
@@ -69,14 +75,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView( Molde molde)
+        public async Task<IActionResult> ActualizarView( Molde molde)
         {
-            await _moldeRepo.ActualizarMoldeAsync(molde.IDMolde, molde);
+            var response= await _moldeRepo.ActualizarMoldeAsync(molde.IDMolde, molde);
 
-            return PartialView("Sucess", molde);
+            if (response.Data.IDMolde != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDMolde = response.Data.IDMolde });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
-        public async Task<PartialViewResult>  _DetallesMoldeView()
+        public async Task<IActionResult>  _DetallesMoldeView()
         {
             var moldes = await _moldeRepo.GetMoldesAsync();
 

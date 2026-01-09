@@ -45,8 +45,18 @@ namespace appVelas.Controllers
 
             try
             {
-                await _VelaFinalizadaRepo.InsertarVelaFinalizadaAsync(VelaFinalizada);
-                return PartialView("Sucess");
+                var response = await _VelaFinalizadaRepo.InsertarVelaFinalizadaAsync(VelaFinalizada);
+                if (response.Data.IDVelaFin != Guid.Empty)
+                {
+                    return RedirectToAction("DetallesView1", new { IDVelaFin = response.Data.IDVelaFin });
+
+                }
+                else
+                {
+                    ViewData["Error"] = response.Error.Mensaje;
+
+                    return View();
+                }
             }
             catch (Exception ex)
             {
@@ -85,11 +95,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(VelaFinalizada VelaFinalizada)
+        public async Task<IActionResult> ActualizarView(VelaFinalizada VelaFinalizada)
         {
-            await _VelaFinalizadaRepo.ActualizarVelaFinalizadaAsync(VelaFinalizada.IDVelaFin, VelaFinalizada);
+            var response = await _VelaFinalizadaRepo.ActualizarVelaFinalizadaAsync(VelaFinalizada.IDVelaFin, VelaFinalizada);
 
-            return PartialView("Sucess", VelaFinalizada);
+            if (response.Data.IDVelaFin != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDVelaFin = response.Data.IDVelaFin });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]

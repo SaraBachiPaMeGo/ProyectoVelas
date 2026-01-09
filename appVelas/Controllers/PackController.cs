@@ -38,10 +38,19 @@ namespace appVelas.Controllers
             //if (!ModelState.IsValid)
             //{
             //}
-            await _packRepo.InsertarPackAsync(pack);
+           var response= await _packRepo.InsertarPackAsync(pack);
 
+            if (response.Data.IDPack != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPack = response.Data.IDPack });
 
-            return PartialView("Sucess", pack);
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
 
         }
 
@@ -69,11 +78,22 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Pack pack)
+        public async Task<IActionResult> ActualizarView(Pack pack)
         {
-            await _packRepo.ActualizarPackAsync(pack.IDPack,pack);
+            var response = await _packRepo.ActualizarPackAsync(pack.IDPack,pack);
 
-            return PartialView("Sucess", pack);
+
+            if (response.Data.IDPack != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDPack = response.Data.IDPack });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         public async Task<IActionResult>  _DetallesPackView()

@@ -44,5 +44,6 @@
 </div>
 <div>
     @Html.ActionLink("Cliente", "ActualizarView", new { id = Model.IDCliente, vista = "Cliente" }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('cliente','miContenedor','Detalles')"> Back to List</a>
+
 </div>

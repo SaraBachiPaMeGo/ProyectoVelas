@@ -5,12 +5,6 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDPedido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDPedido)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaPedi)
         </dt>
         <dd class = "col-sm-10">
@@ -38,5 +32,6 @@
 </div>
 <div>
     @Html.ActionLink("Pedido", "ActualizarView", new { id = Model.IDPedido, vista = "Pedido" }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('pedido','miContenedor','Detalles')"> Back to List</a>
+
 </div>

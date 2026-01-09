@@ -35,9 +35,19 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<IActionResult> _CrearClienteView(Cliente cli)
         {
-             await _clienteRepo.InsertarClienteAsync(cli);
+             var response = await _clienteRepo.InsertarClienteAsync(cli);
 
-            return PartialView("Sucess", cli);
+            if (response.Data.IDCliente != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDCliente = response.Data.IDCliente });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         [HttpGet]
@@ -64,11 +74,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Cliente cliente)
+        public async Task<IActionResult> ActualizarView(Cliente cliente)
         {
-             await _clienteRepo.ActualizarClienteAsync(cliente.IDCliente, cliente);
+            var response = await _clienteRepo.ActualizarClienteAsync(cliente.IDCliente, cliente);
 
-            return PartialView("Sucess", cliente);
+            if (response.Data.IDCliente != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDCliente = response.Data.IDCliente });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         public async Task<PartialViewResult> _DetallesClienteView()

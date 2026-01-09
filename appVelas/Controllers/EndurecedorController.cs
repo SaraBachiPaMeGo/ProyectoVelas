@@ -33,18 +33,24 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> _CrearEndurecedorView(Endurecedor end)
+        public async Task<IActionResult> _CrearEndurecedorView(Endurecedor end)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //}
-             await _endurecedorRepo.InsertarEndurecedorAsync(end);
+             var response = await _endurecedorRepo.InsertarEndurecedorAsync(end);
 
+            if (response.Data.IDEndurecedor != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDEndurecedoc = response.Data.IDEndurecedor });
 
-            return PartialView("Sucess", end);
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
 
+                return View();
+            }
         }
 
+        [HttpGet]
         public async Task<IActionResult> ActualizarView(Guid IDEndurecedor)
         {
             var end =  await _endurecedorRepo.BuscarEndurecedorAsync(IDEndurecedor);
@@ -67,11 +73,21 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Endurecedor end)
+        public async Task<IActionResult> ActualizarView(Endurecedor end)
         {
-             await _endurecedorRepo.ActualizarEndurecedorAsync(end.IDEndurecedor, end);
+            var response = await _endurecedorRepo.ActualizarEndurecedorAsync(end.IDEndurecedor, end);
 
-            return PartialView("Sucess", end);
+            if (response.Data.IDEndurecedor != Guid.Empty)
+            {
+                return RedirectToAction("DetallesView1", new { IDMecha = response.Data.IDEndurecedor });
+
+            }
+            else
+            {
+                ViewData["Error"] = response.Error.Mensaje;
+
+                return View();
+            }
         }
 
         public async Task<PartialViewResult> _DetallesEndurecedorView()
