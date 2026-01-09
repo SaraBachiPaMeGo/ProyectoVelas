@@ -110,7 +110,7 @@ namespace appVelas.Controllers
             string vistaParcial = $"~/Views/{vista}/_Detalles{vista}View1.cshtml";
 
             // Retorna la vista principal contenedora
-            return View("DetallesView1", (vistaParcial, (object)buscarModelo)));
+            return View("DetallesView1", (vistaParcial, (object)buscarModelo));
         }
 
         public IActionResult Privacy()
