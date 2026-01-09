@@ -39,6 +39,9 @@ namespace appVelas.Repository
             return await _pedidoService.ActualizarPedidoAsync(id, pedido);
         }
 
-
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _pedidoService.EliminarPedidoAsync(id);
+        }
     }
 }

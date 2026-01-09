@@ -38,5 +38,10 @@ namespace appVelas.Repository
         {
             return await _mechaService.ActualizarMechaAsync(id, mecha);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _mechaService.EliminarMechaAsync(id);
+        }
     }
 }

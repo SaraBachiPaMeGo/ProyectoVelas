@@ -126,6 +126,27 @@ namespace appVelas.Service
 
             
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarCeraAsync(Guid id)
+        {
+            var response = new CustomApiResponse<bool>();
+
+            try
+            {
+                var respons = await _httpClient.DeleteAsync($"/api/Cera/Eliminar/{id}");
+
+                response.Data = respons.IsSuccessStatusCode;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+        }
     }
 }
 

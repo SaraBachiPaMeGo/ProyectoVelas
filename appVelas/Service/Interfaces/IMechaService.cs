@@ -11,6 +11,8 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Mecha>>> GetMechasAsync();
         Task<CustomApiResponse<Mecha>> BuscarMechaAsync(Guid idMecha);
         Task<CustomApiResponse<Mecha>> InsertarMechaAsync(Mecha Mecha);
-        Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Guid id, Mecha Mecha); 
+        Task<CustomApiResponse<Mecha>> ActualizarMechaAsync(Guid id, Mecha Mecha);
+        Task<CustomApiResponse<bool>> EliminarMechaAsync(Guid idMecha);
+
     }
 }

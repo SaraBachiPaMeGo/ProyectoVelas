@@ -37,5 +37,10 @@ namespace appVelas.Repository
         {
             return await _DocumentoService.ActualizarDocumentoAsync(id, Documento);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _DocumentoService.EliminarDocumentoAsync(id);
+        }
     }
 }

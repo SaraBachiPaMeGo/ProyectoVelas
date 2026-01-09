@@ -12,6 +12,9 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<Documento>> BuscarDocumentoAsync(Guid idDocumento);
         Task<CustomApiResponse<Documento>> InsertarDocumentoAsync(Documento Documento);
         Task<CustomApiResponse<Documento>> ActualizarDocumentoAsync(Guid id, Documento Documento);
+
+        Task<CustomApiResponse<bool>> EliminarDocumentoAsync(Guid idDocumento);
+
     }
 }
 

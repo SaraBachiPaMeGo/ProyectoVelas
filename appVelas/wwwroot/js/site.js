@@ -56,11 +56,8 @@ function cargarVistaParcial(tipoVista, contenedor, http) {
     ejecutarCargaVista(tipoVista, contenedor, http);
 }
 
-
-
 function ejecutarCargaVista(tipoVista, contenedor, http) {
   
-
     switch (tipoVista) {
         case 'vela':
             $.ajax({

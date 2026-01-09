@@ -39,5 +39,10 @@ namespace appVelas.Repository
             return await _clienteService.ActualizarClienteAsync(id, cliente);
         }
 
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _clienteService.EliminarClienteAsync(id);
+        }
+
     }
 }

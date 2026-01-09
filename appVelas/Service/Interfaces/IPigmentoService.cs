@@ -12,5 +12,8 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<Pigmento>> BuscarPigmentoAsync(Guid idPigmento);
         Task<CustomApiResponse<Pigmento>> InsertarPigmentoAsync(Pigmento Pigmento);
         Task<CustomApiResponse<Pigmento>> ActualizarPigmentoAsync(Guid id, Pigmento Pigmento);
+
+        Task<CustomApiResponse<bool>> EliminarPigmentoAsync(Guid idPigmento);
+
     }
 }

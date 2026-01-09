@@ -132,6 +132,11 @@ namespace appVelas.Repository
         //    return response;
         //}
 
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _velaService.EliminarVelaAsync(id);
+        }
+
 
     }
 

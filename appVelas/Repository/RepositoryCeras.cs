@@ -39,5 +39,10 @@ namespace appVelas.Repository
         {
             return await _ceraService.ActualizarCeraAsync(id, cera);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _ceraService.EliminarCeraAsync(id);
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace appVelas.Repository
         {
             return await _moldeService.ActualizarMoldeAsync(id, molde);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _moldeService.EliminarMoldeAsync(id);
+        }
     }
 }

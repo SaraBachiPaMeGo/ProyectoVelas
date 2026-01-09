@@ -12,5 +12,8 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<Fragancia>> BuscarFraganciaAsync(Guid idFragancia);
         Task<CustomApiResponse<Fragancia>> InsertarFraganciaAsync(Fragancia fragancia);
         Task<CustomApiResponse<Fragancia>> ActualizarFraganciaAsync(Guid id, Fragancia fragancia);
+
+        Task<CustomApiResponse<bool>> EliminarFraganciaAsync(Guid idFragancia);
+
     }
 }

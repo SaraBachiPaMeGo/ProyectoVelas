@@ -12,5 +12,6 @@ namespace appVelas.Service
         Task<CustomApiResponse<Cera>> BuscarCeraAsync(Guid idCera);
         Task<CustomApiResponse<Cera>> InsertarCeraAsync(Cera cera);
         Task<CustomApiResponse<Cera>> ActualizarCeraAsync(Guid id, Cera cera);
+        Task<CustomApiResponse<bool>> EliminarCeraAsync(Guid idCera);
     }
 }

@@ -38,5 +38,10 @@ namespace appVelas.Repository
         {
             return await _velaFinalizadaService.ActualizarVelaFinalizadaAsync(id, VelaFinalizada);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _velaFinalizadaService.EliminarVelaFinAsync(id);
+        }
     }
 }

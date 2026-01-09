@@ -110,5 +110,26 @@ namespace appVelas.Service
             }
             
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarMoldeAsync(Guid id)
+        {
+            var response = new CustomApiResponse<bool>();
+
+            try
+            {
+                var respons = await _httpClient.DeleteAsync($"/api/Molde/Eliminar/{id}");
+
+                response.Data = respons.IsSuccessStatusCode;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+
+            }
+        }
     }
 }

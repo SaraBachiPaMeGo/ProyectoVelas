@@ -38,5 +38,10 @@ namespace appVelas.Repository
         {
             return await _pigmentoService.ActualizarPigmentoAsync(id,pigmento);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _pigmentoService.EliminarPigmentoAsync(id);
+        }
     }
 }

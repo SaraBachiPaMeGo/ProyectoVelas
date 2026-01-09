@@ -38,5 +38,10 @@ namespace appVelas.Repository
         {
             return await _packService.ActualizarPackAsync(id, pack);
         }
+
+        public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
+        {
+            return await _packService.EliminarPackAsync(id);
+        }
     }
 }

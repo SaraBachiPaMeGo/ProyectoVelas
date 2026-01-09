@@ -12,5 +12,8 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<VelaFinalizada>> BuscarVelaFinalizadaAsync(Guid idVelaFinalizada);
         Task<CustomApiResponse<VelaFinalizada>> InsertarVelaFinalizadaAsync(VelaFinalizada VelaFinalizada);
         Task<CustomApiResponse<VelaFinalizada>> ActualizarVelaFinalizadaAsync(Guid idVelaFinalizada, VelaFinalizada VelaFinalizada);
+
+        Task<CustomApiResponse<bool>> EliminarVelaFinAsync(Guid idVelaFin);
+
     }
 }
