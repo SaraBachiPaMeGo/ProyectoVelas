@@ -96,7 +96,7 @@
             <td>
                 <span>@Html.ActionLink("Actualizar", "ActualizarView", new { IDVela = item.IDVela, vista = "Vela" })</span>  |
                 @Html.ActionLink("Detalles", "DetallesView1", new { IDVela = item.IDVela, vista = "Vela" })
-                @*@Html.ActionLink("Vela", "Delete", new { /* id=item.PrimaryKey */ })*@
+                |  @Html.ActionLink("Eliminar", "Delete", new { id = item.IDVela })
             </td>
         </tr>
 }

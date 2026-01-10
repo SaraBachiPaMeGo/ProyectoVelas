@@ -55,14 +55,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('mecha','miContenedor','Detalles')"> Back to List</a>
 </div>
 
-<script>
-document.getElementById("prueba").addEventListener("input", e => {
-    console.log(e.target.value);
-});
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

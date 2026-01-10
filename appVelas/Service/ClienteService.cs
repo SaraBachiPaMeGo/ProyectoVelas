@@ -125,7 +125,7 @@ namespace appVelas.Services
 
         }
 
-        public async Task<CustomApiResponse<bool>> EliminarClienteAsync(Guid idCliente)
+        public async Task<CustomApiResponse<bool>> EliminarClienteAsync(Guid id)
         {
                 var response = new CustomApiResponse<bool>();
 

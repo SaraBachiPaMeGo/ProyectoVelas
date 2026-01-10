@@ -32,6 +32,7 @@
 </div>
 <div>
     @Html.ActionLink("Pedido", "ActualizarView", new { id = Model.IDPedido, vista = "Pedido" }) |
-    <a href="#" onclick="cargarVistaParcial('pedido','miContenedor','Detalles')"> Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('pedido','miContenedor','Detalles')"> Back to List</a> |
+    @Html.ActionLink("Eliminar", "Delete", new { id = Model.IDPedido })
 
 </div>

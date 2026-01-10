@@ -25,9 +25,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Coste)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDVela)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -51,12 +48,9 @@
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IDVela)
-                </td>
-                <td>
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack, vista = "Pack" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" }) @*|
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" })|
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDPack })
                 </td>
             </tr>
         }

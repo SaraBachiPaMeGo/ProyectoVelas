@@ -129,7 +129,7 @@ li {
     }
 
         li a:hover, .dropdown:hover .dropbtn {
-            background-color: #FFC0CB;
+            background-color: #e1bb48;
             color: black;
             overflow: visible;
         }
@@ -157,8 +157,9 @@ li {
     }
 
         .dropdown-content a:hover {
-            /*background-color: #f1f1f1;*/
-            background-color: #FFC0CB;
+            /*background-color: #FFC0CB;*/
+            background-color: #e1bb48; /*//#1b6ec2;*/
+            border-color: #8b732c;
             overflow: visible;
         }
 

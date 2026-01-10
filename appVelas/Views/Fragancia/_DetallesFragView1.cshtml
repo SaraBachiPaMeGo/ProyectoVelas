@@ -38,6 +38,7 @@
 </div>
 <div>
     @Html.ActionLink("Fragancia", "ActualizarView", new { id = Model.IDFrag, vista = "Frag" })|
-    <a href="#" onclick="cargarVistaParcial('frag','miContenedor','Detalles')"> Back to List</a>
+    <a href="#" onclick="cargarVistaParcial('frag','miContenedor','Detalles')"> Back to List</a> |
+    @Html.ActionLink("Eliminar", "Delete", new { id = Model.IDFrag })
 
 </div>

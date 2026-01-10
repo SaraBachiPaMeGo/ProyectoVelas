@@ -147,7 +147,7 @@ namespace appVelas.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Eliminar(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _VelaFinalizadaRepo.EliminarAsync(id);
 

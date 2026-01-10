@@ -91,7 +91,7 @@ namespace appVelas.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Eliminar(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var cera = await _ceraRepo.EliminarAsync(id);
 

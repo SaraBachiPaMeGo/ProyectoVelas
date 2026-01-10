@@ -99,7 +99,7 @@
             <td>
                 @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = item.IDDoc, vista = "Documento" }) |
                 @Html.ActionLink("Detalles", "DetallesView1", new { IDDoc = item.IDDoc, vista = "Documento" }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IDDoc })
             </td>
         </tr>
 }

@@ -53,8 +53,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }) @*|
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" })
+                    | @Html.ActionLink("Eliminar", "Delete", new { id = item.IDEndurecedor })
                 </td>
             </tr>
         }

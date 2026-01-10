@@ -37,7 +37,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Cera", "ActualizarView", new { id = Model.IDCera }) |
+    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDCera }) |
     <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Detalles')"> Back to List</a>
+    |
+    @Html.ActionLink("Eliminar", "Delete", new { id = Model.IDCera })
 
 </div>

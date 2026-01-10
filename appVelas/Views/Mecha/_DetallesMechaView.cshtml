@@ -53,8 +53,8 @@
                         </td>
                         <td>
                             @Html.ActionLink("Actualizar", "ActualizarView", new { IDMecha = item.IDMecha, vista = "Mecha" }) |
-                            @Html.ActionLink("Detalles", "DetallesView1", new { IDMecha = item.IDMecha, vista = "Mecha" }) @*|
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                            @Html.ActionLink("Detalles", "DetallesView1", new { IDMecha = item.IDMecha, vista = "Mecha" }) 
+                            |@Html.ActionLink("Eliminar", "Delete", new { id = item.IDMecha })
                         </td>
                     </tr>
                 }
