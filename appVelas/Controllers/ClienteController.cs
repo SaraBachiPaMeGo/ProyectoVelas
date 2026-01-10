@@ -107,6 +107,17 @@ namespace appVelas.Controllers
             return View("~/Views/Cliente/_DetallesClienteView1.cshtml", cli.Data);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var cli = await _clienteRepo.EliminarAsync(id);
+
+            ViewData["Error"] = cli.Error.Mensaje;
+            ViewData["OK"] = cli.Data;
+
+            return RedirectToAction("_DetallesClienteView");
+        }
+
         public IActionResult _CrearCosteView()
         {
             //await  await _clienteRepo.InsertarCoste(NombreUs, email,

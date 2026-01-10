@@ -107,5 +107,16 @@ namespace appVelas.Controllers
             ViewData["MOLDE"] = mol.Data;
             return View("~/Views/Molde/_DetallesMoldeView1.cshtml", mol.Data);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var res = await _moldeRepo.EliminarAsync(id);
+
+            ViewData["Error"] = res.Error.Mensaje;
+            ViewData["OK"] = res.Data;
+
+            return RedirectToAction("_DetallesMoldeView");
+        }
     }
 }

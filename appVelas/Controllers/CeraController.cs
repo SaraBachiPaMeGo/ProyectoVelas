@@ -90,6 +90,17 @@ namespace appVelas.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var cera = await _ceraRepo.EliminarAsync(id);
+
+            ViewData["Error"] = cera.Error.Mensaje;
+            ViewData["OK"] = cera.Data;
+
+            return RedirectToAction("_DetallesCeraView");
+        }
+
         public async Task<IActionResult> _DetallesCeraView()
         {
             var cera = await _ceraRepo.GetCerasAsync();

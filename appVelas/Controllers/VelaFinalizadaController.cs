@@ -144,7 +144,17 @@ namespace appVelas.Controllers
                 return StatusCode(500, $"Error: {ex.Message}");
             }
 
+        }
 
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var res = await _VelaFinalizadaRepo.EliminarAsync(id);
+
+            ViewData["Error"] = res.Error.Mensaje;
+            ViewData["OK"] = res.Data;
+
+            return RedirectToAction("_DetallesVelaFinalizadaView");
         }
     }
 }

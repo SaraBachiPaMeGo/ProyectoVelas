@@ -107,5 +107,16 @@ namespace appVelas.Controllers
             return View("~/Views/Endurecedor/_DetallesEndurecedorView1.cshtml", end.Data);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var res = await _endurecedorRepo.EliminarAsync(id);
+
+            ViewData["Error"] = res.Error.Mensaje;
+            ViewData["OK"] = res.Data;
+
+            return RedirectToAction("_DetallesEndurecedorView");
+        }
+
     }
 }
