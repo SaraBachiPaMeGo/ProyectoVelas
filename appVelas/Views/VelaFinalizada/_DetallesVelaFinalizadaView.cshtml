@@ -63,7 +63,9 @@
             <td>
                 @Html.ActionLink("Actualizar", "ActualizarView", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }) |
                 @Html.ActionLink("Detalles", "DetallesView1", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" })
-                
+                <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@item.IDVelaFin">
+                    Eliminar
+                </button>
                     </td>
                 </tr>
         }

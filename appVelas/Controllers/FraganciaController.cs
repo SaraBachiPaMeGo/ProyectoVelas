@@ -110,7 +110,7 @@ namespace appVelas.Controllers
             return View("~/Views/Fragancia/_DetallesFragView1.cshtml", frag.Data);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _fraganciaRepo.EliminarAsync(id);

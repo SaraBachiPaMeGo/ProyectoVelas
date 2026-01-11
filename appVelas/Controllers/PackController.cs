@@ -112,7 +112,7 @@ namespace appVelas.Controllers
             return View("~/Views/Pack/_DetallesPackView1.cshtml", pack.Data);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _packRepo.EliminarAsync(id);

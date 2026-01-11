@@ -99,7 +99,9 @@
             <td>
                 @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = item.IDDoc, vista = "Documento" }) |
                 @Html.ActionLink("Detalles", "DetallesView1", new { IDDoc = item.IDDoc, vista = "Documento" }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.IDDoc })
+                <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@item.IDDoc">
+                    Eliminar
+                </button>
             </td>
         </tr>
 }

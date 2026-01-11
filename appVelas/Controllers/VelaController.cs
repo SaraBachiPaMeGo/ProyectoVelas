@@ -334,7 +334,7 @@ namespace appVelas.Controllers
             return View("~/Views/Vela/_DetallesVelaView1.cshtml", vela.Data);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _velaRepo.EliminarAsync(id);

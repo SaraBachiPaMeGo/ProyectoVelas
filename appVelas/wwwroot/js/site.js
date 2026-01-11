@@ -20,14 +20,6 @@
     });
 });
 
-function recargarPag(tipoVista, contenedor, http) {
-    sessionStorage.setItem('vistaPendiente', JSON.stringify({ tipoVista, contenedor, http }));
-
-    var url = `${window.location.origin}`;
-    cargarVistaParcial(tipoVista, contenedor, http);
-
-    window.location.href = url;
-}
 document.addEventListener('DOMContentLoaded', () => {
 
     const pendiente = sessionStorage.getItem('vistaPendiente');
@@ -38,7 +30,285 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ejecutarCargaVista(tipoVista, contenedor, http);
     }
+
+    let confirmCallback = null;
+
+    const modal = document.getElementById("confirmModal");
+    const title = document.getElementById("modalTitle");
+    const message = document.getElementById("modalMessage");
+    const btnConfirm = document.getElementById("modalConfirm");
+    const btnCancel = document.getElementById("modalCancel");
+
+    if (!modal || !btnConfirm || !btnCancel) {
+        console.error("Modal no encontrado en el DOM");
+        return;
+    }
+
+    window.mostrarConfirmacion = function (titulo, texto, callback) {
+        title.innerText = titulo;
+        message.innerText = texto;
+        confirmCallback = callback;
+        modal.classList.remove("hidden");
+    };
+
+    function cerrarModal() {
+        modal.classList.add("hidden");
+        confirmCallback = null;
+    }
+
+    btnCancel.addEventListener("click", cerrarModal);
+
+    btnConfirm.addEventListener("click", function () {
+        if (confirmCallback) confirmCallback();
+        cerrarModal();
+    });
+
+    // EVENT DELEGATION (CLAVE PARA AJAX)
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("btn-eliminar-mecha")) {
+            const id = e.target.dataset.id;
+
+            mostrarConfirmacion(
+                "Eliminar mecha",
+                "¿Seguro que deseas eliminar esta mecha? Esta acción no se puede deshacer.",
+                () => eliminarMecha(id)
+            );
+        }
+    });
+
 });
+
+function eliminarMecha(id) {
+    
+    switch (tipoVista) {
+        case 'vela':
+            $.ajax({
+                url: `/Vela/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'velaFin':
+            $.ajax({
+                url: `/VelaFinalizada/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'pedido':
+            if (contenedor === '' || contenedor === null) {
+                contenedor = 'miContenedor'
+            }
+            $.ajax({
+                url: `/Pedido/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'cliente':
+            $.ajax({
+                url: '/Cliente/_' + http + 'ClienteView',
+                type: 'GET',
+                success: function (data) {
+                    $('#' + contenedor).html(data);
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
+        case 'molde':
+            $.ajax({
+                url: `/Molde/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'frag':
+            $.ajax({
+                url: `/Fragancia/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'pig':
+            $.ajax({
+                url: `/Pigmento/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'mecha':
+            $.ajax({
+                url: `/Mecha/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'cera':
+            $.ajax({
+                url: `/Cera/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'doc':
+            $.ajax({
+                url: `/Documento/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'end':
+            $.ajax({
+                url: `/Endurecedor/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        case 'pack':
+            $.ajax({
+                url: `/Pack/Delete/${id}`,
+                type: 'POST',
+                success: function (data) {
+                    $('#' + 'miContenedor').html(data);
+
+                    const fila = document.getElementById(`eliminar-row-${id}`);
+                    if (fila) {
+                        fila.classList.add("fade-out");
+                        setTimeout(() => fila.remove(), 300);
+                    }
+                    return data;
+                },
+                error: function () {
+                    alert('Error al eliminar.');
+                }
+            }) 
+            break;
+        default:
+    }
+
+}
+
 
 function cargarVistaParcial(tipoVista, contenedor, http) {
 

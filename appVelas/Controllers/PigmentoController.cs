@@ -128,7 +128,7 @@ namespace appVelas.Controllers
            
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _pigmentoRepo.EliminarAsync(id);

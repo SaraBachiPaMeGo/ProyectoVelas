@@ -50,7 +50,9 @@
                 <td>
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack, vista = "Pack" }) |
                     @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" })|
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDPack })
+                    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@item.IDPack">
+                        Eliminar
+                    </button>
                 </td>
             </tr>
         }

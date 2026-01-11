@@ -130,7 +130,7 @@ namespace appVelas.Controllers
             return View("~/Views/Pedido/_DetallesPedidoView1.cshtml", pedo.Data);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _pedidoRepo.EliminarAsync(id);

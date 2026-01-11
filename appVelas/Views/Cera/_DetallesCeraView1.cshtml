@@ -40,6 +40,8 @@
     @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDCera }) |
     <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Detalles')"> Back to List</a>
     |
-    @Html.ActionLink("Eliminar", "Delete", new { id = Model.IDCera })
+    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDCera">
+        Eliminar
+    </button>
 
 </div>

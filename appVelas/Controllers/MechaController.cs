@@ -149,13 +149,19 @@ namespace appVelas.Controllers
             
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _mechaRepo.EliminarAsync(id);
 
-            ViewData["Error"] = res.Error.Mensaje;
-            ViewData["OK"] = res.Data;
+            if (res.Error != null)
+            {
+                ViewData["Error"] = res.Error.Mensaje;
+            }
+            else
+            {
+                ViewData["OK"] = res.Data;
+            }
 
             return RedirectToAction("_DetallesMechaView");
         }

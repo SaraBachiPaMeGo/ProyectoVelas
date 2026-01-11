@@ -50,6 +50,11 @@
     <div>
         @Html.ActionLink("Mecha", "ActualizarView", new { id = Model.IDMecha, vista = "Mecha" }) |
         <a href="#" onclick="cargarVistaParcial('mecha','miContenedor','Detalles')"> Back to List</a> |
-        @Html.ActionLink("Eliminar", "Delete", new { id = Model.IDMecha })
+        @*@Html.ActionLink("Eliminar", "Delete", new { id = Model.IDMecha })*@
+        @*btn-eliminar-mecha*@
+
+        <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDMecha">
+            Eliminar
+        </button>
 
     </div>

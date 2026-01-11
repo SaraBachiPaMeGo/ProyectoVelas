@@ -149,7 +149,7 @@ namespace appVelas.Controllers
             return View("~/Views/Documento/_DetallesDocView1.cshtml", Documento.Data);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
             var res = await _docRepo.EliminarAsync(id);
