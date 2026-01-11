@@ -29,7 +29,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="eliminar-row-@item.IDFrag">
 
                 <td>
                     @Html.DisplayFor(modelItem => item.FragNombre)
@@ -56,7 +56,7 @@
         </p>*@
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDFrag = item.IDFrag, vista = "Frag" }) |
                     @Html.ActionLink("Detalles", "DetallesView1", new { IDFrag = item.IDFrag, vista = "Frag" })
-                    | <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@item.IDFrag">
+                    | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Fragancia" data-id="@item.IDFrag">
     Eliminar
 </button>
                 </td>

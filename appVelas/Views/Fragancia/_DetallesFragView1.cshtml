@@ -39,7 +39,7 @@
 <div>
     @Html.ActionLink("Fragancia", "ActualizarView", new { id = Model.IDFrag, vista = "Frag" })|
     <a href="#" onclick="cargarVistaParcial('frag','miContenedor','Detalles')"> Back to List</a> |
-    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDFrag">
+    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Fragancia" data-id="@Model.IDFrag">
         Eliminar
     </button>
 

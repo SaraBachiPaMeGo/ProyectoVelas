@@ -40,7 +40,7 @@
 <div>
     @Html.ActionLink("Pigmento", "ActualizarView", new { id = Model.IDPig, vista = "Pig" }) |
     <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Detalles')"> Back to List</a> |
-    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDPig">
+    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pigmento" data-id="@Model.IDPig">
         Eliminar
     </button>
 

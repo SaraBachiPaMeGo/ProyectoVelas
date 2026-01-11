@@ -93,7 +93,7 @@
 <div>
     @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = Model.IDDoc, vista = "Documento" }) |
     <a href="#" onclick="cargarVistaParcial('doc','miContenedor','Detalles')"> Back to List</a> |
-    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDDoc">
+    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Documento" data-id="@Model.IDDoc">
         Eliminar
     </button>
 

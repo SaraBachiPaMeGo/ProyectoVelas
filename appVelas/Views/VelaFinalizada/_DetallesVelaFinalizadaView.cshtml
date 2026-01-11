@@ -35,7 +35,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr id="eliminar-row-@item.IDVelaFin">
             <td>
                 @Html.DisplayFor(modelItem => item.IDVelaFin)
             </td>
@@ -63,7 +63,7 @@
             <td>
                 @Html.ActionLink("Actualizar", "ActualizarView", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }) |
                 @Html.ActionLink("Detalles", "DetallesView1", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" })
-                <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@item.IDVelaFin">
+                <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="VelaFinalizada" data-id="@item.IDVelaFin">
                     Eliminar
                 </button>
                     </td>

@@ -57,7 +57,7 @@
 <div>
     @Html.ActionLink("VelaFinalizada", "ActualizarView", new { id = Model.IDVelaFin, vista = "VelaFinalizada" }) |
     <a href="#" onclick="cargarVistaParcial('velaFin','miContenedor','Detalles')"> Back to List</a>
-    | <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDVelaFin">
+    | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="VelaFinalizada" data-id="@Model.IDVelaFin">
     Eliminar
 </button>
 

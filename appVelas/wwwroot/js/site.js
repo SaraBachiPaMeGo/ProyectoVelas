@@ -1,4 +1,18 @@
-﻿$(document).ready(function () {
+﻿const rutasDelete = {
+    Vela: '/Vela/Delete/',
+    VelaFinalizada: '/VelaFinalizada/Delete/',
+    Pedido: '/Pedido/Delete/',
+    Molde: '/Molde/Delete/',
+    Fragancia: '/Fragancia/Delete/',
+    Pigmento: '/Pigmento/Delete/',
+    Mecha: '/Mecha/Delete/',
+    Cera: '/Cera/Delete/',
+    Documento: '/Documento/Delete/',
+    Endurecedor: '/Endurecedor/Delete/',
+    Pack: '/Pack/Delete/'
+};
+
+$(document).ready(function () {
     $('#fragancias').select2({
         placeholder: "Selecciona una fragancia",
         allowClear: true
@@ -64,251 +78,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // EVENT DELEGATION (CLAVE PARA AJAX)
-    document.addEventListener("click", function (e) {
-        if (e.target.classList.contains("btn-eliminar-mecha")) {
-            const id = e.target.dataset.id;
+    //document.addEventListener("click", function (e) {
+    //    if (e.target.classList.contains("btn-eliminar")) {
+    //        const id = e.target.dataset.id;
 
-            mostrarConfirmacion(
-                "Eliminar mecha",
-                "¿Seguro que deseas eliminar esta mecha? Esta acción no se puede deshacer.",
-                () => eliminarMecha(id)
-            );
-        }
+    //        mostrarConfirmacion(
+    //            "Eliminar mecha",
+    //            "¿Seguro que deseas eliminar esta mecha? Esta acción no se puede deshacer.",
+    //            () => eliminarMecha(id)
+    //        );
+    //    }
+    //});
+
+    $(document).on('click', '.btn-eliminar', function () {
+
+        const id = $(this).data('id');
+        const tipoVista = $(this).data('tipo');
+
+        mostrarConfirmacion(
+            "Eliminar registro",
+            "¿Seguro que deseas eliminar este registro?",
+            () => eliminarGenerico(id, tipoVista)
+        );
     });
 
 });
 
-function eliminarMecha(id) {
-    
-    switch (tipoVista) {
-        case 'vela':
-            $.ajax({
-                url: `/Vela/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'velaFin':
-            $.ajax({
-                url: `/VelaFinalizada/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
+function eliminarGenerico(id, tipoVista) {
 
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
+    const url = rutasDelete[tipoVista];
+    if (!url) {
+        alert('Tipo de vista no soportado');
+    } else {
+        $.ajax({
+            url: url + id,
+            type: 'POST',
+            success: function () {
+
+                const fila = document.getElementById(`eliminar-row-${id}`);
+                if (fila) {
+                    fila.classList.add("fade-out");
+                    setTimeout(() => fila.remove(), 300);
                 }
-            }) 
-            break;
-        case 'pedido':
-            if (contenedor === '' || contenedor === null) {
-                contenedor = 'miContenedor'
+            },
+            error: function () {
+                alert('Error al eliminar el registro.');
             }
-            $.ajax({
-                url: `/Pedido/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'cliente':
-            $.ajax({
-                url: '/Cliente/_' + http + 'ClienteView',
-                type: 'GET',
-                success: function (data) {
-                    $('#' + contenedor).html(data);
-                },
-                error: function () {
-                    alert('Error al cargar la vista parcial.');
-                }
-            });
-            break;
-        case 'molde':
-            $.ajax({
-                url: `/Molde/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'frag':
-            $.ajax({
-                url: `/Fragancia/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'pig':
-            $.ajax({
-                url: `/Pigmento/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'mecha':
-            $.ajax({
-                url: `/Mecha/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'cera':
-            $.ajax({
-                url: `/Cera/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'doc':
-            $.ajax({
-                url: `/Documento/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'end':
-            $.ajax({
-                url: `/Endurecedor/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        case 'pack':
-            $.ajax({
-                url: `/Pack/Delete/${id}`,
-                type: 'POST',
-                success: function (data) {
-                    $('#' + 'miContenedor').html(data);
-
-                    const fila = document.getElementById(`eliminar-row-${id}`);
-                    if (fila) {
-                        fila.classList.add("fade-out");
-                        setTimeout(() => fila.remove(), 300);
-                    }
-                    return data;
-                },
-                error: function () {
-                    alert('Error al eliminar.');
-                }
-            }) 
-            break;
-        default:
-    }
-
+        });
+    }    
 }
-
 
 function cargarVistaParcial(tipoVista, contenedor, http) {
 

@@ -75,7 +75,7 @@
 <div>
     @Html.ActionLink("Actualizarr", "ActualizarView", new { id = Model.IDMolde, vista = "Molde" }) |
     <a href="#" onclick="cargarVistaParcial('molde','miContenedor','Detalles')"> Back to List</a> |
-    <button class="btn btn-danger btn-eliminar btn-eliminar-mecha" data-id="@Model.IDMolde">
+    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Molde" data-id="@Model.IDMolde">
         Eliminar
     </button>
 </div>
