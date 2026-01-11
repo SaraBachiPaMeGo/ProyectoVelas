@@ -112,7 +112,7 @@ namespace appVelas.Controllers
         {
             var res = await _endurecedorRepo.EliminarAsync(id);
 
-            ViewData["Error"] = res.Error.Mensaje;
+if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             ViewData["OK"] = res.Data;
 
             return RedirectToAction("_DetallesEndurecedorView");

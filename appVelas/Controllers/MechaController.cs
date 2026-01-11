@@ -154,10 +154,7 @@ namespace appVelas.Controllers
         {
             var res = await _mechaRepo.EliminarAsync(id);
 
-            if (res.Error != null)
-            {
-                ViewData["Error"] = res.Error.Mensaje;
-            }
+            if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             else
             {
                 ViewData["OK"] = res.Data;

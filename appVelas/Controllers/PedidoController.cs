@@ -135,7 +135,7 @@ namespace appVelas.Controllers
         {
             var res = await _pedidoRepo.EliminarAsync(id);
 
-            ViewData["Error"] = res.Error.Mensaje;
+if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             ViewData["OK"] = res.Data;
 
             return RedirectToAction("_DetallesPedidoView");
