@@ -316,3 +316,7 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
+tr {
+    transition: all 0.2s ease;
+}

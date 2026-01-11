@@ -128,6 +128,35 @@ function eliminarGenerico(id, tipoVista) {
     }    
 }
 
+$(document).on('keyup', '#buscadorTabla', function () {
+
+    const texto = $(this).val().toLowerCase().trim();
+    const filas = $('#tablaDatos tr');
+
+    let coincidencias = [];
+
+    filas.each(function () {
+        const fila = $(this);
+
+        //Buscar por nombre
+        const contenido = fila.find('.col-buscar').text().toLowerCase();
+
+
+        if (contenido.includes(texto)) {
+            coincidencias.push(fila);
+            fila.show();
+        } else {
+            fila.hide();
+        }
+    });
+
+    // 🔝 Reordenar: coincidencias arriba
+    coincidencias.forEach(fila => {
+        $('#tablaDatos').prepend(fila);
+    });
+});
+
+
 function cargarVistaParcial(tipoVista, contenedor, http) {
 
     sessionStorage.setItem(

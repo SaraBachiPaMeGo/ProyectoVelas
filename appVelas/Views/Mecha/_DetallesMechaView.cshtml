@@ -9,6 +9,12 @@
         <p>
 
         </p>
+        <input type="text"
+               id="buscadorTabla"
+               class="form-control mb-3"
+               placeholder="Buscar..."
+               autocomplete="off" />
+
         <table class="table">
             <thead>
                 <tr>
@@ -21,7 +27,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.CompradoEn)
                     </th>
-                   
+
                     <th>
                         @Html.DisplayNameFor(model => model.Cantidad)
                     </th>
@@ -31,11 +37,11 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaDatos">
                 @foreach (var item in Model)
                 {
                     <tr id="eliminar-row-@item.IDMecha">
-                        <td>
+                        <td class="col-buscar">
                             @Html.DisplayFor(modelItem => item.Firma)
                         </td>
                         <td>
@@ -44,7 +50,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.CompradoEn)
                         </td>
-                        
+
                         <td>
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
