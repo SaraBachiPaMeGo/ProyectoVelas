@@ -2,6 +2,7 @@
 @{
     Layout = null;
 }
+    <input type="text" id="buscadorTabla" class="form-control mb-3" placeholder="Buscar..." autocomplete="off" style="width: 29%;" />
 <table class="table">
     <thead>
         <tr>
@@ -26,12 +27,12 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
             <tr id="eliminar-row-@item.IDFrag">
 
-                <td>
+                <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.FragNombre)
                 </td>
                 <td>

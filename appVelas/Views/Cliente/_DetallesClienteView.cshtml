@@ -5,6 +5,7 @@
 <p>
     <a asp-action="_CrearClienteView">Añadir nuevo cliente</a>
 </p>
+<input type="text" id="buscadorTabla" class="form-control mb-3" placeholder="Buscar..." autocomplete="off" style="width: 29%;" />
 <table class="table">
     <thead>
         <tr>
@@ -26,11 +27,11 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>

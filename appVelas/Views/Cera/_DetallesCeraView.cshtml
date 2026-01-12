@@ -24,17 +24,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.Coste)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IDVela)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
             <tr id="eliminar-row-@item.IDCera">
-                <td>
+                <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.Firma)
                 </td>
                 <td>
@@ -49,9 +49,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.IDVela)
-                </td>
+                </td>*@
                 <td>
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDCera = item.IDCera, vista = "Cera" }) |
                     @Html.ActionLink("Detalles", "DetallesView1", new { IDCera = item.IDCera, vista = "Cera" })|
