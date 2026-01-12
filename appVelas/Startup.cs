@@ -50,6 +50,7 @@ namespace appVelas
             services.AddScoped<RepositoryVelaFragancias>();
             services.AddScoped<RepositoryVelaPigmentos>();
             services.AddScoped<RepositoryVelasFinalizadas>();
+            services.AddScoped<RepositoryInventarios>();
 
             // ✅ Configuración global del HttpClientAction<IServiceProvider, HttpClient> configureClient = (sp, client) =>
 
@@ -179,6 +180,12 @@ namespace appVelas
                 return new VelaFinalizadaService(client);
             });
 
+            services.AddScoped<IInventarioService>(sp =>
+            {
+                var factory = sp.GetRequiredService<IHttpClientFactory>();
+                var client = factory.CreateClient("ApiClient");
+                return new InventarioService(client);
+            });
 
             // ✅ Manejador genérico que ignora certificados locales
             Func<HttpClientHandler> handler = () => new HttpClientHandler

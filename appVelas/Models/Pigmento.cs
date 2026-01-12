@@ -39,7 +39,7 @@ namespace appVelas.Models
 
         public List<VelaPigmento> VelaPigmentos { get; set; }
 
-        public ICollection<Documento>? Documentos { get; set; }
+        //public ICollection<Documento>? Documentos { get; set; }
 
 
     }
