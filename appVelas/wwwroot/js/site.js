@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConfirm = document.getElementById("modalConfirm");
     const btnCancel = document.getElementById("modalCancel");
 
+    const dropzone = document.getElementById("dropzone");
+    const status = document.getElementById("status");
     if (!modal || !btnConfirm || !btnCancel) {
         console.error("Modal no encontrado en el DOM");
         return;
@@ -77,19 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cerrarModal();
     });
 
-    // EVENT DELEGATION (CLAVE PARA AJAX)
-    //document.addEventListener("click", function (e) {
-    //    if (e.target.classList.contains("btn-eliminar")) {
-    //        const id = e.target.dataset.id;
-
-    //        mostrarConfirmacion(
-    //            "Eliminar mecha",
-    //            "¿Seguro que deseas eliminar esta mecha? Esta acción no se puede deshacer.",
-    //            () => eliminarMecha(id)
-    //        );
-    //    }
-    //});
-
     $(document).on('click', '.btn-eliminar', function () {
 
         const id = $(this).data('id');
@@ -102,7 +91,47 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-});
+    dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("dragover");
+    });
+
+    dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("dragover");
+    });
+
+    dropzone.addEventListener("drop", async (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
+
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+
+        //const formData = new FormData();
+        //formData.append("file", file);
+        //formData.append("nombre", document.getElementById("nombre").value);
+        //formData.append("descripcion", document.getElementById("descripcion").value);
+
+        //try {
+        //    const response = await fetch("https://localhost:5001/api/vela/upload", {
+        //        method: "POST",
+        //        body: formData
+        //    });
+
+        //    const data = await response.json();
+        //    if (response.ok) {
+        //        status.textContent = `✅ Imagen subida: ${data.path}`;
+        //    } else {
+        //        status.textContent = `❌ Error: ${data}`;
+        //    }
+        //} catch (error) {
+        //    status.textContent = `❌ Error al conectar con la API`;
+        //}
+
+        
+
+    });
+})
 
 function eliminarGenerico(id, tipoVista) {
 
