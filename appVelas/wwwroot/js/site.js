@@ -32,37 +32,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConfirm = document.getElementById("modalConfirm");
     const btnCancel = document.getElementById("modalCancel");
 
-    document.getElementById("formMolde").addEventListener("submit", function (e) {
-        e.preventDefault();
+    if (document.getElementById("formMolde") !== null) {
+        document.getElementById("formMolde").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        const formData = new FormData(this);
+            const formData = new FormData(this);
 
-        if (archivoSeleccionado) {
-            formData.set("file", archivoSeleccionado);
-        }
+            if (archivoSeleccionado) {
+                formData.set("file", archivoSeleccionado);
+            }
 
-        fetch(this.action, {
-            method: "POST",
-            body: formData
-        })
-            .then(r => r.text())
-            .then(html => {
-                document.body.innerHTML = html; // o lo que necesites
+            fetch(this.action, {
+                method: "POST",
+                body: formData
             })
-            .catch(err => console.error(err));
-    });
-
-    document.getElementById("modalCancel").onclick = () => {
-        cerrarModal();
-    };
-
-    function cerrarModal() { modal.classList.add("hidden"); confirmCallback = null; }
-
-    document.getElementById("modalConfirm").onclick = () => {
-        if (confirmCallback) confirmCallback();
-        cerrarModal();
-    };
-        
+                .then(r => r.text())
+                .then(html => {
+                    document.body.innerHTML = html; // o lo que necesites
+                })
+                .catch(err => console.error(err));
+        });
+    }
+           
     if (!modal || !btnConfirm || !btnCancel) {
         console.error("Modal no encontrado en el DOM");
         return;
@@ -75,18 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove("hidden");
     };
 
+    function cerrarModal() {
+        modal.classList.add("hidden");
+        confirmCallback = null;
+    }
+
+    function mostrarConfirmacion(titulo, mensaje, onConfirm) {
+        confirmCallback = onConfirm;
+
+        document.getElementById("modalTitle").innerText = titulo;
+        document.getElementById("modalMessage").innerText = mensaje;
+        document.getElementById("confirmModal").classList.remove("hidden");
+    }
+
     btnCancel.addEventListener("click", cerrarModal);
 
     btnConfirm.addEventListener("click", function () {
         if (confirmCallback) confirmCallback();
         cerrarModal();
-    });        
-})
+    });    
 
-function cerrarModal() {
-    modal.classList.add("hidden");
-    confirmCallback = null;
-}
+    $(document).on('click', '.btn-eliminar', function () {
+        const id = $(this).data('id');
+        const tipoVista = $(this).data('tipo');
+
+        mostrarConfirmacion(
+            "Eliminar registro",
+            "¿Seguro que deseas eliminar este registro?",
+            () => eliminarGenerico(id, tipoVista)
+        );
+    });
+
+})
 
 function mostrarConfirmacion(titulo, mensaje, onConfirm) {
     confirmCallback = onConfirm;
@@ -95,17 +106,6 @@ function mostrarConfirmacion(titulo, mensaje, onConfirm) {
     document.getElementById("modalMessage").innerText = mensaje;
     document.getElementById("confirmModal").classList.remove("hidden");
 }
-
-$(document).on('click', '.btn-eliminar', function () {
-    const id = $(this).data('id');
-    const tipoVista = $(this).data('tipo');
-
-    mostrarConfirmacion(
-        "Eliminar registro",
-        "¿Seguro que deseas eliminar este registro?",
-        () => eliminarGenerico(id, tipoVista)
-    );
-});
 
 function eliminarGenerico(id, tipoVista) {
 
