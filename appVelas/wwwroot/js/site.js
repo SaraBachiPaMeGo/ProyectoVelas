@@ -11,28 +11,7 @@
     Endurecedor: '/Endurecedor/Delete/',
     Pack: '/Pack/Delete/'
 };
-
-$(document).ready(function () {
-    $('#fragancias').select2({
-        placeholder: "Selecciona una fragancia",
-        allowClear: true
-    });
-
-    $('#pigmentos').select2({
-        placeholder: "Selecciona un pigmento",
-        allowClear: true
-    });
-
-    window.addEventListener('load', function () {
-        const pendiente = sessionStorage.getItem('vistaPendiente');
-        if (pendiente) {
-            const { tipoVista, contenedor, http } = JSON.parse(pendiente);
-            sessionStorage.removeItem('vistaPendiente');
-            // Ejecuta la carga AJAX automáticamente
-            cargarVistaParcial(tipoVista, contenedor, http);
-        }
-    });
-});
+let archivoSeleccionado = null;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -53,8 +32,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConfirm = document.getElementById("modalConfirm");
     const btnCancel = document.getElementById("modalCancel");
 
-    const dropzone = document.getElementById("dropzone");
-    const status = document.getElementById("status");
+    document.getElementById("formMolde").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        if (archivoSeleccionado) {
+            formData.set("file", archivoSeleccionado);
+        }
+
+        fetch(this.action, {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.text())
+            .then(html => {
+                document.body.innerHTML = html; // o lo que necesites
+            })
+            .catch(err => console.error(err));
+    });
+
+    document.getElementById("modalCancel").onclick = () => {
+        cerrarModal();
+    };
+
+    function cerrarModal() { modal.classList.add("hidden"); confirmCallback = null; }
+
+    document.getElementById("modalConfirm").onclick = () => {
+        if (confirmCallback) confirmCallback();
+        cerrarModal();
+    };
+        
     if (!modal || !btnConfirm || !btnCancel) {
         console.error("Modal no encontrado en el DOM");
         return;
@@ -67,71 +75,37 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove("hidden");
     };
 
-    function cerrarModal() {
-        modal.classList.add("hidden");
-        confirmCallback = null;
-    }
-
     btnCancel.addEventListener("click", cerrarModal);
 
     btnConfirm.addEventListener("click", function () {
         if (confirmCallback) confirmCallback();
         cerrarModal();
-    });
-
-    $(document).on('click', '.btn-eliminar', function () {
-
-        const id = $(this).data('id');
-        const tipoVista = $(this).data('tipo');
-
-        mostrarConfirmacion(
-            "Eliminar registro",
-            "¿Seguro que deseas eliminar este registro?",
-            () => eliminarGenerico(id, tipoVista)
-        );
-    });
-
-    dropzone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropzone.classList.add("dragover");
-    });
-
-    dropzone.addEventListener("dragleave", () => {
-        dropzone.classList.remove("dragover");
-    });
-
-    dropzone.addEventListener("drop", async (e) => {
-        e.preventDefault();
-        dropzone.classList.remove("dragover");
-
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-
-        //const formData = new FormData();
-        //formData.append("file", file);
-        //formData.append("nombre", document.getElementById("nombre").value);
-        //formData.append("descripcion", document.getElementById("descripcion").value);
-
-        //try {
-        //    const response = await fetch("https://localhost:5001/api/vela/upload", {
-        //        method: "POST",
-        //        body: formData
-        //    });
-
-        //    const data = await response.json();
-        //    if (response.ok) {
-        //        status.textContent = `✅ Imagen subida: ${data.path}`;
-        //    } else {
-        //        status.textContent = `❌ Error: ${data}`;
-        //    }
-        //} catch (error) {
-        //    status.textContent = `❌ Error al conectar con la API`;
-        //}
-
-        
-
-    });
+    });        
 })
+
+function cerrarModal() {
+    modal.classList.add("hidden");
+    confirmCallback = null;
+}
+
+function mostrarConfirmacion(titulo, mensaje, onConfirm) {
+    confirmCallback = onConfirm;
+
+    document.getElementById("modalTitle").innerText = titulo;
+    document.getElementById("modalMessage").innerText = mensaje;
+    document.getElementById("confirmModal").classList.remove("hidden");
+}
+
+$(document).on('click', '.btn-eliminar', function () {
+    const id = $(this).data('id');
+    const tipoVista = $(this).data('tipo');
+
+    mostrarConfirmacion(
+        "Eliminar registro",
+        "¿Seguro que deseas eliminar este registro?",
+        () => eliminarGenerico(id, tipoVista)
+    );
+});
 
 function eliminarGenerico(id, tipoVista) {
 
@@ -185,7 +159,57 @@ $(document).on('keyup', '#buscadorTabla', function () {
     });
 });
 
+function initDropzone() {
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+    const status = document.getElementById("status");
 
+    if (!dropzone) return; // 🔥 evita errores en otras vistas
+
+    // listeners aquí
+    dropzone.addEventListener("click", () => fileInput.click());
+
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+        dropzone.addEventListener(eventName, e => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+
+    dropzone.addEventListener("dragover", () => {
+        dropzone.classList.add("dragover");
+    });
+
+    dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("dragover");
+    });
+
+    dropzone.addEventListener("drop", (e) => {
+        dropzone.classList.remove("dragover");
+
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+
+        archivoSeleccionado = file;
+
+        // 🔥 CLAVE
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        fileInput.files = dataTransfer.files;
+        mostrarPreview(file);
+    });
+
+    function mostrarPreview(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                preview.src = reader.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+}
+   
 function cargarVistaParcial(tipoVista, contenedor, http) {
 
     sessionStorage.setItem(
@@ -261,7 +285,8 @@ function ejecutarCargaVista(tipoVista, contenedor, http) {
                 url: '/Molde/_' + http +'MoldeView', 
                 type: 'GET',
                 success: function (data) {
-                     $('#' + contenedor).html(data); 
+                    $('#' + contenedor).html(data); 
+                    initDropzone();
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');
@@ -388,3 +413,5 @@ function manejarCheckbox(contenedor, idCheck, tipoVista, http) {
     //    document.getElementById(contenedor).style.display = "none";
     //}
 }
+
+

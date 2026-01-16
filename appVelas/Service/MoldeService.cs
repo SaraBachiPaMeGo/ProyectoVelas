@@ -7,6 +7,7 @@ using appVelas.Models;
 using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace appVelas.Service
 {
@@ -72,11 +73,11 @@ namespace appVelas.Service
           
         }
 
-        public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(Molde molde)
+        public async Task<CustomApiResponse<Molde>> InsertarMoldeAsync(MultipartFormDataContent form)
         {
-            var respons = await _httpClient.PostAsJsonAsync($"/api/Molde/InsertarMolde", molde);
+            var respons = await _httpClient.PostAsync($"/api/Molde/InsertarMolde", form);
 
-            var dos = await respons.Content.ReadAsStringAsync();
+            var dos = await respons.Content.ReadAsStringAsync(); // AQUI PETA
 
             var response = await Helper.ParseApiResponse<Molde>(
               dos

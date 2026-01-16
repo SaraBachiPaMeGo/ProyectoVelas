@@ -3,78 +3,94 @@
 <div>
     <h4>Molde</h4>
     <hr />
-    <dl class="row">
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDMolde)
-        </dt>*@
-        @*<dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDMolde)
-        </dd>*@
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Firma)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Firma)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CompradoEn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CompradoEn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GramCera)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GramCera)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medidas)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medidas)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Duracion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duracion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CMMecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CMMecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Observ)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Observ)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MilAgua)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MilAgua)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDVela)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDVela)
-        </dd>*@
-    </dl>
+    <div style="display:inline-flex" >
+        <div style=" width: 65%;">
+            <dl class="row" style="margin-left: 15px; margin-left: 48px; ">
+                @*<dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.IDMolde)
+                </dt>*@
+                @*<dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.IDMolde)
+                </dd>*@
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Firma)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Firma)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CompradoEn)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CompradoEn)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.GramCera)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GramCera)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Medidas)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Medidas)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Duracion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Duracion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CMMecha)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CMMecha)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Observ)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Observ)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MilAgua)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MilAgua)
+                </dd>
+
+
+                @*<dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.IDVela)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.IDVela)
+                </dd>*@
+            </dl>
+        </div>
+        <div>
+
+            <div class="col-sm-10">
+                <img src="/Molde/Imagen/@Model.IDMolde"  style=" margin-left: -50%; height: 239px;" />
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Actualizarr", "ActualizarView", new { id = Model.IDMolde, vista = "Molde" }) |
-    <a href="#" onclick="cargarVistaParcial('molde','miContenedor','Detalles')"> Back to List</a> |
+<div style="margin-top: 25px">
+    <span >@Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDMolde, vista = "Molde" }, new
+                {
+                    @class = "btn btn-outline-warning",
+                    style = "color:#FF7B00; text-decoration:none;"
+                })</span> 
+    <a href="#" onclick="cargarVistaParcial('molde','miContenedor','Detalles')"> Back to List</a>
     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Molde" data-id="@Model.IDMolde">
         Eliminar
     </button>

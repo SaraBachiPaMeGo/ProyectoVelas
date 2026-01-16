@@ -56,8 +56,10 @@ namespace appVelas.Models
         public int? Cantidad { get; set; }
 
         [JsonProperty("Image")]
+        public byte[] Image { get; set; }          // 🔥 BYTES
 
-        public string Image { get; set; }
+        [JsonProperty("ImagenContentType")]
+        public string ImagenContentType { get; set; } // opcional (muy recomendable)
         //public ICollection<Documento>? Documentos { get; set; }
 
     }
