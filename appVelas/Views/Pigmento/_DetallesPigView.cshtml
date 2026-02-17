@@ -12,19 +12,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Firma)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.ColorNombre)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompradoEn)
-            </th>
-            
             <th>
                 @Html.DisplayNameFor(model => model.Cantidad)
             </th>
@@ -38,17 +29,8 @@
         @foreach (var item in Model)
         {
             <tr id="eliminar-row-@item.IDPig">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Firma)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
                 <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.ColorNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompradoEn)
                 </td>
                
                 <td>
@@ -58,8 +40,8 @@
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPig = item.IDPig, vista = "Pig" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPig = item.IDPig, vista = "Pig" })
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-success" })
                     | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pigmento" data-id="@item.IDPig">
     Eliminar
 </button>

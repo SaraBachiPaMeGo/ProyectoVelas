@@ -17,30 +17,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Firma)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompradoEn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GramCera)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Medidas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duracion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CMMecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MilAgua)
-            </th>
+            
           
             <th>
                 @Html.DisplayNameFor(model => model.Coste)
@@ -58,40 +35,26 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Firma)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompradoEn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GramCera)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Medidas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duracion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CMMecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observ)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MilAgua)
-                </td>
-                
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDMolde = item.IDMolde, vista = "Molde" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDMolde = item.IDMolde, vista = "Molde" }) |
-                    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Molde" data-id="@item.IDMolde">
-                        Eliminar
-                    </button>
+                    <div >
+                        @if (item.Image != null && item.Image.Length > 0)
+                        {
+                            var base64 = Convert.ToBase64String(item.Image);
+                            var imgSrc = $"data:{item.ImagenContentType};base64,{base64}";
+
+                            <img src="@imgSrc" width="150" />
+                        }
+                        @Html.ActionLink("Actualizar", "ActualizarView", new { IDMolde = item.IDMolde, vista = "Molde" }, new { @class = "btn btn-outline-warning" }) |
+                        @Html.ActionLink("Detalles", "DetallesView1", new { IDMolde = item.IDMolde, vista = "Molde" }, new { @class = "btn btn-outline-success" }) |
+                        <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Molde" data-id="@item.IDMolde">
+                            Eliminar
+                        </button>
+                    </div>
+                   
                 </td>
             </tr>
         }

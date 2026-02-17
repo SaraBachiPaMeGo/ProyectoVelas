@@ -54,8 +54,8 @@
                             @Html.DisplayFor(modelItem => item.Coste)
                         </td>
                         <td>
-                            @Html.ActionLink("Actualizar", "ActualizarView", new { IDMecha = item.IDMecha, vista = "Mecha" }) |
-                            @Html.ActionLink("Detalles", "DetallesView1", new { IDMecha = item.IDMecha, vista = "Mecha" })
+                            @Html.ActionLink("Actualizar", "ActualizarView", new { IDMecha = item.IDMecha, vista = "Mecha" }, new { @class = "btn btn-outline-warning" }) |
+                            @Html.ActionLink("Detalles", "DetallesView1", new { IDMecha = item.IDMecha, vista = "Mecha" }, new { @class = "btn btn-outline-success" })
                             @*|@Html.ActionLink("Eliminar", "Delete", new { id = item.IDMecha })*@
                             <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Mecha" data-id="@item.IDMecha">
                                 Eliminar

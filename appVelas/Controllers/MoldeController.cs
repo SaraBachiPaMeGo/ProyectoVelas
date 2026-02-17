@@ -9,6 +9,8 @@ using appVelas.Service.Interfaces;
 using System.Diagnostics;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using appVelas.Service;
 
 namespace appVelas.Controllers
 {
@@ -37,33 +39,8 @@ namespace appVelas.Controllers
         [HttpPost]
         public async Task<IActionResult> _CrearMoldeView(Molde molde, IFormFile file)
         {
-            using var form = new MultipartFormDataContent();
 
-            // 🔹 Imagen
-            if (file != null && file.Length > 0)
-            {
-                var streamContent = new StreamContent(file.OpenReadStream());
-                streamContent.Headers.ContentType =
-                    new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
-
-                form.Add(streamContent, "file", file.FileName);
-            }
-
-
-            // 🔹 Datos del Molde
-            form.Add(new StringContent(molde.MoldeNombre ?? ""), "MoldeNombre");
-            form.Add(new StringContent(molde.Coste.ToString()), "Coste");
-            form.Add(new StringContent(molde.Tipo ?? ""), "Tipo");
-            form.Add(new StringContent(molde.CMMecha.ToString()), "CMMecha");
-            form.Add(new StringContent(molde.GramCera.ToString()), "GramCera");
-            form.Add(new StringContent(molde.Medidas ?? ""), "Medidas");
-            form.Add(new StringContent(molde.Duracion.ToString()), "Duracion");
-            form.Add(new StringContent(molde.Observ ?? ""), "Observ");
-            form.Add(new StringContent(molde.CompradoEn ?? ""), "CompradoEn");
-            form.Add(new StringContent(molde.Firma ?? ""), "Firma");
-            form.Add(new StringContent(molde.Cantidad.ToString()), "Cantidad");
-            form.Add(new StringContent(molde.MilAgua.ToString()), "MilAgua");
-            form.Add(new StringContent(molde.IDVela?.ToString() ?? ""), "IDVela");
+            var form = Helper.CreateMultipartFormData(molde, file);
 
             var response = await _moldeRepo.InsertarMoldeAsync(form);
 
@@ -105,9 +82,11 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ActualizarView(Molde molde)
+        public async Task<IActionResult> ActualizarView(Molde molde, IFormFile file)
         {
-            var response = await _moldeRepo.ActualizarMoldeAsync(molde.IDMolde, molde);
+            var form = Helper.CreateMultipartFormData(molde, file);
+
+            var response = await _moldeRepo.ActualizarMoldeAsync(molde.IDMolde, form);
 
             if (response.Data.IDMolde != Guid.Empty)
             {

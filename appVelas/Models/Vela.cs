@@ -74,10 +74,10 @@ namespace appVelas.Models
 
         public decimal? Cantidad { get; set; }
 
-        public ICollection<Documento>? Documentos { get; set; }
+        //public ICollection<Documento>? Documentos { get; set; }
 
-        public List<VelaPigmento> Pigmentos { get; set; }
-        public List<VelaFragancia> Fragancias { get; set; }
+        public List<Guid> Pigmentos { get; set; }
+        public List<Guid> Fragancias { get; set; }
     }
 
 }

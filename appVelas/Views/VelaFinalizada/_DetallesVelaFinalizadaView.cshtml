@@ -62,8 +62,8 @@
                 @Html.DisplayFor(modelItem => item.FechaFin)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "ActualizarView", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }) |
-                @Html.ActionLink("Detalles", "DetallesView1", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" })
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }, new { @class = "btn btn-outline-warning" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { IDVelaFinalizada = item.IDVelaFin, vista = "VelaFinalizada" }, new { @class = "btn btn-outline-success" })
                 <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="VelaFinalizada" data-id="@item.IDVelaFin">
                     Eliminar
                 </button>

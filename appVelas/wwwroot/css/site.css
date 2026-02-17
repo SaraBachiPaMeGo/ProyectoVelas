@@ -163,12 +163,12 @@ li {
             overflow: visible;
         }
 
-.boton-sucess {
+.boton-success {
     background-color: #FFC0CB;
     color: black;
 }
 
-    .boton-sucess:hover {
+    .boton-success:hover {
         color: #317331;
         background-color: #77dd77;
     }

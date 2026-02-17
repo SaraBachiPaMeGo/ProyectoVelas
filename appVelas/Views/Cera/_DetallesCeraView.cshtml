@@ -53,8 +53,8 @@
                     @Html.DisplayFor(modelItem => item.IDVela)
                 </td>*@
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDCera = item.IDCera, vista = "Cera" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDCera = item.IDCera, vista = "Cera" })|
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDCera = item.IDCera, vista = "Cera" }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDCera = item.IDCera, vista = "Cera" }, new { @class = "btn btn-outline-success" })|
                     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Cera" data-id="@item.IDCera">
                         Eliminar
                     </button>

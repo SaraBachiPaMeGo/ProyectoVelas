@@ -9,7 +9,7 @@
 <hr />
 <div class="row" style="display: block;margin-left: 3%;">
     <div >
-        <form asp-action="ActualizarView" asp-controller="Molde" method="post">
+        <form enctype="multipart/form-data" asp-action="ActualizarView" style="display:inline-block" id="formMolde">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" style="display: none">
                 <label asp-for="IDMolde" class="control-label"></label>
@@ -58,7 +58,7 @@
                 <span asp-validation-for="MilAgua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Coste" class="control-label" ></label>
+                <label asp-for="Coste" class="control-label"></label>
                 <input asp-for="Coste" class="form-control" />
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
@@ -67,6 +67,15 @@
                 <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
                 <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
+
+            <div style="display:flex">
+                <div id="dropzone">Actualiza tu imagen aquí</div>
+
+                <input type="file" id="fileInput" accept="image/*" hidden name="file" />
+                <img id="preview" style=" display:none; width: 300px; margin-left: 52px; height: 200px;" />
+                <p id="status"></p>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Actualizar" class="btn btn-outline-warning" />
             </div>

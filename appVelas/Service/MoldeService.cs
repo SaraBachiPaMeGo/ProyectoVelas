@@ -77,7 +77,7 @@ namespace appVelas.Service
         {
             var respons = await _httpClient.PostAsync($"/api/Molde/InsertarMolde", form);
 
-            var dos = await respons.Content.ReadAsStringAsync(); // AQUI PETA
+            var dos = await respons.Content.ReadAsStringAsync(); 
 
             var response = await Helper.ParseApiResponse<Molde>(
               dos
@@ -86,13 +86,13 @@ namespace appVelas.Service
             return response;
         }
 
-        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, MultipartFormDataContent form)
         {
             var response = new CustomApiResponse<Molde>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Molde/ActualizarMolde/{id}", molde);
+                var respons = await _httpClient.PutAsync($"/api/Molde/ActualizarMolde/{id}", form);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 

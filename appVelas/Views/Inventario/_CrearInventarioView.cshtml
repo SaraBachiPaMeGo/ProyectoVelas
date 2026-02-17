@@ -1,25 +1,12 @@
-﻿@model appVelas.Models.Endurecedor
+﻿@model appVelas.Models.Inventario
 
-@{
-    string IDEndurecedor = ViewData["IDEnd"] as string;
-}
-
-<h4>Endurecedor</h4>
+<h4>Inventario</h4>
 <hr />
-<div class="row" style="display: block;margin-left: 3%;">
-    <div >
-        <form asp-action="ActualizarView" asp-controller="Endurecedor" method="post">
+<div class="row" style="display: block; margin-left: 3%;">
+    <div @*class="col-md-4"*@>
+        <form asp-action="_CrearInventarioView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" style="display: none">
-                <label asp-for="IDEndurecedor" class="control-label"></label>
-                <input asp-for="IDEndurecedor" class="form-control" />
-                <span asp-validation-for="IDEndurecedor" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="display: none">
-                <label asp-for="IDVela" class="control-label" style="display: none"></label>
-                <input asp-for="IDVela" class="form-control" />
-                <span asp-validation-for="IDVela" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Firma" class="control-label"></label>
                 <input asp-for="Firma" class="form-control" />
@@ -31,7 +18,7 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CompradoEn" class="control-label">Comprado en</label>
+                <label asp-for="CompradoEn" class="control-label"></label>
                 <input asp-for="CompradoEn" class="form-control" />
                 <span asp-validation-for="CompradoEn" class="text-danger"></span>
             </div>
@@ -46,14 +33,14 @@
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-outline-warning" />
+                <input type="submit" value="Crear" class="btn btn-outline-success" style="margin-top: 10%; margin-left: 15%;" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a href="#" onclick="cargarVistaParcial('end','miContenedor','Detalles')"> Back to List</a>
 
-</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

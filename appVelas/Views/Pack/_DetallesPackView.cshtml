@@ -49,8 +49,8 @@
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack, vista = "Pack" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" })|
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPack = item.IDPack, vista = "Pack" }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPack = item.IDPack, vista = "Pack" }, new { @class = "btn btn-outline-success" })|
                     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pack" data-id="@item.IDPack">
                         Eliminar
                     </button>

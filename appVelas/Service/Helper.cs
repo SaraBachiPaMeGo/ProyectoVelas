@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace appVelas.Service
 {
@@ -44,6 +45,40 @@ namespace appVelas.Service
             return respon;
             
         }
+
+        public static MultipartFormDataContent CreateMultipartFormData<T>(T obj, IFormFile file = null)
+        {
+            var form = new MultipartFormDataContent();
+
+            // 🔹 Agregar propiedades del objeto dinámicamente
+            var properties = typeof(T).GetProperties();
+
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(obj);
+
+                if (value != null)
+                {
+                    form.Add(
+                        new StringContent(value.ToString()),
+                        prop.Name
+                    );
+                }
+            }
+
+            // 🔹 Agregar archivo si existe
+            if (file != null && file.Length > 0)
+            {
+                var streamContent = new StreamContent(file.OpenReadStream());
+                streamContent.Headers.ContentType =
+                    new MediaTypeHeaderValue(file.ContentType);
+
+                form.Add(streamContent, "file", file.FileName);
+            }
+
+            return form;
+        }
+
 
     }
 }

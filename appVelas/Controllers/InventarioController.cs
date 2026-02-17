@@ -94,9 +94,16 @@ namespace appVelas.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var Inventario = await _InventarioRepo.EliminarAsync(id);
+            if (Inventario.Error != null)
+            {
+                ViewData["Error"] = Inventario.Error.Mensaje;
 
-            ViewData["Error"] = Inventario.Error.Mensaje;
-            ViewData["OK"] = Inventario.Data;
+            }
+            else
+            {
+                ViewData["OK"] = Inventario.Data;
+
+            }
 
             return RedirectToAction("_DetallesInventarioView");
         }

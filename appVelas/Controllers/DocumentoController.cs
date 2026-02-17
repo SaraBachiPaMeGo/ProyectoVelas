@@ -102,7 +102,7 @@ namespace appVelas.Controllers
 
             var resultado = await _docRepo.InsertarDocumentoAsync(documento);
 
-            return PartialView("Sucess");
+            return PartialView("success");
         }
 
         [HttpGet]
@@ -131,7 +131,7 @@ namespace appVelas.Controllers
         {
             var documento = await _docRepo.ActualizarDocumentoAsync(doc.IDDoc, doc);
 
-            return PartialView("Sucess", documento);
+            return PartialView("success", documento);
         }
 
         public async Task<PartialViewResult> _DetallesDocView()

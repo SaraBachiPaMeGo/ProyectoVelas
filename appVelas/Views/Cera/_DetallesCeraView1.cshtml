@@ -37,8 +37,8 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDCera }) |
-    <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Detalles')"> Back to List</a>
+    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDCera }, new { @class = "btn btn-outline-warning" }) |
+    <a href="#" onclick="cargarVistaParcial('cera','miContenedor','Detalles')" class="btn btn-outline-success" > Back to List</a>
     |
     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="cera" data-id="@Model.IDCera">
         Eliminar

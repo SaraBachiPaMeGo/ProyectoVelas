@@ -36,9 +36,9 @@ namespace appVelas.Repository
             return await _moldeService.InsertarMoldeAsync(form);
         }
 
-        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde molde)
+        public async Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, MultipartFormDataContent form)
         {
-            return await _moldeService.ActualizarMoldeAsync(id, molde);
+            return await _moldeService.ActualizarMoldeAsync(id, form);
         }
 
         public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)

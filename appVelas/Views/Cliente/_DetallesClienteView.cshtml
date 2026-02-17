@@ -47,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.IDPedido)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDCliente = item.IDCliente, vista = "Cliente" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDCliente = item.IDCliente, vista = "Cliente" })  |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDCliente })
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDCliente = item.IDCliente, vista = "Cliente" }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDCliente = item.IDCliente, vista = "Cliente" }, new { @class = "btn btn-outline-success" })  |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDCliente }, new { @class = "btn btn-danger btn-eliminar btn-eliminar" })
                 </td>
             </tr>
         }

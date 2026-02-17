@@ -12,7 +12,7 @@ namespace appVelas.Service.Interfaces
         Task<CustomApiResponse<List<Molde>>> GetMoldesAsync();
         Task<CustomApiResponse<Molde>> BuscarMoldeAsync(Guid idMolde);
         Task<CustomApiResponse<Molde>> InsertarMoldeAsync(MultipartFormDataContent form);
-        Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, Molde Molde);
+        Task<CustomApiResponse<Molde>> ActualizarMoldeAsync(Guid id, MultipartFormDataContent form);
 
         Task<CustomApiResponse<bool>> EliminarMoldeAsync(Guid idMolde);
 

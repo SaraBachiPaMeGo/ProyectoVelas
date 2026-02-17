@@ -98,8 +98,8 @@
                 @Html.DisplayFor(modelItem => item.FechaSubida)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = item.IDDoc, vista = "Documento" }) |
-                @Html.ActionLink("Detalles", "DetallesView1", new { IDDoc = item.IDDoc, vista = "Documento" }) |
+                @Html.ActionLink("Actualizar", "ActualizarView", new { IDDoc = item.IDDoc, vista = "Documento" }, new { @class = "btn btn-outline-warning" }) |
+                @Html.ActionLink("Detalles", "DetallesView1", new { IDDoc = item.IDDoc, vista = "Documento" }, new { @class = "btn btn-outline-success" }) |
                 <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Documento" data-id="@item.IDDoc">
                     Eliminar
                 </button>

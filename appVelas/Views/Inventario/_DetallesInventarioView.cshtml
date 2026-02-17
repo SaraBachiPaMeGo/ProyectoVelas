@@ -1,17 +1,14 @@
-﻿@model IEnumerable<appVelas.Models.Endurecedor>
+﻿@model IEnumerable<appVelas.Models.Inventario>
+
 @{
     Layout = null;
 }
-<p>
 
-</p>
 <input type="text" id="buscadorTabla" class="form-control mb-3" placeholder="Buscar..." autocomplete="off" style="width: 29%;" />
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Firma)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
@@ -24,13 +21,11 @@
             <th></th>
         </tr>
     </thead>
-    <tbody id="tablaDatos">
+    <tbody>
         @foreach (var item in Model)
         {
-            <tr id="eliminar-row-@item.IDEndurecedor">
-                <td class="col-buscar">
-                    @Html.DisplayFor(modelItem => item.Firma)
-                </td>
+            <tr>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
                 </td>
@@ -41,11 +36,13 @@
                     @Html.DisplayFor(modelItem => item.Coste)
                 </td>
                 <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }, new { @class = "btn btn-outline-warning" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }, new { @class = "btn btn-outline-success" })
-                    |<button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Endurecedor" data-id="@item.IDEndurecedor">
-    Eliminar
-</button>
+                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDInventario = item.IDInventario, vista = "Inventario" }, new { @class = "btn btn-outline-warning" }) |
+                    @Html.ActionLink("Detalles", "DetallesView1", new { IDInventario = item.IDInventario, vista = "Inventario" }, new { @class = "btn btn-outline-success" })
+                    @*|@Html.ActionLink("Eliminar", "Delete", new { id = item.IDInventario })*@
+                    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Inventario" data-id="@item.IDInventario">
+                        Eliminar
+                    </button>
+
                 </td>
             </tr>
         }

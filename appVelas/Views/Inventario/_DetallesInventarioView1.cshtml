@@ -1,0 +1,52 @@
+﻿@model appVelas.Models.Inventario
+
+<div>
+    <h4>Inventario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDInventario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDInventario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Firma)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Firma)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CompradoEn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CompradoEn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Coste)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Coste)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Actualizar", "ActualizarView", new { IDInventario = Model.IDInventario }, new { @class = "btn btn-outline-warning" }) |
+    <a href="#" onclick="cargarVistaParcial('inv','miContenedor','Detalles')" class="btn btn-outline-success"> Back to List</a>
+    |
+    <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="cera" data-id="@Model.IDInventario">
+        Eliminar
+    </button>
+</div>

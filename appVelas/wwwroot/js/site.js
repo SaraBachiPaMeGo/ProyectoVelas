@@ -3,6 +3,7 @@
     VelaFinalizada: '/VelaFinalizada/Delete/',
     Pedido: '/Pedido/Delete/',
     Molde: '/Molde/Delete/',
+    Inventario: '/Inventario/Delete/',
     Fragancia: '/Fragancia/Delete/',
     Pigmento: '/Pigmento/Delete/',
     Mecha: '/Mecha/Delete/',
@@ -53,6 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(err => console.error(err));
         });
     }
+
+    $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: "Selecciona",
+            width: '100%'
+        });
+    });
            
     if (!modal || !btnConfirm || !btnCancel) {
         console.error("Modal no encontrado en el DOM");
@@ -286,6 +294,19 @@ function ejecutarCargaVista(tipoVista, contenedor, http) {
                 type: 'GET',
                 success: function (data) {
                     $('#' + contenedor).html(data); 
+                    initDropzone();
+                },
+                error: function () {
+                    alert('Error al cargar la vista parcial.');
+                }
+            });
+            break;
+        case 'inv':
+            $.ajax({
+                url: '/Inventario/_' + http + 'InventarioView',
+                type: 'GET',
+                success: function (data) {
+                    $('#' + contenedor).html(data);
                     initDropzone();
                 },
                 error: function () {

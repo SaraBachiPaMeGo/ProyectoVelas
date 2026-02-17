@@ -87,12 +87,11 @@ namespace appVelas.Controllers
                 // Insertar fragancias
                 foreach (var idFrag in IDFragancias)
                 {
+                    //Hacer select con los id. 
                     velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
 
                     await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
                 }
-
-
 
                 // Insertar pigmentos
                 foreach (var idPig in IDPigmentos)
@@ -132,7 +131,7 @@ namespace appVelas.Controllers
                 }
             }
 
-            return PartialView("Sucess", vela);
+            return PartialView("success", vela);
 
         }
 
@@ -226,7 +225,7 @@ namespace appVelas.Controllers
             {
                 foreach (var idFrag in vela.Fragancias)
                 {
-                    await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
+                   // await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
                 }
             }
 
@@ -236,13 +235,13 @@ namespace appVelas.Controllers
             {
                 foreach (var idPig in vela.Pigmentos)
                 {
-                    await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
+                    //await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
                 }
             }
 
             await _velaRepo.ActualizarVelaAsync(vela.IDVela, vela);
 
-            return PartialView("Sucess");
+            return PartialView("success");
         }
 
         [HttpGet]
@@ -339,7 +338,7 @@ namespace appVelas.Controllers
         {
             var res = await _velaRepo.EliminarAsync(id);
 
-if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
+            if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             ViewData["OK"] = res.Data;
 
             return RedirectToAction("_DetallesVelaView");
