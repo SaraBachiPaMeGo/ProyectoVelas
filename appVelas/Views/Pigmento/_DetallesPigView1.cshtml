@@ -38,8 +38,8 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Pigmento", "ActualizarView", new { id = Model.IDPig, vista = "Pig" }) |
-    <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Detalles')"> Back to List</a> |
+    @Html.ActionLink("Pigmento", "ActualizarView", new { id = Model.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-warning" }) |
+    <a href="#" onclick="cargarVistaParcial('pig','miContenedor','Detalles')" class="btn btn-outline-success"> Back to List</a> |
     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pigmento" data-id="@Model.IDPig">
         Eliminar
     </button>

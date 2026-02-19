@@ -37,8 +37,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Endurecedor", "ActualizarView", new { IDEndurecedor = Model.IDEndurecedor, vista = "Endurecedor" }) |
-    <a href="#" onclick="cargarVistaParcial('end','miContenedor','Detalles')"> Back to List</a> |
+    @Html.ActionLink("Actualizar", "ActualizarView", new { IDEndurecedor = Model.IDEndurecedor, vista = "Endurecedor" }, 
+    new { @class = "btn btn-outline-warning" }) |
+    <a href="#" onclick="cargarVistaParcial('end','miContenedor','Detalles')" class="btn btn-outline-success"> Back to List</a> |
     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Endurecedor" data-id="@Model.IDEndurecedor">
         Eliminar
     </button>
