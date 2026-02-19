@@ -27,7 +27,7 @@
     <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
-            <tr id="eliminar-row-@item.IDEndurecedor">
+            <tr data-coste="@item.Coste" id="eliminar-row-@item.IDEndurecedor">
                 <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.Firma)
                 </td>
@@ -44,10 +44,17 @@
                     @Html.ActionLink("Actualizar", "ActualizarView", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }, new { @class = "btn btn-outline-warning" }) |
                     @Html.ActionLink("Detalles", "DetallesView1", new { IDEndurecedor = item.IDEndurecedor, vista = "Endurecedor" }, new { @class = "btn btn-outline-success" })
                     |<button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Endurecedor" data-id="@item.IDEndurecedor">
-    Eliminar
-</button>
+                        Eliminar
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="alert alert-info">
+    Total Coste: <span id="totalCoste">
+        @ViewBag.TotalCoste
+    </span>
+</div>
+

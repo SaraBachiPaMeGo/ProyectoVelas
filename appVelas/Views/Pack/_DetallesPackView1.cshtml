@@ -49,7 +49,11 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Pack", "ActualizarView", new { id = Model.IDPack, vista = "Pack" })|
+    @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDPack, vista = "Pack" }, new
+{
+    @class = "btn btn-outline-warning",
+    style = "color:#FF7B00; text-decoration:none;"
+}))|
     <a href="#" onclick="cargarVistaParcial('pack','miContenedor','Detalles')"> Back to List</a> |
     <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pack" data-id="@Model.IDPack">
         Eliminar

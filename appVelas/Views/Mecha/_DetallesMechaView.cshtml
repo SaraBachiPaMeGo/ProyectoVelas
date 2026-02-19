@@ -36,7 +36,7 @@
             <tbody id="tablaDatos">
                 @foreach (var item in Model)
                 {
-                    <tr id="eliminar-row-@item.IDMecha">
+                    <tr data-coste="@item.Coste" id="eliminar-row-@item.IDMecha">
                         <td class="col-buscar">
                             @Html.DisplayFor(modelItem => item.Firma)
                         </td>
@@ -64,7 +64,13 @@
                         </td>
                     </tr>
                 }
+
             </tbody>
         </table>
+        <div class="alert alert-info">
+            Total Coste: <span id="totalCoste">
+                @ViewBag.TotalCoste
+            </span>
+        </div>
 
     </div>

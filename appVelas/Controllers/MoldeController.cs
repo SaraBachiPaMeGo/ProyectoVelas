@@ -104,6 +104,7 @@ namespace appVelas.Controllers
         public async Task<IActionResult> _DetallesMoldeView()
         {
             var moldes = await _moldeRepo.GetMoldesAsync();
+            ViewBag.TotalCoste = moldes.Data.Sum(x => x.Coste);
 
             ViewData["Moldes"] = moldes.Data;
             return PartialView("~/Views/Molde/_DetallesMoldeView.cshtml", moldes.Data);

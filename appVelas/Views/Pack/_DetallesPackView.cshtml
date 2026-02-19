@@ -18,9 +18,6 @@
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompradoEn)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Cantidad)
             </th>
             <th>
@@ -32,15 +29,12 @@
     <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
-            <tr id="eliminar-row-@item.IDPack">
+            <tr data-coste="@item.Coste" id="eliminar-row-@item.IDPack">
                 <td>
                     @Html.DisplayFor(modelItem => item.Firma)
                 </td>
                 <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompradoEn)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cantidad)
@@ -57,5 +51,11 @@
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
+<div class="alert alert-info">
+    Total Coste: <span id="totalCoste">
+        @ViewBag.TotalCoste
+    </span>
+</div>

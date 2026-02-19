@@ -39,7 +39,7 @@ namespace appVelas.Controllers
 
             if (response.Data.IDEndurecedor != Guid.Empty)
             {
-                return RedirectToAction("DetallesView1", new { IDEndurecedoc = response.Data.IDEndurecedor });
+                return RedirectToAction("DetallesView1", new { IDEndurecedor = response.Data.IDEndurecedor });
 
             }
             else
@@ -93,6 +93,7 @@ namespace appVelas.Controllers
         public async Task<PartialViewResult> _DetallesEndurecedorView()
         {
             var end =  await _endurecedorRepo.GetEndurecedorsAsync();
+            ViewBag.TotalCoste = end.Data.Sum(x => x.Coste);
 
             ViewData["Endurecedores"] = end.Data;
             return PartialView("~/Views/Endurecedor/_DetallesEndurecedorView.cshtml", end.Data);

@@ -95,8 +95,17 @@ namespace appVelas.Controllers
         {
             var cera = await _ceraRepo.EliminarAsync(id);
 
-            ViewData["Error"] = cera.Error.Mensaje;
-            ViewData["OK"] = cera.Data;
+            if (cera.Error != null)
+            {
+                ViewData["Error"] = cera.Error.Mensaje;
+
+            }
+            else
+            {
+                ViewData["OK"] = cera.Data;
+            }
+
+            
 
             return RedirectToAction("_DetallesCeraView");
         }
@@ -104,6 +113,7 @@ namespace appVelas.Controllers
         public async Task<IActionResult> _DetallesCeraView()
         {
             var cera = await _ceraRepo.GetCerasAsync();
+            ViewBag.TotalCoste = cera.Data.Sum(x => x.Coste);
 
             return PartialView("~/Views/Cera/_DetallesCeraView.cshtml",cera.Data);
         }

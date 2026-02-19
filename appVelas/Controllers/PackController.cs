@@ -99,6 +99,7 @@ namespace appVelas.Controllers
         public async Task<IActionResult>  _DetallesPackView()
         {
             var pack = await _packRepo.GetPacksAsync();
+            ViewBag.TotalCoste = pack.Data.Sum(x => x.Coste);
 
             ViewData["Packes"] = pack.Data;
             return PartialView("~/Views/Pack/_DetallesPackView.cshtml", pack.Data);

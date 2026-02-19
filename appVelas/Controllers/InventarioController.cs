@@ -110,9 +110,11 @@ namespace appVelas.Controllers
 
         public async Task<IActionResult> _DetallesInventarioView()
         {
-            var Inventario = await _InventarioRepo.GetInventariosAsync();
+            var inv = await _InventarioRepo.GetInventariosAsync();
+            ViewBag.TotalCoste = inv.Data.Sum(x => x.Coste);
 
-            return PartialView("~/Views/Inventario/_DetallesInventarioView.cshtml", Inventario.Data);
+
+            return PartialView("~/Views/Inventario/_DetallesInventarioView.cshtml", inv.Data);
         }
 
         public async Task<IActionResult> DetallesView1(Guid IDInventario)

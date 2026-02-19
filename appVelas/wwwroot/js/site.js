@@ -15,6 +15,8 @@
 
 let archivoSeleccionado = null;
 
+let filaAEliminar = null;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const pendiente = sessionStorage.getItem('vistaPendiente');
@@ -29,21 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let confirmCallback = null;
-
-    //if (document.querySelector("#dropzone")) {
-
-    //    Dropzone.autoDiscover = false;
-
-    //    if (Dropzone.instances.length > 0) {
-    //        Dropzone.instances.forEach(dz => dz.destroy());
-    //    }
-
-    //    new Dropzone("#dropzone", {
-    //        autoProcessQueue: false,
-    //        maxFiles: 1,
-    //        acceptedFiles: "image/*"
-    //    });
-    //}
 
     const modal = document.getElementById("confirmModal");
     const title = document.getElementById("modalTitle");
@@ -85,13 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    window.mostrarConfirmacion = function (titulo, texto, callback) {
-        title.innerText = titulo;
-        message.innerText = texto;
-        confirmCallback = callback;
-        modal.classList.remove("hidden");
-    };
-
     function cerrarModal() {
         modal.classList.add("hidden");
         confirmCallback = null;
@@ -116,6 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = $(this).data('id');
         const tipoVista = $(this).data('tipo');
 
+        // 🔥 Guardar la fila
+        filaAEliminar = $(this).closest("tr")[0];
+
         mostrarConfirmacion(
             "Eliminar registro",
             "¿Seguro que deseas eliminar este registro?",
@@ -131,6 +114,7 @@ function mostrarConfirmacion(titulo, mensaje, onConfirm) {
     document.getElementById("modalTitle").innerText = titulo;
     document.getElementById("modalMessage").innerText = mensaje;
     document.getElementById("confirmModal").classList.remove("hidden");
+
 }
 
 function eliminarGenerico(id, tipoVista) {
@@ -145,6 +129,16 @@ function eliminarGenerico(id, tipoVista) {
             success: function () {
 
                 const fila = document.getElementById(`eliminar-row-${id}`);
+
+                if (!filaAEliminar) return;
+
+                const costeEliminado = parseFloat(filaAEliminar.dataset.coste);
+                const totalElement = document.getElementById("totalCoste");
+                const totalActual = parseFloat(totalElement.innerText);
+
+                const nuevoTotal = totalActual - costeEliminado;
+                totalElement.innerText = nuevoTotal.toFixed(2);
+
                 if (fila) {
                     fila.classList.add("fade-out");
                     setTimeout(() => fila.remove(), 300);

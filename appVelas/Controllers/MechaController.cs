@@ -120,6 +120,8 @@ namespace appVelas.Controllers
             try
             {
                 var mechas = await _mechaRepo.GetMechasAsync();
+                ViewBag.TotalCoste = mechas.Data.Sum(x => x.Coste);
+
 
                 //ViewData["MechaS"] = Mechas;
                 return PartialView("~/Views/Mecha/_DetallesMechaView.cshtml", mechas.Data);

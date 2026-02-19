@@ -28,7 +28,7 @@
     <tbody id="tablaDatos">
         @foreach (var item in Model)
         {
-            <tr id="eliminar-row-@item.IDPig">
+            <tr data-coste="@item.Coste" id="eliminar-row-@item.IDPig">
                 <td class="col-buscar">
                     @Html.DisplayFor(modelItem => item.ColorNombre)
                 </td>

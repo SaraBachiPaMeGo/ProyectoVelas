@@ -36,7 +36,7 @@
     </thead>
     <tbody id="tablaDatos">
 @foreach (var item in Model) {
-        <tr id="eliminar-row-@item.IDVelaFin">
+        <tr data-coste="@item.Coste" id="eliminar-row-@item.IDVelaFin">
             <td>
                 @Html.DisplayFor(modelItem => item.IDVelaFin)
             </td>
