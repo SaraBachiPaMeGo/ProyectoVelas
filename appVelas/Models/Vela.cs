@@ -18,9 +18,6 @@ namespace appVelas.Models
         [JsonProperty("VelaNombre")]
         public string VelaNombre { get; set; }
 
-        [JsonProperty("Image")]
-        public string Image { get; set; }
-
         [JsonProperty("Observ")]
         public string Observ { get; set; }
 
@@ -75,6 +72,11 @@ namespace appVelas.Models
         public decimal? Cantidad { get; set; }
 
         //public ICollection<Documento>? Documentos { get; set; }
+        [JsonProperty("Image")]
+        public byte[] Image { get; set; }          // 🔥 BYTES
+
+        [JsonProperty("ImagenContentType")]
+        public string ImagenContentType { get; set; } // opcional (muy recomendable)
 
         public List<Guid> Pigmentos { get; set; }
         public List<Guid> Fragancias { get; set; }

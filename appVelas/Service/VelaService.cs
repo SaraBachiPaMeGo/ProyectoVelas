@@ -7,7 +7,7 @@ using appVelas.Models;
 using appVelas.Service.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
-
+using appVelas.Models.DTO;
 
 namespace appVelas.Service
 {
@@ -21,16 +21,16 @@ namespace appVelas.Service
             _httpClient = httpClient;
         }
 
-        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()        
+        public async Task<CustomApiResponse<List<VelaDTO>>> GetVelasAsync()        
         {
-            var response = new CustomApiResponse<List<Vela>>();
+            var response = new CustomApiResponse<List<VelaDTO>>();
             try
             {
                 var respons = await _httpClient.GetAsync("/api/Vela/GetVelas");
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<List<Vela>>(
+                response = await Helper.ParseApiResponse<List<VelaDTO>>(
                   dos
                 );
 
@@ -46,9 +46,9 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid idVela)
+        public async Task<CustomApiResponse<VelaDTO>> BuscarVelaAsync(Guid idVela)
         {
-            var response = new CustomApiResponse<Vela>();
+            var response = new CustomApiResponse<VelaDTO>();
 
             try
             {
@@ -56,7 +56,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<Vela>(
+                response = await Helper.ParseApiResponse<VelaDTO>(
                   dos
                 );
 
@@ -72,17 +72,17 @@ namespace appVelas.Service
            
         }
 
-        public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent vela)
         {
-            var response = new CustomApiResponse<Vela>();
+            var response = new CustomApiResponse<VelaDTO>();
 
             try
             {
-                var respons = await _httpClient.PostAsJsonAsync($"/api/Vela/InsertarVela", vela);
+                var respons = await _httpClient.PostAsync($"/api/Vela/InsertarVela", vela);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<Vela>(
+                response = await Helper.ParseApiResponse<VelaDTO>(
                   dos
                 );
 
@@ -98,17 +98,17 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, Vela vela)
+        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela)
         {
-            var response = new CustomApiResponse<Vela>();
+            var response = new CustomApiResponse<VelaDTO>();
 
             try
             {
-                var respons = await _httpClient.PutAsJsonAsync($"/api/Vela/ActualizarVela/{idVela}", vela);
+                var respons = await _httpClient.PutAsync($"/api/Vela/ActualizarVela/{idVela}", vela);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<Vela>(
+                response = await Helper.ParseApiResponse<VelaDTO>(
                   dos
                 );
 

@@ -42,12 +42,14 @@
     </div>
     <div class="row">
         <div>
-            <form asp-action="_CrearVelaView" method="post" style="padding: 0rem;margin: 0rem;-webkit-JsonProperty-count: 4;display: inline;margin-left: 3%; ">
+            <form asp-action="_CrearVelaView" enctype="multipart/form-data" style="padding: 0rem;margin: 0rem;
+                -webkit-JsonProperty-count: 4;display: inline;margin-left: 3%; " id="formMolde">
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                
+
                 <div class="form-group">
                     <label asp-for="Cantidad" class="control-label">¿Cuántas velas vas a crear?:</label>
-                    <input asp-for="Cantidad" type="number" step="any" class="form-control" style="width: 60%;"/>
+                    <input asp-for="Cantidad" type="number" step="any" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="Cantidad" class="text-danger"></span>
                 </div>
 
@@ -72,7 +74,7 @@
 
                 <div class="form-group">
                     <label asp-for="CantidadMecha" class="control-label">cm:</label>
-                    <input asp-for="CantidadMecha" class="form-control" style="width: 60%;"/>
+                    <input asp-for="CantidadMecha" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="CantidadMecha" class="text-danger"></span>
                 </div>
 
@@ -92,7 +94,7 @@
 
                 <div class="form-group">
                     <label asp-for="CantidadCera" class="control-label">g:</label>
-                    <input asp-for="CantidadCera" class="form-control" style="width: 60%;"/>
+                    <input asp-for="CantidadCera" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="CantidadCera" class="text-danger"></span>
                 </div>
 
@@ -110,7 +112,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label  class="control-label">Endurecedor:</label>
+                    <label class="control-label">Endurecedor:</label>
                     <select name="IDEnd" class="form-control">
                         @foreach (var e in end)
                         {
@@ -121,7 +123,7 @@
 
                 <div class="form-group">
                     <label asp-for="GradEnd" class="control-label">ºC:</label>
-                    <input asp-for="GradEnd" class="form-control" style="width: 60%;"/>
+                    <input asp-for="GradEnd" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="GradEnd" class="text-danger"></span>
                 </div>
 
@@ -143,7 +145,7 @@
 
                 <div class="form-group">
                     <label asp-for="GradPig" class="control-label">ºC:</label>
-                    <input asp-for="GradPig" class="form-control" style="width: 60%;"/>
+                    <input asp-for="GradPig" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="GradPig" class="text-danger"></span>
                 </div>
 
@@ -156,7 +158,7 @@
                 @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
                 <div class="form-group">
                     <label class="control-label">Fragancias</label>
-                    <select asp-for="Fragancias" name="IDFragancias" class="form-control select2" multiple="multiple" >
+                    <select asp-for="Fragancias" name="IDFragancias" class="form-control select2" multiple="multiple">
                         @foreach (var fraga in fragancias)
                         {
                             <option value="@fraga.IDFrag">@fraga.FragNombre</option>
@@ -166,13 +168,13 @@
 
                 <div class="form-group">
                     <label asp-for="CantidadFrag" class="control-label">ml :</label>
-                    <input asp-for="CantidadFrag" class="form-control" style="width: 60%;"/>
+                    <input asp-for="CantidadFrag" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="CantidadFrag" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="GradFrag" class="control-label">ºC :</label>
-                    <input asp-for="GradFrag" class="form-control" style="width: 60%;"/>
+                    <input asp-for="GradFrag" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="GradFrag" class="text-danger"></span>
                 </div>
 
@@ -182,6 +184,14 @@
                     <span asp-validation-for="Observ" class="text-danger"></span>
                 </div>
                 @*</div>*@
+
+                <div style="display:flex">
+                    <div id="dropzone">Arrastra tu imagen aquí</div>
+
+                    <input type="file" id="fileInput" accept="image/*" hidden name="file" />
+                    <img id="preview" style=" display:none; width: 300px; margin-left: 52px; height: 200px;" />
+                    <p id="status"></p>
+                </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-outline-success" style="margin-top: 43%; margin-left: 31%;">Crear</button>

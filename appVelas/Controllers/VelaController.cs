@@ -9,6 +9,7 @@ using appVelas.Service.Interfaces;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using appVelas.Service;
 
 namespace appVelas.Controllers
 {
@@ -77,9 +78,13 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos)
+        public async Task<IActionResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos, IFormFile file)
         {
-            if (vela.Cantidad == 0 || !vela.Cantidad.HasValue)
+            var form = Helper.CreateMultipartFormData(vela, file);
+
+            var response = await _velaRepo.InsertarVelaAsync(form);
+
+            if (response.Data.IDVela != Guid.Empty)
             {
                 var velfrag = new CustomApiResponse<VelaFragancia>();
                 var velpig = new CustomApiResponse<VelaPigmento>();
@@ -101,67 +106,20 @@ namespace appVelas.Controllers
                     await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
                 }
 
-                await _velaRepo.InsertarVelaAsync(vela);
+                return RedirectToAction("DetallesView1", new { IDVela = response.Data.IDVela });
             }
             else
             {
-                for (int i = 0; i < vela.Cantidad; i++)
-                {
-                    var velfrag = new CustomApiResponse<VelaFragancia>();
-                    var velpig = new CustomApiResponse<VelaPigmento>();
+                ViewData["Error"] = response.Error.Mensaje;
 
-                    // Insertar fragancias
-                    foreach (var idFrag in IDFragancias)
-                    {
-                        velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
-
-                        await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
-                    }
-
-                    // Insertar pigmentos
-                    foreach (var idPig in IDPigmentos)
-                    {
-                        velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
-
-                        await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
-                    }
-
-                    await _velaRepo.InsertarVelaAsync(vela);
-
-                }
+                return View();
             }
-
-            return PartialView("success", vela);
-
         }
 
         [HttpGet]
         public async Task<IActionResult> ActualizarView(Guid IDVela, IFormFile? imagen)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
-
-            if (imagen != null && imagen.Length > 0)
-            {
-                // Carpeta donde guardar las imágenes
-                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "imagenes");
-
-                if (!Directory.Exists(uploadsFolder))
-                    Directory.CreateDirectory(uploadsFolder);
-
-                // Generar nombre único
-                string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(imagen.FileName)}";
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                // Guardar archivo físicamente
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imagen.CopyToAsync(fileStream);
-                }
-
-                // Guardar ruta relativa en la BD
-                vela.Data.Image = $"/uploads/imagenes/{uniqueFileName}";
-            }
-
 
             if (vela == null)
             {
@@ -206,42 +164,45 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> ActualizarView(Vela vela)
+        public async Task<IActionResult> ActualizarView(Vela vela, IFormFile file)
         {
+            var form = Helper.CreateMultipartFormData(vela, file);
 
-            if (vela == null)
-                return PartialView("Error", new
-                    ErrorViewModel
-                {
-                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna vela con el IDVela recibido. IDVELA = " + vela.IDVela +
-                        "Error en el Controller de la vista _ActVelaView"
-                });
+            var response = await _velaRepo.ActualizarVelaAsync(vela.IDVela, form);
 
-            // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
-            await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
-
-            if (vela.Fragancias != null)
+            if (response.Data.IDVela != Guid.Empty)
             {
-                foreach (var idFrag in vela.Fragancias)
+                // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
+                await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
+
+                if (vela.Fragancias != null)
                 {
-                   // await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
+                    foreach (var idFrag in vela.Fragancias)
+                    {
+                        // await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
+                    }
                 }
+
+                await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
+
+                if (vela.Pigmentos != null)
+                {
+                    foreach (var idPig in vela.Pigmentos)
+                    {
+                        //await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
+                    }
+                }
+
+                return RedirectToAction("DetallesView1", new { IDVela = response.Data.IDVela });
+
             }
-
-            await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
-
-            if (vela.Pigmentos != null)
+            else
             {
-                foreach (var idPig in vela.Pigmentos)
-                {
-                    //await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
-                }
-            }
+                ViewData["Error"] = response.Error.Mensaje;
 
-            await _velaRepo.ActualizarVelaAsync(vela.IDVela, vela);
+                return View();
+           }
 
-            return PartialView("success");
         }
 
         [HttpGet]
@@ -278,57 +239,7 @@ namespace appVelas.Controllers
         public async Task<IActionResult> DetallesView1(Guid IDVela)
         {
             var vela = await _velaRepo.BuscarVelaAsync(IDVela);
-            var Cera = await _ceraRepo.BuscarCeraAsync(vela.Data.IDCera);
-            var Mecha = await _mechaRepo.BuscarMechaAsync(vela.Data.IDMecha);
-
-            if (vela.Data.IDMolde.HasValue && vela.Data.IDMolde.Value != Guid.Empty)
-            {
-                CustomApiResponse<Molde> moldes = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDMolde ?? Guid.Empty);
-
-                ViewData["Moldes"] = moldes.Data;
-
-            }
-
-            if (vela.Data.IDEnd.HasValue && vela.Data.IDEnd.Value != Guid.Empty)
-            {
-                CustomApiResponse<Molde> end = await _moldeRepo.BuscarMoldeAsync(vela.Data.IDEnd ?? Guid.Empty);
-
-                ViewData["end"] = end.Data;
-
-            }
-
-            if (vela.Data.IDFrag.HasValue && vela.Data.IDFrag.Value != Guid.Empty)
-            {
-                CustomApiResponse<Fragancia> frag = await _fragRepo.BuscarFraganciaAsync(vela.Data.IDFrag ?? Guid.Empty);
-                ViewData["Frag"] = frag.Data;
-
-            }
-
-            if (vela.Data.Pigmentos != null)
-            {
-                CustomApiResponse<Pigmento> pig = await _pigRepo.BuscarPigmentoAsync(vela.Data.IDPig ?? Guid.Empty);
-                ViewData["Pig"] = pig.Data;
-
-
-            }
-
-            //if (vela.Data.IDPedido.HasValue && vela.Data.IDPedido.Value != Guid.Empty)
-            //{
-            //    CustomApiResponse<Pedido> pedi = await _pediRepo.BuscarPedidoAsync(vela.Data.IDPedido ?? Guid.Empty);
-            //    ViewData["pedi"] = pedi.Data;
-
-            //    if (pedi.Data.IDCliente != Guid.Empty)
-            //    {
-            //        CustomApiResponse<Cliente> clien = await _cliRepo.BuscarClienteAsync(pedi.Data.IDCliente);
-            //        ViewData["clien"] = clien.Data;
-
-            //    }
-            //}
-            
-
-            ViewData["Cera"] = Cera.Data;
-            ViewData["Mecha"] = Mecha.Data;
-            ViewData["VELA"] = vela.Data;
+           
 
             return View("~/Views/Vela/_DetallesVelaView1.cshtml", vela.Data);
         }

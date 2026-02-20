@@ -59,7 +59,7 @@
 <hr />
 <div class="row" style="display: block;margin-left: 3%;">
     <div>
-        <form asp-action="ActualizarView" asp-controller="Vela" method="post">
+        <form asp-action="ActualizarView" asp-controller="Vela" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*IDVela*@
             <div class="form-group" style="display:none">
@@ -203,31 +203,7 @@
                 <input asp-for="CantidadFrag" class="form-control" />
                 <span asp-validation-for="CantidadFrag" class="text-danger"></span>
             </div>
-            @*Pack*@
-            @*<div class="form-group">
-            <label asp-for="IDPack" class="control-label">Pack:</label>
-            <select name="IDPack" id="IDMolde" class="form-control">
 
-                @foreach (var item in pack)
-                {
-                    if (@item.IDPack == Model.IDPack)
-                    {
-                        <option value="@item.IDPack" selected>@item.Firma</option>
-
-                    }
-                    else
-                    {
-                        <option value="@item.IDPack">@item.Tipo</option>
-                    }
-                }
-            </select>
-        </div>*@
-            @*Image*@
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">Image</label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
             @*Coste*@
             <div class="form-group">
                 <label asp-for="Coste" class="control-label"></label>
@@ -252,14 +228,12 @@
                 <span asp-validation-for="Observ" class="text-danger"></span>
             </div>
 
-            <div id="dropzone">Arrastra tu imagen aquí</div>
-            <p id="status"></p>
+            <div style="display:flex">
+                <div id="dropzone">Actualiza tu imagen aquí</div>
 
-            @*enctype="multipart/form-data*@
-
-            <div class="form-group">
-                <label for="Imagen">Seleccionar imagen</label>
-                <input type="file" name="imagen" accept="image/*" class="form-control" />
+                <input type="file" id="fileInput" accept="image/*" hidden name="file" />
+                <img id="preview" style=" display:none; width: 300px; margin-left: 52px; height: 200px;" />
+                <p id="status"></p>
             </div>
 
             <div class="form-group">

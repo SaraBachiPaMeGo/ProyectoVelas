@@ -181,18 +181,6 @@ $(document).on('keyup', '#buscadorTabla', function () {
 
 function initDropzone() {
 
-    //if (Dropzone.instances.length > 0) {
-    //    Dropzone.instances.forEach(dz => dz.destroy());
-    //}
-
-    //new Dropzone("#dropzone", {
-    //    url: "#", // no usamos subida automática
-    //    autoProcessQueue: false,
-    //    maxFiles: 1,
-    //    acceptedFiles: "image/*",
-    //    addRemoveLinks: true
-    //});
-
     const dropzone = document.getElementById("dropzone");
     const fileInput = document.getElementById("fileInput");
     const preview = document.getElementById("preview");

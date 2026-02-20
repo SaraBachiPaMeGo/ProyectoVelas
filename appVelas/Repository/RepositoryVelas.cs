@@ -1,9 +1,11 @@
 ﻿
 using appVelas.Models;
+using appVelas.Models.DTO;
 using appVelas.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace appVelas.Repository
@@ -25,112 +27,25 @@ namespace appVelas.Repository
         // ------------------------------------- VELA ---------------------------------------------
         
 
-        public async Task<CustomApiResponse<List<Vela>>> GetVelasAsync()
+        public async Task<CustomApiResponse<List<VelaDTO>>> GetVelasAsync() // CustomApiResponse<VelaDTO>
         {
             return await _velaService.GetVelasAsync();
         }
 
-        public async Task<CustomApiResponse<Vela>> BuscarVelaAsync(Guid id)
+        public async Task<CustomApiResponse<VelaDTO>> BuscarVelaAsync(Guid id) // CustomApiResponse<VelaDTO>
         {
             return await _velaService.BuscarVelaAsync(id);
         }
 
-        public async Task<CustomApiResponse<Vela>> InsertarVelaAsync(Vela vela)
+        public async Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent vela)
         {
             return await _velaService.InsertarVelaAsync(vela);
-        }
+        } // CustomApiResponse<VelaDTO>
 
-        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, Vela vela)
+        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela) // CustomApiResponse<VelaDTO>
         {
             return await _velaService.ActualizarVelaAsync(idVela,vela);
         }
-
-        //public CustomApiResponse<Vela> ActualizarVela(Vela vel)
-        //{
-        //    var response = new CustomApiResponse<Vela>();
-
-        //    try
-        //    {
-        //        //var vela = context.Vela
-        //        //    .Include(v => v.VelaPigmentos)
-        //        //    .Include(v => v.VelaFragancias)
-        //        //    .Include(v => v.VelaCeras)
-        //        //    .Include(v => v.VelaMechas)
-        //        //    .Include(v => v.VelaEndurecedores)
-        //        //    .Include(v => v.VelaMoldes)
-        //        //    .SingleOrDefault(v => v.IDVela == vel.IDVela);
-
-        //        //if (vela == null)
-        //        //    throw new Exception("La vela no existe");
-
-        //        //// ------------------------------
-        //        //// 🔥 ACTUALIZAR MATERIALES
-        //        //// ------------------------------
-
-        //        //ActualizarMaterial<VelaPigmento, Pigmento>(
-        //        //    vela.VelaPigmentos,
-        //        //    vel.VelaPigmentos,
-        //        //    p => p.IDPig,
-        //        //    (pBD, usado) => CalcularCosteUso(usado.Cantidad, pBD.CantidadCompra, pBD.CosteCompra)
-        //        //);
-
-        //        //ActualizarMaterial<VelaFragancia, Fragancia>(
-        //        //    vela.VelaFragancias,
-        //        //    vel.VelaFragancias,
-        //        //    f => f.IDFrag,
-        //        //    (fBD, usado) => CalcularCosteUso(usado.Cantidad, fBD.CantidadCompra, fBD.CosteCompra)
-        //        //);
-
-        //        //ActualizarMaterial<VelaCera, Cera>(
-        //        //    vela.VelaCeras,
-        //        //    vel.VelaCeras,
-        //        //    c => c.IDCera,
-        //        //    (cBD, usado) => CalcularCosteUso(usado.Cantidad, cBD.CantidadCompra, cBD.CosteCompra)
-        //        //);
-
-        //        //ActualizarMaterial<VelaMecha, Mecha>(
-        //        //    vela.VelaMechas,
-        //        //    vel.VelaMechas,
-        //        //    m => m.IDMecha,
-        //        //    (mBD, usado) => CalcularCosteUso(usado.Cantidad, mBD.CantidadCompra, mBD.CosteCompra)
-        //        //);
-
-        //        //ActualizarMaterial<VelaEndurecedor, Endurecedor>(
-        //        //    vela.VelaEndurecedores,
-        //        //    vel.VelaEndurecedores,
-        //        //    e => e.IDEndurecedor,
-        //        //    (eBD, usado) => CalcularCosteUso(usado.Cantidad, eBD.CantidadCompra, eBD.CosteCompra)
-        //        //);
-
-        //        //ActualizarMaterial<VelaMolde, Molde>(
-        //        //    vela.VelaMoldes,
-        //        //    vel.VelaMoldes,
-        //        //    m => m.IDMolde,
-        //        //    (mBD, usado) => CalcularCosteUso(usado.Cantidad, mBD.CantidadCompra, mBD.CosteCompra)
-        //        //);
-
-        //        // ---------------------------------
-        //        // 🔥 CALCULAR EL COSTE TOTAL DE LA VELA
-        //        // ---------------------------------
-        //        //vela.CosteTotal =
-        //        //    vela.VelaPigmentos.Sum(p => p.CosteUso) +
-        //        //    vela.VelaFragancias.Sum(f => f.CosteUso) +
-        //        //    vela.VelaCeras.Sum(c => c.CosteUso) +
-        //        //    vela.VelaMechas.Sum(m => m.CosteUso) +
-        //        //    vela.VelaEndurecedores.Sum(e => e.CosteUso) +
-        //        //    vela.VelaMoldes.Sum(mo => mo.CosteUso);
-
-        //        context.SaveChanges();
-
-        //        response.Object = vela;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.Error = new ErrorViewModel { Mensaje = ex.Message };
-        //    }
-
-        //    return response;
-        //}
 
         public async Task<CustomApiResponse<bool>> EliminarAsync(Guid id)
         {
