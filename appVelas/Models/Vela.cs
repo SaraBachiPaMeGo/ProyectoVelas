@@ -24,26 +24,11 @@ namespace appVelas.Models
         [JsonProperty("FechaReal")]
         public DateTime FechaReal { get; set; }
 
-        [JsonProperty("GradFrag")]
-        public decimal? GradFrag { get; set; }
-
-        [JsonProperty("GradPig")]
-        public decimal? GradPig { get; set; }
-
-        [JsonProperty("IDFrag")]
-        public Guid? IDFrag { get; set; }
-
         [JsonProperty("IDMolde")]
         public Guid? IDMolde { get; set; }
 
         [JsonProperty("IDEndurecedor")]
         public Guid? IDEnd { get; set; }
-
-        [JsonProperty("GradEnd")]
-        public decimal? GradEnd { get; set; }
-
-        [JsonProperty("IDPig")]
-        public Guid? IDPig { get; set; }
 
         [JsonProperty("Coste")]
         public decimal? Coste { get; set; }
@@ -78,8 +63,8 @@ namespace appVelas.Models
         [JsonProperty("ImagenContentType")]
         public string ImagenContentType { get; set; } // opcional (muy recomendable)
 
-        public List<Guid> Pigmentos { get; set; }
-        public List<Guid> Fragancias { get; set; }
+        public List<VelaPigmento> Pigmentos { get; set; }
+        public List<VelaFragancia> Fragancias { get; set; }
     }
 
 }

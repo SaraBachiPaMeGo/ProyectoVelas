@@ -78,38 +78,49 @@ namespace appVelas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>  _CrearVelaView(Vela vela, List<Guid> IDFragancias, List<Guid> IDPigmentos, IFormFile file)
+        public async Task<IActionResult>  _CrearVelaView(Vela vela, List<VelaFragancia> vfrag,
+            List<VelaPigmento> vpig, IFormFile file)
         {
-            var form = Helper.CreateMultipartFormData(vela, file);
-
-            var response = await _velaRepo.InsertarVelaAsync(form);
-
-            if (response.Data.IDVela != Guid.Empty)
+            
+            if (vela != null)
             {
-                var velfrag = new CustomApiResponse<VelaFragancia>();
-                var velpig = new CustomApiResponse<VelaPigmento>();
 
-                // Insertar fragancias
-                foreach (var idFrag in IDFragancias)
+                // 🔹 Inicializamos listas
+                vela.Fragancias = new List<VelaFragancia>();
+                vela.Pigmentos = new List<VelaPigmento>();
+
+                // 🔥 Crear objetos VelaFragancia
+                foreach (var item in vfrag)
                 {
-                    //Hacer select con los id. 
-                    velfrag = await _vFragRepo.BuscarVelaFraganciaAsync(idFrag);
-
-                    await _vFragRepo.InsertarVelaFraganciaAsync(velfrag.Data);
+                    vela.Fragancias.Add(new VelaFragancia
+                    {
+                        IDFrag = item.IDFrag,
+                        Cantidad = item.Cantidad,
+                        Coste = 0, // si aplica,
+                        NombreFragancia = item.NombreFragancia
+                    });
                 }
 
-                // Insertar pigmentos
-                foreach (var idPig in IDPigmentos)
+                foreach (var item in vpig)
                 {
-                    velpig = await _vPigRepo.BuscarVelaPigmentoAsync(idPig);
-
-                    await _vPigRepo.InsertarVelaPigmentoAsync(velpig.Data);
+                    vela.Pigmentos.Add(new VelaPigmento
+                    {
+                        IDPig = item.IDPig,
+                        Cantidad = item.Cantidad,
+                        Coste = 0,
+                        NombrePigmento = item.NombrePigmento
+                    });
                 }
+
+                var form = Helper.CreateMultipartFormData(vela, file);
+
+                var response = await _velaRepo.InsertarVelaAsync(form);
 
                 return RedirectToAction("DetallesView1", new { IDVela = response.Data.IDVela });
             }
             else
             {
+                var response = new CustomApiResponse<VelaFragancia>();
                 ViewData["Error"] = response.Error.Mensaje;
 
                 return View();

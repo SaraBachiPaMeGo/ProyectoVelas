@@ -145,12 +145,6 @@
                     }
                 </select>
             </div>
-            @*GradEnd*@
-            <div class="form-group">
-                <label asp-for="GradEnd" class="control-label">ºC:</label>
-                <input asp-for="GradEnd" class="form-control" />
-                <span asp-validation-for="GradEnd" class="text-danger"></span>
-            </div>
             @*CantidadEnd*@
             <div class="form-group">
                 <label asp-for="CantidadEnd" class="control-label">g:</label>
@@ -158,51 +152,7 @@
                 <span asp-validation-for="CantidadEnd" class="text-danger"></span>
             </div>
             @*PIGMENTO*@
-            <div class="form-group">
-                <label asp-for="IDPig" class="control-label">Color/es</label>
-                <select id="pigmentos" name="IDPigmentos" multiple="multiple" class="form-control select2">
-                    @foreach (var pigt in ViewBag.Pigmentos as SelectList)
-                    {
-                        var selected = ((List<Guid>)ViewBag.PigmentosSeleccionados).Contains(Guid.Parse(pigt.Value)) ? "selected" : "";
-                        <option value="@pigt.Value">@pigt.Text</option>
-                    }
-                </select>
-            </div>
-            @*GradPig*@
-            <div class="form-group">
-                <label asp-for="GradPig" class="control-label">ºC:</label>
-                <input asp-for="GradPig" class="form-control" />
-                <span asp-validation-for="GradPig" class="text-danger"></span>
-            </div>
-            @*CantidadPig*@
-            <div class="form-group">
-                <label asp-for="CantidadPig" class="control-label">ml:</label>
-                <input asp-for="CantidadPig" class="form-control" />
-                <span asp-validation-for="CantidadPig" class="text-danger"></span>
-            </div>
-            @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
-            <div class="form-group">
-                <label asp-for="IDFrag" class="control-label">Fragrancia/s</label>
-                <select id="fragancias" name="IDFragancias" multiple="multiple" class="form-control select2">
-                    @foreach (var fragan in ViewBag.Fragancias as SelectList)
-                    {
-                        var selected = ((List<Guid>)ViewBag.FraganciasSeleccionadas).Contains(Guid.Parse(fragan.Value)) ? "selected" : "";
-                        <option value="@fragan.Value">@fragan.Text</option>
-                    }
-                </select>
-            </div>
-            @*GradFrag*@
-            <div class="form-group">
-                <label asp-for="GradFrag" class="control-label">ºC :</label>
-                <input asp-for="GradFrag" class="form-control" />
-                <span asp-validation-for="GradFrag" class="text-danger"></span>
-            </div>
-            @*CantidadFrag*@
-            <div class="form-group">
-                <label asp-for="CantidadFrag" class="control-label">ml :</label>
-                <input asp-for="CantidadFrag" class="form-control" />
-                <span asp-validation-for="CantidadFrag" class="text-danger"></span>
-            </div>
+            
 
             @*Coste*@
             <div class="form-group">

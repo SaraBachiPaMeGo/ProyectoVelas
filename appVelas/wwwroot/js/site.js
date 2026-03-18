@@ -17,7 +17,48 @@ let archivoSeleccionado = null;
 
 let filaAEliminar = null;
 
+window.inicializarVelaForm = function () {
+
+    configurarModulo(
+        "fraganciasList",
+        "fraganciasEditor",
+        "fraganciasCarrito",
+        "vfrag",
+        "IDFrag"
+    );
+
+    configurarModulo(
+        "pigmentosList",
+        "pigmentosEditor",
+        "pigmentosCarrito",
+        "vpig",
+        "IDPig"
+    );
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    window.inicializarVelaForm?.();
+
+    if (document.getElementById("fraganciasList")) {
+        configurarModulo(
+            "fraganciasList",
+            "fraganciasEditor",
+            "fraganciasCarrito",
+            "vfrag",
+            "IDFrag"
+        );
+    }
+
+    if (document.getElementById("pigmentosList")) {
+        configurarModulo(
+            "pigmentosList",
+            "pigmentosEditor",
+            "pigmentosCarrito",
+            "vpig",
+            "IDPig"
+        );
+    }
 
     const pendiente = sessionStorage.getItem('vistaPendiente');
 
@@ -37,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const message = document.getElementById("modalMessage");
     const btnConfirm = document.getElementById("modalConfirm");
     const btnCancel = document.getElementById("modalCancel");
-
+       
     if (document.getElementById("formMolde") !== null) {
         document.getElementById("formMolde").addEventListener("submit", function (e) {
             e.preventDefault();
@@ -106,7 +147,123 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
+
+   
+    
 })
+
+function configurarModulo(listId, editorId, carritoId, modelName, idProperty) {
+
+    const list = document.getElementById(listId);
+
+    if (!list) {
+        console.warn("No existe:", listId);
+        return;
+    }
+
+    const editor = document.getElementById(editorId);
+    const carrito = document.getElementById(carritoId);
+
+    if (!editor || !carrito) {
+        console.warn("Editor o carrito no encontrados");
+        return;
+    }
+
+    let itemsAñadidos = [];
+
+    // CLICK EN ELEMENTO DE LISTA
+    list.addEventListener("click", function (e) {
+
+        if (!e.target.classList.contains("selectable-item"))
+            return;
+
+        const id = e.target.dataset.id;
+        const name = e.target.dataset.name;
+
+        mostrarEditor(id, name);
+    });
+
+
+    function mostrarEditor(id, name) {
+
+        editor.innerHTML = `
+            <div class="card p-3 mb-2">
+                <h6>${name}</h6>
+
+                <label asp-for="Cantidad">Cantidad</label>
+                <input type="number"
+                       class="form-control mb-2 cantidadInput"
+                       min="1" />
+
+                <i class="fa-solid fa-circle-plus fa-xl text-success"
+                   style="cursor:pointer"></i>
+            </div>
+        `;
+
+        const btnAdd = editor.querySelector(".fa-circle-plus");
+        const inputCantidad = editor.querySelector(".cantidadInput");
+
+        btnAdd.addEventListener("click", function () {
+
+            const cantidad = inputCantidad.value;
+
+            if (!cantidad) {
+                alert("Introduce cantidad");
+                return;
+            }
+
+            if (itemsAñadidos.some(x => x.id === id)) {
+                alert("Ya añadido");
+                return;
+            }
+
+            itemsAñadidos.push({ id, name, cantidad });
+
+            renderCarrito();
+            editor.innerHTML = "";
+        });
+    }
+
+
+    function renderCarrito() {
+
+        carrito.innerHTML = "";
+
+        itemsAñadidos.forEach((item, index) => {
+
+            const div = document.createElement("div");
+            div.classList.add("card", "p-2", "mb-2");
+
+            div.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center">
+                    <span><strong>${item.name}</strong> - ${item.cantidad}</span>
+                    <i class="fa-solid fa-xmark text-danger"
+                       style="cursor:pointer"></i>
+                </div>
+
+                <input type="hidden"
+                       name="${modelName}[${index}].${idProperty}"
+                       value="${item.id}" />
+                <input type="hidden"
+                       name="${modelName}[${index}].ColorNombre"
+                       value="${item.name}" />
+                <input type="hidden"
+                       name="${modelName}[${index}].Cantidad"
+                       value="${item.cantidad}" />
+            `;
+
+            const deleteBtn = div.querySelector(".fa-xmark");
+
+            deleteBtn.addEventListener("click", function () {
+                itemsAñadidos.splice(index, 1);
+                renderCarrito();
+            });
+
+            carrito.appendChild(div);
+        });
+    }
+}
+
 
 function mostrarConfirmacion(titulo, mensaje, onConfirm) {
     confirmCallback = onConfirm;
@@ -150,7 +307,7 @@ function eliminarGenerico(id, tipoVista) {
         });
     }    
 }
-
+ 
 $(document).on('keyup', '#buscadorTabla', function () {
 
     const texto = $(this).val().toLowerCase().trim();
@@ -447,5 +604,7 @@ function manejarCheckbox(contenedor, idCheck, tipoVista, http) {
     //    document.getElementById(contenedor).style.display = "none";
     //}
 }
+
+
 
 

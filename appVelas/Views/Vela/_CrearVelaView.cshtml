@@ -3,15 +3,19 @@
 @{
 
     List<Mecha> mechas = ViewData["Mecha"] as List<Mecha> ?? new List<Mecha>();
-    List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde> ();
-    List<Endurecedor> end = ViewData["end"] as List<Endurecedor> ?? new List<Endurecedor> ();
-    List<Pack> pack = ViewData["Pack"] as List<Pack> ?? new List<Pack> ();
+    List<Molde> moldes = ViewData["Moldes"] as List<Molde> ?? new List<Molde>();
+    List<Endurecedor> end = ViewData["end"] as List<Endurecedor> ?? new List<Endurecedor>();
+    List<Pack> pack = ViewData["Pack"] as List<Pack> ?? new List<Pack>();
     //List<Fragancia> frag = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia> ();
     //List<Pigmento> pig = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento> ();
-    List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera> ();
+    List<Cera> cera = ViewData["Cera"] as List<Cera> ?? new List<Cera>();
     var fragancias = ViewData["Frag"] as List<Fragancia> ?? new List<Fragancia>();
-    var pigmentos = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento>(); 
+    var pigmentos = ViewData["Pig"] as List<Pigmento> ?? new List<Pigmento>();
 
+}
+
+@{
+    Layout = null;
 }
 
 <style>
@@ -23,97 +27,71 @@
         max-width: 48%;
     }
 
+    .zusa {
+        margin-right: 0rem;
+    }
 </style>
-<div style="margin-left: 3%;">
+<div>
     <h4>Vela</h4>
     <hr />
-    <div>
-        <p>
+    <div class="alert alert-info">
+        <span>
             Para velas con mucho detalle
-        </p>
-        <p>
+        </span>
+        <div>
             <ul style="background:inherit">
                 <li>CERA + END = 75 - 80 ºC</li>
                 <li>CERA + PIG = 65 - 70 ºC</li>
                 <li>CERA + FRAG = 60 - 65 ºC</li>
-                <li>VERTER EN MOLDE 68 - 72 ºC</li>
+                <li>VERTER EN MOLDE 60 ºC</li>
+                <li>VERTER EN VASO 40 ºC</li>
             </ul>
-        </p>
+        </div>
     </div>
-    <div class="row">
-        <div>
-            <form asp-action="_CrearVelaView" enctype="multipart/form-data" style="padding: 0rem;margin: 0rem;
-                -webkit-JsonProperty-count: 4;display: inline;margin-left: 3%; " id="formMolde">
+    <div class="row" style=" display: block; margin-left: 3%;">
 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="_CrearVelaView" enctype="multipart/form-data" style="padding: 0rem;margin: 0rem;
+                -webkit-JsonProperty-count: 4;margin-left: 3%; " id="formMolde">
 
-                <div class="form-group">
-                    <label asp-for="Cantidad" class="control-label">¿Cuántas velas vas a crear?:</label>
-                    <input asp-for="Cantidad" type="number" step="any" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="Cantidad" class="text-danger"></span>
-                </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                @*<div >*@
+            @*<div class="form-group">
+            <label asp-for="Cantidad" class="control-label">¿Cuántas velas vas a crear?:</label>
+            <input asp-for="Cantidad" type="number" step="any" class="form-control" style="width: 60%;" />
+            <span asp-validation-for="Cantidad" class="text-danger"></span>
+        </div>*@
+
+            @*<div >*@
+
+
+            <div class="form-group">
                 <div class="form-group">
                     <label asp-for="VelaNombre" class="control-label">Nombre:</label>
                     <input asp-for="VelaNombre" class="form-control" />
                     <span asp-validation-for="VelaNombre" class="text-danger"></span>
                 </div>
 
-                @*Por defecto la de siempre*@
-                <div class="form-group">
-                    <label asp-for="IDMecha" class="control-label">Mecha:</label>
-                    <select name="IDMecha" id="IDMecha" class="form-control">
-
-                        @foreach (var item in mechas)
-                        {
-                            <option value="@item.IDMecha">@item.Firma</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CantidadMecha" class="control-label">cm:</label>
-                    <input asp-for="CantidadMecha" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="CantidadMecha" class="text-danger"></span>
-                </div>
-
-
-                @*Por defecto la de siempre*@
-                <div class="form-group">
+                <div class="form-group zusa">
                     <label asp-for="IDCera" class="control-label">Cera:</label>
                     <select name="IDCera" id="IDCera" class="form-control">
 
                         @foreach (var item in cera)
                         {
-                            <option value="@item.IDCera">@item.Tipo</option>
+                            <option value="@item.IDCera">@item.Firma</option>
                         }
                     </select>
-                    @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
+                    <span asp-validation-for="IDCera" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-right: -56px;">
                     <label asp-for="CantidadCera" class="control-label">g:</label>
                     <input asp-for="CantidadCera" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="CantidadCera" class="text-danger"></span>
                 </div>
 
-
-                @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
                 <div class="form-group">
-                    <label asp-for="IDMolde" class="control-label">Molde:</label>
-                    <select name="IDMolde" id="IDMolde" class="form-control">
-
-                        @foreach (var item in moldes)
-                        {
-                            <option value="@item.IDMolde">@item.MoldeNombre</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label">Endurecedor:</label>
-                    <select name="IDEnd" class="form-control">
+                    <label asp-for="IDEnd" class="control-label">Endurecedor:</label>
+                    <select name="IDEnd" id="IDEnd" class="form-control">
                         @foreach (var e in end)
                         {
                             <option value="@e.IDEndurecedor">@e.Firma</option>
@@ -122,98 +100,119 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="GradEnd" class="control-label">ºC:</label>
-                    <input asp-for="GradEnd" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="GradEnd" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
                     <label asp-for="CantidadEnd" class="control-label">g:</label>
                     <input asp-for="CantidadEnd" class="form-control" style="width: 60%;" />
                     <span asp-validation-for="CantidadEnd" class="text-danger"></span>
                 </div>
+            </div>
+
+            <div class="form-group zusa">
+                @*lista de nombres de los moldes, puedes buscarlos escribiendo*@
+                <input type="text" id="buscadorTabla" class="form-control" placeholder="Buscar moldes..." autocomplete="off" />
 
                 <div class="form-group">
-                    <label class="control-label">Colores</label>
-                    <select asp-for="Pigmentos" name="IDPigmentos" class="form-control select2" multiple="multiple">
-                        @foreach (var pigt in pigmentos)
+                    <label asp-for="IDMolde" class="control-label">Molde:</label>
+                    <select name="IDMolde" id="IDMolde" class="form-control col-buscar">
+
+                        @foreach (var item in moldes)
                         {
-                            <option value="@pigt.IDPig">@pigt.ColorNombre</option>
+                            <option value="@item.IDMolde">@item.MoldeNombre</option>
                         }
                     </select>
                 </div>
+            </div>
+            <div class="form-group zusa">
+                <input type="text" id="buscadorTablaPG" class="form-control" placeholder="Buscar pigmentos..." autocomplete="off" />
 
-                <div class="form-group">
-                    <label asp-for="GradPig" class="control-label">ºC:</label>
-                    <input asp-for="GradPig" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="GradPig" class="text-danger"></span>
-                </div>
+                <label asp-for="Pigmentos"  class="control-label">Pigmentos</label>
+                <ul id="pigmentosList" class="form-control" style="height: auto;"width: 15rem;>
+                    @foreach (var pig in pigmentos)
+                    {
+                        <li class="list-group-item selectable-item"
+                            data-id="@pig.IDPig"
+                            data-name="@pig.ColorNombre">
+                            @pig.ColorNombre
+                        </li>
+                    }
+                </ul>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="CantidadPig" class="control-label">ml:</label>
-                    <input asp-for="CantidadPig" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="CantidadPig" class="text-danger"></span>
-                </div>
+            <div class="col-md-4">
+                <div id="pigmentosEditor"></div>
+            </div>
 
-                @*lista de nombres de las fragancias, puedes buscarlas escribiendo*@
-                <div class="form-group">
-                    <label class="control-label">Fragancias</label>
-                    <select asp-for="Fragancias" name="IDFragancias" class="form-control select2" multiple="multiple">
-                        @foreach (var fraga in fragancias)
-                        {
-                            <option value="@fraga.IDFrag">@fraga.FragNombre</option>
-                        }
-                    </select>
-                </div>
+            <div class="col-md-4">
+                <label>Pigmentos seleccionados</label>
+                <div id="pigmentosCarrito"></div>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="CantidadFrag" class="control-label">ml :</label>
-                    <input asp-for="CantidadFrag" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="CantidadFrag" class="text-danger"></span>
-                </div>
 
-                <div class="form-group">
-                    <label asp-for="GradFrag" class="control-label">ºC :</label>
-                    <input asp-for="GradFrag" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="GradFrag" class="text-danger"></span>
-                </div>
+            <div class="form-group zusa">
+                <input type="text" id="buscadorTablaFG" class="form-control" placeholder="Buscar fragancias..." autocomplete="off" />
 
-                <div class="form-group">
-                    <label asp-for="Observ" class="control-label"></label>
-                    <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
-                    <span asp-validation-for="Observ" class="text-danger"></span>
-                </div>
-                @*</div>*@
+                <label class="control-label" asp-for="Fragancias">Fragancias</label>
 
-                <div style="display:flex">
-                    <div id="dropzone">Arrastra tu imagen aquí</div>
+                <ul class="form-control"
+                    multiple
+                    style="width: 15rem;height: auto;"
+                    id="fraganciasList" >
 
-                    <input type="file" id="fileInput" accept="image/*" hidden name="file" />
-                    <img id="preview" style=" display:none; width: 300px; margin-left: 52px; height: 200px;" />
-                    <p id="status"></p>
-                </div>
+                    @foreach (var fraga in fragancias)
+                    {
+                        <li class="list-group-item selectable-item"
+                            data-id="@fraga.IDFrag"
+                            data-name="@fraga.FragNombre">
+                            @fraga.FragNombre
+                        </li>
+                    }
+                </ul>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline-success" style="margin-top: 43%; margin-left: 31%;">Crear</button>
-                </div>
-            </form>
+                <div id="fraganciasEditor"></div>
+
+                <label>Fragancias seleccionadas</label>
+                <div id="fraganciasCarrito"></div>
+            </div>
+
             <div class="form-group">
-                @*PASAR A LA VISTA PARCIAL EL IDVELA@*@
-                <div class="form-group checkbox-container">
-                    <label for="miCheckbox" class="checkbox-label">¿Es un pedido?</label>
-                    <input type="checkbox" id="idCheckPedi" onclick="manejarCheckbox('contPedi','idCheckPedi','pedido','Crear')" class="checkbox-input">
-                    <span class="checkbox-text">Sí</span>
-                </div>
+                <label asp-for="Observ" class="control-label"></label>
+                <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
+                <span asp-validation-for="Observ" class="text-danger"></span>
+            </div>
+            @*</div>*@
+
+            <div style="display:flex">
+                <div id="dropzone">Arrastra tu imagen aquí</div>
+
+                <input type="file" id="fileInput" accept="image/*" hidden name="file" />
+                <img id="preview" style=" display:none; width: 300px; margin-left: 52px; height: 200px;" />
+                <p id="status"></p>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-success" style="margin-top: 43%; margin-left: 31%;">Crear</button>
+            </div>
+        </form>
+        <div class="form-group">
+            @*PASAR A LA VISTA PARCIAL EL IDVELA@*@
+            <div class="form-group checkbox-container">
+                <label for="miCheckbox" class="checkbox-label">¿Es un pedido?</label>
+                <input type="checkbox" id="idCheckPedi" onclick="manejarCheckbox('contPedi','idCheckPedi','pedido','Crear')" class="checkbox-input">
+                <span class="checkbox-text">Sí</span>
             </div>
         </div>
     </div>
 
     @*<div>
-            
+
         </div>*@
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
 </div>
+
+<script>
+    inicializarVelaForm();
+
+</script>
 
