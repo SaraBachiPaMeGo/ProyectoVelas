@@ -124,8 +124,10 @@
             <div class="form-group zusa">
                 <input type="text" id="buscadorTablaPG" class="form-control" placeholder="Buscar pigmentos..." autocomplete="off" />
 
-                <label asp-for="Pigmentos"  class="control-label">Pigmentos</label>
-                <ul id="pigmentosList" class="form-control" style="height: auto;"width: 15rem;>
+                <label asp-for="Pigmentos" class="control-label">Pigmentos</label>
+                <ul id="pigmentosList" class="form-control"
+                    multiple
+                    style="width: 15rem;height: auto;">
                     @foreach (var pig in pigmentos)
                     {
                         <li class="list-group-item selectable-item"
@@ -135,17 +137,15 @@
                         </li>
                     }
                 </ul>
-            </div>
+                <div class="col-md-4">
+                    <div id="pigmentosEditor"></div>
+                </div>
 
-            <div class="col-md-4">
-                <div id="pigmentosEditor"></div>
+                <div class="col-md-4">
+                    <label>Pigmentos seleccionados</label>
+                    <div id="pigmentosCarrito"></div>
+                </div>
             </div>
-
-            <div class="col-md-4">
-                <label>Pigmentos seleccionados</label>
-                <div id="pigmentosCarrito"></div>
-            </div>
-
 
             <div class="form-group zusa">
                 <input type="text" id="buscadorTablaFG" class="form-control" placeholder="Buscar fragancias..." autocomplete="off" />

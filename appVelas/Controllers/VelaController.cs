@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using appVelas.Service;
+using Newtonsoft.Json;
 
 namespace appVelas.Controllers
 {
@@ -116,6 +117,7 @@ namespace appVelas.Controllers
 
                 var response = await _velaRepo.InsertarVelaAsync(form);
 
+                //PONER ALGO ALTERNATIVO SI IDVELA ES NULL
                 return RedirectToAction("DetallesView1", new { IDVela = response.Data.IDVela });
             }
             else

@@ -40,7 +40,7 @@ namespace appVelas.Repository
         public async Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent vela)
         {
             return await _velaService.InsertarVelaAsync(vela);
-        } // CustomApiResponse<VelaDTO>
+        } 
 
         public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela) // CustomApiResponse<VelaDTO>
         {

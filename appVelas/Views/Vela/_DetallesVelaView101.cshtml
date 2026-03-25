@@ -1,0 +1,151 @@
+﻿@model appVelas.Models.Vela
+
+@{
+    // List<Vela> velas = ViewData["VELAS"] as List<Vela>;
+    //string IDCera = ViewData["IDCera"] as string;
+
+    Endurecedor end =  ViewData["end"]  as Endurecedor ?? new Endurecedor() ;
+    Molde molde=  ViewData["Moldes"]  as Molde ?? new Molde() ;
+    Fragancia frag = ViewData["Frag"] as Fragancia  ?? new Fragancia() ;
+    Pigmento pig  = ViewData["Pig"]  as Pigmento ?? new Pigmento();
+    Cera  cera = ViewData["Cera"]  as  Cera ?? new Cera();
+    Mecha mecha  = ViewData["Mecha"]  as Mecha ?? new Mecha();
+
+    //string clien = ViewData["clien"] as string;
+    //Pedido pedi = ViewData["pedi"]  as Pedido ?? new Pedido();
+
+}
+
+
+    <div class="col-md-4" style="margin-left: 3%;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VelaNombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Coste)
+                    </th>
+                    <th>
+                        Endurecedor
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaReal)
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.FechaVenta)*@
+                    </th>
+
+                    <th>
+                        Fragancia
+                    </th>
+                    <th>
+                        ºC Pig
+                    </th>
+                    <th>
+                        Pigmento
+                    </th>
+
+                    <th>
+                        Molde
+                    </th>
+
+
+                    <th>
+                        Fecha pedido
+                    </th>
+                    <th>
+                        Fecha Entrega
+                    </th>
+                    <th>Cliente</th>
+
+                    <th>
+                        Mecha
+                    </th>
+                    <th>
+                        Cera
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Observ)
+                    </th>
+                    <th>Imagen</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(model => model.IDVela)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(model => model.VelaNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Coste)
+                    </td>
+                    <td>
+                        @end.Firma
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FechaReal)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(model => model.FechaVenta)*@
+                    </td>
+                    
+                    <td>
+                        @pig.ColorNombre
+                    </td>
+                    <td>
+                        @frag.FragNombre;
+                    </td>
+                    <td>
+                        @molde.MoldeNombre;
+                    </td>
+
+                    @*<td>
+                        @pedi.FechaPedi
+                    </td>
+                    <td>
+                        @pedi.FechaEntrega
+                    </td>*@
+                    @*<td>@clien</td>*@
+                    <td>
+                        @mecha.Tipo
+                    </td>
+                    <td>
+                        @cera.Tipo
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Observ)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Vela", "ActualizarView", new { id = Model.IDVela, vista = "Vela" })
+
+                    </td>
+                    <td>
+                        <div class="col-sm-10">
+                            @if (Model.Image != null && Model.Image.Length > 0)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Image);
+                                var imgSrc = $"data:{Model.ImagenContentType};base64,{base64}";
+
+                                <img src="@imgSrc" width="150" />
+                            }
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div>
+            <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Detalles')"> Back to List</a>
+            | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@Model.IDVela">
+    Eliminar
+</button>
+
+        </div>
+    </div>
