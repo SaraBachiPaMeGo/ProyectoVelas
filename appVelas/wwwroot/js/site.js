@@ -412,7 +412,8 @@ function ejecutarCargaVista(tipoVista, contenedor, http) {
                 url: '/Vela/_'+http+'VelaView', 
                 type: 'GET',
                 success: function (data) {
-                     $('#' + contenedor).html(data); 
+                    $('#' + contenedor).html(data); 
+                    initDropzone();
                 },
                 error: function () {
                     alert('Error al cargar la vista parcial.');

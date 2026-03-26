@@ -13,6 +13,7 @@ using appVelas.Service;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using appVelas.Models.DTO;
 
 namespace appVelas.Controllers
 {
@@ -77,7 +78,7 @@ namespace appVelas.Controllers
             ViewData["Mecha"] = listaMecha.Data;
             ViewData["End"] = listaEND.Data;
 
-            return PartialView("_CrearVelaView");
+            return PartialView("_CrearVelaView", new Vela());
         }
 
         [HttpPost]
@@ -142,9 +143,9 @@ namespace appVelas.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ActualizarView(Guid IDVela, IFormFile? imagen)
+        public async Task<IActionResult> ActualizarView(Vela velaF, IFormFile file)
         {
-            var vela = await _velaRepo.BuscarVelaAsync(IDVela);
+            var vela = await _velaRepo.BuscarVelaAsync(velaF.IDVela);
 
             if (vela == null)
             {
@@ -152,7 +153,7 @@ namespace appVelas.Controllers
                     ErrorViewModel
                 {
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                    Mensaje = "No se encontró ninguna vela con el IDVela recibido. IDVELA = " + IDVela +
+                    Mensaje = "No se encontró ninguna vela con el IDVela recibido. IDVELA = " + velaF.IDVela +
                         "Error en el Controller de la vista _ActVelaView"
                 });
             }
@@ -182,20 +183,19 @@ namespace appVelas.Controllers
                 ViewData["Mecha"] = listaMecha.Data;
                 ViewData["Pack"] = listaMecha.Data;
 
-                ViewData["IDVela"] = IDVela;
+                ViewData["IDVela"] = velaF.IDVela;
 
-                return View("~/Views/Vela/_ActVelaView", vela.Data);
+                return View("~/Views/Vela/_ActVelaView.cshtml", vela.Data);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> ActualizarView(Vela vela, IFormFile file)
+        public async Task<IActionResult> ActualizarView(Vela vela, List<VelaFragancia> vfrag,
+            List<VelaPigmento> vpig, IFormFile file)
         {
-            var form = Helper.CreateMultipartFormData(vela, file);
+            var res = new CustomApiResponse<VelaDTO>();
 
-            var response = await _velaRepo.ActualizarVelaAsync(vela.IDVela, form);
-
-            if (response.Data.IDVela != Guid.Empty)
+            if (vela.IDVela != Guid.Empty)
             {
                 // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
                 await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
@@ -218,12 +218,15 @@ namespace appVelas.Controllers
                     }
                 }
 
+                var form = Helper.CreateMultipartFormData(vela, file);
+                var response = await _velaRepo.ActualizarVelaAsync(vela.IDVela, form);
+
                 return RedirectToAction("DetallesView1", new { IDVela = response.Data.IDVela });
 
             }
             else
             {
-                ViewData["Error"] = response.Error.Mensaje;
+                ViewData["Error"] = "";
 
                 return View();
            }
@@ -277,7 +280,19 @@ namespace appVelas.Controllers
             if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             ViewData["OK"] = res.Data;
 
-            return RedirectToAction("_DetallesVelaView");
+            return RedirectToAction("~/Views/Vela/_DetallesVelaView.cshtml");
+        }
+
+        [HttpGet]
+        [Route("Vela/Imagen/{id}")]
+        public async Task<IActionResult> ObtenerImagen(Guid id)
+        {
+            var vel = await _velaRepo.BuscarVelaAsync(id);
+
+            if (vel?.Data?.Image == null || vel.Data.Image.Length == 0)
+                return NotFound();
+
+            return File(vel.Data.Image, vel.Data.ImagenContentType);
         }
     }
 }

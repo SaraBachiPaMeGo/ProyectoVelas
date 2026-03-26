@@ -98,13 +98,13 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela)
+        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid id, MultipartFormDataContent vela)
         {
             var response = new CustomApiResponse<VelaDTO>();
 
             try
             {
-                var respons = await _httpClient.PutAsync($"/api/Vela/ActualizarVela/{idVela}", vela);
+                var respons = await _httpClient.PutAsync($"/api/Vela/ActualizarVela/{id}", vela);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
