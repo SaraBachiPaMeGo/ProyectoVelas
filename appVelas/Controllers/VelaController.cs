@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using appVelas.Service;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
 
 namespace appVelas.Controllers
 {
@@ -87,13 +89,13 @@ namespace appVelas.Controllers
             {
 
                 // 🔹 Inicializamos listas
-                vela.Fragancias = new List<VelaFragancia>();
-                vela.Pigmentos = new List<VelaPigmento>();
+                vela.VelaFragancias = new List<VelaFragancia>();
+                vela.VelaPigmentos = new List<VelaPigmento>();
 
                 // 🔥 Crear objetos VelaFragancia
                 foreach (var item in vfrag)
                 {
-                    vela.Fragancias.Add(new VelaFragancia
+                    vela.VelaFragancias.Add(new VelaFragancia
                     {
                         IDFrag = item.IDFrag,
                         Cantidad = item.Cantidad,
@@ -104,7 +106,7 @@ namespace appVelas.Controllers
 
                 foreach (var item in vpig)
                 {
-                    vela.Pigmentos.Add(new VelaPigmento
+                    vela.VelaPigmentos.Add(new VelaPigmento
                     {
                         IDPig = item.IDPig,
                         Cantidad = item.Cantidad,
@@ -114,6 +116,16 @@ namespace appVelas.Controllers
                 }
 
                 var form = Helper.CreateMultipartFormData(vela, file);
+
+                form.Add(
+                    new StringContent(JsonConvert.SerializeObject(vela.VelaFragancias)),
+                    "vf"
+                );
+
+                form.Add(
+                    new StringContent(JsonConvert.SerializeObject(vela.VelaPigmentos)),
+                    "vp"
+                );
 
                 var response = await _velaRepo.InsertarVelaAsync(form);
 
@@ -188,9 +200,9 @@ namespace appVelas.Controllers
                 // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
                 await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
 
-                if (vela.Fragancias != null)
+                if (vela.VelaFragancias != null)
                 {
-                    foreach (var idFrag in vela.Fragancias)
+                    foreach (var idFrag in vela.VelaFragancias)
                     {
                         // await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
                     }
@@ -198,9 +210,9 @@ namespace appVelas.Controllers
 
                 await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
 
-                if (vela.Pigmentos != null)
+                if (vela.VelaPigmentos != null)
                 {
-                    foreach (var idPig in vela.Pigmentos)
+                    foreach (var idPig in vela.VelaPigmentos)
                     {
                         //await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
                     }

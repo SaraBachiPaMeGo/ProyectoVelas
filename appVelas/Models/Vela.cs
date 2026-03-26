@@ -63,8 +63,8 @@ namespace appVelas.Models
         [JsonProperty("ImagenContentType")]
         public string ImagenContentType { get; set; } // opcional (muy recomendable)
 
-        public List<VelaPigmento> Pigmentos { get; set; }
-        public List<VelaFragancia> Fragancias { get; set; }
+        public List<VelaPigmento> VelaPigmentos { get; set; }
+        public List<VelaFragancia> VelaFragancias { get; set; }
     }
 
 }
