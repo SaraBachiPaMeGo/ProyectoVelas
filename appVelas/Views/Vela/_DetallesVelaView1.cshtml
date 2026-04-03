@@ -62,7 +62,9 @@
     </dl>
 </div>
 <div>
+
     <div>
+        @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-warning" }) |
         <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Detalles')"> Back to List</a>
         | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@Model.IDVela">
             Eliminar

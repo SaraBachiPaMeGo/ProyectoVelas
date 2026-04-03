@@ -187,11 +187,13 @@ function configurarModulo(listId, editorId, carritoId, modelName, idProperty) {
     function mostrarEditor(id, name) {
 
         editor.innerHTML = `
-            <div class="card p-3 mb-2">
-                <h6>${name}</h6>
+            <div class="card p-3">
+            <div class="form-control">
+                <label>${name}</label>
 
-                <label asp-for="Cantidad">Cantidad</label>
-                <input type="number"
+                <label asp-for="Cantidad">Cantidad</label><div>
+                
+                <input type="number" style="width: stretch;"
                        class="form-control mb-2 cantidadInput"
                        min="1" />
 

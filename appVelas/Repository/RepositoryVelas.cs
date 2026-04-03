@@ -51,8 +51,6 @@ namespace appVelas.Repository
         {
             return await _velaService.EliminarVelaAsync(id);
         }
-
-
     }
 
 }

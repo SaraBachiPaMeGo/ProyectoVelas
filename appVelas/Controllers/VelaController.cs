@@ -280,7 +280,7 @@ namespace appVelas.Controllers
             if (res.Error != null){ViewData["Error"] = res.Error.Mensaje;}
             ViewData["OK"] = res.Data;
 
-            return RedirectToAction("~/Views/Vela/_DetallesVelaView.cshtml");
+            return RedirectToAction("_DetallesVelaView");
         }
 
         [HttpGet]

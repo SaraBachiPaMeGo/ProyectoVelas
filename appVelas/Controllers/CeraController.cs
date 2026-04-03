@@ -107,7 +107,7 @@ namespace appVelas.Controllers
 
             
 
-            return RedirectToAction("~/Views/Cera/_DetallesCeraView.cshtml");
+            return RedirectToAction("_DetallesCeraView");
         }
 
         public async Task<IActionResult> _DetallesCeraView()

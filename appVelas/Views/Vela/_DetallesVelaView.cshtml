@@ -33,7 +33,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr data-coste="@item.Coste" id="eliminar-row-@item.IDVela">
 
             <td>
                 @Html.DisplayFor(modelItem => item.FechaReal)
@@ -74,3 +74,8 @@
 }
     </tbody>
 </table>
+<div class="alert alert-info">
+    Total Coste: <span id="totalCoste">
+        @ViewBag.TotalCoste
+    </span>
+</div>
