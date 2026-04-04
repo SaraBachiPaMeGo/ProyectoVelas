@@ -1,4 +1,4 @@
-﻿@model appVelas.Models.Vela
+﻿@model appVelas.Models.DTO.VelaDTO
 
 @{
 
@@ -12,48 +12,48 @@
 
 }
 
-    <script>
+<script>
     const dropzone = document.getElementById("dropzone");
     const status = document.getElementById("status");
 
     dropzone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropzone.classList.add("dragover");
+        e.preventDefault();
+        dropzone.classList.add("dragover");
     });
 
     dropzone.addEventListener("dragleave", () => {
-      dropzone.classList.remove("dragover");
+        dropzone.classList.remove("dragover");
     });
 
     dropzone.addEventListener("drop", async (e) => {
-      e.preventDefault();
-      dropzone.classList.remove("dragover");
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
 
-      const file = e.dataTransfer.files[0];
-      if (!file) return;
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("nombre", document.getElementById("nombre").value);
-      formData.append("descripcion", document.getElementById("descripcion").value);
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("nombre", document.getElementById("nombre").value);
+        formData.append("descripcion", document.getElementById("descripcion").value);
 
-      try {
-        const response = await fetch("https://localhost:5001/api/vela/upload", {
-          method: "POST",
-          body: formData
-        });
+        try {
+            const response = await fetch("https://localhost:5001/api/vela/upload", {
+                method: "POST",
+                body: formData
+            });
 
-        const data = await response.json();
-        if (response.ok) {
-          status.textContent = `✅ Imagen subida: ${data.path}`;
-        } else {
-          status.textContent = `❌ Error: ${data}`;
+            const data = await response.json();
+            if (response.ok) {
+                status.textContent = `✅ Imagen subida: ${data.path}`;
+            } else {
+                status.textContent = `❌ Error: ${data}`;
+            }
+        } catch (error) {
+            status.textContent = `❌ Error al conectar con la API`;
         }
-      } catch (error) {
-        status.textContent = `❌ Error al conectar con la API`;
-      }
     });
-    </script>
+</script>
 
 <h4>Vela</h4>
 <hr />
@@ -79,45 +79,20 @@
                 <input asp-for="FechaReal" class="form-control" />
                 <span asp-validation-for="FechaReal" class="text-danger"></span>
             </div>
-            @*FechaVenta*@
-            @*<div class="form-group">
-            <label asp-for="FechaVenta" class="control-label"></label>
-            <input asp-for="FechaVenta" class="form-control" />
-            <span asp-validation-for="FechaVenta" class="text-danger"></span>
-        </div>*@
-            @*Mecha*@
-            <div class="form-group">
-                <label asp-for="IDMecha" class="control-label">Mecha:</label>
-                <select name="IDMecha" id="IDMecha" class="form-control">
 
-                    @foreach (var item in mechas)
-                    {
-                        if (@item.IDMecha == Model.IDMecha)
-                        {
-                            <option value="@item.IDMecha" selected>@item.Firma</option>
-
-                        }
-                        else
-                        {
-                            <option value="@item.IDMecha">@item.Firma</option>
-                        }
-                    }
-                </select>
-            </div>
             @*Cera*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDCera" class="control-label">Cera:</label>
                 <select name="IDCera" id="IDCera" class="form-control">
 
                     @foreach (var item in cera)
                     {
-                        <option value="@item.IDCera">@item.Tipo</option>
+                    <option value="@item.IDCera">@item.Tipo</option>
                     }
                 </select>
-                @*<span asp-validation-for="IDCera" class="text-danger"></span>*@
-            </div>
+            </div>*@
             @*Molde*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDMolde" class="control-label">Molde:</label>
                 <select name="IDMolde" id="IDMolde" class="form-control">
 
@@ -125,23 +100,23 @@
                     {
                         if (@item.IDMolde == Model.IDMolde)
                         {
-                            <option value="@item.IDMolde" selected>@item.Firma</option>
+                    <option value="@item.IDMolde" selected>@item.Firma</option>
 
                         }
                         else
                         {
-                            <option value="@item.IDMolde">@item.MoldeNombre</option>
+                    <option value="@item.IDMolde">@item.MoldeNombre</option>
                         }
                     }
                 </select>
-            </div>
+            </div>*@
             @*Endurecedor*@
             <div class="form-group">
                 <label class="control-label">Endurecedor:</label>
-                <select name="IDPigmentos" class="form-control select2" multiple="multiple" style="width: 100%;">
+                <select name="IDEndurecedor" class="form-control select2" multiple="multiple" style="width: 100%;">
                     @foreach (var e in end)
                     {
-                        <option value="@e.IDEndurecedor">@e.Firma</option>
+                    <option value="@e.IDEndurecedor">@e.Firma</option>
                     }
                 </select>
             </div>
@@ -152,7 +127,54 @@
                 <span asp-validation-for="CantidadEnd" class="text-danger"></span>
             </div>
             @*PIGMENTO*@
-            
+            <div class="form-group zusa">
+                <input type="text" id="buscadorTablaPG" class="form-control" placeholder="Buscar pigmentos..." autocomplete="off" />
+
+                <label asp-for="VelaPigmentos" class="control-label">Pigmentos</label>
+                <ul id="pigmentosList" class="form-control"
+                    multiple
+                    style="width: 15rem;height: auto;">
+                    @foreach (var pg in Model.VelaPigmentos)
+                    {
+                    <li class="list-group-item selectable-item"
+                        data-id="@pg.IDPig"
+                        data-name="@pg.NombrePigmento">
+                        @pg.NombrePigmento
+                    </li>
+                    }
+                </ul>
+                <div id="pigmentosEditor"></div>
+
+                <label>Pigmentos seleccionados</label>
+                <div id="pigmentosCarrito"></div>
+            </div>
+
+            <div class="form-group zusa">
+                <input type="text" id="buscadorTablaFG" class="form-control" placeholder="Buscar fragancias..." autocomplete="off" />
+
+                <label class="control-label" asp-for="VelaFragancias">Fragancias</label>
+
+                <ul class="form-control"
+                    multiple
+                    style="width: 15rem;height: auto;"
+                    id="fraganciasList">
+
+                    @foreach (var fraga in Model.VelaFragancias)
+                    {
+                    <li class="list-group-item selectable-item"
+                        data-id="@fraga.IDFrag"
+                        data-name="@fraga.NombreFragancia">
+                        @fraga.NombreFragancia
+                    </li>
+                    }
+                </ul>
+
+                <div id="fraganciasEditor"></div>
+
+                <label>Fragancias seleccionadas</label>
+                <div id="fraganciasCarrito"></div>
+            </div>
+
 
             @*Coste*@
             <div class="form-group">
@@ -160,23 +182,12 @@
                 <input asp-for="Coste" class="form-control" />
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
-            @*IDPedido*@
+
             @*<div class="form-group">
-            <label asp-for="IDPedido" class="control-label"></label>
-            <input asp-for="IDPedido" class="form-control" />
-            <span asp-validation-for="IDPedido" class="text-danger"></span>
-        </div>*@
-            @*Observ*@
-            <div class="form-group">
-                <label asp-for="Coste" class="control-label"></label>
-                <input asp-for="Coste" class="form-control" />
-                <span asp-validation-for="Coste" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Observ" class="control-label"></label>
+                <label asp-for="" class="control-label"></label>
                 <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
                 <span asp-validation-for="Observ" class="text-danger"></span>
-            </div>
+            </div>*@
 
             <div style="display:flex">
                 <div id="dropzone">Actualiza tu imagen aquí</div>
@@ -190,7 +201,7 @@
                 <input type="submit" value="Actualizar" class="btn btn-outline-warning" />
             </div>
         </form>
-</div>
+    </div>
 </div>
 
 <div>
@@ -200,3 +211,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>inicializarVelaForm();</script>
+

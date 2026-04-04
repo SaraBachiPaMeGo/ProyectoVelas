@@ -1,74 +1,109 @@
 ﻿@model appVelas.Models.DTO.VelaDTO
 
-<div>
-    <h4>VelaDTO</h4>
-    <hr />
-    <dl class="row">
-       
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VelaNombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VelaNombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaReal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaReal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Coste)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Coste)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCera)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCera)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadCera)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CantidadCera)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadMecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CantidadMecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CantidadEnd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CantidadEnd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.Image != null && Model.Image.Length > 0)
-            {
-                var base64 = Convert.ToBase64String(Model.Image);
-                var imgSrc = $"data:{Model.ImagenContentType};base64,{base64}";
-
-                <img src="@imgSrc" width="150" />
-            }
-        </dd>
-    </dl>
-</div>
-<div>
-
     <div>
-        @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-warning" }) |
-        <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Detalles')"> Back to List</a>
-        | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@Model.IDVela">
-            Eliminar
-        </button>
+        <h4>VelaDTO</h4>
+        <hr />
+        @if (Model != null)
+        {
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VelaNombre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VelaNombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FechaReal)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FechaReal)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Coste)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Coste)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NombreCera)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NombreCera)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CantidadCera)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CantidadCera)
+
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CantidadEnd)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CantidadEnd)
+                </dd>
+
+                <dt class="col-sm-10">
+                    Fragancias
+                </dt>
+
+                <dd class="col-sm-10">
+                    @foreach (var item in Model.VelaFragancias)
+                    {
+                        <span>@item.NombreFragancia - </span>
+                        <span>@item.Cantidad</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-10">
+                    Pigmentos
+                </dt>
+
+                <dd class="col-sm-10">
+                    @foreach (var item in Model.VelaPigmentos)
+                    {
+                        <span>@item.NombrePigmento - </span>
+                        <span>@item.Cantidad</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+                <dd class="col-sm-10">
+                    @if (Model.Image != null && Model.Image.Length > 0)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Image);
+                        var imgSrc = $"data:{Model.ImagenContentType};base64,{base64}";
+
+                        <img src="@imgSrc" width="150" />
+                    }
+                </dd>
+            </dl>
+        }
+        else
+        {
+            <p>El modelo es null</p>
+        }
 
     </div>
-</div>
+    <div>
+        @if (Model != null)
+        {
+            <div>
+                @Html.ActionLink("Actualizar", "ActualizarView", new { id = Model.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-warning" }) |
+                <a href="#" onclick="cargarVistaParcial('vela','miContenedor','Detalles')"> Back to List</a>
+                | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@Model.IDVela">
+                    Eliminar
+                </button>
+
+            </div>
+        }
+        else
+        {
+            <p>Hay algún problema con el modelo</p>
+        }
+
+    </div>

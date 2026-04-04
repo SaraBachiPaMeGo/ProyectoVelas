@@ -17,9 +17,6 @@
                 @Html.DisplayNameFor(model => model.CantidadCera)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CantidadMecha)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CantidadEnd)
             </th>
             <th>
@@ -32,46 +29,52 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr data-coste="@item.Coste" id="eliminar-row-@item.IDVela">
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr data-coste="@item.Coste" id="eliminar-row-@item.IDVela">
 
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaReal)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReal)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCera)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadCera)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadMecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Coste)
-            </td>
-            <td>
-                @if (item.Image != null && item.Image.Length > 0)
-                {
-                    var base64 = Convert.ToBase64String(item.Image);
-                    var imgSrc = $"data:{item.ImagenContentType};base64,{base64}";
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCera)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantidadCera)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantidadEnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Coste)
+                    </td>
+                    <td>
+                        @if (item.Image != null && item.Image.Length > 0)
+                        {
+                            var base64 = Convert.ToBase64String(item.Image);
+                            var imgSrc = $"data:{item.ImagenContentType};base64,{base64}";
 
-                    <img src="@imgSrc" width="150" />
-                }
-            </td>
-            <td>
-                <span>@Html.ActionLink("Actualizar", "ActualizarView", new { IDVela = item.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-warning" })</span>  |
-                @Html.ActionLink("Detalles", "DetallesView1", new { IDVela = item.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-success" })
-                |  <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@item.IDVela">
-                    Eliminar
-                </button>
-            </td>
-        </tr>
-}
+                            <img src="@imgSrc" width="150" />
+                        }
+                    </td>
+                    <td>
+                        <span>@Html.ActionLink("Actualizar", "ActualizarView", new { IDVela = item.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-warning" })</span>  |
+                        @Html.ActionLink("Detalles", "DetallesView1", new { IDVela = item.IDVela, vista = "Vela" }, new { @class = "btn btn-outline-success" })
+                        |  <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Vela" data-id="@item.IDVela">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>El modelo es null</p>
+        }
+
     </tbody>
 </table>
 <div class="alert alert-info">

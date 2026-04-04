@@ -354,7 +354,6 @@ C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\bin\Debug\netcor
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.csprojAssemblyReference.cache
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.csproj.CoreCompileInputs.cache
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.MvcApplicationPartsAssemblyInfo.cache
@@ -436,5 +435,3 @@ C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcor
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.dll
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.pdb
 C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\appVelas.genruntimeconfig.cache
-C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Vela\_DetallesVelaView101.cshtml.g.cs
-C:\Users\sarab\source\repos\appVelasRepo\ProyectoVelas\appVelas\obj\Debug\netcoreapp3.1\Razor\Views\Vela\_DetallesVelaView0.cshtml.g.cs
