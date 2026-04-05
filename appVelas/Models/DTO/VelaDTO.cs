@@ -25,6 +25,7 @@ namespace appVelas.Models.DTO
         [JsonProperty("CantidadMecha")] public decimal? CantidadMecha { get; set; }
 
         [JsonProperty("CantidadEnd")] public decimal? CantidadEnd { get; set; }
+        [JsonProperty("Tiempo")] public decimal? Tiempo { get; set; }
 
         //[JsonProperty("IDVela")] public List<Documento>? Documentos { get; set; }
 

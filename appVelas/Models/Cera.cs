@@ -29,6 +29,8 @@ namespace appVelas.Models
 
         [JsonProperty("Coste")]
         public decimal Coste { get; set; }
+        [JsonProperty("CosteHist")]
+        public decimal? CosteHist { get; set; }
 
         [JsonProperty("IDVela")]
         public ICollection<Documento>? Documentos { get; set; }

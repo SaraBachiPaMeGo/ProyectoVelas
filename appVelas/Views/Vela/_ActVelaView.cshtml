@@ -134,13 +134,16 @@
                 <ul id="pigmentosList" class="form-control"
                     multiple
                     style="width: 15rem;height: auto;">
-                    @foreach (var pg in Model.VelaPigmentos)
+                    @if (Model.VelaPigmentos != null)
                     {
-                    <li class="list-group-item selectable-item"
-                        data-id="@pg.IDPig"
-                        data-name="@pg.NombrePigmento">
-                        @pg.NombrePigmento
-                    </li>
+                        @foreach (var pg in Model.VelaPigmentos)
+                        {
+                            <li class="list-group-item selectable-item"
+                                data-id="@pg.IDPig"
+                                data-name="@pg.NombrePigmento">
+                                @pg.NombrePigmento
+                            </li>
+                        }
                     }
                 </ul>
                 <div id="pigmentosEditor"></div>
@@ -158,15 +161,18 @@
                     multiple
                     style="width: 15rem;height: auto;"
                     id="fraganciasList">
-
-                    @foreach (var fraga in Model.VelaFragancias)
+                    @if (Model.VelaFragancias != null)
                     {
-                    <li class="list-group-item selectable-item"
-                        data-id="@fraga.IDFrag"
-                        data-name="@fraga.NombreFragancia">
-                        @fraga.NombreFragancia
-                    </li>
+                        @foreach (var fraga in Model.VelaFragancias)
+                        {
+                            <li class="list-group-item selectable-item"
+                                data-id="@fraga.IDFrag"
+                                data-name="@fraga.NombreFragancia">
+                                @fraga.NombreFragancia
+                            </li>
+                        }
                     }
+
                 </ul>
 
                 <div id="fraganciasEditor"></div>

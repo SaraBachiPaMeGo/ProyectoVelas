@@ -38,6 +38,7 @@ namespace appVelas.Models
         public decimal Coste { get; set; }
 
         //public ICollection<Documento>? Documentos { get; set; }
-
+        [JsonProperty("CosteHist")]
+        public decimal? CosteHist { get; set; }
     }
 }

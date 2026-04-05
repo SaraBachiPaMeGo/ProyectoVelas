@@ -52,8 +52,8 @@
                 <dd class="col-sm-10">
                     @foreach (var item in Model.VelaFragancias)
                     {
-                        <span>@item.NombreFragancia - </span>
-                        <span>@item.Cantidad</span>
+                    <span>@item.NombreFragancia - @item.Cantidad</span>
+                     
                     }
                 </dd>
 
@@ -64,8 +64,7 @@
                 <dd class="col-sm-10">
                     @foreach (var item in Model.VelaPigmentos)
                     {
-                        <span>@item.NombrePigmento - </span>
-                        <span>@item.Cantidad</span>
+                    <span>@item.NombrePigmento - @item.Cantidad</span>
                     }
                 </dd>
 

@@ -36,6 +36,13 @@ namespace appVelas.Models
 
         public List<Pack> Pack { get; set; }
 
+
+        [JsonProperty("Tiempo")]
+        public decimal? Tiempo { get; set; }
+
+        [JsonProperty("CosteHist")]
+        public decimal? CosteHist { get; set; }
+
         //// 🔗 NAVEGACIÓN A PEDIDO
         //public Pedido? Pedido { get; set; }
     }

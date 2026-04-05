@@ -33,8 +33,8 @@ namespace appVelas.Models
         [JsonProperty("Coste")]
         public decimal? Coste { get; set; }
 
-        [JsonProperty("IDMecha")]
-        public Guid IDMecha { get; set; }
+        [JsonProperty("CosteHist")]
+        public decimal? CosteHist { get; set; }
 
         [JsonProperty("IDCera")]
         public Guid IDCera { get; set; }
@@ -42,19 +42,11 @@ namespace appVelas.Models
         [JsonProperty("CantidadCera")]
         public decimal? CantidadCera { get; set; }
 
-        [JsonProperty("CantidadMecha")]
-        public decimal? CantidadMecha { get; set; }
-
         [JsonProperty("CantidadEnd")]
         public decimal? CantidadEnd { get; set; }
 
-        [Column("CantidadFrag")]
-        public decimal? CantidadFrag { get; set; }
-
-        [JsonProperty("CantidadPig")]
-        public decimal? CantidadPig { get; set; }
-
-        public decimal? Cantidad { get; set; }
+        [JsonProperty("Tiempo")]
+        public decimal? Tiempo { get; set; }
 
         //public ICollection<Documento>? Documentos { get; set; }
         [JsonProperty("Image")]

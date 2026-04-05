@@ -62,5 +62,7 @@ namespace appVelas.Models
         public string ImagenContentType { get; set; } // opcional (muy recomendable)
         //public ICollection<Documento>? Documentos { get; set; }
 
+        [JsonProperty("CosteHist")]
+        public decimal? CosteHist { get; set; }
     }
 }
