@@ -72,6 +72,31 @@ namespace appVelas.Service
            
         }
 
+        public async Task<CustomApiResponse<Vela>> BuscarVelaAsyncEntity(Guid idVela)
+        {
+            var response = new CustomApiResponse<Vela>();
+
+            try
+            {
+                var respons = await _httpClient.GetAsync($"/api/Vela/BuscarVelaEntity/{idVela}");
+
+                var dos = await respons.Content.ReadAsStringAsync();
+
+                response = await Helper.ParseApiResponse<Vela>(
+                  dos
+                );
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = new ErrorViewModel { Mensaje = ex.Message };
+
+                return response;
+            }
+
+        }
+
         public async Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent vela)
         {
             var response = new CustomApiResponse<VelaDTO>();
@@ -98,9 +123,9 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid id, MultipartFormDataContent vela)
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid id, MultipartFormDataContent vela)
         {
-            var response = new CustomApiResponse<VelaDTO>();
+            var response = new CustomApiResponse<Vela>();
 
             try
             {
@@ -108,7 +133,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaDTO>(
+                response = await Helper.ParseApiResponse<Vela>(
                   dos
                 );
 

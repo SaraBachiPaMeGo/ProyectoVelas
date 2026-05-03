@@ -21,9 +21,9 @@ namespace appVelas.Service
             _httpClient = httpClient;
         }
 
-        public async Task<CustomApiResponse<VelaFragancia>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        public async Task<CustomApiResponse<List<VelaFragancia>>> ActualizarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            var response = new CustomApiResponse<VelaFragancia>();
+            var response = new CustomApiResponse<List<VelaFragancia>>();
 
             try
             {
@@ -31,7 +31,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaFragancia>(
+                response = await Helper.ParseApiResponse<List<VelaFragancia>> (
                     dos
                 );
 
@@ -73,9 +73,9 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaFragancia>> EliminarRelacionesFraganciaAsync(Guid idvelaFragancia)
+        public async Task<CustomApiResponse<List<VelaFragancia>>> EliminarRelacionesFraganciaAsync(Guid idvelaFragancia)
         {
-            var response = new CustomApiResponse<VelaFragancia>();
+            var response = new CustomApiResponse<List<VelaFragancia>>();
 
             try
             {
@@ -83,7 +83,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaFragancia>(
+                response = await Helper.ParseApiResponse<List<VelaFragancia>>(
                     dos
                 );
 
@@ -126,9 +126,9 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaFragancia>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
+        public async Task<CustomApiResponse<List<VelaFragancia>>> InsertarVelaFraganciaAsync(VelaFragancia velaFragancia)
         {
-            var response = new CustomApiResponse<VelaFragancia>();
+            var response = new CustomApiResponse<List<VelaFragancia>>();
 
             try
             {
@@ -136,7 +136,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaFragancia>(
+                response = await Helper.ParseApiResponse<List<VelaFragancia>>(
                     dos
                 );
 

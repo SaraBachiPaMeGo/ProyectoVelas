@@ -26,27 +26,35 @@
         </tr>
     </thead>
     <tbody id="tablaDatos">
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr data-coste="@item.Coste" id="eliminar-row-@item.IDPig">
-                <td class="col-buscar">
-                    @Html.DisplayFor(modelItem => item.ColorNombre)
-                </td>
-               
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Coste)
-                </td>
-                <td>
-                    @Html.ActionLink("Actualizar", "ActualizarView", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-warning" }) |
-                    @Html.ActionLink("Detalles", "DetallesView1", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-success" })
-                    | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pigmento" data-id="@item.IDPig">
-    Eliminar
-</button>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr data-coste="@item.Coste" id="eliminar-row-@item.IDPig">
+                    <td class="col-buscar">
+                        @Html.DisplayFor(modelItem => item.ColorNombre)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Coste)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Actualizar", "ActualizarView", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-warning" }) |
+                        @Html.ActionLink("Detalles", "DetallesView1", new { IDPig = item.IDPig, vista = "Pig" }, new { @class = "btn btn-outline-success" })
+                        | <button class="btn btn-danger btn-eliminar btn-eliminar" data-tipo="Pigmento" data-id="@item.IDPig">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
         }
+        else
+        {
+            <p>El modelo fue null</p>
+        }
+
     </tbody>
 </table>

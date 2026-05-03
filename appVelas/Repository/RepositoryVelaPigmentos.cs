@@ -23,13 +23,13 @@ namespace appVelas.Repository
             return await _velaPigmentoService.GetPigmentosPorVelaAsync();
         }
 
-        public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> InsertarVelaPigmentoAsync(List<VelaPigmento> velaPigmento)
         {
             return await _velaPigmentoService.InsertarVelaPigmentoAsync(velaPigmento);
 
         }
 
-        public async Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> ActualizarVelaPigmentoAsync(List<VelaPigmento> velaPigmento)
         {
             return await _velaPigmentoService.ActualizarVelaPigmentoAsync(velaPigmento);
 
@@ -41,7 +41,7 @@ namespace appVelas.Repository
 
         }
 
-        public async Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
         {
             return await _velaPigmentoService.EliminarRelacionesPigmentosAsync(idVelaPigmento);
 

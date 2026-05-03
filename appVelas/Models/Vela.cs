@@ -28,7 +28,7 @@ namespace appVelas.Models
         public Guid? IDMolde { get; set; }
 
         [JsonProperty("IDEndurecedor")]
-        public Guid? IDEnd { get; set; }
+        public Guid? IDEndurecedor { get; set; }
 
         [JsonProperty("Coste")]
         public decimal? Coste { get; set; }

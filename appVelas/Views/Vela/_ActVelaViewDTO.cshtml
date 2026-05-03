@@ -1,4 +1,4 @@
-﻿@model appVelas.Models.Vela
+﻿@model appVelas.Models.DTO.VelaDTO
 
 @{
 
@@ -81,21 +81,21 @@
             </div>
 
             @*Cera*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDCera" class="control-label">Cera:</label>
                 <select name="IDCera" id="IDCera" class="form-control" required>
 
                     @foreach (var item in cera)
                     {
-                        <option value="@item.IDCera">@item.Tipo</option>
+                    <option value="@item.IDCera">@item.Tipo</option>
                     }
                 </select>
-            </div>
+            </div>*@
 
 
             @*Molde*@
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IDMolde" class="control-label">Molde:</label>
                 <select name="IDMolde" id="IDMolde" class="form-control">
 
@@ -103,16 +103,16 @@
                     {
                         if (@item.IDMolde == Model.IDMolde)
                         {
-                            <option value="@item.IDMolde" selected>@item.Firma</option>
+                    <option value="@item.IDMolde" selected>@item.Firma</option>
 
                         }
                         else
                         {
-                            <option value="@item.IDMolde">@item.MoldeNombre</option>
+                    <option value="@item.IDMolde">@item.MoldeNombre</option>
                         }
                     }
                 </select>
-            </div>
+            </div>*@
 
             @*Endurecedor*@
             <div class="form-group">
@@ -120,7 +120,7 @@
                 <select name="IDEndurecedor" class="form-control select2" multiple="multiple" style="width: 100%;">
                     @foreach (var e in end)
                     {
-                        <option value="@e.IDEndurecedor">@e.Firma</option>
+                    <option value="@e.IDEndurecedor">@e.Firma</option>
                     }
                 </select>
             </div>
@@ -138,14 +138,14 @@
                 <ul id="pigmentosList" class="form-control"
                     multiple
                     style="width: 15rem;height: auto;">
-                    @if (pig != null)
+                    @if (Model.VelaPigmentos != null)
                     {
-                        @foreach (var pg in pig)
+                        @foreach (var pg in Model.VelaPigmentos)
                         {
                             <li class="list-group-item selectable-item"
                                 data-id="@pg.IDPig"
-                                data-name="@pg.ColorNombre">
-                                @pg.ColorNombre
+                                data-name="@pg.NombrePigmento">
+                                @pg.NombrePigmento
                             </li>
                         }
                     }
@@ -153,20 +153,7 @@
                 <div id="pigmentosEditor"></div>
 
                 <label>Pigmentos seleccionados</label>
-                <div id="pigmentosCarrito">
-                    @if (Model.VelaPigmentos != null)
-                    {
-                        @foreach (var item in Model.VelaPigmentos)
-                        {
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span><strong>@item.NombrePigmento</strong> - @item.Cantidad</span>
-                                <i class="fa-solid fa-xmark text-danger"
-                                   style="cursor:pointer"></i>
-                            </div>
-
-                        }
-                    }
-                </div>
+                <div id="pigmentosCarrito"></div>
             </div>
 
             <div class="form-group zusa">
@@ -178,14 +165,14 @@
                     multiple
                     style="width: 15rem;height: auto;"
                     id="fraganciasList">
-                    @if (frag != null)
+                    @if (Model.VelaFragancias != null)
                     {
-                        @foreach (var fraga in frag)
+                        @foreach (var fraga in Model.VelaFragancias)
                         {
                             <li class="list-group-item selectable-item"
                                 data-id="@fraga.IDFrag"
-                                data-name="@fraga.FragNombre">
-                                @fraga.FragNombre
+                                data-name="@fraga.NombreFragancia">
+                                @fraga.NombreFragancia
                             </li>
                         }
                     }
@@ -195,35 +182,22 @@
                 <div id="fraganciasEditor"></div>
 
                 <label>Fragancias seleccionadas</label>
-                <div id="fraganciasCarrito">
-                    @if (Model.VelaFragancias != null)
-                    {
-                        @foreach (var item in Model.VelaFragancias)
-                        {
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span><strong>@item.NombreFragancia</strong> - @item.Cantidad</span>
-                                <i class="fa-solid fa-xmark text-danger"
-                                   style="cursor:pointer"></i>
-                            </div>
-
-                        }
-                    }
-                    </div>
+                <div id="fraganciasCarrito"></div>
             </div>
 
 
             @*Coste*@
             <div class="form-group">
                 <label asp-for="Coste" class="control-label"></label>
-                <input asp-for="Coste" class="form-control" disabled />
+                <input asp-for="Coste" class="form-control" />
                 <span asp-validation-for="Coste" class="text-danger"></span>
             </div>
 
             @*<div class="form-group">
-                    <label asp-for="" class="control-label"></label>
-                    <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
-                    <span asp-validation-for="Observ" class="text-danger"></span>
-                </div>*@
+                <label asp-for="" class="control-label"></label>
+                <textarea style="width: 230%;" asp-for="Observ" class="form-control"> </textarea>
+                <span asp-validation-for="Observ" class="text-danger"></span>
+            </div>*@
 
             <div style="display:flex">
                 <div id="dropzone">Actualiza tu imagen aquí</div>

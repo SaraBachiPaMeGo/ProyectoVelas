@@ -10,9 +10,9 @@ namespace appVelas.Service.Interfaces
     {
         Task<CustomApiResponse<List<VelaPigmento>>> GetPigmentosPorVelaAsync();
         Task<CustomApiResponse<VelaPigmento>> BuscarVelaPigmentoAsync(Guid idVelaPigmento);
-        Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento);
-        Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento);
-        Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento);
+        Task<CustomApiResponse<List<VelaPigmento>>> InsertarVelaPigmentoAsync(List<VelaPigmento> velaPigmento);
+        Task<CustomApiResponse<List<VelaPigmento>>> ActualizarVelaPigmentoAsync(List<VelaPigmento> velaPigmento);
+        Task<CustomApiResponse<List<VelaPigmento>>> EliminarRelacionesPigmentosAsync(List<VelaPigmento> velaPigmento);
         
     }
 }

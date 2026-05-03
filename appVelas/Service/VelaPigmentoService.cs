@@ -47,9 +47,9 @@ namespace appVelas.Service
         }
 
 
-        public async Task<CustomApiResponse<VelaPigmento>> InsertarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> InsertarVelaPigmentoAsync(List<VelaPigmento> velaPigmento)
         {
-            var response = new CustomApiResponse<VelaPigmento>();
+            var response = new CustomApiResponse<List<VelaPigmento>>();
 
             try
             {
@@ -57,7 +57,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaPigmento>(
+                response = await Helper.ParseApiResponse<List<VelaPigmento>>(
                     dos
                 );
 
@@ -73,9 +73,9 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaPigmento>> ActualizarVelaPigmentoAsync(VelaPigmento velaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> ActualizarVelaPigmentoAsync(List<VelaPigmento> velaPigmento)
         {
-            var response = new CustomApiResponse<VelaPigmento>();
+            var response = new CustomApiResponse<List<VelaPigmento>>();
 
             try
             {
@@ -83,7 +83,7 @@ namespace appVelas.Service
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaPigmento>(
+                response = await Helper.ParseApiResponse<List<VelaPigmento>>(
                     dos
                 );
 
@@ -99,20 +99,20 @@ namespace appVelas.Service
             
         }
 
-        public async Task<CustomApiResponse<VelaPigmento>> EliminarRelacionesPigmentosAsync(Guid idVelaPigmento)
+        public async Task<CustomApiResponse<List<VelaPigmento>>> EliminarRelacionesPigmentosAsync(List<VelaPigmento> pig)
         {
-            var response = new CustomApiResponse<VelaPigmento>();
+            var response = new CustomApiResponse<List<VelaPigmento>>();
 
             try
             {
-                var respons = await _httpClient.GetAsync($"/api/VelaPigmento/EliminarVelaPigmento/{idVelaPigmento}");
+                var respons = await _httpClient.DeleteAsync($"/api/VelaPigmento/EliminarVelaPigmento"/*, pig*/);
 
                 var dos = await respons.Content.ReadAsStringAsync();
 
-                response = await Helper.ParseApiResponse<VelaPigmento>(
+                response = await Helper.ParseApiResponse<List<VelaPigmento>>(
                     dos
                 );
-
+ 
                 return response;
             }
             catch (Exception ex)

@@ -12,8 +12,9 @@ namespace appVelas.Service.Interfaces
     {
         Task<CustomApiResponse<List<VelaDTO>>> GetVelasAsync();
         Task<CustomApiResponse<VelaDTO>> BuscarVelaAsync(Guid idVela);
+        Task<CustomApiResponse<Vela>> BuscarVelaAsyncEntity(Guid idVela);
         Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent form);
-        Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent form);
+        Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent form);
 
         Task<CustomApiResponse<bool>> EliminarVelaAsync(Guid idVela);
 

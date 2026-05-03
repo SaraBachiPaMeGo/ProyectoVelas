@@ -78,7 +78,7 @@
 
                         @foreach (var item in cera)
                         {
-                            <option value="@item.IDCera">@item.Firma</option>
+                            <option value="@item.IDCera" required>@item.Firma</option>
                         }
                     </select>
                     <span asp-validation-for="IDCera" class="text-danger"></span>
@@ -86,13 +86,13 @@
 
                 <div class="form-group" style="margin-right: -56px;">
                     <label asp-for="CantidadCera" class="control-label">g:</label>
-                    <input asp-for="CantidadCera" class="form-control" style="width: 60%;" />
-                    <span asp-validation-for="CantidadCera" class="text-danger"></span>
+                    <input asp-for="CantidadCera" class="form-control" style="width: 60%;" required  />
+                    <span asp-validation-for="CantidadCera" class="text-danger" ></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IDEnd" class="control-label">Endurecedor:</label>
-                    <select name="IDEnd" id="IDEnd" class="form-control">
+                    <label asp-for="IDEndurecedor" class="control-label">Endurecedor:</label>
+                    <select name="IDEndurecedor" id="IDEndurecedor" class="form-control">
                         @foreach (var e in end)
                         {
                             <option value="@e.IDEndurecedor">@e.Firma</option>
@@ -172,7 +172,7 @@
 
             <div class="form-group" style="margin-right: -56px;">
                 <label asp-for="Tiempo" class="control-label">Tiempo:</label>
-                <input asp-for="Tiempo" class="form-control" style="width: 60%;" />
+                <input asp-for="Tiempo" class="form-control" style="width: 60%;" required />
                 <span asp-validation-for="Tiempo" class="text-danger"></span>
             </div>
 

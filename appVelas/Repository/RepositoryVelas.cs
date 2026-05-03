@@ -37,12 +37,17 @@ namespace appVelas.Repository
             return await _velaService.BuscarVelaAsync(id);
         }
 
+        public async Task<CustomApiResponse<Vela>> BuscarVelaAsyncEntity(Guid id) // CustomApiResponse<Vela>
+        {
+            return await _velaService.BuscarVelaAsyncEntity(id);
+        }
+
         public async Task<CustomApiResponse<VelaDTO>> InsertarVelaAsync(MultipartFormDataContent vela)
         {
             return await _velaService.InsertarVelaAsync(vela);
         } 
 
-        public async Task<CustomApiResponse<VelaDTO>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela) // CustomApiResponse<VelaDTO>
+        public async Task<CustomApiResponse<Vela>> ActualizarVelaAsync(Guid idVela, MultipartFormDataContent vela) // CustomApiResponse<VelaDTO>
         {
             return await _velaService.ActualizarVelaAsync(idVela,vela);
         }

@@ -145,7 +145,7 @@ namespace appVelas.Controllers
         [HttpGet]
         public async Task<IActionResult> ActualizarView(Vela velaF, IFormFile file)
         {
-            var vela = await _velaRepo.BuscarVelaAsync(velaF.IDVela);
+            var vela = await _velaRepo.BuscarVelaAsyncEntity(velaF.IDVela);
 
             if (vela == null)
             {
@@ -193,28 +193,28 @@ namespace appVelas.Controllers
         public async Task<IActionResult> ActualizarView(Vela vela, List<VelaFragancia> vfrag,
             List<VelaPigmento> vpig, IFormFile file)
         {
-            var res = new CustomApiResponse<VelaDTO>();
+            var res = new CustomApiResponse<Vela>();
 
             if (vela.IDVela != Guid.Empty)
             {
                 // Elimina todas las relaciones actuales y vuelve a insertar las seleccionadas
-                await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
 
                 if (vela.VelaFragancias != null)
                 {
-                    foreach (var idFrag in vela.VelaFragancias)
+                    var delet = await _vFragRepo.EliminarRelacionesFraganciaAsync(vela.IDVela);
+                    foreach (var idFrag in vfrag)
                     {
-                        // await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
+                        var fragsInsertadas = await _vFragRepo.InsertarVelaFraganciaAsync(idFrag); 
                     }
                 }
 
-                await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
 
                 if (vela.VelaPigmentos != null)
                 {
-                    foreach (var idPig in vela.VelaPigmentos)
+                   var delet =  await _vPigRepo.EliminarRelacionesPigmentosAsync(vela.IDVela);
+                    foreach (var idPig in vpig)
                     {
-                        //await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
+                        var pigsInsertados = await _vPigRepo.InsertarVelaPigmentoAsync(idPig); 
                     }
                 }
 
