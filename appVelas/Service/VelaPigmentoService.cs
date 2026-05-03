@@ -105,6 +105,7 @@ namespace appVelas.Service
 
             try
             {
+                //Queremos enviar una lista para que elimine esos registros
                 var respons = await _httpClient.DeleteAsync($"/api/VelaPigmento/EliminarVelaPigmento"/*, pig*/);
 
                 var dos = await respons.Content.ReadAsStringAsync();

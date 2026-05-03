@@ -25,7 +25,7 @@ Web application to manage products, including CRUD operations and automatic pric
 3. Run frontend
 
 ## 📷 Screenshots
-(esto suma MUCHO)
+
 
 ## 🔧 Future Improvements
 - Upgrade to .NET 8
